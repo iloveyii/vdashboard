@@ -2,13 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
-import {apiServer} from '../common/constants';
 import Sidebar from './Sidebar';
 import Center from './Center';
-
-
-const endPoint = '/v2/calculator/api/?zone=';
-const server = apiServer + endPoint;
 
 
 class Index extends React.Component {

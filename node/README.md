@@ -9,6 +9,11 @@ This is node , express server for the application. It provides RESTFul Services.
 #### Migrations
   * Create migrations by: `db-migrate create create_table_tablename --config ./config/dev.json`.
   * Run migrations by: `db-migrate up --config ./config/dev.json`.
+  
+#### Run app
+  * Change credentials in file server.js.
+  * Run app like (inside node) : `npm start`.
+
     
 ### Requirements
 

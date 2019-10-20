@@ -10,7 +10,7 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Reports from './components/Reports';
-import Movies from "./components/Movies";
+import Videos from "./components/Videos";
 
 class App extends Component {
 
@@ -19,7 +19,7 @@ class App extends Component {
             <BrowserRouter basename="/">
                 <Switch>
                     <Route exact path={`/items`} component={Index}/>
-                    <Route exact path={`/movies`} component={Movies}/>
+                    <Route exact path={`/videos`} component={Videos}/>
                     <Route exact path={`/login`} component={Login}/>
                     <Route exact path={`/signup`} component={Signup}/>
                     <Route exact path={`/`} component={Login}/>

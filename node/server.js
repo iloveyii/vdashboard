@@ -17,7 +17,7 @@ const port = process.env.PORT || 8090;
 
 // Database credentials
 const dbHost = 'localhost';
-const dbName = 'shopping';
+const dbName = 'dashboard';
 const dbUser = 'root';
 const dbPass = 'root';
 

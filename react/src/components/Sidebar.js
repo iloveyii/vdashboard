@@ -57,9 +57,9 @@ class Sidebar extends React.Component {
                     <label htmlFor="">Profile</label>
                 </Link>
 
-                <Link to={`/movies`} className={pathname=='/movies' ? 'button active' : 'button'}>
+                <Link to={`/videos`} className={pathname=='/videos' ? 'button active' : 'button'}>
                     <i className="fas fa-user"></i>
-                    <label htmlFor="">Movies</label>
+                    <label htmlFor="">Videos</label>
                 </Link>
 
                 <Link to={`/settings`} className={pathname=='/settings' ? 'button active' : 'button'}>

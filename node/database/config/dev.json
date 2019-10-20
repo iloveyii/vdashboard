@@ -1,7 +1,7 @@
 {
   "dev": {
     "host": "localhost",
-    "database": "shopping",
+    "database": "dashboard",
     "driver": "mysql",
     "user": "root",
     "password": "root",
