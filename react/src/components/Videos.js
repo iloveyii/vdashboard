@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
 import Center2 from './Center2';
+import Select from './Select';
 
 
 class Videos extends React.Component {
@@ -44,6 +45,11 @@ class Videos extends React.Component {
         this.makeAdmin = this.makeAdmin.bind(this);
         this.handleChange = this.handleChange.bind(this);
         */
+        this.onClickGetSelected = this.onClickGetSelected.bind(this);
+    }
+
+    onClickGetSelected(selected) {
+        console.log('Selected', selected);
     }
 
     render() {
@@ -77,23 +83,12 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <div className="dd-wrapper">
-                                    <div className="dd-header dd-header-open" id="select-city"
-                                         onClick={(e) => this.showAdminList(e)}>
-                                        <div className="dd-header-title"
-                                             id="dd-header-title"> {this.state.admin == 1 ? 'Yes' : 'No'} </div>
-                                        <div className="dd-icon"><i className="fas fa-angle-down"></i></div>
-                                    </div>
-                                    <ul className="dd-list" id="dd-list"
-                                        style={{display: this.state.showAdminList ? 'block' : 'none'}}>
-                                        {
-                                            this.genreList.map((item, i) => <li
-                                                key={i}
-                                                onClick={() => this.makeAdmin(item.value)} id={item.value}
-                                                className="dd-list-item">{item.label}</li>)
-                                        }
-                                    </ul>
-                                </div>
+                                <Select list={this.genreList} onClickGetSelected={this.onClickGetSelected}/>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-1-of-2">
                             </div>
                         </div>
 
@@ -101,7 +96,8 @@ class Videos extends React.Component {
                             <div className="col-1-of-3">
                                 <div className="dashboard--container">
 
-                                    <button style={{width: '80px'}} type="submit" onClick={e => this.handleFormSubmit(e)}><i
+                                    <button style={{width: '80px'}} type="submit"
+                                            onClick={e => this.handleFormSubmit(e)}><i
                                         className="fas fa-save"></i> Save
                                     </button>
 
