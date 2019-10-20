@@ -1,4 +1,4 @@
-Shopping Test Application
+Dashboard Application
 =====================================
 
 This is a small Test web application developed in React, Redux, SASS, PHP. 
