@@ -43,9 +43,13 @@ class Videos extends React.Component {
         this.showAdminList = this.showAdminList.bind(this);
         this.handleCenterClick = this.handleCenterClick.bind(this);
         this.makeAdmin = this.makeAdmin.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         */
         this.onClickGetSelected = this.onClickGetSelected.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        this.setState({[e.target.id]: e.target.value});
     }
 
     onClickGetSelected(selected) {
@@ -62,14 +66,14 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="email" placeholder="Type email" value={this.state.email}
+                                <input type="text" id="title" placeholder="Type title" value={this.state.title}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="username" placeholder="Type username" value={this.state.username}
+                                <input type="text" id="description" placeholder="Type description" value={this.state.description}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>

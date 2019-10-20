@@ -443,6 +443,82 @@ p.large {
   .list-group {
     padding: 5px !important; } }
 
+* {
+  box-sizing: border-box; }
+
+.file-upload {
+  padding: 30px;
+  border-radius: 3px;
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  background-color: #1a1b30;
+  position: relative;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif; }
+  .file-upload header {
+    width: 100%;
+    background-color: #1a1b30;
+    padding: 0px;
+    flex: 2;
+    display: flex;
+    flex-direction: row; }
+    .file-upload header p {
+      flex: 1;
+      font-size: 16px;
+      text-align: center; }
+      .file-upload header p i {
+        color: white;
+        font-size: 30px; }
+  .file-upload main {
+    background-color: #1a1b30;
+    flex: 4;
+    display: flex;
+    flex-direction: row; }
+    .file-upload main [type="file"] {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute !important;
+      white-space: nowrap;
+      width: 1px; }
+    .file-upload main [type="file"]:focus + label,
+    .file-upload main [type="file"] + label:hover {
+      background-color: #0b0c22; }
+    .file-upload main [type="file"]:focus + label {
+      outline: 1px dotted #000; }
+    .file-upload main .upload {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-right: 5px;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      color: #20232f; }
+      .file-upload main .upload i {
+        font-size: 60px; }
+      .file-upload main .upload p {
+        font-size: 20px; }
+    .file-upload main .display {
+      flex: 1; }
+    .file-upload main .upload, .file-upload main .display {
+      border: 1px dotted #20232f; }
+  .file-upload footer {
+    flex: 1;
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px dotted #20232f; }
+    .file-upload footer .progress {
+      height: 5px;
+      background-color: blue;
+      width: 50%;
+      display: block; }
+
 .dd-wrapper {
   display: block;
   font-family: "Open Sans", sans-serif;

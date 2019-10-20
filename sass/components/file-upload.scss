@@ -1,0 +1,114 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+* {
+  box-sizing: border-box;
+}
+
+.file-upload {
+  padding: 30px;
+  border-radius: 3px;
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  background-color: $color-dd-blue-light-2;
+  position: relative;
+  box-sizing: border-box;
+  font-family: $dd-font-family;
+
+  header {
+    width: 100%;
+    background-color: $color-dd-blue-light-2;
+    padding: 0px;
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+
+
+    p {
+      flex: 1;
+      font-size: 16px;
+      text-align: center;
+
+      i {
+        color: white;
+        font-size: 30px;
+      }
+
+    }
+  }
+
+  main {
+    background-color: $color-dd-blue-light-2;
+    flex: 4;
+    display: flex;
+    flex-direction: row;
+
+    [type="file"] {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute !important;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    [type="file"]:focus + label,
+    [type="file"] + label:hover {
+      background-color: $color-dd-blue-light-1;
+    }
+
+    [type="file"]:focus + label {
+      outline: 1px dotted #000;
+    }
+
+    .upload {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-right: 5px;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      color: $color-dd-grey-light-1;
+
+      i {
+        font-size: 60px;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+
+    }
+
+    .display {
+      flex: 1;
+
+    }
+
+    .upload, .display {
+      border: 1px dotted $color-dd-grey-light-1;
+    }
+  }
+
+  footer {
+    flex: 1;
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px dotted $color-dd-grey-light-1;
+
+    .progress {
+      height: 5px;
+      background-color: blue;
+      width: 50%;
+      display: block;
+    }
+  }
+
+}
