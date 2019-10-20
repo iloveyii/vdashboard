@@ -5,19 +5,21 @@ import {withRouter} from "react-router-dom";
 import Sidebar from './Sidebar';
 import Center2 from './Center2';
 import Select from './Select';
+import FileUpload from './FileUpload';
 
 
 class Videos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: null,
-            title: '',
-            description: '',
-            genre: '',
-            image_path: '',
-            video_path: '',
-            showGenreList: false,
+            form : {
+                id: null,
+                title: '',
+                description: '',
+                genre: '',
+                image_path: '',
+                video_path: '',
+            }
         };
 
         this.genreList = [
@@ -46,14 +48,49 @@ class Videos extends React.Component {
         */
         this.onClickGetSelected = this.onClickGetSelected.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.getFiles = this.getFiles.bind(this);
     }
 
     handleChange(e) {
-        this.setState({[e.target.id]: e.target.value});
+        const {form} = this.state;
+        form[e.target.id]= e.target.value;
+        this.setState({form});
     }
 
     onClickGetSelected(selected) {
         console.log('Selected', selected);
+        const {form} = this.state;
+        form.genre = selected.value;
+        this.setState({form});
+    }
+
+    getFiles(files) {
+        console.log(files);
+        const {form} = this.state;
+        form.image_path = files;
+        this.setState({form});
+    }
+
+    submitForm(e) {
+        e.preventDefault();
+        const { form } = this.state;
+        const formData = new FormData();
+
+        Object.keys(form).map(key => {
+            formData.append(key, form[key]);
+        });
+
+        console.log('onSubmit: ', formData);
+
+        if (this.props.match.params.id) {
+            console.log('Updating in component: ', form);
+            this.props.videoUpdateAction({id: form._id, formData});
+            setTimeout(() => {
+                this.props.videoReadAction();
+            }, 5000, this)
+        } else {
+            this.props.videoAddAction(formData);
+        }
     }
 
     render() {
@@ -66,21 +103,14 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="title" placeholder="Type title" value={this.state.title}
+                                <input type="text" id="title" placeholder="Type title" value={this.state.form.title}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="description" placeholder="Type description" value={this.state.description}
-                                       onChange={e => this.handleChange(e)}/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-1-of-3">
-                                <input type="text" id="password" placeholder="Type password" value={this.state.password}
+                                <input type="text" id="description" placeholder="Type description" value={this.state.form.description}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
@@ -93,6 +123,7 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
+                                <FileUpload getFiles={this.getFiles} />
                             </div>
                         </div>
 
