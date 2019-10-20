@@ -3,6 +3,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
 import ListItems from './ListItems';
+import UserInfo from "./UserInfo";
 
 class Center extends React.Component {
     constructor(props) {
@@ -89,6 +90,7 @@ class Center extends React.Component {
     render() {
         return (
             <div className="dashboard--center" onClick={this.handleCenterClick}>
+                <div style={{textAlign: 'right'}}><UserInfo /></div>
                 <h1 className="h1">Users</h1>
 
                 <form action="">
