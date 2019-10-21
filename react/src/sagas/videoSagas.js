@@ -22,17 +22,12 @@ export function* videoReadSaga(action) {
     }
 }
 
-function progress(resp) {
-    (videoAddSuccessAction(resp));
-    console.log('progress : ' + resp);
-}
-
 export function* videoAddSaga(action) {
     console.log('Inside videoAddSaga ', action);
     try {
         const resp = yield call(api.video.add, { video : action.payload.video, action: (d) => action.payload.action(d) });
 
-        if (true) {
+        if (resp && Array.isArray(Object.keys(resp))) {
             console.log('Inside videoAddSaga isArray', action, resp);
             yield put(videoAddSuccessAction(resp));
             yield put(videoReadAction());

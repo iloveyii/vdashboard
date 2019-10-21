@@ -6,26 +6,29 @@ class FileUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imgSrc : null,
+            imgSrc: null,
             progress: 0
         };
         this.refImage = React.createRef();
+        this.refDisplayImage = React.createRef();
         this.handleOnClick = this.handleOnClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.readURL = this.readURL.bind(this);
     }
 
     handleOnClick() {
-        const files = this.refImage.current.files;
-        console.log('handleOnClick', files);
+        console.log('handleOnClick');
     }
 
     handleChange() {
         const files = this.refImage.current.files;
         console.log('handleChange', files, files && true);
-        this.props.getFiles(files);
-        // this.refImage.current.value = '';
-        this.readURL();
+        this.props.getFiles(files, this.props.id);
+        if(this.refImage.current.accept.includes('image')) {
+            console.log('File type is image');
+            this.readURL();
+        }
+        this.refImage.current.value = '';
     }
 
     readURL() {
@@ -36,7 +39,7 @@ class FileUpload extends React.Component {
             const reader = new FileReader();
             console.log('readURL if');
             reader.onload = (e) => {
-                this.setState({imgSrc: e.target.result})
+                this.refDisplayImage.current.src = e.target.result;
             };
             reader.readAsDataURL(input.files[0]);
         }
@@ -55,17 +58,18 @@ class FileUpload extends React.Component {
                     </p>
                 </header>
                 <main>
-                    <input accept="image/x-png,image/gif,image/jpeg" ref={this.refImage} multiple type="file" id="file" onClick={this.handleOnClick} onChange={this.handleChange}/>
-                    <label htmlFor="file" className="upload">
+                    <input accept={this.props.accept} ref={this.refImage} multiple type="file" id={this.props.id}
+                           onClick={this.handleOnClick} onChange={this.handleChange}/>
+                    <label htmlFor={this.props.id} className="upload">
                         <i className="fas fa-cloud-upload-alt"></i>
                         <p>Drag your files here</p>
                     </label>
                     <div className="display">
-                        <img style={{width: '100%'}} src={this.state.imgSrc} alt="Image"/>
+                        <img ref={this.refDisplayImage} style={{width: '100%'}} src="" alt="Image"/>
                     </div>
                 </main>
                 <footer>
-                    <span className="progress" style={{width:this.state.progress+'%'}}></span>
+                    <span className="progress" style={{width: this.state.progress + '%'}}></span>
                 </footer>
 
             </div>

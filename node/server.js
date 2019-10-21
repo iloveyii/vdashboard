@@ -10,10 +10,7 @@ const uuidv1 = require('uuid/v1');
 const fileUpload = require('express-fileupload');
 const Joi = require('joi');
 
-function saveMedia(fileNameNumber, image, video) {
-    const imageFileName = constants.IMAGES_DIR + '/' + fileNameNumber + '.png';
-    const videoFileName = constants.VID_DIR + '/' + fileNameNumber + '.mp4';
-
+function saveMedia(image, imageFileName, video, videoFileName) {
     let message = '';
     console.log('Inside saveMedia ', image, video);
 
@@ -46,7 +43,7 @@ app.use(
     express.static(__dirname + '/public'),
     fileUpload({
         createParentPath: true,
-        limits: { fileSize: 50 * 1024 * 1024 },
+        limits: {fileSize: 50 * 1024 * 1024},
     }),
     bodyParser.urlencoded({extended: true}),
     bodyParser.json(),
@@ -84,7 +81,7 @@ con.connect(err => {
 });
 
 function isAdmin(req) {
-    const base64Credentials =  req.headers.authorization.split(' ')[1];
+    const base64Credentials = req.headers.authorization.split(' ')[1];
     const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
     let [username, password] = credentials.split(':');
     console.log('credentials', credentials);
@@ -117,7 +114,7 @@ app.get('/api/v1/login', (req, res) => {
     // const password = userInput.password ? md5(userInput.password) : 'root';
     console.log('header', req.headers);
 
-    const base64Credentials =  req.headers.authorization.split(' ')[1];
+    const base64Credentials = req.headers.authorization.split(' ')[1];
     const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
     let [username, password] = credentials.split(':');
     console.log('credentials', credentials);
@@ -138,7 +135,7 @@ app.get('/api/v1/login', (req, res) => {
             authenticated: false,
             username: username
         };
-        if(result.length > 0) {
+        if (result.length > 0) {
             auth.authenticated = true;
         }
 
@@ -171,9 +168,9 @@ app.post('/api/v1/users', (req, res, next) => {
     const email = userInput.email;
     const username = userInput.username;
     const password = md5(userInput.password);
-    const doerIsAdmin =  1; //isAdmin(req); @TODO
-    let admin =  0;
-    if(userInput.admin && doerIsAdmin) {
+    const doerIsAdmin = 1; //isAdmin(req); @TODO
+    let admin = 0;
+    if (userInput.admin && doerIsAdmin) {
         admin = userInput.admin;
     }
 
@@ -188,7 +185,7 @@ app.post('/api/v1/users', (req, res, next) => {
         if (err) throw  err;
         console.log('Result:', result);
         const response = {
-            status : result.affectedRows
+            status: result.affectedRows
         }
         res.json(response);
     });
@@ -202,9 +199,9 @@ app.put('/api/v1/users/:id', (req, res) => {
     const userId = req.params.id;
     const userInput = req.body;
     const {email, username, password} = userInput;
-    const doerIsAdmin =  1; //isAdmin(req); @TODO
-    let admin =  0;
-    if(userInput.admin && doerIsAdmin) {
+    const doerIsAdmin = 1; //isAdmin(req); @TODO
+    let admin = 0;
+    if (userInput.admin && doerIsAdmin) {
         admin = userInput.admin;
     }
     sql = `
@@ -236,44 +233,54 @@ app.delete('/api/v1/users/:id', (req, res) => {
 });
 
 app.post('/api/v1/videos', (req, res) => {
-    console.log('POST /api/v1/videos ');
+    console.log('POST /api/v1/videos');
 
-    /*if (!req.files || Object.keys(req.files).length == 0) {
+    if (!req.files || Object.keys(req.files).length == 0) {
         return res.status(400).json({result: 'No images were attached'});
-    }*/
+    }
 
     // Use same image field name as in html form
     const imageFile = req.files.image_path;
     const videoFile = req.files.video_path;
     const fileNameNumber = uuidv1();
     const video = req.body;
-    video.image = '/images/' + fileNameNumber + '.png';
-    video.video = '/videos/' + fileNameNumber + '.mp4';
 
-    let result = saveMedia(fileNameNumber, imageFile, videoFile);
+    const imageFileName = constants.IMAGES_DIR + '/' + fileNameNumber + '_' + imageFile.name;
+    const videoFileName = constants.VID_DIR + '/' + fileNameNumber + '_' + videoFile.name;
+
+    video.image = imageFileName;
+    video.video = videoFileName;
+
+    let result = saveMedia(imageFile, imageFileName, videoFile, videoFileName);
 
     console.log(result);
-    return res.json(result);
+    // return res.json(result);
 
-    if (result.status === 'ok') {
-        db.getDb().collection(collections.videos).insertOne(req.body, (err, action) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Added video to mongodb:', req.body);
-                result.message += ' , Show saved to mongodb.';
-                // res.json({result: action.result, document: action.ops[0], error: null});
-            }
-        });
-    } else {
-        result.status = 'error';
-    }
+    if(result.status != 'ok') return res.json(result);
 
-    res.json({result});
+    const title = req.body.title;
+    const description = req.body.description;
+    const genre = req.body.genre;
+    const image_path = imageFileName;
+    const video_path = videoFileName;
+
+    sql = `
+          INSERT INTO video (title, description, genre, image_path, video_path)
+          VALUES ('${title}', '${description}', '${genre}', '${image_path}', '${video_path}');
+        `;
+
+    console.log(sql);
+
+    con.query(sql, (err, result) => {
+        if (err) throw  err;
+        console.log('Result:', result);
+        const response = {
+            status: result.affectedRows,
+        }
+        res.json(result);
+    });
+
 });
-
-
-
 
 
 app.listen(constants.port, () => console.log('Server started on port ' + constants.port));

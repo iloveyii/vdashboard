@@ -13,15 +13,15 @@ class Videos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            form : {
+            form: {
                 id: null,
                 title: '',
                 description: '',
                 genre: '',
-                image_path: '',
+                image_path: {},
                 video_path: '',
             },
-            progress :  0
+            progress: 0
         };
 
         this.genreList = [
@@ -62,7 +62,7 @@ class Videos extends React.Component {
 
     handleChange(e) {
         const {form} = this.state;
-        form[e.target.id]= e.target.value;
+        form[e.target.id] = e.target.value;
         this.setState({form});
     }
 
@@ -73,10 +73,17 @@ class Videos extends React.Component {
         this.setState({form});
     }
 
-    getFiles(files) {
-        console.log('getFiles',files);
+    getFiles(files, id) {
+        console.log('getFiles', files, id);
         const {form} = this.state;
-        form.image_path = files[0];
+        if(id === 'image_file') {
+            form.image_path = files[0];
+        }
+
+        if(id === 'video_file') {
+            form.video_path = files[0];
+        }
+
         this.setState({form});
     }
 
@@ -86,7 +93,7 @@ class Videos extends React.Component {
     }
 
     submitForm() {
-        const { form } = this.state;
+        const {form} = this.state;
         const formData = new FormData();
 
         Object.keys(form).map(key => {
@@ -95,7 +102,6 @@ class Videos extends React.Component {
         });
 
         console.log('onSubmit: ', formData);
-
 
         if (this.props.match.params.id) {
             console.log('Updating in component: ', form);
@@ -125,7 +131,8 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="description" placeholder="Type description" value={this.state.form.description}
+                                <input type="text" id="description" placeholder="Type description"
+                                       value={this.state.form.description}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
@@ -138,7 +145,15 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <FileUpload progress={this.state.progress} getFiles={this.getFiles} />
+                                <FileUpload accept="image/x-png,image/gif,image/jpeg" id="image_file" key={1}
+                                            progress={this.state.progress} getFiles={this.getFiles}/>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-1-of-2">
+                                <FileUpload accept="video/mp4,video/x-m4v,video/*" id="video_file" key={2}
+                                            progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
                         </div>
 
