@@ -11,14 +11,15 @@ export default {
                 throw new Error(error);
                 console.dir(error);
             }),
-        add: (video, config) => {
-            var config = {
+        add: (data) => {
+            const config = {
                 onUploadProgress: function(progressEvent) {
                     const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
                     console.log('PercentCompleted: ', percentCompleted);
+                    data.action(percentCompleted);
                 }
             };
-            return axios.post(server, video, config).then(res => res.data).catch(error => {
+            return axios.post(server, data.video, config).then(res => res.data).catch(error => {
                 throw new Error(error);
                 console.dir(error);
             })

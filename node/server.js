@@ -42,7 +42,6 @@ function saveMedia(fileNameNumber, image, video) {
     return result;
 }
 
-
 app.use(
     express.static(__dirname + '/public'),
     fileUpload({
@@ -253,7 +252,8 @@ app.post('/api/v1/videos', (req, res) => {
 
     let result = saveMedia(fileNameNumber, imageFile, videoFile);
 
-    return;
+    console.log(result);
+    return res.json(result);
 
     if (result.status === 'ok') {
         db.getDb().collection(collections.videos).insertOne(req.body, (err, action) => {

@@ -4,7 +4,7 @@ import {
     videoReadAction, videoReadSuccessAction, videoReadFailAction,
     videoAddSuccessAction, videoAddFailAction,
     videoDeleteSuccessAction, videoDeleteFailAction,
-    videoUpdateSuccessAction, videoUpdateFailAction
+    videoUpdateSuccessAction, videoUpdateFailAction, videoAddAction
 } from "../actions/VideoAction";
 
 export function* videoReadSaga(action) {
@@ -22,12 +22,17 @@ export function* videoReadSaga(action) {
     }
 }
 
+function progress(resp) {
+    (videoAddSuccessAction(resp));
+    console.log('progress : ' + resp);
+}
+
 export function* videoAddSaga(action) {
     console.log('Inside videoAddSaga ', action);
     try {
-        const resp = yield call(api.video.add, action.payload.show);
+        const resp = yield call(api.video.add, { video : action.payload.video, action: (d) => action.payload.action(d) });
 
-        if (Array.isArray(Object.keys(resp))) {
+        if (true) {
             console.log('Inside videoAddSaga isArray', action, resp);
             yield put(videoAddSuccessAction(resp));
             yield put(videoReadAction());

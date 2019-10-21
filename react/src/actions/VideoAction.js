@@ -38,12 +38,13 @@ export const videoReadFailAction = (err) => {
 };
 
 
-export const videoAddAction = (show) => {
-    console.log('Inside videoAddAction', show);
+export const videoAddAction = (video, action) => {
+    console.log('Inside videoAddAction', video, action);
     return {
         type: VIDEO_ADD,
         payload: {
-            show
+            video,
+            action
         }
     }
 };

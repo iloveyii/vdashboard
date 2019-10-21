@@ -20,7 +20,8 @@ class Videos extends React.Component {
                 genre: '',
                 image_path: '',
                 video_path: '',
-            }
+            },
+            progress :  0
         };
 
         this.genreList = [
@@ -51,6 +52,12 @@ class Videos extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.getFiles = this.getFiles.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.getProgress = this.getProgress.bind(this);
+    }
+
+    getProgress(progress) {
+        console.log('getProgress: ', progress);
+        this.setState({progress});
     }
 
     handleChange(e) {
@@ -89,6 +96,7 @@ class Videos extends React.Component {
 
         console.log('onSubmit: ', formData);
 
+
         if (this.props.match.params.id) {
             console.log('Updating in component: ', form);
             this.props.videoUpdateAction({id: form._id, formData});
@@ -96,7 +104,7 @@ class Videos extends React.Component {
                 this.props.videoReadAction();
             }, 5000, this)
         } else {
-            this.props.videoAddAction(formData);
+            this.props.videoAddAction(formData, this.getProgress);
         }
     }
 
@@ -130,7 +138,7 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <FileUpload getFiles={this.getFiles} />
+                                <FileUpload progress={this.state.progress} getFiles={this.getFiles} />
                             </div>
                         </div>
 
