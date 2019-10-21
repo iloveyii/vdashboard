@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import Center2 from './Center2';
 import Select from './Select';
 import FileUpload from './FileUpload';
+import {videoAddAction, videoReadAction, videoUpdateAction} from "../actions/VideoAction";
 
 
 class Videos extends React.Component {
@@ -49,6 +50,7 @@ class Videos extends React.Component {
         this.onClickGetSelected = this.onClickGetSelected.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.getFiles = this.getFiles.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
     handleChange(e) {
@@ -65,19 +67,24 @@ class Videos extends React.Component {
     }
 
     getFiles(files) {
-        console.log(files);
+        console.log('getFiles',files);
         const {form} = this.state;
-        form.image_path = files;
+        form.image_path = files[0];
         this.setState({form});
     }
 
-    submitForm(e) {
+    handleFormSubmit(e) {
         e.preventDefault();
+        this.submitForm();
+    }
+
+    submitForm() {
         const { form } = this.state;
         const formData = new FormData();
 
         Object.keys(form).map(key => {
             formData.append(key, form[key]);
+            console.log('Form key', key, formData);
         });
 
         console.log('onSubmit: ', formData);
@@ -160,6 +167,10 @@ const mapStateToProps = state => ({
  * Import action from dir action above - but must be passed to connect method in order to trigger reducer in store
  * @type {{UserUpdate: UserUpdateAction}}
  */
-const mapActionsToProps = {};
+const mapActionsToProps = {
+    videoAddAction,
+    videoReadAction,
+    videoUpdateAction
+};
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Videos));

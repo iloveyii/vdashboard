@@ -11,12 +11,13 @@ class FileUpload extends React.Component {
     }
 
     handleOnClick() {
-        console.log('handleOnClick');
+        const files = this.refImage.current.files;
+        console.log('handleOnClick', files);
     }
 
     handleChange() {
-        console.log('handleChange');
         const files = this.refImage.current.files;
+        console.log('handleChange', files);
         this.props.getFiles(files);
         this.refImage.current.value = '';
     }

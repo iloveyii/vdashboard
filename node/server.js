@@ -5,15 +5,59 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const md5 = require('md5');
+const constants = require('./constants');
+const uuidv1 = require('uuid/v1');
+const fileUpload = require('express-fileupload');
+const Joi = require('joi');
+
+function saveMedia(fileNameNumber, image, video) {
+    const imageFileName = constants.IMAGES_DIR + '/' + fileNameNumber + '.png';
+    const videoFileName = constants.VID_DIR + '/' + fileNameNumber + '.mp4';
+
+    let message = '';
+    console.log('Inside saveMedia ', image, video);
+
+    // Mv file to some dir
+    image && image.mv(imageFileName, err => {
+        if (err) {
+            return 500
+        }
+
+        console.log('File saved to directory ' + imageFileName);
+        message = 'Image File upload success, ';
+    });
+
+    // Mv file to some dir
+    video && video.mv(videoFileName, err => {
+        if (err) {
+            return 500
+        }
+
+        console.log('File saved to directory ' + videoFileName);
+        message += 'Video File upload success.';
+    });
+
+    const result = {status: 'ok', message};
+
+    return result;
+}
+
 
 app.use(
     express.static(__dirname + '/public'),
+    fileUpload({
+        createParentPath: true,
+        limits: { fileSize: 50 * 1024 * 1024 },
+    }),
     bodyParser.urlencoded({extended: true}),
     bodyParser.json(),
-    cors()
+    cors(),
+    (req, res, next) => {
+        // req.body.title = 'I changed it here in mw';
+        // console.log('Inside middleware request body is : ', req);
+        next();
+    }
 );
-
-const port = process.env.PORT || 8090;
 
 // Database credentials
 const dbHost = 'localhost';
@@ -192,9 +236,46 @@ app.delete('/api/v1/users/:id', (req, res) => {
     });
 });
 
+app.post('/api/v1/videos', (req, res) => {
+    console.log('POST /api/v1/videos ');
+
+    /*if (!req.files || Object.keys(req.files).length == 0) {
+        return res.status(400).json({result: 'No images were attached'});
+    }*/
+
+    // Use same image field name as in html form
+    const imageFile = req.files.image_path;
+    const videoFile = req.files.video_path;
+    const fileNameNumber = uuidv1();
+    const video = req.body;
+    video.image = '/images/' + fileNameNumber + '.png';
+    video.video = '/videos/' + fileNameNumber + '.mp4';
+
+    let result = saveMedia(fileNameNumber, imageFile, videoFile);
+
+    return;
+
+    if (result.status === 'ok') {
+        db.getDb().collection(collections.videos).insertOne(req.body, (err, action) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Added video to mongodb:', req.body);
+                result.message += ' , Show saved to mongodb.';
+                // res.json({result: action.result, document: action.ops[0], error: null});
+            }
+        });
+    } else {
+        result.status = 'error';
+    }
+
+    res.json({result});
+});
 
 
 
-app.listen(port, () => console.log('Server started on port ' + port));
+
+
+app.listen(constants.port, () => console.log('Server started on port ' + constants.port));
 
 
