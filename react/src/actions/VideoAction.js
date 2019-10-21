@@ -22,10 +22,10 @@ export const videoReadAction = () => {
     }
 };
 
-export const videoReadSuccessAction = (shows) => {
+export const videoReadSuccessAction = (videos) => {
     return {
         type: VIDEO_READ_SUCCESS,
-        payload: shows
+        payload: videos
     }
 };
 

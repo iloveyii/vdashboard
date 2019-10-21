@@ -37,12 +37,13 @@ import LoginReducer from "./reducers/LoginReducer";
 import VideoReducer from "./reducers/VideoReducer";
 
 import {itemsReadAction} from "./actions/ItemsAction";
+import {videoReadAction} from "./actions/VideoAction";
 
 const allReducers = combineReducers({
     items: ItemsReducer,
     item: ItemReducer,
     login: LoginReducer,
-    formVideo : VideoReducer
+    videos : VideoReducer
 });
 
 // # 02
@@ -105,7 +106,7 @@ localStorage.setItem('statsUpdate', statsUpdate);
 // Read news
 if(true || ENVIRONMENT.DEV) {
     // store.dispatch(postsReadAction());
-    // store.dispatch(videoReadAction());
+    store.dispatch(videoReadAction());
 }
 
 /**

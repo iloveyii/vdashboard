@@ -22,7 +22,7 @@ class Videos extends React.Component {
                 video_path: '',
             },
             progress: 0,
-            videoUrl : null
+            videoUrl: null
         };
 
         this.genreList = [
@@ -77,11 +77,11 @@ class Videos extends React.Component {
     getFiles(files, id) {
         console.log('getFiles', files, id);
         const {form} = this.state;
-        if(id === 'image_file') {
+        if (id === 'image_file') {
             form.image_path = files[0];
         }
 
-        if(id === 'video_file') {
+        if (id === 'video_file') {
             form.video_path = files[0];
         }
 
@@ -116,8 +116,8 @@ class Videos extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log('componentWillReceiveProps Videos', nextProps)
-        this.setState({videoUrl: nextProps.formVideo.result.video_path});
+        console.log('componentWillReceiveProps Videos', nextProps);
+        this.setState({videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null});
     }
 
     render() {
@@ -158,7 +158,8 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <FileUpload videoUrl={this.state.videoUrl} accept="video/mp4,video/x-m4v,video/*" id="video_file" key={2}
+                                <FileUpload videoUrl={this.state.videoUrl} accept="video/mp4,video/x-m4v,video/*"
+                                            id="video_file" key={2}
                                             progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
                         </div>
@@ -189,7 +190,7 @@ class Videos extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    formVideo: state.formVideo,
+    videos: state.videos,
 });
 
 /**

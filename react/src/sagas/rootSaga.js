@@ -1,14 +1,14 @@
 import {ITEM_ADD, ITEM_DELETE, ITEM_UPDATE} from "../types/Item";
 import {ITEMS_READ} from "../types/Items";
 import {LOGIN} from "../types/Login";
-import {VIDEO_ADD} from "../types/Video";
+import {VIDEO_ADD, VIDEO_READ} from "../types/Video";
 
 import {takeLatest, takeEvery} from 'redux-saga/effects';
 
 import {itemAddSaga, itemDeleteSaga, itemUpdateSaga} from "./itemSagas";
 import {itemsReadSaga} from "./itemsSagas";
 import {loginSaga} from "./loginSagas";
-import {videoAddSaga} from "./videoSagas";
+import {videoAddSaga, videoReadSaga} from "./videoSagas";
 
 
 export default function* rootSaga() {
@@ -19,4 +19,5 @@ export default function* rootSaga() {
     yield takeLatest(ITEMS_READ, itemsReadSaga);
     yield takeLatest(LOGIN, loginSaga);
     yield takeLatest(VIDEO_ADD, videoAddSaga);
+    yield takeLatest(VIDEO_READ, videoReadSaga);
 }
