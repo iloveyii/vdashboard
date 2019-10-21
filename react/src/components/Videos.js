@@ -21,7 +21,8 @@ class Videos extends React.Component {
                 image_path: {},
                 video_path: '',
             },
-            progress: 0
+            progress: 0,
+            videoUrl : null
         };
 
         this.genreList = [
@@ -114,6 +115,11 @@ class Videos extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log('componentWillReceiveProps Videos', nextProps)
+        this.setState({videoUrl: nextProps.formVideo.result.video_path});
+    }
+
     render() {
 
         return (
@@ -152,7 +158,7 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <FileUpload accept="video/mp4,video/x-m4v,video/*" id="video_file" key={2}
+                                <FileUpload videoUrl={this.state.videoUrl} accept="video/mp4,video/x-m4v,video/*" id="video_file" key={2}
                                             progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
                         </div>
@@ -183,7 +189,7 @@ class Videos extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    spot: state.spot,
+    formVideo: state.formVideo,
 });
 
 /**

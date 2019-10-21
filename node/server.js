@@ -152,15 +152,12 @@ app.get('/api/v1/users', (req, res) => {
           FROM login 
           ;
         `;
-
     con.query(sql, (err, result) => {
         if (err) throw  err;
         res.json(result);
     });
-
     console.log(sql);
     console.log('Headers: ', req.headers);
-
 });
 
 app.post('/api/v1/users', (req, res, next) => {
@@ -261,8 +258,8 @@ app.post('/api/v1/videos', (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
     const genre = req.body.genre;
-    const image_path = imageFileName;
-    const video_path = videoFileName;
+    const image_path = 'images/'+fileNameNumber + '_' + imageFile.name;
+    const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
 
     sql = `
           INSERT INTO video (title, description, genre, image_path, video_path)
@@ -276,11 +273,29 @@ app.post('/api/v1/videos', (req, res) => {
         console.log('Result:', result);
         const response = {
             status: result.affectedRows,
-        }
+        };
+
+        result.image_path = constants.IMAGES_URL + '/images/' + fileNameNumber + '_' + imageFile.name;
+        result.video_path = constants.IMAGES_URL + '/videos/' + fileNameNumber + '_' + videoFile.name;
         res.json(result);
     });
 
 });
+
+app.get('/api/v1/videos', (req, res) => {
+    sql = `
+          SELECT * 
+          FROM video
+          ORDER BY id DESC 
+          ;
+        `;
+    con.query(sql, (err, result) => {
+        if (err) throw  err;
+        res.json(result);
+    });
+    console.log(sql);
+});
+
 
 
 app.listen(constants.port, () => console.log('Server started on port ' + constants.port));

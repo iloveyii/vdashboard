@@ -34,13 +34,15 @@ import rootSaga from './sagas/rootSaga';
 import ItemsReducer from "./reducers/ItemsReducer";
 import ItemReducer from "./reducers/ItemReducer";
 import LoginReducer from "./reducers/LoginReducer";
+import VideoReducer from "./reducers/VideoReducer";
 
 import {itemsReadAction} from "./actions/ItemsAction";
 
 const allReducers = combineReducers({
     items: ItemsReducer,
     item: ItemReducer,
-    login: LoginReducer
+    login: LoginReducer,
+    formVideo : VideoReducer
 });
 
 // # 02

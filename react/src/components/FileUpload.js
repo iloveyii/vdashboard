@@ -7,6 +7,7 @@ class FileUpload extends React.Component {
         super(props);
         this.state = {
             imgSrc: null,
+            videoUrl: null,
             progress: 0
         };
         this.refImage = React.createRef();
@@ -46,7 +47,8 @@ class FileUpload extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        this.setState({progress: nextProps.progress})
+        console.log('componentWillReceiveProps', nextProps);
+        this.setState({progress: nextProps.progress, videoUrl: nextProps.videoUrl})
     }
 
     render() {
@@ -65,7 +67,10 @@ class FileUpload extends React.Component {
                         <p>Drag your files here</p>
                     </label>
                     <div className="display">
-                        <img ref={this.refDisplayImage} style={{width: '100%'}} src="" alt="Image"/>
+                        { this.state.videoUrl
+                            ?  <video width="100%"  controls><source src={this.props.videoUrl} type="video/mp4"></source></video>
+                            :  <img ref={this.refDisplayImage} style={{width: '100%'}} src="" alt="Image"/>
+                        }
                     </div>
                 </main>
                 <footer>
