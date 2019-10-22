@@ -4,7 +4,6 @@ import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
 import Center from './Center';
-import FileUpload from './FileUpload';
 import {videoAddAction, videoReadAction, videoUpdateAction} from "../actions/VideoAction";
 import Table from '@softhem.se/table';
 import File from '@softhem.se/file';
@@ -167,7 +166,7 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <FileUpload videoUrl={this.state.videoUrl} accept="video/mp4,video/x-m4v,video/*"
+                                <File videoUrl={this.state.videoUrl} accept="video/mp4,video/x-m4v,video/*"
                                             id="video_file" key={2}
                                             progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
