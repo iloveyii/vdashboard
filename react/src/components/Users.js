@@ -143,7 +143,7 @@ class Users extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'username', 'email', 'admin']} items={users.list}
+                    <Table fields={['id', 'username', 'admin']} items={users.list}
                            itemDeleteAction={userDeleteAction} itemEditAction={userEditAction}/>
                 </Center>
             </section>

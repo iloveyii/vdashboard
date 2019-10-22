@@ -161,7 +161,7 @@ app.get('/api/v1/users', (req, res) => {
 });
 
 app.post('/api/v1/users', (req, res, next) => {
-    const userInput = req.body.item;
+    const userInput = req.body.user;
     const email = userInput.email;
     const username = userInput.username;
     const password = md5(userInput.password);

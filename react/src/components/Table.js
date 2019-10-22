@@ -5,6 +5,7 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
         e.preventDefault();
         itemDeleteAction(item.id);
     };
+    console.log(item);
     return (
         <li className="list-group-item">
             <div className="list-group-item-data">
