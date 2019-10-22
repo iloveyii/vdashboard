@@ -1,8 +1,4 @@
 import React from 'react';
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
-import ListItems from './ListItems';
 import UserInfo from "./UserInfo";
 
 class Center extends React.Component {
