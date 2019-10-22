@@ -58,12 +58,12 @@ class Users extends React.Component {
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps', nextProps);
 
-        if (nextProps.edit && nextProps.edit.user) {
-            const {id, email, username, password, admin} = nextProps.edit.user;
-            this.setState({id: id ? id : null, email, username, password, admin});
+        if (nextProps.users && nextProps.users.edit) {
+            const {id, email, username, password, admin} = nextProps.users.edit;
+            this.setState({id: id ? id : null, email, username, password, admin, users: nextProps.users});
         }
 
-        if (nextProps.add && nextProps.add.status === 1) {
+        if (nextProps.users.add && nextProps.users.add.status === 1) {
             this.setState({id: null, email: '', username: '', password: '', admin: 0});
         }
     }
@@ -93,6 +93,7 @@ class Users extends React.Component {
 
     render() {
         const {users, userDeleteAction, userEditAction} = this.props;
+        if( ! users ) return <div>Loading</div>
 
         return (
             <section id="dashboard" className="dashboard">
@@ -142,7 +143,7 @@ class Users extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'username', 'email', 'admin']} items={users}
+                    <Table fields={['id', 'username', 'email', 'admin']} items={users.list}
                            itemDeleteAction={userDeleteAction} itemEditAction={userEditAction}/>
                 </Center>
             </section>
@@ -156,8 +157,7 @@ class Users extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    users: state.users.list,
-    edit: state.users.edit,
+    users: state.users
 });
 
 /**

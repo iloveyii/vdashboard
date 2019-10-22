@@ -64,6 +64,7 @@ export function* userUpdateSaga(action) {
 
 export function* userReadSaga(action) {
     try {
+        console.log('Inside userReadSaga');
         const resp = yield call(api.user.read, action.payload);
         console.log('userReadSaga', resp);
 

@@ -154,10 +154,10 @@ app.get('/api/v1/users', (req, res) => {
         `;
     con.query(sql, (err, result) => {
         if (err) throw  err;
+        console.log('result', result);
         res.json(result);
     });
     console.log(sql);
-    console.log('Headers: ', req.headers);
 });
 
 app.post('/api/v1/users', (req, res, next) => {
