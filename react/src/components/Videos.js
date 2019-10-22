@@ -4,9 +4,11 @@ import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
 import Center2 from './Center2';
-import Select from './Select';
 import FileUpload from './FileUpload';
 import {videoAddAction, videoReadAction, videoUpdateAction} from "../actions/VideoAction";
+import Table from '@softhem.se/table';
+import File from '@softhem.se/file';
+import Select from '@softhem.se/select';
 
 
 class Videos extends React.Component {
@@ -117,7 +119,11 @@ class Videos extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
-        this.setState({videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null});
+        this.setState({ list: nextProps.videos.list, videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null});
+    }
+
+    componentDidMount() {
+        this.setState({ list: this.props.videos.list});
     }
 
     render() {
@@ -145,13 +151,13 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <Select list={this.genreList} onClickGetSelected={this.onClickGetSelected}/>
+                                <Select data={this.genreList} onSelect={this.onClickGetSelected}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <FileUpload accept="image/x-png,image/gif,image/jpeg" id="image_file" key={1}
+                                <File accept="image/x-png,image/gif,image/jpeg" id="image_file" key={1}
                                             progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
                         </div>
@@ -178,6 +184,8 @@ class Videos extends React.Component {
                         </div>
 
                     </form>
+
+                    <Table fields={['id', 'title', 'genre']} items={this.state.list}/>
                 </Center2>
 
             </section>

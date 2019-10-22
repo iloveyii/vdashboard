@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
 import ListItems from './ListItems';
 import UserInfo from "./UserInfo";
+import Select from '@softhem.se/select';
+
 
 class Center extends React.Component {
     constructor(props) {
@@ -44,7 +46,7 @@ class Center extends React.Component {
     }
 
     makeAdmin(item) {
-        this.setState({admin: item});
+        this.setState({admin: item.value});
     }
 
     handleChange(e) {
@@ -118,23 +120,7 @@ class Center extends React.Component {
 
                     <div className="row">
                         <div className="col-1-of-2">
-                            <div className="dd-wrapper">
-                                <div className="dd-header dd-header-open" id="select-city"
-                                     onClick={(e) => this.showAdminList(e)}>
-                                    <div className="dd-header-title"
-                                         id="dd-header-title"> {this.state.admin == 1 ? 'Yes' : 'No'} </div>
-                                    <div className="dd-icon"><i className="fas fa-angle-down"></i></div>
-                                </div>
-                                <ul className="dd-list" id="dd-list"
-                                    style={{display: this.state.showAdminList ? 'block' : 'none'}}>
-                                    {
-                                        this.adminList.map((item, i) => <li
-                                            key={i}
-                                            onClick={() => this.makeAdmin(item.value)} id={item.value}
-                                            className="dd-list-item">{item.label}</li>)
-                                    }
-                                </ul>
-                            </div>
+                            <Select data={this.adminList} onSelect={this.makeAdmin} />
                         </div>
                     </div>
 

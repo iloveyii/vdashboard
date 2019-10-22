@@ -14,6 +14,9 @@
     "node-sass": "^4.11.0"
   },
   "dependencies": {
+    "@softhem.se/file": "^1.0.3",
+    "@softhem.se/select": "^1.0.0",
+    "@softhem.se/table": "^1.0.2",
     "axios": "^0.18.1",
     "hapi": "^18.1.0",
     "hooks": "^0.3.2",
@@ -34,7 +37,7 @@
     "react-router-dom": "^4.3.1",
     "react-saga": "^0.2.6",
     "react-scripts": "2.1.5",
-    "react-select": "^3.0.4",
+    "react-select": "^3.0.8",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
