@@ -34,11 +34,13 @@ export const itemAddFailAction = (err) => {
     }
 };
 
-export const itemDeleteAction = (id) => {
+export const itemDeleteAction = (item) => {
+    console.log('Inside itemDeleteAction', item);
+
     return {
         type: ITEM_DELETE,
         payload: {
-            id
+            id : item.id
         }
     }
 };

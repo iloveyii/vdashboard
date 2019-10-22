@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
 import Center from "./Center";
 import Select from '@softhem.se/select';
-import Table from '@softhem.se/table';
+import Table from './Table';
 import Sidebar from "./Sidebar";
 import {itemDeleteAction, itemEditAction} from '../actions/ItemAction';
 
@@ -143,7 +143,7 @@ class Users extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'username', 'email', 'admin']} items={items} itemDeleteAction={() =>itemDeleteAction()} itemEditAction={() => itemEditAction()} />
+                    <Table fields={['id', 'username', 'email', 'admin']} items={items} itemDeleteAction={itemDeleteAction} itemEditAction={itemEditAction} />
                 </Center>
             </section>
         )
@@ -157,6 +157,7 @@ class Users extends React.Component {
  */
 const mapStateToProps = state => ({
     items: state.items,
+    edit: state.item.edit,
 });
 
 /**
