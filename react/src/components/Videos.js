@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
-import Center2 from './Center2';
+import Center from './Center';
 import FileUpload from './FileUpload';
 import {videoAddAction, videoReadAction, videoUpdateAction} from "../actions/VideoAction";
 import Table from '@softhem.se/table';
@@ -134,7 +134,7 @@ class Videos extends React.Component {
         return (
             <section id="dashboard" className="dashboard">
                 <Sidebar/>
-                <Center2>
+                <Center>
                     <form action="">
 
                         <div className="row">
@@ -189,7 +189,7 @@ class Videos extends React.Component {
                     </form>
 
                     <Table fields={['id', 'title', 'genre']} items={this.state.list}/>
-                </Center2>
+                </Center>
             </section>
         )
     }

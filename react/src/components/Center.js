@@ -5,7 +5,7 @@ import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
 import ListItems from './ListItems';
 import UserInfo from "./UserInfo";
 
-class Center2 extends React.Component {
+class Center extends React.Component {
 
     render() {
         const {title} = this.props;
@@ -20,4 +20,4 @@ class Center2 extends React.Component {
     }
 }
 
-export default Center2;
+export default Center;

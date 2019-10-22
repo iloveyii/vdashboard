@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
-import Center2 from "./Center2";
+import Center from "./Center";
 import Select from '@softhem.se/select';
 import Table from '@softhem.se/table';
 import Sidebar from "./Sidebar";
@@ -98,7 +98,7 @@ class Users extends React.Component {
         return (
             <section id="dashboard" className="dashboard">
                 <Sidebar/>
-                <Center2 title="Users">
+                <Center title="Users">
                     <form action="">
 
                         <div className="row">
@@ -144,7 +144,7 @@ class Users extends React.Component {
                     </form>
 
                     <Table fields={['id', 'username', 'email', 'admin']} items={items} itemDeleteAction={() =>itemDeleteAction()} itemEditAction={() => itemEditAction()} />
-                </Center2>
+                </Center>
             </section>
         )
     }
