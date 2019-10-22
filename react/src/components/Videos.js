@@ -119,11 +119,14 @@ class Videos extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
-        this.setState({ list: nextProps.videos.list, videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null});
+        this.setState({
+            list: nextProps.videos.list,
+            videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null
+        });
     }
 
     componentDidMount() {
-        this.setState({ list: this.props.videos.list});
+        this.setState({list: this.props.videos.list});
     }
 
     render() {
@@ -158,7 +161,7 @@ class Videos extends React.Component {
                         <div className="row">
                             <div className="col-1-of-2">
                                 <File accept="image/x-png,image/gif,image/jpeg" id="image_file" key={1}
-                                            progress={this.state.progress} getFiles={this.getFiles}/>
+                                      progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
                         </div>
 
@@ -187,7 +190,6 @@ class Videos extends React.Component {
 
                     <Table fields={['id', 'title', 'genre']} items={this.state.list}/>
                 </Center2>
-
             </section>
         )
     }

@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
-import Center from './Center';
 
 
 class Index extends React.Component {
@@ -16,7 +15,6 @@ class Index extends React.Component {
         return (
             <section id="dashboard" className="dashboard">
                 <Sidebar/>
-                <Center />
             </section>
         )
     }

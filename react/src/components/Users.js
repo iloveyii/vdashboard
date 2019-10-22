@@ -2,12 +2,15 @@ import React from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
-import ListItems from './ListItems';
-import UserInfo from "./UserInfo";
+import Center2 from "./Center2";
 import Select from '@softhem.se/select';
+import Table from '@softhem.se/table';
+import Sidebar from "./Sidebar";
+import {itemDeleteAction, itemEditAction} from '../actions/ItemAction';
 
 
-class Center extends React.Component {
+
+class Users extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -90,58 +93,59 @@ class Center extends React.Component {
     }
 
     render() {
+        const {items, itemDeleteAction} = this.props;
+
         return (
-            <div className="dashboard--center" onClick={this.handleCenterClick}>
-                <div style={{textAlign: 'right'}}><UserInfo /></div>
-                <h1 className="h1">Users</h1>
+            <section id="dashboard" className="dashboard">
+                <Sidebar/>
+                <Center2 title="Users">
+                    <form action="">
 
-                <form action="">
-
-                    <div className="row">
-                        <div className="col-1-of-2">
-                            <input type="text" id="email" placeholder="Type email" value={this.state.email}
-                                   onChange={e => this.handleChange(e)}/>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-1-of-2">
-                            <input type="text" id="username" placeholder="Type username" value={this.state.username}
-                                   onChange={e => this.handleChange(e)}/>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-1-of-3">
-                            <input type="text" id="password" placeholder="Type password" value={this.state.password}
-                                   onChange={e => this.handleChange(e)}/>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-1-of-2">
-                            <Select data={this.adminList} onSelect={this.makeAdmin} />
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-1-of-3">
-                            <div className="dashboard--container">
-
-                                <button style={{width: '80px'}} type="submit" onClick={e => this.handleFormSubmit(e)}><i
-                                    className="fas fa-save"></i> Save
-                                </button>
-
+                        <div className="row">
+                            <div className="col-1-of-2">
+                                <input type="text" id="email" placeholder="Type email" value={this.state.email}
+                                       onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
-                    </div>
 
-                </form>
+                        <div className="row">
+                            <div className="col-1-of-2">
+                                <input type="text" id="username" placeholder="Type username" value={this.state.username}
+                                       onChange={e => this.handleChange(e)}/>
+                            </div>
+                        </div>
 
-                <ListItems/>
+                        <div className="row">
+                            <div className="col-1-of-3">
+                                <input type="text" id="password" placeholder="Type password" value={this.state.password}
+                                       onChange={e => this.handleChange(e)}/>
+                            </div>
+                        </div>
 
-            </div>
+                        <div className="row">
+                            <div className="col-1-of-2">
+                                <Select data={this.adminList} onSelect={this.makeAdmin}/>
+                            </div>
+                        </div>
 
+                        <div className="row">
+                            <div className="col-1-of-3">
+                                <div className="dashboard--container">
+
+                                    <button style={{width: '80px'}} type="submit"
+                                            onClick={e => this.handleFormSubmit(e)}><i
+                                        className="fas fa-save"></i> Save
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <Table fields={['id', 'username', 'email', 'admin']} items={items} itemDeleteAction={() =>itemDeleteAction()} itemEditAction={() => itemEditAction()} />
+                </Center2>
+            </section>
         )
     }
 }
@@ -152,9 +156,7 @@ class Center extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    posts: state.posts,
-    edit: state.item.edit,
-    add: state.item.add,
+    items: state.items,
 });
 
 /**
@@ -163,7 +165,9 @@ const mapStateToProps = state => ({
  */
 const mapActionsToProps = {
     itemAddAction,
-    itemUpdateAction
+    itemUpdateAction,
+    itemDeleteAction,
+    itemEditAction
 };
 
-export default withRouter(connect(mapStateToProps, mapActionsToProps)(Center));
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(Users));
