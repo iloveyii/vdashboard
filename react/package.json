@@ -16,7 +16,7 @@
   "dependencies": {
     "@softhem.se/file": "^1.0.3",
     "@softhem.se/select": "^1.0.0",
-    "@softhem.se/table": "^1.0.2",
+    "@softhem.se/table": "^1.0.6",
     "axios": "^0.18.1",
     "hapi": "^18.1.0",
     "hooks": "^0.3.2",

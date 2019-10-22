@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {logoutAction} from "../actions/LoginAction";
 
+
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
@@ -24,8 +25,8 @@ class Sidebar extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        const { login } = nextProps;
-        if(login.authenticated === false) {
+        const {login} = nextProps;
+        if (login.authenticated === false) {
             this.props.history.push('/');
         }
     }
@@ -42,32 +43,32 @@ class Sidebar extends React.Component {
                 </span>
                 <span className="dashboard--left-bar-line"></span>
 
-                <Link to={`/dashboard`} className={pathname=='/dashboard' ? 'button active' : 'button'}>
+                <Link to={`/dashboard`} className={pathname == '/dashboard' ? 'button active' : 'button'}>
                     <i className="fas fa-home"></i>
                     <label htmlFor="">Dashboard</label>
                 </Link>
 
-                <Link to={`/users`} className={pathname=='/users' ? 'button active' : 'button'}>
+                <Link to={`/users`} className={pathname == '/users' ? 'button active' : 'button'}>
                     <i className="fas fa-users"></i>
                     <label htmlFor="">Users</label>
                 </Link>
 
-                <Link to={`/profile`} className={pathname=='/profile' ? 'button active' : 'button'}>
+                <Link to={`/profile`} className={pathname == '/profile' ? 'button active' : 'button'}>
                     <i className="fas fa-user"></i>
                     <label htmlFor="">Profile</label>
                 </Link>
 
-                <Link to={`/videos`} className={pathname=='/videos' ? 'button active' : 'button'}>
+                <Link to={`/videos`} className={pathname == '/videos' ? 'button active' : 'button'}>
                     <i className="fas fa-photo-video"></i>
                     <label htmlFor="">Videos</label>
                 </Link>
 
-                <Link to={`/settings`} className={pathname=='/settings' ? 'button active' : 'button'}>
+                <Link to={`/settings`} className={pathname == '/settings' ? 'button active' : 'button'}>
                     <i className="fas fa-cog"></i>
                     <label>Settings</label>
                 </Link>
 
-                <Link to={`/reports`} className={pathname=='/reports' ? 'button active' : 'button'}>
+                <Link to={`/reports`} className={pathname == '/reports' ? 'button active' : 'button'}>
                     <i className="fas fa-chart-bar"></i>
                     <label>Reports</label>
                 </Link>
@@ -81,14 +82,12 @@ class Sidebar extends React.Component {
     }
 }
 
-
-
 /**
  * Get data from store
  * @param state
  */
 const mapStateToProps = state => ({
-    login : state.login
+    login: state.login
 });
 
 /**

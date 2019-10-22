@@ -215,6 +215,9 @@ app.put('/api/v1/users/:id', (req, res) => {
 
 app.delete('/api/v1/users/:id', (req, res) => {
     const userId = req.params.id;
+
+    if(userId=='undefined') return res.json({result: 'id is not defined'});
+
     sql = `
           DELETE from login 
           WHERE id=${userId}

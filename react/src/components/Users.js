@@ -93,7 +93,7 @@ class Users extends React.Component {
     }
 
     render() {
-        const {items, itemDeleteAction} = this.props;
+        const {items, itemDeleteAction, itemEditAction} = this.props;
 
         return (
             <section id="dashboard" className="dashboard">
