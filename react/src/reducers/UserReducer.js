@@ -1,4 +1,4 @@
-import {ITEM_EDIT, ITEM_EDIT_SUCCESS, ITEM_EDIT_FAIL, ITEM_ADD_SUCCESS} from '../types/Item';
+import {USER_EDIT, USER_EDIT_SUCCESS, USER_EDIT_FAIL, USER_ADD_SUCCESS} from '../types/User';
 
 const initState = {
     edit: {},
@@ -6,18 +6,18 @@ const initState = {
     add: {}
 };
 
-const ItemReducer = (state = initState, action = {}) => {
+const UserReducer = (state = initState, action = {}) => {
     switch (action.type) {
-        case ITEM_ADD_SUCCESS:
-            console.log('Inside ItemReducer ITEM_ADD_SUCCESS', action.payload);
+        case USER_ADD_SUCCESS:
+            console.log('Inside ItemReducer USER_ADD_SUCCESS', action.payload);
             return Object.assign({}, {
                 add: {
                     status: action.payload.status
                 }
             });
 
-        case ITEM_EDIT:
-            console.log('Inside ItemsReducer ITEM_EDIT', action.payload);
+        case USER_EDIT:
+            console.log('Inside ItemsReducer USER_EDIT', action.payload);
 
             return Object.assign({}, {
                 edit: {
@@ -25,11 +25,11 @@ const ItemReducer = (state = initState, action = {}) => {
                 }
             });
 
-        case ITEM_EDIT_SUCCESS:
-            console.log('Inside ItemsReducer ITEM_EDIT_SUCCESS', action);
+        case USER_EDIT_SUCCESS:
+            console.log('Inside ItemsReducer USER_EDIT_SUCCESS', action);
             return state;
 
-        case ITEM_ADD_SUCCESS:
+        case USER_ADD_SUCCESS:
             console.log('Inside ItemsReducer', action.payload);
             return { add: Object.assign({}, action.payload) };
 
@@ -38,4 +38,4 @@ const ItemReducer = (state = initState, action = {}) => {
     }
 };
 
-export default ItemReducer;
+export default UserReducer;

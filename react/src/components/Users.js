@@ -1,13 +1,12 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {itemAddAction, itemUpdateAction} from "../actions/ItemAction";
+import {userAddAction, userUpdateAction} from "../actions/UserAction";
 import Center from "./Center";
 import Select from '@softhem.se/select';
 import Table from './Table';
 import Sidebar from "./Sidebar";
-import {itemDeleteAction, itemEditAction} from '../actions/ItemAction';
-
+import {userDeleteAction, userEditAction} from '../actions/UserAction';
 
 
 class Users extends React.Component {
@@ -48,8 +47,8 @@ class Users extends React.Component {
         this.setState({showAdminList: false});
     }
 
-    makeAdmin(item) {
-        this.setState({admin: item.value});
+    makeAdmin(user) {
+        this.setState({admin: user.value});
     }
 
     handleChange(e) {
@@ -59,8 +58,8 @@ class Users extends React.Component {
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps', nextProps);
 
-        if (nextProps.edit && nextProps.edit.item) {
-            const {id, email, username, password, admin} = nextProps.edit.item;
+        if (nextProps.edit && nextProps.edit.user) {
+            const {id, email, username, password, admin} = nextProps.edit.user;
             this.setState({id: id ? id : null, email, username, password, admin});
         }
 
@@ -72,9 +71,9 @@ class Users extends React.Component {
     handleFormSubmit(e) {
         e.preventDefault();
         const {id, email, username, password, admin} = this.state;
-        const {itemAddAction, itemUpdateAction} = this.props;
+        const {userAddAction, userUpdateAction} = this.props;
 
-        const item = {
+        const user = {
             id: id,
             email: email,
             username: username,
@@ -85,15 +84,15 @@ class Users extends React.Component {
         console.log('Form data: ', id, username, password, admin);
 
         if (id === null) {
-            itemAddAction(item);
+            userAddAction(user);
         } else {
-            itemUpdateAction(item);
+            userUpdateAction(user);
             this.setState({id: null, email: '', username: '', password: '', admin: 0});
         }
     }
 
     render() {
-        const {items, itemDeleteAction, itemEditAction} = this.props;
+        const {users, userDeleteAction, userEditAction} = this.props;
 
         return (
             <section id="dashboard" className="dashboard">
@@ -143,7 +142,8 @@ class Users extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'username', 'email', 'admin']} items={items} itemDeleteAction={itemDeleteAction} itemEditAction={itemEditAction} />
+                    <Table fields={['id', 'username', 'email', 'admin']} items={users}
+                           itemDeleteAction={userDeleteAction} itemEditAction={userEditAction}/>
                 </Center>
             </section>
         )
@@ -156,8 +156,8 @@ class Users extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    items: state.items,
-    edit: state.item.edit,
+    users: state.users.list,
+    edit: state.users.edit,
 });
 
 /**
@@ -165,10 +165,10 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = {
-    itemAddAction,
-    itemUpdateAction,
-    itemDeleteAction,
-    itemEditAction
+    userAddAction,
+    userUpdateAction,
+    userDeleteAction,
+    userEditAction
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Users));

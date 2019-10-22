@@ -1,7 +1,6 @@
 import {call, put} from 'redux-saga/effects';
-import api from '../api/item';
+import api from '../api/login';
 import {
-    loginAction,
     loginSuccessAction,
     loginFailAction,
 } from "../actions/LoginAction";
@@ -10,7 +9,7 @@ export function* loginSaga(action) {
     try {
         console.log('loginSaga action', action);
 
-        const resp = yield call(api.item.read, action.payload.user);
+        const resp = yield call(api.user.login, action.payload.user);
         console.log('loginSaga', resp);
 
         if (Array.isArray(Object.keys(resp))) {

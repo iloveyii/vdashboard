@@ -1,7 +1,6 @@
 import {LOGIN_SUCCESS, LOGOUT} from '../types/Login';
 
 const initState = {
-    login: {},
 };
 
 const LoginReducer = (state = initState, action = {}) => {
