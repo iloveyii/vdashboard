@@ -4,9 +4,16 @@ import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
 import Center from './Center';
-import {videoAddAction, videoReadAction, videoUpdateAction, videoDeleteAction} from "../actions/VideoAction";
+import {
+    videoAddAction,
+    videoReadAction,
+    videoUpdateAction,
+    videoDeleteAction,
+    videoEditAction
+} from "../actions/VideoAction";
 import Table from '@softhem.se/table';
-import File from '@softhem.se/file';
+// import File from '@softhem.se/file';
+import File from './File';
 import Select from '@softhem.se/select';
 
 
@@ -118,10 +125,13 @@ class Videos extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
-        this.setState({
-            list: nextProps.videos.list,
-            videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null
-        });
+        const {list, videoUrl, form} = nextProps.videos;
+
+        if (Object.keys(form).length > 0) {
+            this.setState({list, videoUrl, form});
+        } else {
+            this.setState({list, videoUrl});
+        }
     }
 
     componentDidMount() {
@@ -159,7 +169,8 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <File accept="image/x-png,image/gif,image/jpeg" id="image_file" key={1}
+                                <File imageUrl={this.state.imageUrl} accept="image/x-png,image/gif,image/jpeg"
+                                      id="image_file" key={1}
                                       progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
                         </div>
@@ -167,8 +178,8 @@ class Videos extends React.Component {
                         <div className="row">
                             <div className="col-1-of-2">
                                 <File videoUrl={this.state.videoUrl} accept="video/mp4,video/x-m4v,video/*"
-                                            id="video_file" key={2}
-                                            progress={this.state.progress} getFiles={this.getFiles}/>
+                                      id="video_file" key={2}
+                                      progress={this.state.progress} getFiles={this.getFiles}/>
                             </div>
                         </div>
 
@@ -187,7 +198,8 @@ class Videos extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'title', 'genre']} items={this.state.list} itemDeleteAction={this.props.videoDeleteAction} />
+                    <Table fields={['id', 'title', 'genre']} items={this.state.list}
+                           itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>
         )
@@ -210,7 +222,8 @@ const mapActionsToProps = {
     videoAddAction,
     videoReadAction,
     videoUpdateAction,
-    videoDeleteAction
+    videoDeleteAction,
+    videoEditAction
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Videos));

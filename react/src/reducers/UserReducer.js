@@ -10,7 +10,6 @@ const UserReducer = (state = initState, action = {}) => {
     switch (action.type) {
         case USER_ADD_SUCCESS:
             console.log('Inside ItemReducer USER_ADD_SUCCESS', action.payload);
-            return state;
             return Object.assign({}, {
                 add: {
                     status: action.payload.status
@@ -19,12 +18,8 @@ const UserReducer = (state = initState, action = {}) => {
 
         case USER_EDIT:
             console.log('Inside ItemsReducer USER_EDIT', action.payload);
-            return state;
-            return Object.assign({}, {
-                edit: {
-                    item: action.payload.item
-                }
-            });
+            const newStateEdit = {...state, ...{edit: action.payload.user}};
+            return newStateEdit;
 
         case USER_EDIT_SUCCESS:
             console.log('Inside ItemsReducer USER_EDIT_SUCCESS', action);
@@ -32,13 +27,12 @@ const UserReducer = (state = initState, action = {}) => {
 
         case USER_ADD_SUCCESS:
             console.log('Inside ItemsReducer', action.payload);
-
-            return state;
-            return { add: Object.assign({}, action.payload) };
+            const newStateAdd = {...state, ...{add: action.payload}};
+            return newStateAdd;
 
         case USER_READ_SUCCESS:
             console.log('Inside USER_READ_SUCCESS', action.payload);
-            const newState = { ...state, ...{list:action.payload.users}};
+            const newState = {...state, ...{list: action.payload.users}};
             return newState;
 
         default:

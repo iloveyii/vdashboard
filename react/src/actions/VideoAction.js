@@ -1,17 +1,10 @@
 import {
-    VIDEO_READ,
-    VIDEO_READ_SUCCESS,
-    VIDEO_READ_FAIL,
-    VIDEO_ADD,
-    VIDEO_ADD_SUCCESS,
-    VIDEO_ADD_FAIL,
-    VIDEO_DELETE,
-    VIDEO_DELETE_SUCCESS,
-    VIDEO_DELETE_FAIL,
-    VIDEO_UPDATE,
-    VIDEO_UPDATE_SUCCESS,
-    VIDEO_UPDATE_FAIL,
-    VIDEO_SEARCH, VIDEO_SEARCH_SUCCESS, VIDEO_SEARCH_FAIL
+    VIDEO_READ, VIDEO_READ_SUCCESS,VIDEO_READ_FAIL,
+    VIDEO_ADD,VIDEO_ADD_SUCCESS,VIDEO_ADD_FAIL,
+    VIDEO_DELETE,VIDEO_DELETE_SUCCESS,VIDEO_DELETE_FAIL,
+    VIDEO_UPDATE,VIDEO_UPDATE_SUCCESS,VIDEO_UPDATE_FAIL,
+    VIDEO_SEARCH, VIDEO_SEARCH_SUCCESS, VIDEO_SEARCH_FAIL,
+    VIDEO_EDIT, VIDEO_EDIT_SUCCESS,VIDEO_EDIT_FAIL
 } from '../types/Video';
 
 export const videoReadAction = () => {
@@ -150,3 +143,23 @@ export const videoSearchFailAction = (err) => {
         payload: {err}
     }
 };
+
+export const videoEditAction = (video) => {
+    console.log('Inside videoEditAction', video);
+    return {
+        type: VIDEO_EDIT,
+        payload: {
+            video,
+        }
+    }
+};
+
+export const videoEditSuccessAction = (result) => {
+    return {
+        type: VIDEO_EDIT_SUCCESS,
+        payload: {
+            result
+        }
+    }
+};
+

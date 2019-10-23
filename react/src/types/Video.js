@@ -17,3 +17,7 @@ export const VIDEO_DELETE_FAIL = 'Video.Delete.Fail';
 export const VIDEO_SEARCH = 'Video.Search';
 export const VIDEO_SEARCH_SUCCESS = 'Video.Search.Success';
 export const VIDEO_SEARCH_FAIL = 'Video.Search.Fail';
+
+export const VIDEO_EDIT = 'Video.Edit';
+export const VIDEO_EDIT_SUCCESS = 'Video.Edit.Success';
+export const VIDEO_EDIT_FAIL = 'Video.Edit.Fail';
