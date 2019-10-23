@@ -10,11 +10,11 @@ const VideoReducer = (state = initState, action = {}) => {
     switch (action.type) {
         case VIDEO_READ_SUCCESS:
             console.log('Inside VideoReducer', action.payload);
-            const list = action.payload.slice();
-            const videos = [];
-            list.forEach( video => videos.push(new Video(video)));
+            const data = action.payload;
+            const list = [];
+            data.forEach( video => list.push(new Video(video)));
 
-            const newStateSuccess = {...state, ...{list}, ...{videos}};
+            const newStateSuccess = {...state, ...{list}};
             return newStateSuccess;
 
         case VIDEO_ADD_SUCCESS:

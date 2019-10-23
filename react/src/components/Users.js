@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {userAddAction, userUpdateAction} from "../actions/UserAction";
 import Center from "./Center";
-import Select from '@softhem.se/select';
+import Select from './Select';
 import Table from './Table';
 import Sidebar from "./Sidebar";
 import {userDeleteAction, userEditAction} from '../actions/UserAction';
@@ -12,15 +12,6 @@ import {userDeleteAction, userEditAction} from '../actions/UserAction';
 class Users extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: null,
-            email: '',
-            username: '',
-            password: '',
-            admin: 0,
-            showAdminList: false,
-        };
-
         this.adminList = [
             {
                 value: '1',
@@ -31,6 +22,17 @@ class Users extends React.Component {
                 label: 'No'
             },
         ];
+
+        this.state = {
+            id: null,
+            email: '',
+            username: '',
+            password: '',
+            admin: 0,
+            showAdminList: false,
+        };
+
+
 
         this.showAdminList = this.showAdminList.bind(this);
         this.handleCenterClick = this.handleCenterClick.bind(this);
@@ -124,7 +126,7 @@ class Users extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <Select data={this.adminList} onSelect={this.makeAdmin}/>
+                                <Select selected={this.adminList.find(i => i.value == this.state.admin)} data={this.adminList} onSelect={this.makeAdmin}/>
                             </div>
                         </div>
 

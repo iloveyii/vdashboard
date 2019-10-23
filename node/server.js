@@ -43,7 +43,7 @@ app.use(
     express.static(__dirname + '/public'),
     fileUpload({
         createParentPath: true,
-        limits: {fileSize: 50 * 1024 * 1024},
+        limits: {fileSize: 550 * 1024 * 1024},
     }),
     bodyParser.urlencoded({extended: true}),
     bodyParser.json(),

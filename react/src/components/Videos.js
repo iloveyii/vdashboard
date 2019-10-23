@@ -11,10 +11,10 @@ import {
     videoDeleteAction,
     videoEditAction
 } from "../actions/VideoAction";
-import Table from '@softhem.se/table';
+import Table from './Table';
 // import File from '@softhem.se/file';
 import File from './File';
-import Select from '@softhem.se/select';
+import Select from './Select';
 import {apiServer} from '../common/constants';
 import Video from '../Models/Video';
 
@@ -22,9 +22,11 @@ import Video from '../Models/Video';
 class Videos extends React.Component {
     constructor(props) {
         super(props);
-        const video = new Video();
-        console.log(video.getData);
-        video.print();
+        this._forceUpdate = this._forceUpdate.bind(this);
+
+        const video = new Video(this._forceUpdate);
+        console.log('Videos constructor', video.genre);
+
 
         this.state = {
             form: {
@@ -40,24 +42,7 @@ class Videos extends React.Component {
             video: video
         };
 
-        this.genreList = [
-            {
-                value: 'pop',
-                label: 'Pop'
-            },
-            {
-                value: 'jazz',
-                label: 'Jazz'
-            },
-            {
-                value: 'rock',
-                label: 'Rock'
-            },
-            {
-                value: 'disco',
-                label: 'Disco'
-            },
-        ];
+        this.genreList = video.genreList;
 
         /*
         this.showAdminList = this.showAdminList.bind(this);
@@ -70,39 +55,43 @@ class Videos extends React.Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.getProgress = this.getProgress.bind(this);
 
+    }
 
+    _forceUpdate() {
+        this.forceUpdate();
     }
 
     getProgress(progress) {
         console.log('getProgress: ', progress);
-        this.setState({progress});
+        const {video} = this.state;
+        video.uploadProgress = progress;
+        this.setState({video});
     }
 
     handleChange(e) {
-        const {form} = this.state;
-        form[e.target.id] = e.target.value;
-        this.setState({form});
+        const {video} = this.state;
+        video.formFieldByE = e;
+        this.setState({video});
     }
 
     onClickGetSelected(selected) {
-        console.log('Selected', selected);
-        const {form} = this.state;
-        form.genre = selected.value;
-        this.setState({form});
+        const {video} = this.state;
+        video.genre = selected;
+        this.setState({video});
     }
 
     getFiles(files, id) {
-        console.log('getFiles', files, id);
-        const {form} = this.state;
+        const {video} = this.state;
+
         if (id === 'image_file') {
-            form.image_path = files[0];
+            video.imagePath = files;
         }
 
         if (id === 'video_file') {
-            form.video_path = files[0];
+            video.videoPath = files;
         }
 
-        this.setState({form});
+        this.setState({video});
     }
 
     handleFormSubmit(e) {
@@ -111,46 +100,20 @@ class Videos extends React.Component {
     }
 
     submitForm() {
-        const {form} = this.state;
-        const formData = new FormData();
+        const {video} = this.state;
 
-        Object.keys(form).map(key => {
-            formData.append(key, form[key]);
-            console.log('Form key', key, formData);
-        });
-
-        console.log('onSubmit: ', formData);
-
-        if (this.props.match.params.id || form.mode == 'edit') {
-            console.log('Updating in component: ', form);
-            this.props.videoUpdateAction({id: form.id, formData});
-            setTimeout(() => {
-                this.props.videoReadAction();
-            }, 5000, this)
+        if (this.props.match.params.id || video.mode == 'update') {
+            video.submitForm(this.props.videoUpdateAction);
         } else {
-            this.props.videoAddAction(formData, this.getProgress);
+            video.submitForm(this.props.videoAddAction);
         }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
-
-        if(nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) { // EDIT MODE
-            console.log('nextProps.videos.form.video_path,', nextProps.videos.form.video_path);
-            const { form } = nextProps.videos;
-            form.mode = 'edit';
-
-            this.setState({
-                videoUrl: apiServer + '/' + nextProps.videos.form.video_path,
-                imageUrl: apiServer + '/' + nextProps.videos.form.image_path,
-                form
-            });
-        } else { // ADD MODE
-            this.setState({
-                list: nextProps.videos.list,
-                videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null,
-                imageUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.image_path ? nextProps.videos.form.result.image_path : null
-            });
+        if (nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) {
+            const video = new Video(nextProps.videos.form);
+            this.setState({video});
         }
     }
 
@@ -159,6 +122,7 @@ class Videos extends React.Component {
     }
 
     render() {
+        const {video} = this.state;
 
         return (
             <section id="dashboard" className="dashboard">
@@ -168,7 +132,7 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="title" placeholder="Type title" value={this.state.form.title}
+                                <input type="text" id="title" placeholder="Type title" value={video.form.title}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
@@ -176,30 +140,30 @@ class Videos extends React.Component {
                         <div className="row">
                             <div className="col-1-of-2">
                                 <input type="text" id="description" placeholder="Type description"
-                                       value={this.state.form.description}
+                                       value={video.form.description}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <Select data={this.genreList} onSelect={this.onClickGetSelected}/>
+                                <Select selected={video.selected} data={video.genreList} onSelect={video.setGenre}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <File imageUrl={this.state.imageUrl} accept="image/x-png,image/gif,image/jpeg"
+                                <File imageUrl={video.imageUrl} accept="image/x-png,image/gif,image/jpeg"
                                       id="image_file" key={1}
-                                      progress={this.state.progress} getFiles={this.getFiles}/>
+                                      progress={video.uploadProgress} getFiles={video.setImagePath}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <File videoUrl={this.state.videoUrl} accept="video/mp4,video/x-m4v,video/*"
+                                <File videoUrl={video.videoUrl} accept="video/mp4,video/x-m4v,video/*"
                                       id="video_file" key={2}
-                                      progress={this.state.progress} getFiles={this.getFiles}/>
+                                      progress={video.uploadProgress} getFiles={video.setVideoPath}/>
                             </div>
                         </div>
 
@@ -218,7 +182,7 @@ class Videos extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'title', 'genre']} items={this.state.list}
+                    <Table fields={['id', 'title', 'genre']} items={this.props.videos.list}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>

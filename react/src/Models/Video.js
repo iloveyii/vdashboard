@@ -1,8 +1,8 @@
 const HTTP = 'http://localhost:8090/';
 
 class Video {
-    mode = 'create';
-    genreList = [
+    _mode = 'create';
+    _genreList = [
         {
             value: 'pop',
             label: 'Pop'
@@ -20,62 +20,121 @@ class Video {
             label: 'Disco'
         },
     ];
-    uploadProgress = 0;
-    form = {
+    _uploadProgress = 0;
+    _form = {
         id: null,
         title: '',
         description: '',
-        genre: '',
-        image_path: null,
-        video_path: null,
+        genre: 'rock',
+        image_path: 'images/ff50cfe0-f591-11e9-b16f-7da8357c7944_14.png',
+        video_path: 'videos/ff50cfe0-f591-11e9-b16f-7da8357c7944_songs14.mp4',
     };
+    forceUpdate = () => null;
 
     // If form is null then new record - create mode
     constructor(form = null) {
-        if (form) {
+        if (form && typeof form == 'object') {
             this.form = form;
             this.mode = 'update';
+        } else if(form && typeof form=='function') {
+            this.forceUpdate = form;
         }
-        console.log('TEST Video constructor', this.data);
+        console.log('TEST Video constructor', this._form);
+        this.setGenre = this.setGenre.bind(this);
+        this.setUploadProgress = this.setUploadProgress.bind(this);
+        this.setImagePath = this.setImagePath.bind(this);
+        this.setVideoPath = this.setVideoPath.bind(this);
+    }
+
+    get __class() {
+        return 'Video';
     }
 
     print() {
-        console.log('TEST Video print', this.mode, this.form);
+        console.log('Videos constructor', this._mode, this._form);
     }
 
-    get getData() {
-        console.log('TEST Video getData', this.data);
-        return this.data;
+    get selected() {
+        return this.genreList.find( item => item.value == this.form.genre);
     }
 
-    set setData(data) {
-        console.log('TEST Video setData', this.data);
-        this.data = data;
+    set mode(m) {
+        this._mode = m;
+    }
+    set form(form) {
+        console.log('TEST Video form', this._form);
+        this._form = form;
+    }
+    get form() {
+        return this._form;
     }
 
-    get getVidoeUrl() {
-        return HTTP + this.data.video_path;
+    set formFieldByE(e) {
+        this._form[e.target.id] = e.target.value;
+        console.log('TEST Video form', this._form);
     }
 
-    get getImageUrl() {
-        return HTTP + this.data.image_path;
+    get videoUrl() {
+        return HTTP + this._form.video_path;
     }
 
-    get getGereList() {
-        return this.genreList;
+    get imageUrl() {
+        return HTTP + this._form.image_path;
     }
 
-    set setVideoPath(files) {
-        this.data.video_path = files[0];
+    get genreList() {
+        return this._genreList;
     }
 
-    set setImagePath(files) {
-        this.data.image_path = files[0];
+    set genre(item) {
+        this._form.genre = item.value;
+    }
+    setGenre(item) {
+        this._form.genre = item.value;
+    }
+    get genre() {
+        return this._form.genre;
     }
 
-    set setUploadProgress(value) {
-        this.uploadProgress = value;
+    set videoPath(files) {
+        this._form.video_path = files[0];
     }
+    setVideoPath(files) {
+        this._form.video_path = files[0];
+    }
+
+    set imagePath(files) {
+        this._form.image_path = files[0];
+    }
+    setImagePath(files) {
+        this._form.image_path = files[0];
+    }
+
+    set uploadProgress(value) {
+        this._uploadProgress = value;
+    }
+
+    setUploadProgress(value) {
+        this._uploadProgress = value;
+        this.forceUpdate();
+        console.log('TEST Video form', this.uploadProgress, value);
+    }
+
+    get uploadProgress() {
+        return this._uploadProgress;
+    }
+
+    submitForm(action) {
+        const formData = new FormData();
+
+        Object.keys(this._form).map(key => {
+            formData.append(key, this._form[key]);
+            console.log('Form key', key, formData);
+        });
+
+        this.mode === 'create' ? action(formData, this.setUploadProgress) : action(formData, this.setUploadProgress);
+    }
+
 
 
 }
