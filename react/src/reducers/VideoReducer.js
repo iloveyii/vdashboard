@@ -1,4 +1,5 @@
 import {VIDEO_ADD_SUCCESS, VIDEO_EDIT, VIDEO_READ_SUCCESS} from '../types/Video';
+import Video from '../Models/Video';
 
 const initState = {
     list: [],
@@ -10,7 +11,10 @@ const VideoReducer = (state = initState, action = {}) => {
         case VIDEO_READ_SUCCESS:
             console.log('Inside VideoReducer', action.payload);
             const list = action.payload.slice();
-            const newStateSuccess = {...state, ...{list}};
+            const videos = [];
+            list.forEach( video => videos.push(new Video(video)));
+
+            const newStateSuccess = {...state, ...{list}, ...{videos}};
             return newStateSuccess;
 
         case VIDEO_ADD_SUCCESS:

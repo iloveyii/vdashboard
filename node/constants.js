@@ -7,8 +7,8 @@ const VID_DIR = path.resolve('public/videos');
 const IMAGES_DIR = path.resolve('public/images');
 // URls
 const serverIP = 'localhost';//getIp('wlp1s0');
-const IMAGES_URL = 'http://' + serverIP + ':' + port;
-const VIDEOS_URL = 'http://' + serverIP + ':' + port;
+const IMAGES_URL = 'http://' + serverIP + ':' + port + '/images/';
+const VIDEOS_URL = 'http://' + serverIP + ':' + port + '/videos/';
 
 module.exports = {
     port,

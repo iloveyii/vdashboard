@@ -277,8 +277,8 @@ app.post('/api/v1/videos', (req, res) => {
             status: result.affectedRows,
         };
 
-        result.image_path = constants.IMAGES_URL + '/images/' + fileNameNumber + '_' + imageFile.name;
-        result.video_path = constants.IMAGES_URL + '/videos/' + fileNameNumber + '_' + videoFile.name;
+        result.image_path = constants.IMAGES_URL  + fileNameNumber + '_' + imageFile.name;
+        result.video_path = constants.VIDEOS_URL + fileNameNumber + '_' + videoFile.name;
         res.json(result);
     });
 
@@ -311,6 +311,24 @@ app.delete('/api/v1/videos/:id', (req, res) => {
 
     console.log(sql);
 
+    con.query(sql, (err, result) => {
+        if (err) throw  err;
+        console.log('Result:', result);
+        res.json(result);
+    });
+});
+
+app.put('/api/v1/videos/:id', (req, res) => {
+    console.log('PUT /api/v1/videos', req.body, req.params.id);
+    const userId = req.params.id;
+    const userInput = req.body;
+    const {title, description, genre} = userInput;
+
+    sql = `
+          UPDATE video SET title='${title}', description='${description}', genre='${genre}'
+          WHERE id=${userId}
+        `;
+    console.log(sql);
     con.query(sql, (err, result) => {
         if (err) throw  err;
         console.log('Result:', result);

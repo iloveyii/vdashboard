@@ -53,6 +53,7 @@ class File extends React.Component {
     }
 
     render() {
+        console.log('File render');
         return (
             <div className="file-upload">
                 <header>
@@ -69,8 +70,8 @@ class File extends React.Component {
                     </label>
                     <div className="display">
                         {this.state.videoUrl
-                            ? <video width="100%" controls>
-                                <source src={this.props.videoUrl} type="video/mp4"></source>
+                            ? <video width="100%" controls key={this.state.videoUrl}>
+                                <source src={this.state.videoUrl} type="video/mp4"></source>
                             </video>
                             : <img ref={this.refDisplayImage} style={{width: '100%'}} src={this.state.imageUrl} alt="Image"/>
                         }

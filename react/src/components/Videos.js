@@ -15,11 +15,17 @@ import Table from '@softhem.se/table';
 // import File from '@softhem.se/file';
 import File from './File';
 import Select from '@softhem.se/select';
+import {apiServer} from '../common/constants';
+import Video from '../Models/Video';
 
 
 class Videos extends React.Component {
     constructor(props) {
         super(props);
+        const video = new Video();
+        console.log(video.getData);
+        video.print();
+
         this.state = {
             form: {
                 id: null,
@@ -30,7 +36,8 @@ class Videos extends React.Component {
                 video_path: '',
             },
             progress: 0,
-            videoUrl: null
+            videoUrl: null,
+            video: video
         };
 
         this.genreList = [
@@ -62,6 +69,8 @@ class Videos extends React.Component {
         this.getFiles = this.getFiles.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.getProgress = this.getProgress.bind(this);
+
+
     }
 
     getProgress(progress) {
@@ -112,9 +121,9 @@ class Videos extends React.Component {
 
         console.log('onSubmit: ', formData);
 
-        if (this.props.match.params.id) {
+        if (this.props.match.params.id || form.mode == 'edit') {
             console.log('Updating in component: ', form);
-            this.props.videoUpdateAction({id: form._id, formData});
+            this.props.videoUpdateAction({id: form.id, formData});
             setTimeout(() => {
                 this.props.videoReadAction();
             }, 5000, this)
@@ -125,12 +134,23 @@ class Videos extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
-        const {list, videoUrl, form} = nextProps.videos;
 
-        if (Object.keys(form).length > 0) {
-            this.setState({list, videoUrl, form});
-        } else {
-            this.setState({list, videoUrl});
+        if(nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) { // EDIT MODE
+            console.log('nextProps.videos.form.video_path,', nextProps.videos.form.video_path);
+            const { form } = nextProps.videos;
+            form.mode = 'edit';
+
+            this.setState({
+                videoUrl: apiServer + '/' + nextProps.videos.form.video_path,
+                imageUrl: apiServer + '/' + nextProps.videos.form.image_path,
+                form
+            });
+        } else { // ADD MODE
+            this.setState({
+                list: nextProps.videos.list,
+                videoUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.video_path ? nextProps.videos.form.result.video_path : null,
+                imageUrl: nextProps.videos && nextProps.videos.form && nextProps.videos.form.result && nextProps.videos.form.result.image_path ? nextProps.videos.form.result.image_path : null
+            });
         }
     }
 
