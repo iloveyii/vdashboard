@@ -38,12 +38,11 @@ const UserReducer = (state = initState, action = {}) => {
 
         case USER_READ_SUCCESS:
             console.log('Inside USER_READ_SUCCESS', action.payload);
-            const newState = { ...state};
-            newState.list = action.payload.users;
+            const newState = { ...state, ...{list:action.payload.users}};
             return newState;
 
         default:
-            return initState;
+            return state;
     }
 };
 

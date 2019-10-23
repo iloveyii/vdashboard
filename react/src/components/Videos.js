@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
 import Center from './Center';
-import {videoAddAction, videoReadAction, videoUpdateAction} from "../actions/VideoAction";
+import {videoAddAction, videoReadAction, videoUpdateAction, videoDeleteAction} from "../actions/VideoAction";
 import Table from '@softhem.se/table';
 import File from '@softhem.se/file';
 import Select from '@softhem.se/select';
@@ -187,7 +187,7 @@ class Videos extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'title', 'genre']} items={this.state.list}/>
+                    <Table fields={['id', 'title', 'genre']} items={this.state.list} itemDeleteAction={this.props.videoDeleteAction} />
                 </Center>
             </section>
         )
@@ -209,7 +209,8 @@ const mapStateToProps = state => ({
 const mapActionsToProps = {
     videoAddAction,
     videoReadAction,
-    videoUpdateAction
+    videoUpdateAction,
+    videoDeleteAction
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Videos));

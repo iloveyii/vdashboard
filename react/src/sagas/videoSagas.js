@@ -43,7 +43,7 @@ export function* videoAddSaga(action) {
 export function* videoDeleteSaga(action) {
     console.log('Inside videoDeleteSaga ', action);
     try {
-        const resp = yield call(api.video.delete, action.payload.show);
+        const resp = yield call(api.video.delete, action.payload.video);
 
         if (Array.isArray(Object.keys(resp))) {
             console.log('Inside videoAddSaga isArray', action, resp);

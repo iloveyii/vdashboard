@@ -104,7 +104,7 @@ localStorage.setItem('statsUpdate', statsUpdate);
 if(true || ENVIRONMENT.DEV) {
     // store.dispatch(postsReadAction());
     store.dispatch(userReadAction());
-    //store.dispatch(videoReadAction());
+    store.dispatch(videoReadAction());
 }
 
 /**

@@ -27,7 +27,7 @@ class Sidebar extends React.Component {
     componentWillReceiveProps(nextProps, nextContext) {
         const {login} = nextProps;
         if (login.authenticated === false) {
-            this.props.history.push('/');
+            // this.props.history.push('/');
         }
     }
 

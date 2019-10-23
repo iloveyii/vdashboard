@@ -24,8 +24,8 @@ export default {
                 console.dir(error);
             })
         },
-        delete: (show) =>
-            axios.delete(server + '/' + show._id).then(res => res.data).catch(error => {
+        delete: (video) =>
+            axios.delete(server + '/' + video.id).then(res => res.data).catch(error => {
                 throw new Error(error);
                 console.dir(error);
             }),

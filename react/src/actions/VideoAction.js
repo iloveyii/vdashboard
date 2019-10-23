@@ -68,12 +68,12 @@ export const videoAddFailAction = (err) => {
 
 
 
-export const videoDeleteAction = (show) => {
-    console.log('Inside videoDeleteAction', show);
+export const videoDeleteAction = (video) => {
+    console.log('Inside videoDeleteAction', video);
     return {
         type: VIDEO_DELETE,
         payload: {
-            show
+            video
         }
     }
 };

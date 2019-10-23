@@ -190,7 +190,6 @@ app.post('/api/v1/users', (req, res, next) => {
     console.log('Headers: ', req.headers);
 });
 
-
 app.put('/api/v1/users/:id', (req, res) => {
     console.log('PUT /api/v1/posts', req.body, req.params.id);
     const userId = req.params.id;
@@ -300,6 +299,24 @@ app.get('/api/v1/videos', (req, res) => {
 });
 
 
+app.delete('/api/v1/videos/:id', (req, res) => {
+    const videoId = req.params.id;
+
+    if(videoId=='undefined') return res.json({result: 'id is not defined'});
+
+    sql = `
+          DELETE from video 
+          WHERE id=${videoId}
+        `;
+
+    console.log(sql);
+
+    con.query(sql, (err, result) => {
+        if (err) throw  err;
+        console.log('Result:', result);
+        res.json(result);
+    });
+});
 
 app.listen(constants.port, () => console.log('Server started on port ' + constants.port));
 
