@@ -6,9 +6,10 @@
 }
 
 .alert {
+  z-index: 999;
   padding: 2px;
   border-radius: 3px;
-  width: 100%;
+  width: 70%;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -17,6 +18,7 @@
   box-sizing: border-box;
   font-family: $dd-font-family;
   line-height: 1;
+  -webkit-animation: alert 3s;
 
   &-left {
     width: 40px;
@@ -38,9 +40,7 @@
     span {
       padding: $alert-padding;
       cursor: pointer;
-      background-color: red;
       display: block;
-      background-color: red;
     }
     span:hover {
       background-color: #3b5998;
@@ -65,4 +65,9 @@
   }
 
 
+}
+
+@-webkit-keyframes alert{
+  0%{top:100%}
+  100%{top:100px}
 }

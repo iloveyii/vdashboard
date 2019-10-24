@@ -577,9 +577,10 @@ p.large {
   box-sizing: border-box; }
 
 .alert {
+  z-index: 999;
   padding: 2px;
   border-radius: 3px;
-  width: 100%;
+  width: 70%;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -587,7 +588,8 @@ p.large {
   position: relative;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
-  line-height: 1; }
+  line-height: 1;
+  -webkit-animation: alert 3s; }
   .alert-left {
     width: 40px;
     font-size: 30px; }
@@ -603,9 +605,7 @@ p.large {
     .alert-right span {
       padding: 20px;
       cursor: pointer;
-      background-color: red;
-      display: block;
-      background-color: red; }
+      display: block; }
     .alert-right span:hover {
       background-color: #3b5998; }
   .alert-success {
@@ -617,6 +617,12 @@ p.large {
     background-color: #f8d7da; }
   .alert-info {
     background-color: #cce5ff; }
+
+@-webkit-keyframes alert {
+  0% {
+    top: 100%; }
+  100% {
+    top: 100px; } }
 
 .row {
   max-width: 100%;
