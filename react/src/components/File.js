@@ -1,5 +1,6 @@
 import React from 'react';
-
+// @TODO add to package
+import uuidv4 from 'uuid/v4';
 
 class File extends React.Component {
 
@@ -8,7 +9,7 @@ class File extends React.Component {
         this.state = {
             imageUrl: null,
             videoUrl: null,
-            progress: 0
+            uploadProgress: 0
         };
         this.refImage = React.createRef();
         this.refDisplayImage = React.createRef();
@@ -24,16 +25,20 @@ class File extends React.Component {
     handleChange() {
         const files = this.refImage.current.files;
         console.log('handleChange', files, files && true);
-        this.props.getFiles(files, this.props.id);
+        let {getFiles, model, type} = this.props;
+        if (model && type == 'image') getFiles = model.setImagePath;
+        if (model && type == 'video') getFiles = model.setVideoPath;
+        getFiles(files);
+
         if (this.refImage.current.accept.includes('image')) {
             console.log('File type is image');
             this.readURL();
         }
-        this.refImage.current.value = '';
+        // this.refImage.current.value = '';
     }
 
     readURL() {
-        const input = this.refImage.current;
+        const input = this.refImage.current; // used for all ie image and video
         console.log('readURL', input.files, input.files && true && input.files[0]);
 
         if (input.files && input.files[0]) {
@@ -48,12 +53,21 @@ class File extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps', nextProps);
-        const {progress, videoUrl, imageUrl} = nextProps;
-        this.setState({progress, videoUrl, imageUrl});
+        var {uploadProgress, videoUrl, imageUrl, model} = nextProps;
+        if (model) {
+            var {uploadProgress, videoUrl, imageUrl} = model;
+        }
+        this.setState({uploadProgress, videoUrl, imageUrl});
     }
 
     render() {
         console.log('File render');
+        const id = uuidv4();
+        let accept = "*";
+        const {type} = this.props;
+        if (type && type == 'image') accept = "image/x-png,image/gif,image/jpeg";
+        if (type && type == 'video') accept = "video/mp4,video/x-m4v,video/*";
+
         return (
             <div className="file-upload">
                 <header>
@@ -62,23 +76,24 @@ class File extends React.Component {
                     </p>
                 </header>
                 <main>
-                    <input accept={this.props.accept} ref={this.refImage} multiple type="file" id={this.props.id}
+                    <input accept={accept} ref={this.refImage} multiple type="file" id={id}
                            onClick={this.handleOnClick} onChange={this.handleChange}/>
-                    <label htmlFor={this.props.id} className="upload">
+                    <label htmlFor={id} className="upload">
                         <i className="fas fa-cloud-upload-alt"></i>
                         <p>Drag your files here</p>
                     </label>
                     <div className="display">
-                        {this.state.videoUrl
+                        {type && type=='video'
                             ? <video width="100%" controls key={this.state.videoUrl}>
                                 <source src={this.state.videoUrl} type="video/mp4"></source>
                             </video>
-                            : <img ref={this.refDisplayImage} style={{width: '100%'}} src={this.state.imageUrl} alt="Image"/>
+                            : <img ref={this.refDisplayImage} style={{width: '100%'}} src={this.state.imageUrl}
+                                   alt="Image"/>
                         }
                     </div>
                 </main>
                 <footer>
-                    <span className="progress" style={{width: this.state.progress + '%'}}></span>
+                    <span className="progress" style={{width: this.state.uploadProgress + '%'}}></span>
                 </footer>
 
             </div>

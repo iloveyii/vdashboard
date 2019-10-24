@@ -42,6 +42,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
     "rss-parser": "^3.6.2",
+    "uuid": "^3.3.3",
     "xml2js": "^0.4.19"
   },
   "eslintConfig": {

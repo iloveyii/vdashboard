@@ -33,7 +33,7 @@ class Videos extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        }
+    }
 
     _forceUpdate() {
         this.forceUpdate();
@@ -100,8 +100,13 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
+                                <File model={video} type="image"/>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-1-of-2">
                                 <File imageUrl={video.imageUrl} accept="image/x-png,image/gif,image/jpeg"
-                                      id="image_file" key={1}
                                       progress={video.uploadProgress} getFiles={video.setImagePath}/>
                             </div>
                         </div>

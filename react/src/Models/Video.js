@@ -102,7 +102,7 @@ class Video {
         return this._form.genre;
     }
 
-    // Record editing mode
+    // Model editing mode
     set mode(m) {
         this._mode = m;
     }
