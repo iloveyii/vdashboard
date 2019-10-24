@@ -29,9 +29,14 @@ class Video {
         image_path: 'images/ff50cfe0-f591-11e9-b16f-7da8357c7944_14.png',
         video_path: 'videos/ff50cfe0-f591-11e9-b16f-7da8357c7944_songs14.mp4',
     };
+    _formResult = {
+        affectedRows: 0
+    };
     _display_fields = ['id', 'title', 'genre'];
     _subscribed = [];
     forceUpdate = () => null;
+    _videoUrl = null;
+    _imageUrl = null;
 
     // If form is null then new record - create mode
     constructor(form = null) {
@@ -106,12 +111,25 @@ class Video {
     set mode(m) {
         this._mode = m;
     }
+    get mode() {
+        return this._mode;
+    }
+
     set form(form) {
         console.log('TEST Video form', this._form);
         this._form = form;
     }
     get form() {
         return this._form;
+    }
+    set formResult(r) {
+        this._formResult = r;
+        if(r && r.affectedRows > 0) {
+            this.mode = 'update';
+            this._imageUrl = r.image_path;
+            this._videoUrl = r.video_path;
+            this.callSubscribed('formResult');
+        }
     }
 
     set formFieldByE(e) {
@@ -120,11 +138,11 @@ class Video {
     }
 
     get videoUrl() {
-        return HTTP + this._form.video_path;
+        return this._videoUrl ? this._videoUrl : HTTP + this._form.video_path;
     }
 
     get imageUrl() {
-        return HTTP + this._form.image_path;
+        return this._imageUrl ? this._imageUrl : HTTP + this._form.image_path;
     }
 
     set videoPath(files) {
@@ -165,9 +183,6 @@ class Video {
 
         this.mode === 'create' ? action(formData, this.setUploadProgress) : action(formData, this.setUploadProgress);
     }
-
-
-
 }
 
 export default Video;

@@ -22,6 +22,7 @@ class Sidebar extends React.Component {
     handleLogout() {
         const {logoutAction} = this.props;
         logoutAction();
+        this.props.history.push('/');
     }
 
     componentWillReceiveProps(nextProps, nextContext) {

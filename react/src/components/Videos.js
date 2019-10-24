@@ -25,7 +25,7 @@ class Videos extends React.Component {
         this._forceUpdate = this._forceUpdate.bind(this);
 
         const video = new Video(this._forceUpdate);
-        video.subscribe('setUploadProgress');
+        video.subscribe(['setUploadProgress', 'formResult']);
 
         this.state = {
             video: video
@@ -59,8 +59,9 @@ class Videos extends React.Component {
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
         if (nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) {
-            const video = new Video(nextProps.videos.form);
-            this.setState({video});
+            const {video} = this.state;
+            video.form = nextProps.videos.form;
+            video.formResult = nextProps.videos.form.result;
         }
     }
 
@@ -106,16 +107,7 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <File imageUrl={video.imageUrl} accept="image/x-png,image/gif,image/jpeg"
-                                      progress={video.uploadProgress} getFiles={video.setImagePath}/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-1-of-2">
-                                <File videoUrl={video.videoUrl} accept="video/mp4,video/x-m4v,video/*"
-                                      id="video_file" key={2}
-                                      progress={video.uploadProgress} getFiles={video.setVideoPath}/>
+                                <File model={video} type="video"/>
                             </div>
                         </div>
 
