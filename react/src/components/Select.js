@@ -24,21 +24,31 @@ class Select extends React.Component {
     handleOnClick(selected) {
         const isVisible = false;
         this.setState({selected, isVisible});
-        const {onSelect} = this.props;
+        let {onSelect, model} = this.props;
+        if(model) {
+            onSelect = model.onSelect;
+        }
         onSelect(selected);
     }
 
     componentDidMount() {
-        const {selected} = this.props;
+        let {selected, model} = this.props;
         console.log('componentDidMount', selected);
+        if(model) {
+            selected = model.selected;
+        }
         if (selected) {
             this.setState({selected});
         }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        const {selected} = nextProps;
+        let {selected, model} = nextProps;
         console.log('componentWillReceiveProps', selected);
+        if(model) {
+            selected = model.selected;
+        }
+
         if (selected) {
             this.setState({selected});
         }

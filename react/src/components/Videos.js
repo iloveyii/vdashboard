@@ -25,47 +25,18 @@ class Videos extends React.Component {
         this._forceUpdate = this._forceUpdate.bind(this);
 
         const video = new Video(this._forceUpdate);
-        console.log('Videos constructor', video.genre);
-
+        video.subscribe('setUploadProgress');
 
         this.state = {
-            form: {
-                id: null,
-                title: '',
-                description: '',
-                genre: '',
-                image_path: {},
-                video_path: '',
-            },
-            progress: 0,
-            videoUrl: null,
             video: video
         };
 
-        this.genreList = video.genreList;
-
-        /*
-        this.showAdminList = this.showAdminList.bind(this);
-        this.handleCenterClick = this.handleCenterClick.bind(this);
-        this.makeAdmin = this.makeAdmin.bind(this);
-        */
-        this.onClickGetSelected = this.onClickGetSelected.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.getFiles = this.getFiles.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.getProgress = this.getProgress.bind(this);
-
-    }
+        }
 
     _forceUpdate() {
         this.forceUpdate();
-    }
-
-    getProgress(progress) {
-        console.log('getProgress: ', progress);
-        const {video} = this.state;
-        video.uploadProgress = progress;
-        this.setState({video});
     }
 
     handleChange(e) {
@@ -74,32 +45,8 @@ class Videos extends React.Component {
         this.setState({video});
     }
 
-    onClickGetSelected(selected) {
-        const {video} = this.state;
-        video.genre = selected;
-        this.setState({video});
-    }
-
-    getFiles(files, id) {
-        const {video} = this.state;
-
-        if (id === 'image_file') {
-            video.imagePath = files;
-        }
-
-        if (id === 'video_file') {
-            video.videoPath = files;
-        }
-
-        this.setState({video});
-    }
-
     handleFormSubmit(e) {
         e.preventDefault();
-        this.submitForm();
-    }
-
-    submitForm() {
         const {video} = this.state;
 
         if (this.props.match.params.id || video.mode == 'update') {
@@ -147,7 +94,7 @@ class Videos extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <Select selected={video.selected} data={video.genreList} onSelect={video.setGenre}/>
+                                <Select model={video}/>
                             </div>
                         </div>
 
