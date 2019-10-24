@@ -15,6 +15,7 @@ import Table from './Table';
 // import File from '@softhem.se/file';
 import File from './File';
 import Select from './Select';
+import Alert from './Alert';
 import {apiServer} from '../common/constants';
 import Video from '../Models/Video';
 
@@ -28,7 +29,11 @@ class Videos extends React.Component {
         video.subscribe(['setUploadProgress', 'formResult']);
 
         this.state = {
-            video: video
+            video: video,
+            alert: {
+                type: 'info',
+                title: 'Info'
+            }
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -51,8 +56,12 @@ class Videos extends React.Component {
 
         if (this.props.match.params.id || video.mode == 'update') {
             video.submitForm(this.props.videoUpdateAction);
+            const alert = { type: 'info', title: 'Video updated successfully'};
+            this.setState({alert});
         } else {
             video.submitForm(this.props.videoAddAction);
+            const alert = { type: 'info', title: 'Video added successfully'};
+            this.setState({alert});
         }
     }
 
@@ -77,7 +86,11 @@ class Videos extends React.Component {
                 <Sidebar/>
                 <Center>
                     <form action="">
-
+                        <div className="row">
+                            <div className="col-1-of-1">
+                                <Alert type={this.state.alert.type} title={this.state.alert.title} />
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-1-of-2">
                                 <input type="text" id="title" placeholder="Type title" value={video.form.title}
