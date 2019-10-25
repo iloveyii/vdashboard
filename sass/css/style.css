@@ -669,7 +669,7 @@ p.large {
         color: white;
         display: flex;
         flex-direction: row;
-        padding: 20px; }
+        padding: 5px; }
         .video-view main .left-row img {
           width: 100%;
           overflow: hidden; }
