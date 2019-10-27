@@ -120,6 +120,7 @@ app.get('/api/v1/login', (req, res) => {
 });
 
 app.get('/api/v1/users', (req, res) => {
+    console.log('Saeed fetched this')
     sql = `
           SELECT * 
           FROM login 

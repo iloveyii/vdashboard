@@ -14,7 +14,7 @@ const file = {
         if (imageFile) {
             const imageFilePath = constants.IMAGES_DIR + '/' + fileNameNumber + '_' + imageFile.name;
             const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
-            this.moveFile(imageFile, imageFilePath);
+            imageFile && this.moveFile(imageFile, imageFilePath);
             result.image_path = image_path;
             result.image_url = constants.IMAGES_URL + fileNameNumber + '_' + imageFile.name;
         } else {
@@ -24,7 +24,7 @@ const file = {
         if (videoFile) {
             const videoFilePath = constants.VID_DIR + '/' + fileNameNumber + '_' + videoFile.name;
             const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
-            this.moveFile(imageFile, videoFilePath);
+            videoFile && this.moveFile(imageFile, videoFilePath);
             result.video_url = constants.VIDEOS_URL + fileNameNumber + '_' + videoFile.name;
             result.video_path = video_path;
         } else {
