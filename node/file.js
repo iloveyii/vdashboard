@@ -2,7 +2,7 @@ const constants = require('./constants');
 const uuidv1 = require('uuid/v1');
 
 const file = {
-    save: function (req) {
+    save: async function (req) {
         const imageFile = req.files ? req.files.image_path : null;
         const videoFile = req.files ? req.files.video_path : null;
         const fileNameNumber = uuidv1();
@@ -14,7 +14,7 @@ const file = {
         if (imageFile) {
             const imageFilePath = constants.IMAGES_DIR + '/' + fileNameNumber + '_' + imageFile.name;
             const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
-            imageFile && this.moveFile(imageFile, imageFilePath);
+            imageFile && await this.moveFile(imageFile, imageFilePath);
             result.image_path = image_path;
             result.image_url = constants.IMAGES_URL + fileNameNumber + '_' + imageFile.name;
         } else {
@@ -24,7 +24,7 @@ const file = {
         if (videoFile) {
             const videoFilePath = constants.VID_DIR + '/' + fileNameNumber + '_' + videoFile.name;
             const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
-            videoFile && this.moveFile(imageFile, videoFilePath);
+            videoFile && await this.moveFile(videoFile, videoFilePath);
             result.video_url = constants.VIDEOS_URL + fileNameNumber + '_' + videoFile.name;
             result.video_path = video_path;
         } else {
@@ -34,36 +34,36 @@ const file = {
         console.log('before return from save(): ');
 
         return result;
+
     },
 
     moveFile: function (file, fullFilePath) {
         let message = 'File upload failed';
 
-        try {
-            // Mv file to some dir
-            file.mv(fullFilePath, err => {
-                if (err) {
-                    return 500
-                }
+        return new Promise(function (resolve, reject) {
+            try {
+                // Mv file to some dir
+                file.mv(fullFilePath, err => {
+                    if (err) {
+                        return 500
+                    }
 
-                console.log('File saved to directory ' + fullFilePath);
-                message = 'Image File upload success, ';
-                return {
-                    status: 'ok',
+                    console.log('File saved to directory ' + fullFilePath);
+                    message = 'Image File upload success, ';
+                    resolve({
+                        status: 'ok',
+                        message
+                    });
+                });
+            } catch (e) {
+                console.log('Some error in saving the file ', e);
+                reject({
+                    status: 'not ok',
                     message
-                }
-            });
-
-            return {
-                status: 'not ok',
-                message
+                });
             }
-        } catch (e) {
-            console.log('Some error in saving the file ', e);
-        }
+        });
     }
-
-
 };
 
 module.exports = file;

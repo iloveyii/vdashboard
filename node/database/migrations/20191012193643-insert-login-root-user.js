@@ -16,8 +16,8 @@ exports.setup = function (options, seedLink) {
 
 exports.up = function (db) {
     db.insert('login',
-        ['username', 'password'],
-        ['root', md5('root')],
+        ['username', 'password', 'avatar'],
+        ['root', md5('root'), 'http://localhost:8090/images/root.jpg'],
         function (err) {
             if (err) return callback(err);
             return callback();
