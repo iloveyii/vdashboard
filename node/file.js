@@ -12,31 +12,27 @@ const file = {
             video_path: null
         };
 
-        const promises = [];
-
         if (imageFile) {
             const imageFilePath = constants.IMAGES_DIR + '/' + fileNameNumber + '_' + imageFile.name;
             const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
-            const i = this.moveFile(imageFile, imageFilePath);
-            if (i.status == 'ok') {
-                result.image_path = image_path;
-            }
+            this.moveFile(imageFile, imageFilePath);
+            result.image_path = image_path;
+            result.image_url = constants.IMAGES_URL + fileNameNumber + '_' + imageFile.name;
         } else {
-            result.i = ' No image file attached';
+            result.image_path_status = ' No image file attached';
         }
 
         if (videoFile) {
             const videoFilePath = constants.VID_DIR + '/' + fileNameNumber + '_' + videoFile.name;
             const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
-            const v = new Promise(this.moveFile(imageFile, videoFilePath));
-            if (v.status == 'ok') {
-                result.video_path = video_path;
-            }
+            this.moveFile(imageFile, videoFilePath);
+            result.video_url = constants.VIDEOS_URL + fileNameNumber + '_' + imageFile.name;
+            result.video_path = video_path;
         } else {
-            result.v = 'No video file attached';
+            result.video_path_status = 'No video file attached';
         }
 
-        console.log(result);
+        console.log('before return from save(): ', result);
 
         return result;
     },

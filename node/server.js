@@ -334,24 +334,13 @@ app.put('/api/v1/videos/:id', (req, res) => {
     const userId = req.params.id;
     const userInput = req.body;
     const {title, description, genre} = userInput;
-
     sql = `
           UPDATE video SET title='${title}', description='${description}', genre='${genre}'
-          
         `;
-
-    var result = {};
-
-    var abc = async function () {
-        console.log('Async 1')
-        result = await file.save(req);
-        console.log('Async 2')
-    }();
-
+    const result = file.save(req);
 
     if (result.image_path) {
         sql += `
-        
             ,
            image_path='${result.image_path}'
         `;
@@ -359,22 +348,22 @@ app.put('/api/v1/videos/:id', (req, res) => {
 
     if (result.video_path) {
         sql += `
-        
             ,
            video_path='${result.video_path}'
         `;
     }
 
     sql += `
-    
           WHERE id=${userId}
         `;
 
     console.log(' after file : ', sql);
-    con.query(sql, (err, result) => {
+
+    con.query(sql, (err, dbResult) => {
         if (err) throw  err;
-        console.log('Result:', result);
-        res.json(result);
+        console.log('dbResult:', dbResult);
+        const dbAndFile = Object.assign({}, result, dbResult);
+        res.json(dbAndFile);
     });
 });
 
