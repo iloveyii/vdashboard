@@ -83,7 +83,7 @@ class File extends React.Component {
                         <p>Drag your files here</p>
                     </label>
                     <div className="display">
-                        {type && type=='video'
+                        {type && type == 'video'
                             ? <video width="100%" controls autoPlay={true} key={this.state.videoUrl}>
                                 <source src={this.state.videoUrl} type="video/mp4"></source>
                             </video>

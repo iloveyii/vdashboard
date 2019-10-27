@@ -39,7 +39,7 @@ export default {
                     data.action(percentCompleted);
                 }
             };
-            axios.put(server + '/' + formData.getAll('id'), formData, config).then(res => {console.log('Update response: ', res); return res.data; }).catch(error => {
+            return axios.put(server + '/' + formData.getAll('id'), formData, config).then(res => {console.log('Update response: ', res); return res.data; }).catch(error => {
                 throw new Error(error);
                 console.dir(error);
             })

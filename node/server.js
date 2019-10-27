@@ -12,35 +12,6 @@ const Joi = require('joi');
 const file = require('./file');
 
 
-function saveMedia(image, imageFileName, video, videoFileName) {
-    let message = '';
-    console.log('Inside saveMedia ', image, video);
-
-    // Mv file to some dir
-    image && image.mv(imageFileName, err => {
-        if (err) {
-            return 500
-        }
-
-        console.log('File saved to directory ' + imageFileName);
-        message = 'Image File upload success, ';
-    });
-
-    // Mv file to some dir
-    video && video.mv(videoFileName, err => {
-        if (err) {
-            return 500
-        }
-
-        console.log('File saved to directory ' + videoFileName);
-        message += 'Video File upload success.';
-    });
-
-    const result = {status: 'ok', message};
-
-    return result;
-}
-
 app.use(
     express.static(__dirname + '/public'),
     fileUpload({
@@ -233,66 +204,42 @@ app.delete('/api/v1/users/:id', (req, res) => {
     });
 });
 
-function saveFiles(req) {
-    // Use same image field name as in html form
-    const imageFile = req.files ? req.files.image_path : null;
-    const videoFile = req.files ? req.files.video_path : null;
-    const fileNameNumber = uuidv1();
-    const video = req.body;
-
-    const imageFileName = constants.IMAGES_DIR + '/' + fileNameNumber + '_' + imageFile.name;
-    const videoFileName = constants.VID_DIR + '/' + fileNameNumber + '_' + videoFile.name;
-
-    video.image = imageFileName;
-    video.video = videoFileName;
-
-    let result = saveMedia(imageFile, imageFileName, videoFile, videoFileName);
-    if (result.status == 'ok') {
-        const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
-        const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
-        result.image_path = image_path;
-        result.video_path = video_path;
-    }
-
-    return (result);
-}
-
-app.post('/api/v1/videos', (req, res) => {
+app.post('/api/v1/videos', async (req, res) => {
     console.log('POST /api/v1/videos');
 
     if (!req.files || Object.keys(req.files).length == 0) {
         return res.status(400).json({result: 'No images were attached'});
     }
 
-    let result = saveFiles(req);
+    const userInput = req.body;
+    const {title, description, genre} = userInput;
+    const result = await file.save(req);
+    let sql = '';
 
-    if (result.status != 'ok') return res.json(result);
-
-    const title = req.body.title;
-    const description = req.body.description;
-    const genre = req.body.genre;
-    const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
-    const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
-
-    sql = `
-          INSERT INTO video (title, description, genre, image_path, video_path)
-          VALUES ('${title}', '${description}', '${genre}', '${image_path}', '${video_path}');
+    if (result.image_path && result.video_path) {
+        sql = `
+           INSERT INTO video (title, description, genre, image_path, video_path)
+           VALUES ('${title}', '${description}', '${genre}', '${result.image_path}', '${result.video_path}');
         `;
+    } else if(result.image_path) {
+        sql = `
+           INSERT INTO video (title, description, genre, image_path)
+           VALUES ('${title}', '${description}', '${genre}', '${result.image_path}');
+        `;
+    } else if(result.video_path) {
+        sql = `
+           INSERT INTO video (title, description, genre, video_path)
+           VALUES ('${title}', '${description}', '${genre}', '${result.video_path}');
+        `;
+    }
 
-    console.log(sql);
-
-    con.query(sql, (err, result) => {
+    console.log('Running sql : ', sql);
+    con.query(sql, (err, dbResult) => {
         if (err) throw  err;
-        console.log('Result:', result);
-        const response = {
-            status: result.affectedRows,
-        };
-
-        result.image_path = constants.IMAGES_URL + fileNameNumber + '_' + imageFile.name;
-        result.video_path = constants.VIDEOS_URL + fileNameNumber + '_' + videoFile.name;
-        res.json(result);
+        console.log('dbResult:', dbResult);
+        const dbAndFile = Object.assign({}, result, dbResult);
+        res.json(dbAndFile);
     });
-
 });
 
 app.get('/api/v1/videos', (req, res) => {
@@ -308,7 +255,6 @@ app.get('/api/v1/videos', (req, res) => {
     });
     console.log(sql);
 });
-
 
 app.delete('/api/v1/videos/:id', (req, res) => {
     const videoId = req.params.id;

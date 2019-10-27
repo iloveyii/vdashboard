@@ -64,14 +64,14 @@ export function* videoUpdateSaga(action) {
             formData: action.payload.formData,
             action: (d) => action.payload.action(d)
         });
-        console.log('Resp', resp);
+        console.log('videoUpdateSaga Resp', resp);
 
         if (resp && Array.isArray(Object.keys(resp))) {
             console.log('Inside videoUpdateSaga isArray', action, resp);
             yield put(videoUpdateSuccessAction(resp));
             yield put(videoReadAction());
         } else {
-            // yield put(videoUpdateFailAction(resp));
+            //  yield put(videoUpdateFailAction(resp));
         }
     } catch (err) {
         console.log(err);

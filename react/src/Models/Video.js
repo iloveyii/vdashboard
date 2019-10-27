@@ -138,10 +138,16 @@ class Video {
     }
 
     get videoUrl() {
+        if(this._form.result && this._form.result.video_url) {
+            return this._form.result.video_url;
+        }
         return this._videoUrl ? this._videoUrl : HTTP + this._form.video_path;
     }
 
     get imageUrl() {
+        if(this._form.result && this._form.result.image_url) {
+            return this._form.result.image_url;
+        }
         return this._imageUrl ? this._imageUrl : HTTP + this._form.image_path;
     }
 

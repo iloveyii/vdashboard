@@ -1,4 +1,4 @@
-import {VIDEO_ADD_SUCCESS, VIDEO_EDIT, VIDEO_READ_SUCCESS} from '../types/Video';
+import {VIDEO_ADD_SUCCESS, VIDEO_EDIT, VIDEO_READ_SUCCESS, VIDEO_UPDATE_SUCCESS} from '../types/Video';
 import Video from '../Models/Video';
 
 const initState = {
@@ -7,19 +7,20 @@ const initState = {
 };
 
 const VideoReducer = (state = initState, action = {}) => {
+    let form = {};
     switch (action.type) {
         case VIDEO_READ_SUCCESS:
             console.log('Inside VideoReducer', action.payload);
             const data = action.payload;
             const list = [];
-            data.forEach( video => list.push(new Video(video)));
+            data.forEach(video => list.push(new Video(video)));
 
             const newStateSuccess = {...state, ...{list}};
             return newStateSuccess;
 
         case VIDEO_ADD_SUCCESS:
             console.log('Inside VideoReducer', action.payload);
-            const form = Object.assign({}, state.form);
+            form = Object.assign({}, state.form);
             form.result = action.payload.result;
             const newStateAdd = {...state, ...{form}};
             return newStateAdd;
@@ -31,6 +32,13 @@ const VideoReducer = (state = initState, action = {}) => {
 
             return newStateEdit;
 
+        case VIDEO_UPDATE_SUCCESS:
+            console.log('Inside VideoReducer', action.payload);
+            form = Object.assign({}, state.form);
+            form.result = action.payload.result;
+            const newStateUpdate = {...state, ...{form}};
+
+            return newStateUpdate;
 
         default:
             return state;
