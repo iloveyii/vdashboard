@@ -9,6 +9,8 @@ const constants = require('./constants');
 const uuidv1 = require('uuid/v1');
 const fileUpload = require('express-fileupload');
 const Joi = require('joi');
+const file = require('./file');
+
 
 function saveMedia(image, imageFileName, video, videoFileName) {
     let message = '';
@@ -335,21 +337,40 @@ app.put('/api/v1/videos/:id', (req, res) => {
 
     sql = `
           UPDATE video SET title='${title}', description='${description}', genre='${genre}'
-          WHERE id=${userId}
+          
         `;
-    console.log(sql);
 
-    let result = saveFiles(req);
-    if (result.status == 'ok' && result.image_path) {
-        const {image_path, video_path} = result;
-        sql = `
-          UPDATE video SET title='${title}', description='${description}', genre='${genre}',
-                 image_path='${image_path}', video_path='${video_path}'
-          WHERE id=${userId}
+    var result = {};
+
+    var abc = async function () {
+        console.log('Async 1')
+        result = await file.save(req);
+        console.log('Async 2')
+    }();
+
+
+    if (result.image_path) {
+        sql += `
+        
+            ,
+           image_path='${result.image_path}'
         `;
-        console.log(sql);
     }
 
+    if (result.video_path) {
+        sql += `
+        
+            ,
+           video_path='${result.video_path}'
+        `;
+    }
+
+    sql += `
+    
+          WHERE id=${userId}
+        `;
+
+    console.log(' after file : ', sql);
     con.query(sql, (err, result) => {
         if (err) throw  err;
         console.log('Result:', result);

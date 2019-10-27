@@ -12,6 +12,8 @@ const file = {
             video_path: null
         };
 
+        const promises = [];
+
         if (imageFile) {
             const imageFilePath = constants.IMAGES_DIR + '/' + fileNameNumber + '_' + imageFile.name;
             const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
@@ -19,15 +21,19 @@ const file = {
             if (i.status == 'ok') {
                 result.image_path = image_path;
             }
+        } else {
+            result.i = ' No image file attached';
         }
 
         if (videoFile) {
             const videoFilePath = constants.VID_DIR + '/' + fileNameNumber + '_' + videoFile.name;
             const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
-            const v = this.moveFile(imageFile, videoFilePath);
-            if(v.status=='ok') {
+            const v = new Promise(this.moveFile(imageFile, videoFilePath));
+            if (v.status == 'ok') {
                 result.video_path = video_path;
             }
+        } else {
+            result.v = 'No video file attached';
         }
 
         console.log(result);
@@ -35,13 +41,13 @@ const file = {
         return result;
     },
 
-    moveFile: async function (file, fullFilePath) {
+    moveFile: function (file, fullFilePath) {
         console.log('Inside moveFile ', file);
         let message = 'File upload failed';
 
         try {
             // Mv file to some dir
-            await file.mv(fullFilePath, err => {
+            file.mv(fullFilePath, err => {
                 if (err) {
                     return 500
                 }
@@ -66,5 +72,4 @@ const file = {
 
 };
 
-exports = file;
-file.save({});
+module.exports = file;
