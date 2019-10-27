@@ -1,5 +1,6 @@
 
 const con = require('./config/db');
+const file = require('./file');
 
 const video = {
     post: async (req, res) => {

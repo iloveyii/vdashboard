@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const md5 = require('md5');
-const constants = require('./constants');
+const constants = require('./src/config/constants');
 const fileUpload = require('express-fileupload');
 const Joi = require('joi');
 

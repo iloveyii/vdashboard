@@ -1,4 +1,4 @@
-const constants = require('./constants');
+const constants = require('./config/constants');
 const uuidv1 = require('uuid/v1');
 
 const file = {
