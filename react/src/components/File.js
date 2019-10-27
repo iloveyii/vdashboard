@@ -84,7 +84,7 @@ class File extends React.Component {
                     </label>
                     <div className="display">
                         {type && type=='video'
-                            ? <video width="100%" controls autoplay key={this.state.videoUrl}>
+                            ? <video width="100%" controls autoPlay={true} key={this.state.videoUrl}>
                                 <source src={this.state.videoUrl} type="video/mp4"></source>
                             </video>
                             : <img ref={this.refDisplayImage} style={{width: '100%'}} src={this.state.imageUrl}

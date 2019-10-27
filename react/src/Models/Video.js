@@ -22,7 +22,7 @@ class Video {
     ];
     _uploadProgress = 0;
     _form = {
-        id: null,
+        id: '',
         title: '',
         description: '',
         genre: 'rock',
@@ -178,8 +178,10 @@ class Video {
 
         Object.keys(this._form).map(key => {
             formData.append(key, this._form[key]);
-            console.log('Form key', key, formData);
+            console.log('Form key', key, formData.getAll(key));
         });
+
+        console.log('Before action', formData);
 
         this.mode === 'create' ? action(formData, this.setUploadProgress) : action(formData, this.setUploadProgress);
     }

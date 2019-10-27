@@ -29,9 +29,17 @@ export default {
                 throw new Error(error);
                 console.dir(error);
             }),
-        update: async (show) => {
-            console.log('Inside axios put ,' , show);
-            await axios.put(server + '/' + show.id, show.formData).then(res => {console.log('Update response: ', res); return res.data; }).catch(error => {
+        update: (data) => {
+            const formData = data.formData;
+            console.log('Inside axios put ,' , data);
+            const config = {
+                onUploadProgress: function(progressEvent) {
+                    const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                    console.log('PercentCompleted: ', percentCompleted);
+                    data.action(percentCompleted);
+                }
+            };
+            axios.put(server + '/' + formData.getAll('id'), formData, config).then(res => {console.log('Update response: ', res); return res.data; }).catch(error => {
                 throw new Error(error);
                 console.dir(error);
             })

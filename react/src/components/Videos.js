@@ -16,7 +16,7 @@ import Table from './Table';
 import File from './File';
 import Select from './Select';
 import Alert from './Alert';
-import {apiServer} from '../common/constants';
+import VideoView from './VideoView';
 import Video from '../Models/Video';
 
 
@@ -56,11 +56,11 @@ class Videos extends React.Component {
 
         if (this.props.match.params.id || video.mode == 'update') {
             video.submitForm(this.props.videoUpdateAction);
-            const alert = { type: 'info', title: 'Video updated successfully'};
+            const alert = {type: 'info', title: 'Video updated successfully'};
             this.setState({alert});
         } else {
             video.submitForm(this.props.videoAddAction);
-            const alert = { type: 'info', title: 'Video added successfully'};
+            const alert = {type: 'info', title: 'Video added successfully'};
             this.setState({alert});
         }
     }
@@ -70,6 +70,7 @@ class Videos extends React.Component {
         if (nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) {
             const {video} = this.state;
             video.form = nextProps.videos.form;
+            video.mode = 'update';
             video.formResult = nextProps.videos.form.result;
         }
     }
@@ -85,59 +86,67 @@ class Videos extends React.Component {
             <section id="dashboard" className="dashboard">
                 <Sidebar/>
                 <Center>
-                    <form action="">
-                        <div className="row">
-                            <div className="col-1-of-1">
-                                <Alert type={this.state.alert.type} title={this.state.alert.title} />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-1-of-2">
-                                <input type="text" id="title" placeholder="Type title" value={video.form.title}
-                                       onChange={e => this.handleChange(e)}/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-1-of-2">
-                                <input type="text" id="description" placeholder="Type description"
-                                       value={video.form.description}
-                                       onChange={e => this.handleChange(e)}/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-1-of-2">
-                                <Select model={video}/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-1-of-2">
-                                <File model={video} type="image"/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-1-of-2">
-                                <File model={video} type="video"/>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-1-of-3">
-                                <div className="dashboard--container">
-
-                                    <button style={{width: '80px'}} type="submit"
-                                            onClick={e => this.handleFormSubmit(e)}><i
-                                        className="fas fa-save"></i> Save
-                                    </button>
-
+                    <div className="row">
+                        <div className="col-1-of-2">
+                            <form>
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <Alert type={this.state.alert.type} title={this.state.alert.title}/>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <input type="text" id="title" placeholder="Type title"
+                                               value={video.form.title}
+                                               onChange={e => this.handleChange(e)}/>
+                                    </div>
+                                </div>
 
-                    </form>
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <input type="text" id="description" placeholder="Type description"
+                                               value={video.form.description}
+                                               onChange={e => this.handleChange(e)}/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <Select model={video}/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <File model={video} type="image"/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <File model={video} type="video"/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-1-of-3">
+                                        <div className="dashboard--container">
+
+                                            <button style={{width: '80px'}} type="submit"
+                                                    onClick={e => this.handleFormSubmit(e)}><i
+                                                className="fas fa-save"></i> Save
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div className="col-1-of-2">
+                            <VideoView video={video}/>
+                        </div>
+                    </div>
 
                     <Table fields={['id', 'title', 'genre']} items={this.props.videos.list}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>

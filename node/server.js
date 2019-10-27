@@ -215,7 +215,7 @@ app.put('/api/v1/users/:id', (req, res) => {
 app.delete('/api/v1/users/:id', (req, res) => {
     const userId = req.params.id;
 
-    if(userId=='undefined') return res.json({result: 'id is not defined'});
+    if (userId == 'undefined') return res.json({result: 'id is not defined'});
 
     sql = `
           DELETE from login 
@@ -231,16 +231,10 @@ app.delete('/api/v1/users/:id', (req, res) => {
     });
 });
 
-app.post('/api/v1/videos', (req, res) => {
-    console.log('POST /api/v1/videos');
-
-    if (!req.files || Object.keys(req.files).length == 0) {
-        return res.status(400).json({result: 'No images were attached'});
-    }
-
+function saveFiles(req) {
     // Use same image field name as in html form
-    const imageFile = req.files.image_path;
-    const videoFile = req.files.video_path;
+    const imageFile = req.files ? req.files.image_path : null;
+    const videoFile = req.files ? req.files.video_path : null;
     const fileNameNumber = uuidv1();
     const video = req.body;
 
@@ -251,16 +245,31 @@ app.post('/api/v1/videos', (req, res) => {
     video.video = videoFileName;
 
     let result = saveMedia(imageFile, imageFileName, videoFile, videoFileName);
+    if (result.status == 'ok') {
+        const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
+        const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
+        result.image_path = image_path;
+        result.video_path = video_path;
+    }
 
-    console.log(result);
-    // return res.json(result);
+    return (result);
+}
 
-    if(result.status != 'ok') return res.json(result);
+app.post('/api/v1/videos', (req, res) => {
+    console.log('POST /api/v1/videos');
+
+    if (!req.files || Object.keys(req.files).length == 0) {
+        return res.status(400).json({result: 'No images were attached'});
+    }
+
+    let result = saveFiles(req);
+
+    if (result.status != 'ok') return res.json(result);
 
     const title = req.body.title;
     const description = req.body.description;
     const genre = req.body.genre;
-    const image_path = 'images/'+fileNameNumber + '_' + imageFile.name;
+    const image_path = 'images/' + fileNameNumber + '_' + imageFile.name;
     const video_path = 'videos/' + fileNameNumber + '_' + videoFile.name;
 
     sql = `
@@ -277,7 +286,7 @@ app.post('/api/v1/videos', (req, res) => {
             status: result.affectedRows,
         };
 
-        result.image_path = constants.IMAGES_URL  + fileNameNumber + '_' + imageFile.name;
+        result.image_path = constants.IMAGES_URL + fileNameNumber + '_' + imageFile.name;
         result.video_path = constants.VIDEOS_URL + fileNameNumber + '_' + videoFile.name;
         res.json(result);
     });
@@ -302,7 +311,7 @@ app.get('/api/v1/videos', (req, res) => {
 app.delete('/api/v1/videos/:id', (req, res) => {
     const videoId = req.params.id;
 
-    if(videoId=='undefined') return res.json({result: 'id is not defined'});
+    if (videoId == 'undefined') return res.json({result: 'id is not defined'});
 
     sql = `
           DELETE from video 
@@ -329,6 +338,18 @@ app.put('/api/v1/videos/:id', (req, res) => {
           WHERE id=${userId}
         `;
     console.log(sql);
+
+    let result = saveFiles(req);
+    if (result.status == 'ok' && result.image_path) {
+        const {image_path, video_path} = result;
+        sql = `
+          UPDATE video SET title='${title}', description='${description}', genre='${genre}',
+                 image_path='${image_path}', video_path='${video_path}'
+          WHERE id=${userId}
+        `;
+        console.log(sql);
+    }
+
     con.query(sql, (err, result) => {
         if (err) throw  err;
         console.log('Result:', result);

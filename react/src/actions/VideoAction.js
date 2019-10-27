@@ -89,12 +89,12 @@ export const videoDeleteFailAction = (err) => {
 };
 
 
-export const videoUpdateAction = (show) => {
-    console.log('Inside videoUpdateAction', show);
+export const videoUpdateAction = (formData, action) => {
+    console.log('Inside videoUpdateAction', formData, action);
     return {
         type: VIDEO_UPDATE,
         payload: {
-            show
+            formData, action
         }
     }
 };

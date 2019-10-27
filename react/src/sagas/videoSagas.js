@@ -25,7 +25,7 @@ export function* videoReadSaga(action) {
 export function* videoAddSaga(action) {
     console.log('Inside videoAddSaga ', action);
     try {
-        const resp = yield call(api.video.add, { video : action.payload.video, action: (d) => action.payload.action(d) });
+        const resp = yield call(api.video.add, {video: action.payload.video, action: (d) => action.payload.action(d)});
 
         if (resp && Array.isArray(Object.keys(resp))) {
             console.log('Inside videoAddSaga isArray', action, resp);
@@ -58,9 +58,12 @@ export function* videoDeleteSaga(action) {
 }
 
 export function* videoUpdateSaga(action) {
-    console.log('Inside videoUpdateSaga ', action);
+    console.log('Inside videoUpdateSaga ', action, action.payload.formData);
     try {
-        const resp = yield call(api.video.update, action.payload.show);
+        const resp = yield call(api.video.update, {
+            formData: action.payload.formData,
+            action: (d) => action.payload.action(d)
+        });
         console.log('Resp', resp);
 
         if (resp && Array.isArray(Object.keys(resp))) {
