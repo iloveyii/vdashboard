@@ -657,7 +657,8 @@ p.large {
       color: white;
       margin: 0;
       font-size: 20px;
-      line-height: 3; }
+      align-items: center;
+      display: inline-flex; }
   .video-view main {
     flex: 1;
     background-color: black;
