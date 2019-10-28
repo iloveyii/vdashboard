@@ -1,4 +1,3 @@
-
 const con = require('./config/db');
 const file = require('./file');
 
@@ -74,7 +73,7 @@ const video = {
         });
     }),
 
-    put: (req, res) => {
+    put: async (req, res) => {
         console.log('PUT /api/v1/videos', req.body, req.params.id);
         const userId = req.params.id;
         const userInput = req.body;
@@ -82,7 +81,7 @@ const video = {
         sql = `
           UPDATE video SET title='${title}', description='${description}', genre='${genre}'
         `;
-        const result = file.save(req);
+        const result = await file.save(req);
 
         if (result.image_path) {
             sql += `

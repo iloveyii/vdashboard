@@ -1,9 +1,8 @@
-
+const md5 = require('md5');
 const con = require('./config/db');
 
 const user = {
     get: (req, res) => {
-        console.log('Saeed fetched this')
         sql = `
           SELECT * 
           FROM login 
@@ -58,9 +57,17 @@ const user = {
             admin = userInput.admin;
         }
         sql = `
-          UPDATE login SET email='${email}', username='${username}', password='${password}', admin=${admin}
+          UPDATE login SET email='${email}', username='${username}', admin=${admin}
           WHERE id=${userId}
         `;
+
+        if(password) {
+            sql = `
+              UPDATE login SET email='${email}', username='${username}', password='${password}', admin=${admin}
+              WHERE id=${userId}
+            `;
+        }
+
         console.log(sql);
         con.query(sql, (err, result) => {
             if (err) throw  err;

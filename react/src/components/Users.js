@@ -33,7 +33,6 @@ class Users extends React.Component {
         };
 
 
-
         this.showAdminList = this.showAdminList.bind(this);
         this.handleCenterClick = this.handleCenterClick.bind(this);
         this.makeAdmin = this.makeAdmin.bind(this);
@@ -59,13 +58,14 @@ class Users extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps', nextProps);
+        const {edit, add} = nextProps.users;
 
-        if (nextProps.users && nextProps.users.edit) {
-            const {id, email, username, password, admin} = nextProps.users.edit;
-            this.setState({id: id ? id : null, email, username, password, admin, users: nextProps.users});
+        if (nextProps.users && edit) {
+            const {id, email, username, admin} = edit;
+            this.setState({id: id ? id : null, email, username, password: '', admin});
         }
 
-        if (nextProps.users.add && nextProps.users.add.status === 1) {
+        if ( (add && add.status === 1) || (edit && edit.result && edit.result.affectedRows == 1) ) {
             this.setState({id: null, email: '', username: '', password: '', admin: 0});
         }
     }
@@ -95,7 +95,8 @@ class Users extends React.Component {
 
     render() {
         const {users, userDeleteAction, userEditAction} = this.props;
-        if( ! users ) return <div>Loading</div>
+        if (!users) return <div>Loading</div>
+        console.log('Users Render', users);
 
         return (
             <section id="dashboard" className="dashboard">
@@ -119,14 +120,15 @@ class Users extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-3">
-                                <input type="text" id="password" placeholder="Type password" value={this.state.password}
+                                <input type="password" id="password" placeholder="Type password" value={this.state.password}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <Select selected={this.adminList.find(i => i.value == this.state.admin)} data={this.adminList} onSelect={this.makeAdmin}/>
+                                <Select selected={this.adminList.find(i => i.value == this.state.admin)}
+                                        data={this.adminList} onSelect={this.makeAdmin}/>
                             </div>
                         </div>
 

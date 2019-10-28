@@ -1,4 +1,11 @@
-import {USER_EDIT, USER_EDIT_SUCCESS, USER_EDIT_FAIL, USER_ADD_SUCCESS, USER_READ_SUCCESS} from '../types/User';
+import {
+    USER_EDIT,
+    USER_EDIT_SUCCESS,
+    USER_EDIT_FAIL,
+    USER_ADD_SUCCESS,
+    USER_READ_SUCCESS,
+    USER_UPDATE_SUCCESS
+} from '../types/User';
 
 const initState = {
     edit: {},
@@ -8,25 +15,24 @@ const initState = {
 
 const UserReducer = (state = initState, action = {}) => {
     switch (action.type) {
-        case USER_ADD_SUCCESS:
-            console.log('Inside ItemReducer USER_ADD_SUCCESS', action.payload);
-            return Object.assign({}, {
-                add: {
-                    status: action.payload.status
-                }
-            });
-
         case USER_EDIT:
-            console.log('Inside ItemsReducer USER_EDIT', action.payload);
+            console.log('Inside UserReducer USER_EDIT', action.payload);
             const newStateEdit = {...state, ...{edit: action.payload.user}};
             return newStateEdit;
 
         case USER_EDIT_SUCCESS:
-            console.log('Inside ItemsReducer USER_EDIT_SUCCESS', action);
+            console.log('Inside UserReducer USER_EDIT_SUCCESS', action);
             return state;
 
+        case USER_UPDATE_SUCCESS:
+            console.log('Inside UserReducer', action.payload);
+            const edit = state.edit;
+            edit.result = action.payload.status;
+            const newStateUpdate = {...state, ...{edit}};
+            return newStateUpdate;
+
         case USER_ADD_SUCCESS:
-            console.log('Inside ItemsReducer', action.payload);
+            console.log('Inside UserReducer', action.payload);
             const newStateAdd = {...state, ...{add: action.payload}};
             return newStateAdd;
 

@@ -31,7 +31,7 @@ const file = {
             result.video_path_status = 'No video file attached';
         }
 
-        console.log('before return from save(): ');
+        console.log('before return from save(): ', result);
 
         return result;
 

@@ -1,4 +1,4 @@
-
+const md5 = require('md5');
 const con = require('./config/db');
 
 const login = {
