@@ -29,7 +29,7 @@ class VideoView extends React.Component {
         if (!video) return <div>Loading</div>
 
         return (
-            <article className="video-view">
+            <article className="video-view" style={{marginTop: '13px'}}>
                 <header>
                     <i className="fas fa-film"></i>
                     <h2>{video.form.title}</h2>
