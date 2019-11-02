@@ -1,4 +1,5 @@
 import React from 'react';
+import {apiServer} from "../common/constants";
 
 class VideoView extends React.Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class VideoView extends React.Component {
                     <div className="left">
                         <video width="100%" controls autoPlay key={video.videoUrl}>
                             <source
-                                src={video.videoUrl}
+                                src={apiServer + '/' + video.videoUrl}
                                 type="video/mp4"></source>
                         </video>
                     </div>
