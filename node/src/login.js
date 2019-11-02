@@ -11,7 +11,6 @@ const login = {
         if( ! req.headers.authorization ) {
             const auth = {
                 authenticated: false,
-                username: username
             };
             res.json(auth);
             return false;
