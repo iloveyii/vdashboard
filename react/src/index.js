@@ -31,14 +31,17 @@ import registerServiceWorker from './registerServiceWorker';
  * @returns {Array} - every return value is assigned to the corresponding key in allReducers
  */
 import rootSaga from './sagas/rootSaga';
-import ItemsReducer from "./reducers/ItemsReducer";
-import ItemReducer from "./reducers/ItemReducer";
+import UserReducer from "./reducers/UserReducer";
+import LoginReducer from "./reducers/LoginReducer";
+import VideoReducer from "./reducers/VideoReducer";
 
-import {itemsReadAction} from "./actions/ItemsAction";
+import {userReadAction} from "./actions/UserAction";
+import {videoReadAction} from "./actions/VideoAction";
 
 const allReducers = combineReducers({
-    items: ItemsReducer,
-    item: ItemReducer
+    users: UserReducer,
+    login: LoginReducer,
+    videos : VideoReducer
 });
 
 // # 02
@@ -88,7 +91,6 @@ console.log(store.getState());
  * Dispatch action to store
  */
 
-store.dispatch(itemsReadAction());
 /*
 * no need here moved to App component for unified standard place for all these actions
 store.dispatch(eventStatsUpdateAction());
@@ -101,7 +103,8 @@ localStorage.setItem('statsUpdate', statsUpdate);
 // Read news
 if(true || ENVIRONMENT.DEV) {
     // store.dispatch(postsReadAction());
-    // store.dispatch(videoReadAction());
+    store.dispatch(userReadAction());
+    store.dispatch(videoReadAction());
 }
 
 /**

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
+import {logoutAction} from "../actions/LoginAction";
+
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -17,9 +19,18 @@ class Sidebar extends React.Component {
         this.setState({active: e});
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
+    handleLogout() {
+        const {logoutAction} = this.props;
+        logoutAction();
+        this.props.history.push('/');
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        const {login} = nextProps;
+        if (login.authenticated === false) {
+            // this.props.history.push('/');
+        }
+    }
 
     render() {
         let {pathname} = this.props.location;
@@ -29,36 +40,41 @@ class Sidebar extends React.Component {
             <div className="dashboard--left-bar">
                 <span className="button line u-green-text">
                     <i className="fas fa-shopping-basket"></i>
-                    <label htmlFor=""><h4 className="italic">Shop</h4></label>
+                    <label htmlFor=""><h4 className="italic">Admin</h4></label>
                 </span>
                 <span className="dashboard--left-bar-line"></span>
 
-                <Link to={`/dashboard`} className={pathname=='/dashboard' ? 'button active' : 'button'}>
+                <Link to={`/dashboard`} className={pathname == '/dashboard' ? 'button active' : 'button'}>
                     <i className="fas fa-home"></i>
                     <label htmlFor="">Dashboard</label>
                 </Link>
 
-                <Link to={`/items`} className={pathname=='/items' ? 'button active' : 'button'}>
-                    <i className="fas fa-tshirt"></i>
-                    <label htmlFor="">Items</label>
+                <Link to={`/users`} className={pathname == '/users' ? 'button active' : 'button'}>
+                    <i className="fas fa-users"></i>
+                    <label htmlFor="">Users</label>
                 </Link>
 
-                <Link to={`/profile`} className={pathname=='/profile' ? 'button active' : 'button'}>
+                <Link to={`/profile`} className={pathname == '/profile' ? 'button active' : 'button'}>
                     <i className="fas fa-user"></i>
                     <label htmlFor="">Profile</label>
                 </Link>
 
-                <Link to={`/settings`} className={pathname=='/settings' ? 'button active' : 'button'}>
+                <Link to={`/videos`} className={pathname == '/videos' ? 'button active' : 'button'}>
+                    <i className="fas fa-photo-video"></i>
+                    <label htmlFor="">Videos</label>
+                </Link>
+
+                <Link to={`/settings`} className={pathname == '/settings' ? 'button active' : 'button'}>
                     <i className="fas fa-cog"></i>
                     <label>Settings</label>
                 </Link>
 
-                <Link to={`/reports`} className={pathname=='/reports' ? 'button active' : 'button'}>
+                <Link to={`/reports`} className={pathname == '/reports' ? 'button active' : 'button'}>
                     <i className="fas fa-chart-bar"></i>
                     <label>Reports</label>
                 </Link>
 
-                <span className="button">
+                <span className="button" onClick={() => this.handleLogout()}>
                     <i className="fas fa-sign-out-alt"></i>
                     <label>Sign out</label>
                 </span>
@@ -67,20 +83,21 @@ class Sidebar extends React.Component {
     }
 }
 
-
-
 /**
  * Get data from store
  * @param state
  */
 const mapStateToProps = state => ({
+    login: state.login
 });
 
 /**
  * Import action from dir action above - but must be passed to connect method in order to trigger reducer in store
  * @type {{UserUpdate: UserUpdateAction}}
  */
-const mapActionsToProps = {};
+const mapActionsToProps = {
+    logoutAction
+};
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Sidebar));
 

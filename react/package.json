@@ -14,6 +14,9 @@
     "node-sass": "^4.11.0"
   },
   "dependencies": {
+    "@softhem.se/file": "^1.0.3",
+    "@softhem.se/select": "^1.0.0",
+    "@softhem.se/table": "^1.0.6",
     "axios": "^0.18.1",
     "hapi": "^18.1.0",
     "hooks": "^0.3.2",
@@ -34,12 +37,17 @@
     "react-router-dom": "^4.3.1",
     "react-saga": "^0.2.6",
     "react-scripts": "2.1.5",
+<<<<<<< HEAD
     "react-select": "^3.0.4",
     "recharts": "^1.7.1",
+=======
+    "react-select": "^3.0.8",
+>>>>>>> google-charts
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
     "rss-parser": "^3.6.2",
+    "uuid": "^3.3.3",
     "xml2js": "^0.4.19"
   },
   "eslintConfig": {

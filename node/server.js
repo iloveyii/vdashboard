@@ -1,52 +1,36 @@
 // Import required packages
 const express = require('express');
-const mysql = require('mysql');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const md5 = require('md5');
+const constants = require('./src/config/constants');
+const fileUpload = require('express-fileupload');
+const Joi = require('joi');
+
+const video = require('./src/video');
+const user = require('./src/user');
+const login = require('./src/login');
+
 
 app.use(
     express.static(__dirname + '/public'),
+    fileUpload({
+        createParentPath: true,
+        limits: {fileSize: 50 * 1024 * 1024},
+    }),
     bodyParser.urlencoded({extended: true}),
     bodyParser.json(),
-    cors()
+    cors(),
+    (req, res, next) => {
+        // req.body.title = 'I changed it here in mw';
+        // console.log('Inside middleware request body is : ', req);
+        next();
+    }
 );
 
-const port = process.env.PORT || 8090;
-
-// Database credentials
-const dbHost = 'localhost';
-const dbName = 'shopping';
-const dbUser = 'root';
-const dbPass = 'root';
-
-// Connect to MySQL
-const con = mysql.createConnection({
-    host: dbHost,
-    user: dbUser,
-    password: dbPass
-});
-
-
-con.connect(err => {
-    if (err) throw err;
-    console.log('MySQL connected !');
-
-    // Select Database
-    con.changeUser({database: dbName}, function (err) {
-        if (err) throw err;
-        console.log('Database changed to ' + dbName);
-    });
-});
-
-app.get('/api/v1/login', (req, res) => {
-    const userInput = req.headers;
-    // const username = userInput.username ? userInput.username : 'root';
-    // const password = userInput.password ? md5(userInput.password) : 'root';
-    console.log('UserInput', userInput);
-
-    const base64Credentials =  req.headers.authorization.split(' ')[1];
+function isAdmin(req) {
+    const base64Credentials = req.headers.authorization.split(' ')[1];
     const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
     let [username, password] = credentials.split(':');
     console.log('credentials', credentials);
@@ -57,26 +41,36 @@ app.get('/api/v1/login', (req, res) => {
           FROM login 
           WHERE username='${username}' 
           AND password='${password}'
+          AND admin=1
           ;
         `;
 
-    con.query(sql, (err, result) => {
-        if (err) throw  err;
-        console.log(result);
-        const auth = {
-            authenticated: false
-        };
-        if(result.length > 0) {
-            auth.authenticated = true;
-        }
+    async function doQuery() {
+        await
+            con.query(sql, (err, result) => {
+                if (err) throw  err;
+                console.log(result);
+                return result.length > 0;
+            });
+    }
 
-        res.json(auth);
-    });
-
-    console.log(sql);
-});
+    return doQuery();
+}
 
 
-app.listen(port, () => console.log('Server started on port ' + port));
+app.get('/api/v1/login', login.get);
+
+app.get('/api/v1/users', user.get);
+app.post('/api/v1/users', user.post);
+app.delete('/api/v1/users/:id', user.delete);
+app.put('/api/v1/users/:id', user.put);
+
+
+app.get('/api/v1/videos', video.get);
+app.post('/api/v1/videos', video.post);
+app.delete('/api/v1/videos/:id', video.delete);
+app.put('/api/v1/videos/:id', video.put);
+
+app.listen(constants.port, () => console.log('Server started on port ' + constants.port));
 
 

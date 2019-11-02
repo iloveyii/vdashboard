@@ -1,11 +1,11 @@
 import axios from 'axios';
 import {apiServer} from '../common/constants';
 
-const endPoint = '/api/v1/items';
+const endPoint = '/api/v1/users';
 const server = apiServer + endPoint;
 
 export default {
-    item: {
+    user: {
         add: (item) =>
             axios.post(server, item, {
                 headers: {
@@ -34,6 +34,10 @@ export default {
                 throw new Error(error);
                 console.dir(error);
             }),
-
+        read: () => console.log('Inside api to ' + server) ||
+            axios.get(server).then(res => { console.log('api',res.data); return res.data;}).catch(error => {
+                throw new Error(error);
+                console.dir(error);
+            })
     }
 }
