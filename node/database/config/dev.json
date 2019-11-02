@@ -4,7 +4,7 @@
     "database": "dashboard",
     "driver": "mysql",
     "user": "root",
-    "password": "root",
+    "password": "root1@3",
     "multipleStatements": true,
     "sql-file": true
   }
