@@ -1,4 +1,4 @@
-const HTTP = 'http://localhost:8090/';
+import {apiServer} from "../common/constants";
 
 class Video {
     _mode = 'create';
@@ -43,7 +43,7 @@ class Video {
         if (form && typeof form == 'object') {
             this.form = form;
             this.mode = 'update';
-        } else if(form && typeof form=='function') {
+        } else if (form && typeof form == 'function') {
             this.forceUpdate = form;
         }
         console.log('TEST Video constructor', this._form);
@@ -60,7 +60,7 @@ class Video {
     }
 
     subscribe(method) {
-        if(Array.isArray(method)) {
+        if (Array.isArray(method)) {
             this._subscribed = [...this._subscribed, ...method];
         } else {
             this._subscribed.push(method);
@@ -70,7 +70,7 @@ class Video {
 
     callSubscribed(method) {
         console.log('Subscribed callSubscribed', method);
-        if(this._subscribed.includes(method)) {
+        if (this._subscribed.includes(method)) {
             console.log('Subscribed callSubscribed if', method);
             this.forceUpdate();
         }
@@ -84,25 +84,31 @@ class Video {
     // Item, not string
     // INTERFACE Select
     get selected() {
-        return this.genreList.find( item => item.value == this.form.genre);
+        return this.genreList.find(item => item.value == this.form.genre);
     }
+
     get genreList() {
         return this._genreList;
     }
+
     // INTERFACE Select
     get data() {
         return this._genreList;
     }
+
     set genre(item) {
         this._form.genre = item.value;
     }
+
     setGenre(item) {
         this._form.genre = item.value;
     }
+
     // INTERFACE Select
     onSelect(item) {
         this.genre = item;
     }
+
     get genre() {
         return this._form.genre;
     }
@@ -111,6 +117,7 @@ class Video {
     set mode(m) {
         this._mode = m;
     }
+
     get mode() {
         return this._mode;
     }
@@ -119,12 +126,14 @@ class Video {
         console.log('TEST Video form', this._form);
         this._form = form;
     }
+
     get form() {
         return this._form;
     }
+
     set formResult(r) {
         this._formResult = r;
-        if(r && r.affectedRows > 0) {
+        if (r && r.affectedRows > 0) {
             this.mode = 'update';
             this._imageUrl = r.image_path;
             this._videoUrl = r.video_path;
@@ -138,22 +147,23 @@ class Video {
     }
 
     get videoUrl() {
-        if(this._form.result && this._form.result.video_url) {
+        if (this._form.result && this._form.result.video_url) {
             return this._form.result.video_url;
         }
-        return this._videoUrl ? this._videoUrl : HTTP + this._form.video_path;
+        return this._videoUrl ? this._videoUrl : apiServer + '/' + this._form.video_path;
     }
 
     get imageUrl() {
-        if(this._form.result && this._form.result.image_url) {
+        if (this._form.result && this._form.result.image_url) {
             return this._form.result.image_url;
         }
-        return this._imageUrl ? this._imageUrl : HTTP + this._form.image_path;
+        return this._imageUrl ? this._imageUrl : apiServer + '/' + this._form.image_path;
     }
 
     set videoPath(files) {
         this._form.video_path = files[0];
     }
+
     setVideoPath(files) {
         this._form.video_path = files[0];
     }
@@ -161,6 +171,7 @@ class Video {
     set imagePath(files) {
         this._form.image_path = files[0];
     }
+
     setImagePath(files) {
         this._form.image_path = files[0];
     }

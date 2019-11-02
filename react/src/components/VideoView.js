@@ -28,6 +28,7 @@ class VideoView extends React.Component {
     render() {
         const {video} = this.state;
         if (!video) return <div>Loading</div>
+        console.log('URL ', video);
 
         return (
             <article className="video-view" style={{marginTop: '13px'}}>
