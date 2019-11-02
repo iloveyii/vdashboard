@@ -37,12 +37,7 @@
     "react-router-dom": "^4.3.1",
     "react-saga": "^0.2.6",
     "react-scripts": "2.1.5",
-<<<<<<< HEAD
-    "react-select": "^3.0.4",
-    "recharts": "^1.7.1",
-=======
     "react-select": "^3.0.8",
->>>>>>> google-charts
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
