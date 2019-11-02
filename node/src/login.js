@@ -8,6 +8,15 @@ const login = {
         // const password = userInput.password ? md5(userInput.password) : 'root';
         console.log('header', req.headers);
 
+        if( ! req.headers.authorization ) {
+            const auth = {
+                authenticated: false,
+                username: username
+            };
+            res.json(auth);
+            return false;
+        }
+
         const base64Credentials = req.headers.authorization.split(' ')[1];
         const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
         let [username, password] = credentials.split(':');
