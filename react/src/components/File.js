@@ -1,7 +1,6 @@
 import React from 'react';
 // @TODO add to package
 import uuidv4 from 'uuid/v4';
-import {apiServer} from "../common/constants";
 
 class File extends React.Component {
 
@@ -86,7 +85,7 @@ class File extends React.Component {
                     <div className="display">
                         {type && type == 'video'
                             ? <video width="100%" controls autoPlay={true} key={this.state.videoUrl}>
-                                <source src={apiServer +'/' + this.state.videoUrl} type="video/mp4"></source>
+                                <source src={this.state.videoUrl} type="video/mp4"></source>
                             </video>
                             : <img ref={this.refDisplayImage} style={{width: '100%'}} src={this.state.imageUrl}
                                    alt="Image"/>

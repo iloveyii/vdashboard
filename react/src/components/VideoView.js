@@ -40,7 +40,7 @@ class VideoView extends React.Component {
                     <div className="left">
                         <video width="100%" controls autoPlay key={video.videoUrl}>
                             <source
-                                src={apiServer + '/' + video.videoUrl}
+                                src={video.videoUrl}
                                 type="video/mp4"></source>
                         </video>
                     </div>
