@@ -1,7 +1,7 @@
 const constants = require('./config/constants');
 const uuidv1 = require('uuid/v1');
 
-const file = {
+const _file = {
     removeSpaces: function(str) {
         return (str.replace(/ /g, '')).toLowerCase();
     },
@@ -69,4 +69,4 @@ const file = {
     }
 };
 
-module.exports = file;
+module.exports = _file;

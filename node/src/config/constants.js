@@ -2,19 +2,26 @@ const path = require('path');
 
 // PORT
 const port = process.env.PORT || 8090;
+// USE MySQL OR MongoDB
+const USE_MONGO = true;
 // Resolve paths
-const VID_DIR = path.resolve('public/videos');
-const IMAGES_DIR = path.resolve('public/images');
+const VIDEOS_DIR = '/videos/';
+const VIDEOS_DIR_PATH = path.resolve('public/' + VIDEOS_DIR);
+const IMAGES_DIR = '/images/';
+const IMAGES_DIR_PATH = path.resolve('public/' + IMAGES_DIR);
 // URls
-const serverIP = 'ec2-3-133-249-232.us-east-2.compute.amazonaws.com';//getIp('wlp1s0');
-const IMAGES_URL = 'http://' + serverIP + ':' + port + '/images/';
-const VIDEOS_URL = 'http://' + serverIP + ':' + port + '/videos/';
+const serverIP = 'mobile-server.softhem.se';//getIp('wlp1s0');
+const IMAGES_URL = 'http://' + serverIP + ':' + port + IMAGES_DIR;
+const VIDEOS_URL = 'http://' + serverIP + ':' + port + VIDEOS_DIR;
 
 module.exports = {
     port,
-    VID_DIR,
+    VIDEOS_DIR,
+    VIDEOS_DIR_PATH,
     IMAGES_DIR,
+    IMAGES_DIR_PATH,
     serverIP,
     IMAGES_URL,
-    VIDEOS_URL
+    VIDEOS_URL,
+    USE_MONGO
 };

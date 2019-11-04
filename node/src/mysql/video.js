@@ -1,5 +1,5 @@
-const con = require('./config/db');
-const file = require('./file');
+const con = require('../config/mysql');
+const file = require('../_file');
 
 const video = {
     post: async (req, res) => {
