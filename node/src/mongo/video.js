@@ -25,7 +25,10 @@ const shows = {
                 console.log(err);
             } else {
                 res.status(200);
-                const s = shows.map(show => show.video = 'http://' + constants.serverIP + show.video)
+                const s = shows.map(show => {
+                    show.video = 'http://' + constants.serverIP + show.video;
+                    show.image = 'http://' + constants.serverIP + show.image;
+                });
                 res.json(shows);
                 console.log(s);
             }
@@ -72,14 +75,24 @@ const shows = {
             let i = c + 1;
             let index = i < 10 ? '0' + i : i;
 
-            let song = {};
-            song.id = Number(index);
-            song.title = lorem.generateWords(3);
-            song.captionText = lorem.generateSentences(3);
-            song.image = constants.IMAGES_DIR + index + '.png';
-            song.video = constants.VIDEOS_DIR + file;
+            let show = {};
+            show.id = Number(index);
+            show.title = lorem.generateWords(3);
+            show.description = lorem.generateSentences(3);
+            show.episodes = [];
 
-            db.getDb().collection(collections.shows).insertOne(song, (err, result) => {
+            for(let i=0; i < Math.floor(Math.random() * 10); i++) {
+                let episode = {
+                    id: 'Episode 0' + (Number(i) + 1),
+                    title: lorem.generateWords(3),
+                    description: lorem.generateSentences(3),
+                    image: constants.IMAGES_DIR + index + '.png',
+                    video: constants.VIDEOS_DIR + file,
+                };
+                show.episodes.push(episode);
+            }
+
+            db.getDb().collection(collections.shows).insertOne(show, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {
@@ -89,7 +102,7 @@ const shows = {
                 }
             });
 
-            data.push(song);
+            data.push(show);
         });
 
         // console.log(data);
