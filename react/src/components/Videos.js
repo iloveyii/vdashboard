@@ -47,6 +47,11 @@ class Videos extends React.Component {
     handleChange(e) {
         const {video} = this.state;
         video.formFieldByE = e;
+        if (e.target.id === 'title') {
+            const {list} = this.state;
+            const filtered = list.filter( item => item.form.title.includes(video.form.title));
+            console.log(list, filtered);
+        }
         this.setState({video});
     }
 
@@ -67,6 +72,8 @@ class Videos extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
+        this.setState({list: nextProps.videos.list});
+
         if (nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) {
             const {video} = this.state;
             video.form = nextProps.videos.form;
@@ -76,6 +83,7 @@ class Videos extends React.Component {
     }
 
     componentDidMount() {
+        console.log('componentDidMount Videos', this.props);
         this.setState({list: this.props.videos.list});
     }
 

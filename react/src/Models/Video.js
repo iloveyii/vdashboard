@@ -143,7 +143,6 @@ class Video {
 
     set formFieldByE(e) {
         this._form[e.target.id] = e.target.value;
-        console.log('TEST Video form', this._form);
     }
 
     get videoUrl() {

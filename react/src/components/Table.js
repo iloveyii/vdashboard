@@ -15,7 +15,6 @@ const Div = ({_item, key}) => {
         )
     } else {
         let el = '';
-        console.log('Key', key);
         if ((_item + '').includes('http')) {
             el = <img style={{width: '160px'}} src={_item} alt="Image"/>
         } else {
@@ -31,7 +30,6 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
         e.preventDefault();
         itemDeleteAction(item.id);
     };
-    console.log(item);
     let _item = item;
 
     if (item.__class && item.__class === 'Video') {
@@ -80,7 +78,6 @@ class Table extends React.Component {
     render() {
         const {items, itemDeleteAction, itemEditAction, fields} = this.props;
         if (!items || items.length === 0) return <div>Loading...</div>;
-        console.log('Items:', items);
 
         return (
             <ul className="list-group u-margin-top-big">

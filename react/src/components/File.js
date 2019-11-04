@@ -52,7 +52,6 @@ class File extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log('componentWillReceiveProps', nextProps);
         var {uploadProgress, videoUrl, imageUrl, model} = nextProps;
         if (model) {
             var {uploadProgress, videoUrl, imageUrl} = model;
@@ -61,7 +60,6 @@ class File extends React.Component {
     }
 
     render() {
-        console.log('File render');
         const id = uuidv4();
         let accept = "*";
         const {type} = this.props;

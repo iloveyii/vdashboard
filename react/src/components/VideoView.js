@@ -15,7 +15,6 @@ class VideoView extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         const {video} = nextProps;
-        console.log('VideoView componentWillReceiveProps', video);
         this.setState({video});
     }
 
@@ -28,7 +27,6 @@ class VideoView extends React.Component {
     render() {
         const {video} = this.state;
         if (!video) return <div>Loading</div>
-        console.log('URL ', video);
 
         return (
             <article className="video-view" style={{marginTop: '13px'}}>

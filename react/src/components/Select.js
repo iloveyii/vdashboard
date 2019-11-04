@@ -44,7 +44,6 @@ class Select extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         let {selected, model} = nextProps;
-        console.log('componentWillReceiveProps', selected);
         if(model) {
             selected = model.selected;
         }
