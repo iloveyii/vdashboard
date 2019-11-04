@@ -148,7 +148,7 @@ class Videos extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'genre']} items={this.props.videos.list}
+                    <Table fields={['id', 'title', 'episodes']} items={this.props.videos.list}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>

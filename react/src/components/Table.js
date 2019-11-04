@@ -1,10 +1,28 @@
 import React from 'react';
 
-const Div = ({_item}) => {
+const Div = ({_item, key}) => {
     if (Array.isArray(_item)) {
-        return <Table items={_item} ></Table>
+        const fields = ['id', 'description', 'image'];
+        return (
+            <ul className="list-group u-margin-top-big">
+                {
+                    _item.map((item, i) =>
+                        <Li fields={fields} itemDeleteAction={null}
+                            itemEditAction={null} key={i} item={item}></Li>
+                    )
+                }
+            </ul>
+        )
     } else {
-        return <div key={_item + Math.random()} style={{flex: 1}} href="#">{_item}</div>
+        let el = '';
+        console.log('Key', key);
+        if ((_item + '').includes('http')) {
+            el = <img style={{width: '160px'}} src={_item} alt="Image"/>
+        } else {
+            el = _item;
+        }
+
+        return <div key={_item + Math.random()} style={{flex: 1}} href="#">{el}</div>
     }
 };
 
@@ -25,17 +43,24 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
             <div className="list-group-item-data">
                 {
                     Object.keys(_item).map(key => fields && fields.includes(key) ?
-                        <div key={_item[key] + Math.random()} style={{flex: 1}} href="#">{_item[key]}</div> : null)
+                        <Div _item={_item[key]} key={key}/> : null)
                 }
             </div>
-            <div className="list-group-item-buttons">
-                <div style={{flex: 1}}>
-                    <button onClick={() => itemEditAction(_item)} className="button-small">Edit</button>
-                </div>
-                <div style={{flex: 1}}>
-                    <button onClick={() => itemDeleteAction(_item)} className="button-small">Delete</button>
-                </div>
-            </div>
+            {
+                itemEditAction === null || itemEditAction === null || !itemEditAction
+                    ?
+                    null
+                    :
+                    <div className="list-group-item-buttons">
+                        <div style={{flex: 1}}>
+                            <button onClick={() => itemEditAction(_item)} className="button-small">Edit</button>
+                        </div>
+                        <div style={{flex: 1}}>
+                            <button onClick={() => itemDeleteAction(_item)} className="button-small">Delete</button>
+                        </div>
+                    </div>
+            }
+
         </li>
     );
 };
@@ -60,8 +85,9 @@ class Table extends React.Component {
         return (
             <ul className="list-group u-margin-top-big">
                 {
-                    items.map((item, i) => <Li fields={fields} itemDeleteAction={itemDeleteAction}
-                                               itemEditAction={itemEditAction} key={i} item={item}></Li>)
+                    items.map((item, i) => Array.isArray(item) ? null :
+                        <Li fields={fields} itemDeleteAction={itemDeleteAction}
+                            itemEditAction={itemEditAction} key={i} item={item}></Li>)
                 }
             </ul>
         )

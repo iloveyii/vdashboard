@@ -29,8 +29,8 @@ const shows = {
                 res.status(200);
                 shows.map(show => {
                     show.episodes.map(episode => {
-                        episode.video = 'http://' + constants.serverIP + episode.video;
-                        episode.image = 'http://' + constants.serverIP + episode.image;
+                        episode.video = 'http://' + constants.serverIP + ':' + constants.port + episode.video;
+                        episode.image = 'http://' + constants.serverIP + ':' + constants.port + episode.image;
                     });
                 });
 
