@@ -25,12 +25,14 @@ const shows = {
                 console.log(err);
             } else {
                 res.status(200);
-                const s = shows.map(show => {
-                    show.video = 'http://' + constants.serverIP + show.video;
-                    show.image = 'http://' + constants.serverIP + show.image;
+                shows.map(show => {
+                    show.episodes.map(episode => {
+                        episode.video = 'http://' + constants.serverIP + episode.video;
+                        episode.image = 'http://' + constants.serverIP + episode.image;
+                    });
                 });
+
                 res.json(shows);
-                console.log(s);
             }
         });
     },
@@ -81,7 +83,7 @@ const shows = {
             show.description = lorem.generateSentences(3);
             show.episodes = [];
 
-            for(let i=0; i < Math.floor(Math.random() * 10); i++) {
+            for (let i = 0; i < Math.floor(Math.random() * 10); i++) {
                 let episode = {
                     id: 'Episode 0' + (Number(i) + 1),
                     title: lorem.generateWords(3),
