@@ -1,5 +1,13 @@
 import React from 'react';
 
+const Div = ({_item}) => {
+    if (Array.isArray(_item)) {
+        return <Table items={_item} ></Table>
+    } else {
+        return <div key={_item + Math.random()} style={{flex: 1}} href="#">{_item}</div>
+    }
+};
+
 const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
     const handleDelete = (e) => {
         e.preventDefault();
@@ -8,7 +16,7 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
     console.log(item);
     let _item = item;
 
-    if(item.__class && item.__class === 'Video') {
+    if (item.__class && item.__class === 'Video') {
         _item = item.form;
     }
 
@@ -59,11 +67,24 @@ class Table extends React.Component {
         )
     }
 }
+
 Table.defaultProps = {
-    fields:['id', 'title', 'genre'],
+    fields: ['id', 'title', 'genre'],
     items: [
-        {id: 2, title: "Laboris soluta nostr", description: "Ad maxime possimus ", genre: "jazz", image_path: "images/85588900-f44a-11e9-ab34-c7f808721400_23.png",},
-        {id: 1, title: "Molestiae aliquam it", description: "Ea ea architecto eni", genre: "jazz", image_path: "images/607ad250-f44a-11e9-ab34-c7f808721400_24.png",}
+        {
+            id: 2,
+            title: "Laboris soluta nostr",
+            description: "Ad maxime possimus ",
+            genre: "jazz",
+            image_path: "images/85588900-f44a-11e9-ab34-c7f808721400_23.png",
+        },
+        {
+            id: 1,
+            title: "Molestiae aliquam it",
+            description: "Ea ea architecto eni",
+            genre: "jazz",
+            image_path: "images/607ad250-f44a-11e9-ab34-c7f808721400_24.png",
+        }
     ]
 };
 export default Table;

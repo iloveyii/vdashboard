@@ -4,6 +4,8 @@ const fs = require('fs');
 const ffmpeg = require('fluent-ffmpeg');
 const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 const rimraf = require("rimraf");
+const file = require('../_file');
+
 
 const collections = {shows: 'shows'};
 
@@ -140,6 +142,106 @@ const shows = {
                     console.log('screenshots were not saved ' + err, filenames)
                 });
         });
+    },
+    post: async (req, res) => {
+        console.log('POST /api/v1/shows');
+
+        if (!req.files || Object.keys(req.files).length == 0) {
+            return res.status(400).json({result: 'No images were attached'});
+        }
+
+        const userInput = req.body;
+        const {title, description, episode} = userInput;
+        const result = await file.save(req);
+        const show = {
+            title,
+            description,
+            episodes: [{
+                title: episode.title,
+                description: episode.description,
+                image: result.image_path,
+                video: result.video_path
+            }]
+        };
+
+        if (result.status === 'ok') {
+            db.getDb().collection(collections.shows).insertOne(show, (err, result) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('Added show to mongodb:', req.body);
+                    result.message += ' , Show saved to mongodb.';
+                }
+            });
+        } else {
+            result.status = 'error';
+        }
+
+        res.json({result});
+    },
+
+    delete: (req, res) => {
+        console.log('DELETE /api/v1/shows/:id ' + req.params.id);
+        const showId = db.getPrimaryKey(req.params.id);
+        db.getDb().collection(collections.shows).findOneAndDelete(
+            {_id: showId},
+            (err, action) => {
+                if (err) {
+                    console.log('Error in deleting id ' + req.params.id);
+                } else {
+                    console.log(action);
+                    res.json(action)
+                }
+            }
+        );
+    },
+    update: async (req, res) => {
+        console.log('PUT /api/v1/shows/:id', req.body);
+        const showId = db.getPrimaryKey(req.params.id);
+        const userInput = req.body;
+        const result = await file.save(req);
+        const {title, description, episode} = userInput;
+
+        const show = {
+            title,
+            description,
+            episodes: [{
+                title: episode.title,
+                description: episode.description,
+                image: result.image_path,
+                video: result.video_path
+            }]
+        };
+
+        db.getDb().collection(collections.shows).findOneAndUpdate(
+            {_id: showId},
+            {
+                $set: {
+                    title: show.title,
+                    description: show.description,
+                    episodes: show.episodes,
+                }
+            },
+            {returnOriginal: false},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    let result2 = {};
+
+                    if (image && video) {
+                        let strA = result.value.image.split("/");
+                        console.log(result, strA);
+                        const id = strA[2].slice(0, -4);
+                        console.log('ID made is: ', id);
+                        result2 = saveMedia(id, image, video);
+                    }
+
+                    console.log('No files attached');
+                    res.json(result);
+                }
+            }
+        )
     }
 };
 
