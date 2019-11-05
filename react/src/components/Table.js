@@ -1,20 +1,15 @@
 import React from 'react';
 
-const Div = ({_item, key}) => {
+const Div = ({itemRow}) => {
+    let el = '';
 
-    let el = '', flexSize = 1;
-    if ((_item + '').includes('http')) {
-        el = <img style={{width: '160px'}} src={_item} alt="Image"/>
+    if ((itemRow.value + '').includes('http')) {
+        el = <img style={{width: '160px'}} src={itemRow.value} alt="Image"/>
     } else {
-        if (_item instanceof Object) {
-            el = _item.value;
-            flexSize = _item.flexSize
-        } else {
-            el = _item;
-        }
+        el = itemRow.value;
     }
 
-    return <div key={el + Math.random()} style={{flex: flexSize}} href="#">{el}</div>
+    return <div key={el + Math.random()} style={{flex: itemRow.flexSize}} href="#">{el}</div>
 };
 
 const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
@@ -22,22 +17,22 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
         e.preventDefault();
         itemDeleteAction(item.id);
     };
-    let _item = item;
-    let __item = item;
+    let itemArray = item; // Array
+    let itemRow = item; // Row
 
     if (item.__class && item.__class === 'Video') {
-        _item = item.form;
+        itemArray = item.form;
     }
 
-    __item = new Row(_item);
+    itemRow = new Row(itemArray);
 
 
     return (
         <li className="list-group-item">
             <div className="list-group-item-data">
                 {
-                    Object.keys(__item).map(key => fields && fields.includes(key) ?
-                        <Div _item={__item[key]} key={key}/> : null)
+                    Object.keys(itemRow).map(key => fields && fields.includes(key) ?
+                        <Div itemRow={itemRow[key]} key={key}/> : null)
                 }
             </div>
             {
@@ -47,10 +42,10 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
                     :
                     <div className="list-group-item-buttons">
                         <div style={{flex: 1}}>
-                            <button onClick={() => itemEditAction(_item)} className="button-small">Edit</button>
+                            <button onClick={() => itemEditAction(itemArray)} className="button-small">Edit</button>
                         </div>
                         <div style={{flex: 1}}>
-                            <button onClick={() => itemDeleteAction(_item)} className="button-small">Delete</button>
+                            <button onClick={() => itemDeleteAction(itemArray)} className="button-small">Delete</button>
                         </div>
                     </div>
             }
@@ -116,13 +111,14 @@ function Row(data) {
         title: 3,
         description: 5,
         genre: 2,
-        controls: 5
+        controls: 5,
+        image: 3
     };
 
     for (let col in data) {
         this[col] = {
             value: data[col],
-            flexSize: dim[col]
+            flexSize: dim[col] ? dim[col] : 1
         };
     }
     return this;
