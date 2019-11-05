@@ -1,28 +1,20 @@
 import React from 'react';
 
 const Div = ({_item, key}) => {
-    if (Array.isArray(_item)) {
-        const fields = ['id', 'description', 'image'];
-        return (
-            <ul className="list-group u-margin-top-big">
-                {
-                    _item.map((item, i) =>
-                        <Li fields={fields} itemDeleteAction={null}
-                            itemEditAction={null} key={i} item={item}></Li>
-                    )
-                }
-            </ul>
-        )
+
+    let el = '', flexSize = 1;
+    if ((_item + '').includes('http')) {
+        el = <img style={{width: '160px'}} src={_item} alt="Image"/>
     } else {
-        let el = '';
-        if ((_item + '').includes('http')) {
-            el = <img style={{width: '160px'}} src={_item} alt="Image"/>
+        if (_item instanceof Object) {
+            el = _item.value;
+            flexSize = _item.flexSize
         } else {
             el = _item;
         }
-
-        return <div key={_item + Math.random()} style={{flex: 1}} href="#">{el}</div>
     }
+
+    return <div key={el + Math.random()} style={{flex: flexSize}} href="#">{el}</div>
 };
 
 const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
@@ -31,17 +23,21 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
         itemDeleteAction(item.id);
     };
     let _item = item;
+    let __item = item;
 
     if (item.__class && item.__class === 'Video') {
         _item = item.form;
     }
 
+    __item = new Row(_item);
+
+
     return (
         <li className="list-group-item">
             <div className="list-group-item-data">
                 {
-                    Object.keys(_item).map(key => fields && fields.includes(key) ?
-                        <Div _item={_item[key]} key={key}/> : null)
+                    Object.keys(__item).map(key => fields && fields.includes(key) ?
+                        <Div _item={__item[key]} key={key}/> : null)
                 }
             </div>
             {
@@ -111,3 +107,23 @@ Table.defaultProps = {
     ]
 };
 export default Table;
+
+function Row(data) {
+    this.__class = 'Row';
+
+    const dim = {
+        id: 1,
+        title: 3,
+        description: 5,
+        genre: 2,
+        controls: 5
+    };
+
+    for (let col in data) {
+        this[col] = {
+            value: data[col],
+            flexSize: dim[col]
+        };
+    }
+    return this;
+}
