@@ -12,7 +12,7 @@ const Div = ({itemRow}) => {
     return <div key={el + Math.random()} style={{flex: itemRow.flexSize}} href="#">{el}</div>
 };
 
-const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
+const Li = ({fields, item, itemDeleteAction, itemEditAction, itemViewAction}) => {
     const handleDelete = (e) => {
         e.preventDefault();
         itemDeleteAction(item.id);
@@ -35,20 +35,32 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction}) => {
                         <Div itemRow={itemRow[key]} key={key}/> : null)
                 }
             </div>
-            {
-                itemEditAction === null || itemEditAction === null || !itemEditAction
-                    ?
-                    null
-                    :
-                    <div className="list-group-item-buttons">
+
+            <div className="list-group-item-buttons">
+                {
+                    itemEditAction && itemEditAction !== null ?
                         <div style={{flex: 1}}>
                             <button onClick={() => itemEditAction(itemArray)} className="button-small">Edit</button>
                         </div>
+                        : null
+                }
+
+                {
+                    itemDeleteAction && itemDeleteAction !== null ?
                         <div style={{flex: 1}}>
                             <button onClick={() => itemDeleteAction(itemArray)} className="button-small">Delete</button>
                         </div>
-                    </div>
-            }
+                        : null
+                }
+                {
+                    itemViewAction && itemViewAction !== null ?
+                        <div style={{flex: 1}}>
+                            <button onClick={() => itemViewAction(itemArray)} className="button-small">View</button>
+                        </div>
+                        : null
+                }
+            </div>
+
 
         </li>
     );
@@ -67,7 +79,7 @@ class Table extends React.Component {
     }
 
     render() {
-        const {items, itemDeleteAction, itemEditAction, fields} = this.props;
+        const {items, itemDeleteAction, itemEditAction, itemViewAction, fields} = this.props;
         if (!items || items.length === 0) return <div>Loading...</div>;
 
         return (
@@ -75,7 +87,7 @@ class Table extends React.Component {
                 {
                     items.map((item, i) => Array.isArray(item) ? null :
                         <Li fields={fields} itemDeleteAction={itemDeleteAction}
-                            itemEditAction={itemEditAction} key={i} item={item}></Li>)
+                            itemEditAction={itemEditAction} itemViewAction={itemViewAction} key={i} item={item}></Li>)
                 }
             </ul>
         )

@@ -20,7 +20,7 @@ import VideoPlayer from './VideoPlayer';
 import Video from '../Models/Video';
 
 
-class Videos extends React.Component {
+class VideosView extends React.Component {
     constructor(props) {
         super(props);
         this._forceUpdate = this._forceUpdate.bind(this);
@@ -156,7 +156,7 @@ class Videos extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'episodes']} items={this.props.videos.list}
+                    <Table fields={['id', 'title']} items={this.props.videos.list}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>
@@ -184,4 +184,4 @@ const mapActionsToProps = {
     videoEditAction
 };
 
-export default withRouter(connect(mapStateToProps, mapActionsToProps)(Videos));
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(VideosView));
