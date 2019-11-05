@@ -1,7 +1,7 @@
 import React from 'react';
 import {apiServer} from "../common/constants";
 
-class VideoView extends React.Component {
+class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -71,4 +71,4 @@ class VideoView extends React.Component {
     }
 }
 
-export default VideoView;
+export default VideoPlayer;

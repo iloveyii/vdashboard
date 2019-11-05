@@ -49,7 +49,7 @@ class Videos extends React.Component {
         video.formFieldByE = e;
         if (e.target.id === 'title') {
             const {list} = this.state;
-            const filtered = list.filter(item => item.form.title.includes(video.form.title));
+            const filtered = list.filter( item => item.form.title.includes(video.form.title));
             console.log(list, filtered);
         }
         this.setState({video});
@@ -95,11 +95,6 @@ class Videos extends React.Component {
                 <Sidebar/>
                 <Center>
                     <div className="row">
-                        <div className="col-1-of-1">
-                            <h1>Shows</h1>
-                        </div>
-                    </div>
-                    <div className="row">
                         <div className="col-1-of-2">
                             <form>
                                 <div className="row">
@@ -124,6 +119,24 @@ class Videos extends React.Component {
                                 </div>
 
                                 <div className="row">
+                                    <div className="col-1-of-1">
+                                        <Select model={video}/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <File model={video} type="image"/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <File model={video} type="video"/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
                                     <div className="col-1-of-3">
                                         <div className="dashboard--container">
 
@@ -138,9 +151,12 @@ class Videos extends React.Component {
 
                             </form>
                         </div>
+                        <div className="col-1-of-2">
+                            <VideoPlayer video={video}/>
+                        </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'description']} items={this.props.videos.list}
+                    <Table fields={['id', 'title', 'episodes']} items={this.props.videos.list}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>
