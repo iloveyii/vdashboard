@@ -109,6 +109,10 @@ class Video {
         this.genre = item;
     }
 
+    get id() {
+        return this._form.id;
+    }
+
     get genre() {
         return this._form.genre;
     }

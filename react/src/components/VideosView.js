@@ -49,7 +49,7 @@ class VideosView extends React.Component {
         video.formFieldByE = e;
         if (e.target.id === 'title') {
             const {list} = this.state;
-            const filtered = list.filter( item => item.form.title.includes(video.form.title));
+            const filtered = list.filter(item => item.form.title.includes(video.form.title));
             console.log(list, filtered);
         }
         this.setState({video});
@@ -71,8 +71,10 @@ class VideosView extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log('componentWillReceiveProps Videos', nextProps);
-        this.setState({list: nextProps.videos.list});
+        const {id} = nextProps.match.params;
+        const show = this.filterById(id, nextProps.videos.list);
+        console.log('VideosView componentWillReceiveProps Videos', id, show, nextProps);
+        this.setState({show});
 
         if (nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) {
             const {video} = this.state;
@@ -83,17 +85,36 @@ class VideosView extends React.Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount Videos', this.props);
-        this.setState({list: this.props.videos.list});
+        const {id} = this.props.match.params;
+        const show = this.filterById(id, this.props.videos.list);
+        console.log('VideosView componentDidMount Show and Videos', show, this.props);
+        this.setState({list: this.props.videos.list, show});
+    }
+
+    filterById(id, list) {
+        const showArray = list.filter(s => s.id == id);
+        const show = Array.isArray(showArray) ? showArray[0] : showArray;
+        return show;
     }
 
     render() {
-        const {video} = this.state;
+        const {video, show} = this.state;
+        if (!show) return <div>Loading...</div>
 
         return (
             <section id="dashboard" className="dashboard">
                 <Sidebar/>
                 <Center>
+
+                    <div className="row">
+                        <div className="col-1-of-1">
+                            <h1>Show View</h1>
+                            <h3>{show.form.title}</h3>
+                            <h3>{show.form.description}</h3>
+                            <h3>Episodes: {show.form.episodes.length}</h3>
+                        </div>
+                    </div>
+
                     <div className="row">
                         <div className="col-1-of-2">
                             <form>
@@ -156,7 +177,7 @@ class VideosView extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title']} items={this.props.videos.list}
+                    <Table fields={['id', 'title']} items={show.form.episodes}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>
