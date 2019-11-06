@@ -84,7 +84,13 @@ class Videos extends React.Component {
 
     componentDidMount() {
         console.log('componentDidMount Videos', this.props);
-        this.setState({list: this.props.videos.list});
+        const {videos: {list}, videoReadAction} = this.props;
+
+        if (list.length < 1) {
+            videoReadAction();
+        } else {
+            this.setState({list});
+        }
     }
 
     render() {
@@ -117,9 +123,9 @@ class Videos extends React.Component {
 
                                 <div className="row">
                                     <div className="col-1-of-1">
-                                        <input type="text" id="description" placeholder="Type description"
-                                               value={video.form.description}
-                                               onChange={e => this.handleChange(e)}/>
+                                        <textarea cols={40} rows={5} id="description" placeholder="Type description"
+                                                  value={video.form.description}
+                                                  onChange={e => this.handleChange(e)}> </textarea>
                                     </div>
                                 </div>
 
@@ -141,7 +147,7 @@ class Videos extends React.Component {
                     </div>
 
                     <Table fields={['id', 'title', 'description']} items={this.props.videos.list}
-                           itemViewAction={(arr)=>this.props.history.push('/videos/'+arr['id'])}
+                           itemViewAction={(arr) => this.props.history.push('/videos/' + arr['id'])}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>
