@@ -19,7 +19,7 @@ export default {
                     data.action(percentCompleted);
                 }
             };
-            return axios.post(server, data.video, config).then(res => res.data).catch(error => {
+            return axios.post(apiServer + '/api/v1/episode', data.video, config).then(res => res.data).catch(error => {
                 throw new Error(error);
                 console.dir(error);
             })

@@ -59,15 +59,24 @@ class VideosView extends React.Component {
         e.preventDefault();
         const {video} = this.state;
 
-        if (this.props.match.params.id || video.mode == 'update') {
-            video.submitForm(this.props.videoUpdateAction);
-            const alert = {type: 'info', title: 'Video updated successfully'};
-            this.setState({alert});
-        } else {
-            video.submitForm(this.props.videoAddAction);
-            const alert = {type: 'info', title: 'Video added successfully'};
-            this.setState({alert});
-        }
+        const show = {
+            id: this.props.match.params.id,
+            episode: {
+                title: video._form.title,
+                description: video._form.description,
+                genre: video._form.genre,
+            },
+            image_path: video._form.image_path,
+            video_path: video._form.video_path,
+        };
+
+        const formData = new FormData();
+
+        Object.keys(show).map(key => {
+            formData.append(key, show[key]);
+        });
+
+        this.props.videoAddAction(formData, video.setUploadProgress);
     }
 
     componentWillReceiveProps(nextProps, nextContext) {

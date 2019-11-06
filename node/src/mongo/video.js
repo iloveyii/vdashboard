@@ -143,7 +143,7 @@ const shows = {
                 });
         });
     },
-    post2: async (req, res) => {
+    post: async (req, res) => {
         console.log('POST /api/v1/shows');
 
         if (!req.files || Object.keys(req.files).length == 0) {
@@ -195,30 +195,29 @@ const shows = {
             }
         );
     },
-    post: async (req, res) => {
-        console.log('POST /api/v1/shows', req.body);
+    episodeAdd: async (req, res) => {
+        console.log('POST /api/v1/episode', req.body);
         const userInput = req.body;
         const result = await file.save(req);
-        const {id, title, description, episode} = userInput;
+        const {id, episode} = userInput;
         const showId = id ? db.getPrimaryKey(id) : db.getPrimaryKey();
 
         const show = {
-            title,
-            description,
             episodes: episode ? [{
                 title: episode.title,
                 description: episode.description,
+                genre: episode.genre,
                 image: result.image_path,
                 video: result.video_path
             }] : []
         };
 
+        console.log('show', show);
+
         db.getDb().collection(collections.shows).updateOne(
             {_id: showId},
             {
                 $set: {
-                    title: show.title,
-                    description: show.description,
                     episodes: show.episodes,
                 }
             },

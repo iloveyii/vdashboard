@@ -197,7 +197,7 @@ class Video {
         const formData = new FormData();
 
         Object.keys(this._form).map(key => {
-            formData.append(key, this._form[key]);
+            formData.append(key, this.form[key]);
             console.log('Form key', key, formData.getAll(key));
         });
 

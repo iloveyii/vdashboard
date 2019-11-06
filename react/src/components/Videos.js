@@ -110,7 +110,6 @@ class Videos extends React.Component {
                             <form>
                                 <div className="row">
                                     <div className="col-1-of-1">
-                                        <Alert type={this.state.alert.type} title={this.state.alert.title}/>
                                     </div>
                                 </div>
                                 <div className="row">
