@@ -17,7 +17,7 @@ const _file = {
         if (imageFile) {
             let cleanFileName = this.removeSpaces(imageFile.name);
             const imageFilePath = constants.IMAGES_DIR_PATH + '/' + fileNameNumber + '_' + cleanFileName;
-            const image_path = 'images/' + fileNameNumber + '_' + cleanFileName;
+            const image_path = constants.IMAGES_DIR + fileNameNumber + '_' + cleanFileName;
             imageFile && await this.moveFile(imageFile, imageFilePath);
             result.image_path = image_path;
             result.image_url = constants.IMAGES_URL + fileNameNumber + '_' + cleanFileName;
@@ -28,7 +28,7 @@ const _file = {
         if (videoFile) {
             let cleanFileName = this.removeSpaces(videoFile.name);
             const videoFilePath = constants.VIDEOS_DIR_PATH + '/' + fileNameNumber + '_' + cleanFileName;
-            const video_path = 'videos/' + fileNameNumber + '_' + cleanFileName;
+            const video_path = constants.VIDEOS_DIR + fileNameNumber + '_' + cleanFileName;
             videoFile && await this.moveFile(videoFile, videoFilePath);
             result.video_url = constants.VIDEOS_URL + fileNameNumber + '_' + cleanFileName;
             result.video_path = video_path;
