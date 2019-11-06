@@ -143,11 +143,11 @@ const shows = {
                 });
         });
     },
-    post: async (req, res) => {
+    post2: async (req, res) => {
         console.log('POST /api/v1/shows');
 
         if (!req.files || Object.keys(req.files).length == 0) {
-            return res.status(400).json({result: 'No images were attached'});
+            // return res.status(400).json({result: 'No images were attached'});
         }
 
         const userInput = req.body;
@@ -195,6 +195,44 @@ const shows = {
             }
         );
     },
+    post: async (req, res) => {
+        console.log('POST /api/v1/shows', req.body);
+        const userInput = req.body;
+        const result = await file.save(req);
+        const {id, title, description, episode} = userInput;
+        const showId = id ? db.getPrimaryKey(id) : db.getPrimaryKey();
+
+        const show = {
+            title,
+            description,
+            episodes: episode ? [{
+                title: episode.title,
+                description: episode.description,
+                image: result.image_path,
+                video: result.video_path
+            }] : []
+        };
+
+        db.getDb().collection(collections.shows).updateOne(
+            {_id: showId},
+            {
+                $set: {
+                    title: show.title,
+                    description: show.description,
+                    episodes: show.episodes,
+                }
+            },
+            {returnOriginal: false, upsert: true},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('Show added or updated');
+                    res.json(result);
+                }
+            }
+        )
+    },
     update: async (req, res) => {
         console.log('PUT /api/v1/shows/:id', req.body);
         const showId = db.getPrimaryKey(req.params.id);
@@ -227,22 +265,12 @@ const shows = {
                 if (err) {
                     console.log('Some error occurred. ', err);
                 } else {
-                    let result2 = {};
-
-                    if (image && video) {
-                        let strA = result.value.image.split("/");
-                        console.log(result, strA);
-                        const id = strA[2].slice(0, -4);
-                        console.log('ID made is: ', id);
-                        result2 = saveMedia(id, image, video);
-                    }
-
                     console.log('No files attached');
                     res.json(result);
                 }
             }
         )
-    }
+    },
 };
 
 module.exports = shows;

@@ -110,7 +110,7 @@ class Video {
     }
 
     get id() {
-        return this._form.id;
+        return this._form.id ? this._form.id : this._form._id;
     }
 
     get genre() {

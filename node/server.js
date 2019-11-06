@@ -70,9 +70,9 @@ app.put('/api/v1/users/:id', user.put);
 app.get('/api/v1/generate', mongoVideo.generate);
 app.get('/api/v1/remove', mongoVideo.remove);
 app.get('/api/v1/shows', constants.USE_MONGO ? mongoVideo.get : mySqlVideo.get);
-app.post('/api/v1/videos', mySqlVideo.post);
-app.delete('/api/v1/videos/:id', mySqlVideo.delete);
-app.put('/api/v1/videos/:id', mySqlVideo.put);
+app.post('/api/v1/shows', mongoVideo.post);
+app.delete('/api/v1/shows/:id', mySqlVideo.delete);
+app.put('/api/v1/shows/:id', mongoVideo.update);
 
 app.listen(constants.port, () => console.log('Server started on port ' + constants.port));
 

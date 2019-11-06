@@ -147,7 +147,7 @@ class Videos extends React.Component {
                     </div>
 
                     <Table fields={['id', 'title', 'description']} items={this.props.videos.list}
-                           itemViewAction={(arr) => this.props.history.push('/videos/' + arr['id'])}
+                           itemViewAction={(arr) => this.props.history.push('/videos/' + (arr['id'] ? arr['id'] : arr['_id']) )}
                            itemEditAction={this.props.videoEditAction} itemDeleteAction={this.props.videoDeleteAction}/>
                 </Center>
             </section>
