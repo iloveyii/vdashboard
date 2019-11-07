@@ -21,3 +21,7 @@ export const VIDEO_SEARCH_FAIL = 'Video.Search.Fail';
 export const VIDEO_EDIT = 'Video.Edit';
 export const VIDEO_EDIT_SUCCESS = 'Video.Edit.Success';
 export const VIDEO_EDIT_FAIL = 'Video.Edit.Fail';
+
+export const EPISODE_ADD = 'Episode.Add';
+export const EPISODE_ADD_SUCCESS = 'Episode.Add.Success';
+export const EPISODE_ADD_FAIL = 'Episode.Add.Fail';

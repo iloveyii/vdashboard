@@ -1,10 +1,11 @@
 import {
-    VIDEO_READ, VIDEO_READ_SUCCESS,VIDEO_READ_FAIL,
-    VIDEO_ADD,VIDEO_ADD_SUCCESS,VIDEO_ADD_FAIL,
-    VIDEO_DELETE,VIDEO_DELETE_SUCCESS,VIDEO_DELETE_FAIL,
-    VIDEO_UPDATE,VIDEO_UPDATE_SUCCESS,VIDEO_UPDATE_FAIL,
+    VIDEO_READ, VIDEO_READ_SUCCESS, VIDEO_READ_FAIL,
+    VIDEO_ADD, VIDEO_ADD_SUCCESS, VIDEO_ADD_FAIL,
+    VIDEO_DELETE, VIDEO_DELETE_SUCCESS, VIDEO_DELETE_FAIL,
+    VIDEO_UPDATE, VIDEO_UPDATE_SUCCESS, VIDEO_UPDATE_FAIL,
     VIDEO_SEARCH, VIDEO_SEARCH_SUCCESS, VIDEO_SEARCH_FAIL,
-    VIDEO_EDIT, VIDEO_EDIT_SUCCESS,VIDEO_EDIT_FAIL
+    VIDEO_EDIT, VIDEO_EDIT_SUCCESS, VIDEO_EDIT_FAIL,
+    EPISODE_ADD, EPISODE_ADD_SUCCESS
 } from '../types/Video';
 
 export const videoReadAction = () => {
@@ -58,7 +59,6 @@ export const videoAddFailAction = (err) => {
         payload: {err}
     }
 };
-
 
 
 export const videoDeleteAction = (video) => {
@@ -146,6 +146,7 @@ export const videoSearchFailAction = (err) => {
 
 export const videoEditAction = (video) => {
     console.log('Inside videoEditAction', video);
+    video.mode = 'update';
     return {
         type: VIDEO_EDIT,
         payload: {
@@ -163,3 +164,23 @@ export const videoEditSuccessAction = (result) => {
     }
 };
 
+export const episodeAddAction = (showId, episode, action) => {
+    console.log('Inside episodeAddAction', showId, episode, action);
+    return {
+        type: EPISODE_ADD,
+        payload: {
+            showId,
+            episode,
+            action
+        }
+    }
+};
+export const episodeAddSuccessAction = (result) => {
+    console.log('Inside episodeAddSuccessAction', result);
+    return {
+        type: EPISODE_ADD_SUCCESS,
+        payload: {
+            result
+        }
+    }
+};

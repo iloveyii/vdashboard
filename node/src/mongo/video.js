@@ -144,24 +144,19 @@ const shows = {
         });
     },
     post: async (req, res) => {
-        console.log('POST /api/v1/shows');
+        console.log('POST2 /api/v1/shows');
 
         if (!req.files || Object.keys(req.files).length == 0) {
             // return res.status(400).json({result: 'No images were attached'});
         }
 
         const userInput = req.body;
-        const {title, description, episode} = userInput;
+        const {title, description} = userInput;
         const result = await file.save(req);
         const show = {
             title,
             description,
-            episodes: [{
-                title: episode.title,
-                description: episode.description,
-                image: result.image_path,
-                video: result.video_path
-            }]
+            episodes: []
         };
 
         if (result.status === 'ok') {
@@ -195,7 +190,7 @@ const shows = {
             }
         );
     },
-    episodeAdd: async (req, res) => {
+    postEpisode: async (req, res) => {
         console.log('POST /api/v1/episode', req.body);
         const userInput = req.body;
         const result = await file.save(req);
@@ -236,28 +231,18 @@ const shows = {
         console.log('PUT /api/v1/shows/:id', req.body);
         const showId = db.getPrimaryKey(req.params.id);
         const userInput = req.body;
-        const result = await file.save(req);
-        const {title, description, episode} = userInput;
+        const {title, description} = userInput;
 
         const show = {
             title,
             description,
-            episodes: [{
-                title: episode.title,
-                description: episode.description,
-                image: result.image_path,
-                video: result.video_path
-            }]
+            episodes: []
         };
 
         db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},
             {
-                $set: {
-                    title: show.title,
-                    description: show.description,
-                    episodes: show.episodes,
-                }
+                $set: show
             },
             {returnOriginal: false},
             (err, result) => {
@@ -265,7 +250,7 @@ const shows = {
                     console.log('Some error occurred. ', err);
                 } else {
                     console.log('No files attached');
-                    res.json(result);
+                    res.json({status: 'ok', action: 'update'});
                 }
             }
         )

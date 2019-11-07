@@ -36,6 +36,7 @@ const VideoReducer = (state = initState, action = {}) => {
             console.log('Inside VideoReducer', action.payload);
             form = Object.assign({}, state.form);
             form.result = action.payload.result;
+            form.mode = 'updated';
             const newStateUpdate = {...state, ...{form}};
 
             return newStateUpdate;

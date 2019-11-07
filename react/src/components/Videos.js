@@ -47,9 +47,9 @@ class Videos extends React.Component {
     handleChange(e) {
         const {video} = this.state;
         video.formFieldByE = e;
-        if (e.target.id === 'title') {
+        if (false && e.target.id === 'title') {
             const {list} = this.state;
-            const filtered = list.filter(item => item.form.title.includes(video.form.title));
+            const filtered = list.filter(item => item._form.title.includes(video.form.title));
             console.log(list, filtered);
         }
         this.setState({video});
@@ -61,23 +61,27 @@ class Videos extends React.Component {
 
         if (this.props.match.params.id || video.mode == 'update') {
             video.submitForm(this.props.videoUpdateAction);
-            const alert = {type: 'info', title: 'Video updated successfully'};
-            this.setState({alert});
+            const alerted = {type: 'info', title: 'Video updated successfully'};
+            this.setState({alert:alerted});
         } else {
             video.submitForm(this.props.videoAddAction);
-            const alert = {type: 'info', title: 'Video added successfully'};
-            this.setState({alert});
+            const alerted = {type: 'info', title: 'Video added successfully'};
+            this.setState({alert:alerted});
         }
+        this.forceUpdate();
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('componentWillReceiveProps Videos', nextProps);
-        this.setState({list: nextProps.videos.list});
+        const {videos} = nextProps;
+        this.setState({list: videos.list});
 
-        if (nextProps.videos && nextProps.videos.form && Object.keys(nextProps.videos.form).length > 0) {
+        if (videos && videos.form) {
             const {video} = this.state;
-            video.form = nextProps.videos.form;
-            video.mode = 'update';
+            if(videos.form.mode === 'update') {
+                video.form = nextProps.videos.form;
+                video.mode = 'update';
+            }
             video.formResult = nextProps.videos.form.result;
         }
     }
@@ -86,7 +90,7 @@ class Videos extends React.Component {
         console.log('componentDidMount Videos', this.props);
         const {videos: {list}, videoReadAction} = this.props;
 
-        if (list.length < 1) {
+        if (! list || list.length < 1) {
             videoReadAction();
         } else {
             this.setState({list});

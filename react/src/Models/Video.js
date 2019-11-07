@@ -186,7 +186,16 @@ class Video {
     setUploadProgress(value) {
         this._uploadProgress = value;
         this.callSubscribed('setUploadProgress');
-        console.log('TEST Video form', this.uploadProgress, value);
+            console.log('TEST Video form setUploadProgress', this.uploadProgress, value);
+        if(this.uploadProgress > 99) {
+            this.resetForm();
+            console.log('TEST Video form setUploadProgress', this.form, this.mode);
+        }
+    }
+
+    resetForm() {
+        this.form = new Video().form;
+        this.mode = 'create';
     }
 
     get uploadProgress() {
