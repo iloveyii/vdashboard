@@ -1,23 +1,18 @@
 import {call, put} from 'redux-saga/effects';
 import api from "../api/video";
-import {
-    videoDeleteFailAction,
-    videoDeleteSuccessAction,
-    videoReadAction,
-    videoUpdateFailAction,
-    videoUpdateSuccessAction
-} from "../actions/VideoAction";
+import axios from "axios";
 
 class Model {
 
     // Constructor - Name, forceUpdate
-    constructor(name, forceUpdate = null) {
+    constructor(name, forceUpdate = null, server = 'http://localhost:8090/api/v1/shows') {
         this.name = name;
         if (forceUpdate && typeof forceUpdate === 'function') {
             this.forceUpdate = forceUpdate;
         } else {
             this.forceUpdate = () => null;
         }
+        this.server = server;
         this.debug = true;
     }
 
@@ -101,7 +96,7 @@ class Model {
 
         const create = function* (action) {
             try {
-                const data = yield call(api.video.add, {
+                const data = yield call($this.api.create, {
                     formData: action.payload.data.formData,
                     action: (d) => action.payload.data.action ? action.payload.data.action(d) : null
                 });
@@ -119,7 +114,7 @@ class Model {
 
         const read = function* (action) {
             try {
-                const data = yield call(api.video.read, action.payload);
+                const data = yield call($this.api.read, action.payload);
                 if ( true || Array.isArray(data)) {
                     yield put( $this.actions.read_success(data) );
                 } else {
@@ -132,7 +127,7 @@ class Model {
 
         const update = function* (action) {
             try {
-                const data = yield call(api.video.update, {
+                const data = yield call($this.api.update, {
                     formData: action.payload.data.formData,
                     action: (d) => action.payload.data.action ? action.payload.data.action(d) : null
                 });
@@ -150,7 +145,7 @@ class Model {
 
         const deleted = function* (action) {
             try {
-                const data = yield call(api.video.delete, action.payload);
+                const data = yield call($this.api.delete, action.payload);
                 if (Array.isArray(Object.keys(data))) {
                     yield put($this.actions.delete_success(data));
                     yield put($this.actions.read());
@@ -169,6 +164,51 @@ class Model {
             deleted,
         }
     }
+
+    // API
+    get api() {
+        return {
+                read: () =>
+                    axios.get(this.server).then(res => res.data).catch(error => {
+                        throw new Error(error);
+                        console.dir(error);
+                    }),
+                create: (data) => {
+                    const config = {
+                        onUploadProgress: function(progressEvent) {
+                            const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                            data.action && data.action(percentCompleted);
+                        }
+                    };
+                    return axios.post(this.server, data.video, config).then(res => res.data).catch(error => {
+                        throw new Error(error);
+                        console.dir(error);
+                    })
+                },
+                delete: (video) =>
+                    axios.delete(this.server + '/' + video.id).then(res => res.data).catch(error => {
+                        throw new Error(error);
+                        console.dir(error);
+                    }),
+                update: (data) => {
+                    const formData = data.formData;
+                    const config = {
+                        onUploadProgress: function(progressEvent) {
+                            const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                            data && data.action(percentCompleted);
+                        }
+                    };
+                    return axios.put(this.server + '/' + formData.getAll('_id'), formData, config).then(res => {console.log('Update response: ', res); return res.data; }).catch(error => {
+                        throw new Error(error);
+                        console.dir(error);
+                    })
+                }
+            }
+        }
+
+
+
+
 
 
     // Validation

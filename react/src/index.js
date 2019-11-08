@@ -38,14 +38,18 @@ import VideoReducer from "./reducers/VideoReducer";
 import {userReadAction} from "./actions/UserAction";
 import {videoReadAction} from "./actions/VideoAction";
 import Model from './Models/Model';
+import {apiServer} from "./common/constants";
 
 const show = new Model('show');
+const user = new Model('u');
+
 
 const allReducers = combineReducers({
     users: UserReducer,
     login: LoginReducer,
     videos : VideoReducer,
-    shows: show.reducers
+    shows: show.reducers,
+    u: user.reducers,
 });
 
 // # 02
@@ -110,6 +114,7 @@ if(true || ENVIRONMENT.DEV) {
     store.dispatch(userReadAction());
     // store.dispatch(videoReadAction());
     store.dispatch(show.actions.read({}));
+    store.dispatch(user.actions.read({}));
     /*store.dispatch(show.actions.read_success({
         a: 5455,
         b: 9909
