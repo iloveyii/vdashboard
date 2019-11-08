@@ -11,6 +11,7 @@ import {showReadSaga} from "./showSagas";
 
 import Show from '../Models/Show';
 import {apiServer} from '../common/constants';
+import models from "../store/models";
 
 const endPoint = '/api/v1/shows';
 const api = apiServer + endPoint;
@@ -33,7 +34,17 @@ export default function* rootSaga() {
     yield takeLatest(VIDEO_DELETE, videoDeleteSaga);
     yield takeLatest(VIDEO_UPDATE, videoUpdateSaga);
 
-    yield takeLatest(show.types.read, show.sagas.read);
-
-    yield takeLatest(user.types.read, user.sagas.read);
+    // yield takeLatest(show.types.read, show.sagas.read);
+    //yield takeLatest(user.types.read, user.sagas.read);
+    for(let i=0; i < Object.keys(models).length; i++) {
+        const model = models[Object.keys(models)[i]];
+        // CRUD Listeners
+        yield takeLatest(model.types.create, model.sagas.create);
+        yield takeLatest(model.types.read, model.sagas.read);
+        yield takeLatest(model.types.update, model.sagas.update);
+        yield takeLatest(model.types.delete, model.sagas.deleted);
+    }
 }
+
+
+
