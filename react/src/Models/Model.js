@@ -1,5 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 import api from "../api/video";
+import {videoReadAction, videoUpdateFailAction, videoUpdateSuccessAction} from "../actions/VideoAction";
 
 class Model {
 
@@ -90,25 +91,46 @@ class Model {
 
     // SAGAS
     get sagas() {
+        const show = this;// new Model('show');
 
-        const read = () => function* (action) {
+        const read = function* (action) {
             try {
-                this.log('Inside saga of ' + this.name );
-                const resp = yield call(api.video.read, action.payload);
+                const data = yield call(api.video.read, action.payload);
 
-                if ( true || Array.isArray(resp)) {
-                    this.log('Inside saga of ' + this.name + ' ' + JSON.stringify(action) + ' ' + JSON.stringify(resp));
-                    yield put(this.actions.read_success(resp));
+                if ( true || Array.isArray(data)) {
+                    yield put( show.actions.read_success(data) );
                 } else {
-                    yield put(this.actions.read_fail(resp));
+                    yield put(show.actions.read_fail(data));
                 }
             } catch (err) {
-                yield put(this.actions.read_fail(err));
+                yield put(show.actions.read_fail(err));
+            }
+        };
+
+        const update = function* (action) {
+            const show = this;
+            try {
+                const data = yield call(api.video.update, {
+                    formData: action.payload.formData,
+                    action: (d) => action.payload.action ? action.payload.action(d) : null
+                });
+
+                if (data && Array.isArray(Object.keys(data))) {
+                    yield put(show.actions.update_success(data));
+                    yield put(show.actions.read());
+                } else {
+                    yield put(show.actions.update_fail(data));
+                }
+
+            } catch (err) {
+                console.log(err);
+                yield put(show.actions.update_fail(err));
             }
         };
 
         return {
-            read
+            read,
+            update
         }
     }
 

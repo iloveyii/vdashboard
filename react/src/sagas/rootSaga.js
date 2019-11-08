@@ -27,7 +27,7 @@ export default function* rootSaga() {
     yield takeLatest(VIDEO_UPDATE, videoUpdateSaga); */
 
     // console.log('Inside saga of: '+ show.actions.read, show.sagas.read())
-    yield takeLatest(show.types.read, showReadSaga);
+    yield takeLatest(show.types.read, show.sagas.read);
     // inside saga of show
     // inside show actions
     // inside show default
