@@ -1,0 +1,139 @@
+0000000000000000000000000000000000000000 c92137aa8406530d360b36a2701dabbb77043501 Hazrat Ali <iloveyii@yahoo.com> 1568193075 +0200	commit (initial): Initial commit
+c92137aa8406530d360b36a2701dabbb77043501 4f83c6a8ff9e2d7e98cea14179bef7b4dcaf5ed9 Hazrat Ali <iloveyii@yahoo.com> 1568193163 +0200	commit: Added server app with composer.json
+4f83c6a8ff9e2d7e98cea14179bef7b4dcaf5ed9 221090396fe13237d6e121665812c18284a14861 Hazrat Ali <iloveyii@yahoo.com> 1568193224 +0200	commit: .gitignore edited
+221090396fe13237d6e121665812c18284a14861 775ca06a76bfb9dbbafb306c17d641dbb69a1fd5 Hazrat Ali <iloveyii@yahoo.com> 1568193335 +0200	commit: Added config file for microservice
+775ca06a76bfb9dbbafb306c17d641dbb69a1fd5 cce2402a93d1eea073a1a451db4b90392ad0c0fb Hazrat Ali <iloveyii@yahoo.com> 1568193482 +0200	commit: Added migrations, controller, model
+cce2402a93d1eea073a1a451db4b90392ad0c0fb d0b73b9f407b97bd165c757f054fd5eca3ba0b5a Hazrat Ali <iloveyii@yahoo.com> 1568200745 +0200	commit: Fix in config file - parsers - should not load from cli
+d0b73b9f407b97bd165c757f054fd5eca3ba0b5a df27f07a8c5047e101f497c8c72335c44c4f8d7d Hazrat Ali <iloveyii@yahoo.com> 1568200924 +0200	commit: Added controller and model
+df27f07a8c5047e101f497c8c72335c44c4f8d7d 35a1c89a08c48be60dbc8069c1623bd3b2d758ad Hazrat Ali <iloveyii@yahoo.com> 1568202574 +0200	commit: Added SASS app for web design using SCSS
+35a1c89a08c48be60dbc8069c1623bd3b2d758ad 42b33837ec2d731f84af4a78fc34eeea29ab7c49 Hazrat Ali <iloveyii@yahoo.com> 1568233724 +0200	commit: removed extra files
+42b33837ec2d731f84af4a78fc34eeea29ab7c49 0d73413ca140f06ea857fdb06f8a3eb2906055ff Hazrat Ali <iloveyii@yahoo.com> 1568234614 +0200	commit: Added react app
+0d73413ca140f06ea857fdb06f8a3eb2906055ff 72d760759662c0e4853ffea0293d74264640426c Hazrat Ali <iloveyii@yahoo.com> 1568235686 +0200	commit: Added htaccess to build dir
+72d760759662c0e4853ffea0293d74264640426c c9245d9745b162706a8aaaebc5f718853de86fc4 Hazrat Ali <iloveyii@yahoo.com> 1568236250 +0200	commit: Fixed readme
+c9245d9745b162706a8aaaebc5f718853de86fc4 2fa9e09492e50431933e5b0516e45fe13874fc53 Hazrat Ali <iloveyii@yahoo.com> 1568296138 +0200	commit: Fixed css
+2fa9e09492e50431933e5b0516e45fe13874fc53 ee47b43187961fa343615bd13773ad4328d3b1ce Hazrat Ali <iloveyii@yahoo.com> 1568296840 +0200	commit: Added css for grid - media query
+ee47b43187961fa343615bd13773ad4328d3b1ce a63c1aa1b23b951c8780c437717909203fb73a49 Hazrat Ali <iloveyii@yahoo.com> 1570969154 +0200	commit: Added Login page
+a63c1aa1b23b951c8780c437717909203fb73a49 1414bfd0d83b3eae58ad4bbb06c931adf47382f0 Hazrat Ali <iloveyii@yahoo.com> 1570993181 +0200	commit: Added react-charts
+1414bfd0d83b3eae58ad4bbb06c931adf47382f0 1414bfd0d83b3eae58ad4bbb06c931adf47382f0 Hazrat Ali <iloveyii@yahoo.com> 1570996077 +0200	reset: moving to HEAD
+1414bfd0d83b3eae58ad4bbb06c931adf47382f0 1414bfd0d83b3eae58ad4bbb06c931adf47382f0 Hazrat Ali <iloveyii@yahoo.com> 1570996668 +0200	reset: moving to HEAD
+1414bfd0d83b3eae58ad4bbb06c931adf47382f0 00f1f80a552232bb967f536c388c06d1e554495f Hazrat Ali <iloveyii@yahoo.com> 1570997419 +0200	commit: Added google charts
+00f1f80a552232bb967f536c388c06d1e554495f 48014edc4005dcf9ab624bb447ed9f420f8c0d33 Hazrat Ali <iloveyii@yahoo.com> 1571001478 +0200	commit: Added recharts
+48014edc4005dcf9ab624bb447ed9f420f8c0d33 1c30abc3fc41f41a3d82610d9fa33c4ad037c61b Hazrat Ali <iloveyii@yahoo.com> 1571003013 +0200	commit: Added Pie
+1c30abc3fc41f41a3d82610d9fa33c4ad037c61b 00f1f80a552232bb967f536c388c06d1e554495f Hazrat Ali <iloveyii@yahoo.com> 1571003040 +0200	checkout: moving from master to 00f1f80a552232bb9
+00f1f80a552232bb967f536c388c06d1e554495f 00f1f80a552232bb967f536c388c06d1e554495f Hazrat Ali <iloveyii@yahoo.com> 1571003216 +0200	checkout: moving from 00f1f80a552232bb967f536c388c06d1e554495f to google-charts
+00f1f80a552232bb967f536c388c06d1e554495f 2b15cbec0e9561bf16b154afbc1f762261e7e777 Hazrat Ali <iloveyii@yahoo.com> 1571004507 +0200	commit: Formated graphs
+2b15cbec0e9561bf16b154afbc1f762261e7e777 8e54e97f423c191cb242882226797aaf915605be Hazrat Ali <iloveyii@yahoo.com> 1571005374 +0200	commit: Added simple squares
+8e54e97f423c191cb242882226797aaf915605be e9bec99357b1ade0f2659c57a09bfaa525c14311 Hazrat Ali <iloveyii@yahoo.com> 1571007239 +0200	commit: Added geo chart
+e9bec99357b1ade0f2659c57a09bfaa525c14311 1c30abc3fc41f41a3d82610d9fa33c4ad037c61b Hazrat Ali <iloveyii@yahoo.com> 1571036666 +0200	checkout: moving from google-charts to master
+1c30abc3fc41f41a3d82610d9fa33c4ad037c61b 1c30abc3fc41f41a3d82610d9fa33c4ad037c61b Hazrat Ali <iloveyii@yahoo.com> 1571036737 +0200	checkout: moving from master to master
+1c30abc3fc41f41a3d82610d9fa33c4ad037c61b e9bec99357b1ade0f2659c57a09bfaa525c14311 Hazrat Ali <iloveyii@yahoo.com> 1571036928 +0200	checkout: moving from master to google-charts
+e9bec99357b1ade0f2659c57a09bfaa525c14311 112660a066e48056494fc42d044b4cbafc6bf3ce Hazrat Ali <iloveyii@yahoo.com> 1571037546 +0200	commit: Added Users fetch
+112660a066e48056494fc42d044b4cbafc6bf3ce 91917dd85686f74abf8b2fd4cb5c562ed48a38b1 Hazrat Ali <iloveyii@yahoo.com> 1571039611 +0200	commit: Added user add
+91917dd85686f74abf8b2fd4cb5c562ed48a38b1 7411d05a06cead727e98e8d87cde28852e9bb292 Hazrat Ali <iloveyii@yahoo.com> 1571059295 +0200	commit: Added changed field names
+7411d05a06cead727e98e8d87cde28852e9bb292 d4e3bc0b9c0ddb50f48f3dfa05c8b528c01f80dd Hazrat Ali <iloveyii@yahoo.com> 1571062330 +0200	commit: Fixed adminlist
+d4e3bc0b9c0ddb50f48f3dfa05c8b528c01f80dd eda398a93015e50ec3423681c9590e697b04404e Hazrat Ali <iloveyii@yahoo.com> 1571072049 +0200	commit: Added users admin
+eda398a93015e50ec3423681c9590e697b04404e 5c9ede84c804eafd190a569f8d35455c09ea9ae7 Hazrat Ali <iloveyii@yahoo.com> 1571074758 +0200	commit: Added sign up
+5c9ede84c804eafd190a569f8d35455c09ea9ae7 de955816242b4443050694b57677a1ad9664ffc8 Hazrat Ali <iloveyii@yahoo.com> 1571075487 +0200	commit: Added axios catch error
+de955816242b4443050694b57677a1ad9664ffc8 fc912546d349d3f426c55284d3ce85d3673e7e5a Hazrat Ali <iloveyii@yahoo.com> 1571075774 +0200	commit: Added col email in migrations
+fc912546d349d3f426c55284d3ce85d3673e7e5a 157e2e55dbff0fcd43abcc07793cc926a7e02994 Hazrat Ali <iloveyii@yahoo.com> 1571082978 +0200	commit: Added userinfo
+157e2e55dbff0fcd43abcc07793cc926a7e02994 d7e04306c9d4fdaa15d01819d1c9224504a04d82 Hazrat Ali <iloveyii@yahoo.com> 1571085422 +0200	commit: Added login actions, sagas
+d7e04306c9d4fdaa15d01819d1c9224504a04d82 9b8ad18d8c1de6b90655a4a76410daa5a8e5ba48 Hazrat Ali <iloveyii@yahoo.com> 1571089443 +0200	commit: Login complete
+9b8ad18d8c1de6b90655a4a76410daa5a8e5ba48 5bc7bc4563029479927b1c842ff352e409349416 Hazrat Ali <iloveyii@yahoo.com> 1571173308 +0200	commit: Clear form on submit
+5bc7bc4563029479927b1c842ff352e409349416 0937f118002fea80795f4b4fe5fce9466a5af0ed Hazrat Ali <iloveyii@yahoo.com> 1571579701 +0200	commit: Added movies component
+0937f118002fea80795f4b4fe5fce9466a5af0ed f26c4cf707f5117357a4a5f0554457fcd94028e3 Hazrat Ali <iloveyii@yahoo.com> 1571587596 +0200	commit: Added migration video , readme file
+f26c4cf707f5117357a4a5f0554457fcd94028e3 785171f824a5b63cef0bbc4f074ced308821357f Hazrat Ali <iloveyii@yahoo.com> 1571589612 +0200	commit: Added Select
+785171f824a5b63cef0bbc4f074ced308821357f 37ea725e5007f72d0ea619d1c5ec7c7a9ea98a55 Hazrat Ali <iloveyii@yahoo.com> 1571592736 +0200	commit: Added Select component
+37ea725e5007f72d0ea619d1c5ec7c7a9ea98a55 931ad41ae9f0db8ccaad9de4dd92f36af98e6933 Hazrat Ali <iloveyii@yahoo.com> 1571605643 +0200	commit: Added file upload sass
+931ad41ae9f0db8ccaad9de4dd92f36af98e6933 acfb2cc79c1844b56f2067ae2ed13621aeec9895 Hazrat Ali <iloveyii@yahoo.com> 1571613961 +0200	commit: File uploadä
+acfb2cc79c1844b56f2067ae2ed13621aeec9895 6e2b225f1ec97421a164aaee6004357a44aab5d0 Hazrat Ali <iloveyii@yahoo.com> 1571652272 +0200	commit: Added file upload huge files
+6e2b225f1ec97421a164aaee6004357a44aab5d0 4af8d748520d5efc2544f2a9ecd33cd7f09c80ce Hazrat Ali <iloveyii@yahoo.com> 1571659077 +0200	commit: Added file upload
+4af8d748520d5efc2544f2a9ecd33cd7f09c80ce 78b3ad73a87972e7a6dcd241e5ffbe11e84aa110 Hazrat Ali <iloveyii@yahoo.com> 1571679424 +0200	commit: Save data to db
+78b3ad73a87972e7a6dcd241e5ffbe11e84aa110 d05ff9f7920a831386caa2b4b44da79127c58b2a Hazrat Ali <iloveyii@yahoo.com> 1571686368 +0200	commit: Added GET videos
+d05ff9f7920a831386caa2b4b44da79127c58b2a a80bc055ce45bf67b9d754353a42718a5202a8d3 Hazrat Ali <iloveyii@yahoo.com> 1571690104 +0200	commit: Videos read action
+a80bc055ce45bf67b9d754353a42718a5202a8d3 e36657792dbb70aa6111da57f3a7d6900bc20c1d Hazrat Ali <iloveyii@yahoo.com> 1571741221 +0200	commit: Using own components from npm
+e36657792dbb70aa6111da57f3a7d6900bc20c1d 96df4df99a0cb84a0dd23d15b50e6eec785782fd Hazrat Ali <iloveyii@yahoo.com> 1571743495 +0200	commit: Added Users component
+96df4df99a0cb84a0dd23d15b50e6eec785782fd 96df4df99a0cb84a0dd23d15b50e6eec785782fd Hazrat Ali <iloveyii@yahoo.com> 1571745912 +0200	reset: moving to HEAD
+96df4df99a0cb84a0dd23d15b50e6eec785782fd 78f8bc96f2a6a7b2180834de9d3dbe0375698b03 Hazrat Ali <iloveyii@yahoo.com> 1571746032 +0200	commit: Code clean up
+78f8bc96f2a6a7b2180834de9d3dbe0375698b03 ab46ab3e18692569c08aeda387ccab913e2da6db Hazrat Ali <iloveyii@yahoo.com> 1571746065 +0200	commit: Renamed
+ab46ab3e18692569c08aeda387ccab913e2da6db 3696ab1243f3965bbc6c886326c8b72b16c0d331 Hazrat Ali <iloveyii@yahoo.com> 1571746176 +0200	commit: Code clean up
+3696ab1243f3965bbc6c886326c8b72b16c0d331 c0fca1c1e76733f5055179124838bcfd925a1765 Hazrat Ali <iloveyii@yahoo.com> 1571746433 +0200	commit: Code clean up
+c0fca1c1e76733f5055179124838bcfd925a1765 3b78ed097d9b8c0cb4f1283d06c2e647e0f11aca Hazrat Ali <iloveyii@yahoo.com> 1571747760 +0200	commit: Fix in server delete user
+3b78ed097d9b8c0cb4f1283d06c2e647e0f11aca 8299640f46d07f4242ade2b3ceaf8c64a2971a79 Hazrat Ali <iloveyii@yahoo.com> 1571748538 +0200	commit: Fix in users delete
+8299640f46d07f4242ade2b3ceaf8c64a2971a79 86cfc1cebdac32da1898de60ba67267cdbcd79a8 Hazrat Ali <iloveyii@yahoo.com> 1571775567 +0200	commit: Added login api
+86cfc1cebdac32da1898de60ba67267cdbcd79a8 b42652e2a400c4365a4a273b63ee8ea780be5e4d Hazrat Ali <iloveyii@yahoo.com> 1571777781 +0200	commit: Users fixed
+b42652e2a400c4365a4a273b63ee8ea780be5e4d 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571778262 +0200	commit: Fixed users list
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571826583 +0200	reset: moving to HEAD
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 96df4df99a0cb84a0dd23d15b50e6eec785782fd Hazrat Ali <iloveyii@yahoo.com> 1571826586 +0200	checkout: moving from google-charts to 96df4df99a0cb84a0d
+96df4df99a0cb84a0dd23d15b50e6eec785782fd 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571826733 +0200	checkout: moving from 96df4df99a0cb84a0dd23d15b50e6eec785782fd to google-charts
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 96df4df99a0cb84a0dd23d15b50e6eec785782fd Hazrat Ali <iloveyii@yahoo.com> 1571826815 +0200	checkout: moving from google-charts to 96df4df99a0cb84a0d
+96df4df99a0cb84a0dd23d15b50e6eec785782fd 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571826821 +0200	checkout: moving from 96df4df99a0cb84a0dd23d15b50e6eec785782fd to google-charts
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 ab46ab3e18692569c08aeda387ccab913e2da6db Hazrat Ali <iloveyii@yahoo.com> 1571826829 +0200	checkout: moving from google-charts to ab46ab3e18692569c
+ab46ab3e18692569c08aeda387ccab913e2da6db 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571826921 +0200	checkout: moving from ab46ab3e18692569c08aeda387ccab913e2da6db to google-charts
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 c0fca1c1e76733f5055179124838bcfd925a1765 Hazrat Ali <iloveyii@yahoo.com> 1571826960 +0200	checkout: moving from google-charts to c0fca1c1e76733f50
+c0fca1c1e76733f5055179124838bcfd925a1765 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571827430 +0200	checkout: moving from c0fca1c1e76733f5055179124838bcfd925a1765 to google-charts
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 8299640f46d07f4242ade2b3ceaf8c64a2971a79 Hazrat Ali <iloveyii@yahoo.com> 1571827491 +0200	checkout: moving from google-charts to 8299640f46d
+8299640f46d07f4242ade2b3ceaf8c64a2971a79 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571827605 +0200	checkout: moving from 8299640f46d07f4242ade2b3ceaf8c64a2971a79 to google-charts
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 86cfc1cebdac32da1898de60ba67267cdbcd79a8 Hazrat Ali <iloveyii@yahoo.com> 1571827631 +0200	checkout: moving from google-charts to 86cfc1cebdac3
+86cfc1cebdac32da1898de60ba67267cdbcd79a8 84d9dc60abaf2014cf45463eb55fdebacd56d1c1 Hazrat Ali <iloveyii@yahoo.com> 1571829709 +0200	checkout: moving from 86cfc1cebdac32da1898de60ba67267cdbcd79a8 to google-charts
+84d9dc60abaf2014cf45463eb55fdebacd56d1c1 1a5146abafd5e41886badcc02cf6d1e12bd00f6e Hazrat Ali <iloveyii@yahoo.com> 1571832335 +0200	commit: Video delete added
+1a5146abafd5e41886badcc02cf6d1e12bd00f6e a448f91ef1cb801c34361b69f1aacc11dd955853 Hazrat Ali <iloveyii@yahoo.com> 1571834443 +0200	commit: Fixing video edit
+a448f91ef1cb801c34361b69f1aacc11dd955853 1a5146abafd5e41886badcc02cf6d1e12bd00f6e Hazrat Ali <iloveyii@yahoo.com> 1571834459 +0200	checkout: moving from google-charts to 1a5146abafd5e4
+1a5146abafd5e41886badcc02cf6d1e12bd00f6e a448f91ef1cb801c34361b69f1aacc11dd955853 Hazrat Ali <iloveyii@yahoo.com> 1571834542 +0200	checkout: moving from 1a5146abafd5e41886badcc02cf6d1e12bd00f6e to google-charts
+a448f91ef1cb801c34361b69f1aacc11dd955853 b686e30c3a7567eafa6ac3930891765401f3354a Hazrat Ali <iloveyii@yahoo.com> 1571842803 +0200	commit: Added Model
+b686e30c3a7567eafa6ac3930891765401f3354a d7c3e150c04ceec004cd9e195a71ef35ede72e0e Hazrat Ali <iloveyii@yahoo.com> 1571866113 +0200	commit: Added model Video
+d7c3e150c04ceec004cd9e195a71ef35ede72e0e e8627765cad6d6b357d3f52d7b15902e66e04cd9 Hazrat Ali <iloveyii@yahoo.com> 1571917265 +0200	commit: Video as model to Select
+e8627765cad6d6b357d3f52d7b15902e66e04cd9 2602b924775413cbb25e335588e2dfe81a7c16cb Hazrat Ali <iloveyii@yahoo.com> 1571920749 +0200	commit: Added model to File
+2602b924775413cbb25e335588e2dfe81a7c16cb bc0b3ca8df345424e13be56201c06144f9f35b54 Hazrat Ali <iloveyii@yahoo.com> 1571956620 +0200	commit: Added alert
+bc0b3ca8df345424e13be56201c06144f9f35b54 4263c0ecc316e5bbb253682532d2a9b671ea1bd7 Hazrat Ali <iloveyii@yahoo.com> 1571957929 +0200	commit: Span bg color
+4263c0ecc316e5bbb253682532d2a9b671ea1bd7 16b776883673a26a497c723b41868ffdcd4be838 Hazrat Ali <iloveyii@yahoo.com> 1571959375 +0200	commit: Added Alert
+16b776883673a26a497c723b41868ffdcd4be838 aa35df06ad91abc179a1fe7d80d251f109bfcbf6 Hazrat Ali <iloveyii@yahoo.com> 1571962860 +0200	commit: Added video-view
+aa35df06ad91abc179a1fe7d80d251f109bfcbf6 2711690f9fcba05f7af9d394aaf5e8580cec703e Hazrat Ali <iloveyii@yahoo.com> 1571962996 +0200	commit: Padding
+2711690f9fcba05f7af9d394aaf5e8580cec703e 7808825b12af8596808572fcb3cdf077bb680e8c Hazrat Ali <iloveyii@yahoo.com> 1572180257 +0100	commit: Added file.js
+7808825b12af8596808572fcb3cdf077bb680e8c c6214adaff7fc414b16dc6dae1f02019fc15903c Hazrat Ali <iloveyii@yahoo.com> 1572185192 +0100	commit: b4 promises
+c6214adaff7fc414b16dc6dae1f02019fc15903c c6214adaff7fc414b16dc6dae1f02019fc15903c Hazrat Ali <iloveyii@yahoo.com> 1572186578 +0100	reset: moving to HEAD
+c6214adaff7fc414b16dc6dae1f02019fc15903c c6214adaff7fc414b16dc6dae1f02019fc15903c Hazrat Ali <iloveyii@yahoo.com> 1572192820 +0100	reset: moving to HEAD
+c6214adaff7fc414b16dc6dae1f02019fc15903c f870ecda1e6561bee6a8a5a9d734b420142968cf Hazrat Ali <iloveyii@yahoo.com> 1572193693 +0100	commit: Fixed file.js
+f870ecda1e6561bee6a8a5a9d734b420142968cf b266911f9ea6e1b2cb6e5631179d2d58c793105c Hazrat Ali <iloveyii@yahoo.com> 1572199142 +0100	commit: Added file add with new file.js
+b266911f9ea6e1b2cb6e5631179d2d58c793105c 2711690f9fcba05f7af9d394aaf5e8580cec703e Hazrat Ali <iloveyii@yahoo.com> 1572199215 +0100	checkout: moving from google-charts to 2711690f9fcba05f
+2711690f9fcba05f7af9d394aaf5e8580cec703e b266911f9ea6e1b2cb6e5631179d2d58c793105c Hazrat Ali <iloveyii@yahoo.com> 1572199437 +0100	checkout: moving from 2711690f9fcba05f7af9d394aaf5e8580cec703e to google-charts
+b266911f9ea6e1b2cb6e5631179d2d58c793105c 6045af478112053f481ca96b7675cad1783cb531 Hazrat Ali <iloveyii@yahoo.com> 1572203059 +0100	commit: Added promise and main
+6045af478112053f481ca96b7675cad1783cb531 f908927f9c3d1f9df8f2fa642a029f855ea03917 Hazrat Ali <iloveyii@yahoo.com> 1572210860 +0100	commit: Fixed file async
+f908927f9c3d1f9df8f2fa642a029f855ea03917 01f4e4a728cd9f186f86ebf13b46caf8a3de6fe6 Hazrat Ali <iloveyii@yahoo.com> 1572213742 +0100	commit: Added src and separated server files
+01f4e4a728cd9f186f86ebf13b46caf8a3de6fe6 d6f6edda22a0e5e11adc934569c28c7b58878397 Hazrat Ali <iloveyii@yahoo.com> 1572214156 +0100	commit: Fixed file imports
+d6f6edda22a0e5e11adc934569c28c7b58878397 e5b14390f374d03cbcb3d1c3ef1f560f1bd36672 Hazrat Ali <iloveyii@yahoo.com> 1572267985 +0100	commit: Fixes in users
+e5b14390f374d03cbcb3d1c3ef1f560f1bd36672 8533e991afb18410958fda1dc31f2caf83d048ee Hazrat Ali <iloveyii@yahoo.com> 1572286525 +0100	commit: Fix in alert flicker, file removeSpaces
+8533e991afb18410958fda1dc31f2caf83d048ee d2e75b04cf790b64724dd6c7f66704180e0fbb5b Hazrat Ali <iloveyii@yahoo.com> 1572287311 +0100	commit: inline-flex display
+d2e75b04cf790b64724dd6c7f66704180e0fbb5b 3837809ec149a4c94200bbd713ef82c2728916ee Hazrat Ali <iloveyii@yahoo.com> 1572699400 +0100	commit: Read me
+3837809ec149a4c94200bbd713ef82c2728916ee 1c30abc3fc41f41a3d82610d9fa33c4ad037c61b Hazrat Ali <iloveyii@yahoo.com> 1572699448 +0100	checkout: moving from google-charts to master
+1c30abc3fc41f41a3d82610d9fa33c4ad037c61b edc421bf5d9ae6121ad1f3de731ef94652a79e95 Hazrat Ali <iloveyii@yahoo.com> 1572699771 +0100	commit (merge): Fixed Dashboard conflict
+edc421bf5d9ae6121ad1f3de731ef94652a79e95 047bcf30974d0603bc268e136646dfcdccf3dfb8 Hazrat Ali <iloveyii@yahoo.com> 1572699850 +0100	commit: Merge conflick pack lock
+047bcf30974d0603bc268e136646dfcdccf3dfb8 df7dff52d8f08e54ceb816ea492080ec2bfe6457 Hazrat Ali <iloveyii@yahoo.com> 1572699947 +0100	commit: resolved merge conflict in package.json
+df7dff52d8f08e54ceb816ea492080ec2bfe6457 130a0058ff83b7c6f8e2074e6b84e9a4ffdf8d5f Hazrat Ali <iloveyii@yahoo.com> 1572702291 +0100	commit: Fix in empty authorization field
+130a0058ff83b7c6f8e2074e6b84e9a4ffdf8d5f 5b3dc0976749034c983621c51662e4654c41b7bc Hazrat Ali <iloveyii@yahoo.com> 1572702348 +0100	commit: Fix in empty authorization field
+5b3dc0976749034c983621c51662e4654c41b7bc a9f2b61ada5769eedca4d36079aa2633c6728292 Hazrat Ali <iloveyii@yahoo.com> 1572703101 +0100	commit: constants for aws
+a9f2b61ada5769eedca4d36079aa2633c6728292 f714c7c3e9d3fbb0a61c8ea3140136abf9aea847 Hazrat Ali <iloveyii@yahoo.com> 1572703258 +0100	commit: Build - aws
+f714c7c3e9d3fbb0a61c8ea3140136abf9aea847 2f480f8464ec373d53f6b85082e41e01a871a205 Hazrat Ali <iloveyii@yahoo.com> 1572710321 +0100	commit: Fixed video url
+2f480f8464ec373d53f6b85082e41e01a871a205 aa847591298ebdd724975cb282219333cec4fc39 Hazrat Ali <iloveyii@yahoo.com> 1572710362 +0100	commit: Aws - build
+aa847591298ebdd724975cb282219333cec4fc39 6c1c37f2376c2229b56362680c5235ffd3887628 Hazrat Ali <iloveyii@yahoo.com> 1572710662 +0100	commit: url
+6c1c37f2376c2229b56362680c5235ffd3887628 a182f2bda233681a7ff130b1113a2e6217beb3ad Hazrat Ali <iloveyii@yahoo.com> 1572710723 +0100	commit: Added build - aws
+a182f2bda233681a7ff130b1113a2e6217beb3ad 4dea0181629606bc636146d03bd70c1822896f04 Hazrat Ali <iloveyii@yahoo.com> 1572710965 +0100	commit: File fixed url
+4dea0181629606bc636146d03bd70c1822896f04 e53e3b2cfcb226150b827ae8041c70546cb3c1e3 Hazrat Ali <iloveyii@yahoo.com> 1572711007 +0100	commit: Added build - aws
+e53e3b2cfcb226150b827ae8041c70546cb3c1e3 9d8c643bb8c035a2250db543374714f0d9430eef Hazrat Ali <iloveyii@yahoo.com> 1572711148 +0100	commit: Added build - aws
+9d8c643bb8c035a2250db543374714f0d9430eef 2eefbded0bb76ced0251882f066bcb62ec3be96a Hazrat Ali <iloveyii@yahoo.com> 1572883396 +0100	commit: Added node mongo
+2eefbded0bb76ced0251882f066bcb62ec3be96a 64d823d60ba6a488f9c910af4e5d6f049567e933 Hazrat Ali <iloveyii@yahoo.com> 1572884559 +0100	commit: Added episodes
+64d823d60ba6a488f9c910af4e5d6f049567e933 764ff6df80e16016e2525918929ba880d44b4c53 Hazrat Ali <iloveyii@yahoo.com> 1572885345 +0100	commit: Added url to all episodes
+764ff6df80e16016e2525918929ba880d44b4c53 8be4122c3bb157a94fd0a49fc6416f8a369560d6 Hazrat Ali <iloveyii@yahoo.com> 1572892822 +0100	commit: Added Div in Table
+8be4122c3bb157a94fd0a49fc6416f8a369560d6 4be329f12ac49d238f0bfcefae99a031cb2bc48e Hazrat Ali <iloveyii@yahoo.com> 1572895412 +0100	commit: Adjusted episodes
+4be329f12ac49d238f0bfcefae99a031cb2bc48e 4be329f12ac49d238f0bfcefae99a031cb2bc48e Hazrat Ali <iloveyii@yahoo.com> 1572905162 +0100	reset: moving to HEAD
+4be329f12ac49d238f0bfcefae99a031cb2bc48e baa46284fc77eeedfd1f93d3d220bbbfa2d01ea5 Hazrat Ali <iloveyii@yahoo.com> 1572907555 +0100	commit: Added filter
+baa46284fc77eeedfd1f93d3d220bbbfa2d01ea5 b661c829e337faedce920e40a151fee410cf044d Hazrat Ali <iloveyii@yahoo.com> 1572949514 +0100	commit: Added VideoPlayer component
+b661c829e337faedce920e40a151fee410cf044d b661c829e337faedce920e40a151fee410cf044d Hazrat Ali <iloveyii@yahoo.com> 1572949517 +0100	reset: moving to HEAD
+b661c829e337faedce920e40a151fee410cf044d 987265106b438f51be81a810f5da67eb3e2c3fea Hazrat Ali <iloveyii@yahoo.com> 1572950487 +0100	commit: Added Table changes for Row
+987265106b438f51be81a810f5da67eb3e2c3fea 551d08f79b813b33fed3466339a4b7780f20b77c Hazrat Ali <iloveyii@yahoo.com> 1572951097 +0100	commit: Better var names
+551d08f79b813b33fed3466339a4b7780f20b77c ca5342634a0a78194400a5525ad1da77c532b9f2 Hazrat Ali <iloveyii@yahoo.com> 1572952577 +0100	commit: Fixed view path
+ca5342634a0a78194400a5525ad1da77c532b9f2 3d7de05cb85028f8f68585eb35838954d31864ad Hazrat Ali <iloveyii@yahoo.com> 1572968488 +0100	commit: Added VidoeView with episodes
+3d7de05cb85028f8f68585eb35838954d31864ad ad6f0a49e6d93e1b79f130cf8c72e4277dc2b12f Hazrat Ali <iloveyii@yahoo.com> 1573037562 +0100	commit: Added nested destrcutring
+ad6f0a49e6d93e1b79f130cf8c72e4277dc2b12f aa366767cc851ee76ea80b1b105cb91e2d3fea2f Hazrat Ali <iloveyii@yahoo.com> 1573041980 +0100	commit: Fix in mongo post , add or update
+aa366767cc851ee76ea80b1b105cb91e2d3fea2f 3cd6f1a9adc942b2ba114031a983576f7a797c61 Hazrat Ali <iloveyii@yahoo.com> 1573058139 +0100	commit: Fixes
+3cd6f1a9adc942b2ba114031a983576f7a797c61 f92aa685ec82d03080739a2524061a2d8e572499 Hazrat Ali <iloveyii@yahoo.com> 1573058414 +0100	commit: Fixed path
+                                                                                                                                                           

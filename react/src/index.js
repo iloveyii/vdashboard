@@ -37,11 +37,15 @@ import VideoReducer from "./reducers/VideoReducer";
 
 import {userReadAction} from "./actions/UserAction";
 import {videoReadAction} from "./actions/VideoAction";
+import Model from './Models/Model';
+
+const show = new Model('show');
 
 const allReducers = combineReducers({
     users: UserReducer,
     login: LoginReducer,
-    videos : VideoReducer
+    videos : VideoReducer,
+    shows: show.reducers
 });
 
 // # 02
@@ -104,7 +108,12 @@ localStorage.setItem('statsUpdate', statsUpdate);
 if(true || ENVIRONMENT.DEV) {
     // store.dispatch(postsReadAction());
     store.dispatch(userReadAction());
-    store.dispatch(videoReadAction());
+    // store.dispatch(videoReadAction());
+    store.dispatch(show.actions.read({}));
+    /*store.dispatch(show.actions.read_success({
+        a: 5455,
+        b: 9909
+    }));*/
 }
 
 /**
