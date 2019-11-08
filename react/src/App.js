@@ -12,6 +12,7 @@ import Settings from './components/Settings';
 import Reports from './components/Reports';
 import Videos from "./components/Videos";
 import VideosView from "./components/VideosView";
+import Shows from "./components/Shows";
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
                     <Route exact path={`/`} component={Login}/>
                     <Route exact path={`/users`} component={Users}/>
                     <Route exact path={`/videos`} component={Videos}/>
+                    <Route exact path={`/shows`} component={Shows}/>
                     <Route exact path={`/videos/:id`} component={VideosView}/>
                     <Route exact path={`/login`} component={Login}/>
                     <Route exact path={`/signup`} component={Signup}/>

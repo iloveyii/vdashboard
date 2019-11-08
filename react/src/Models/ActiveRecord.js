@@ -6,15 +6,8 @@ class ActiveRecord extends Model{
     _form = {};
     _subscribers = [];
 
-    constructor(form, forceUpdate = null) {
-        // name, forceUpdate = null, server
-        super(null, forceUpdate, null);
-        this.form = form;
-        if (forceUpdate && typeof forceUpdate === 'function') {
-            this.forceUpdate = forceUpdate;
-        } else {
-            this.forceUpdate = () => null;
-        }
+    constructor(name) {
+        super(name);
         this.debug = true;
     }
 

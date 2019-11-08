@@ -39,18 +39,23 @@ import {userReadAction} from "./actions/UserAction";
 import {videoReadAction} from "./actions/VideoAction";
 import Model from './Models/Model';
 import {apiServer} from "./common/constants";
+import models from './store/models';
+import {takeLatest} from "redux-saga/effects";
 
-const show = new Model('show');
-const user = new Model('u');
+const show = new Model('shows');
+const user = new Model('users');
 
+let reds = {};
+for(let i=0; i < Object.keys(models).length; i++) {
+    const model = models[Object.keys(models)[i]];
+    reds[model.name] = model.reducers
+}
 
-const allReducers = combineReducers({
+const allReducers = combineReducers( Object.assign({}, {
     users: UserReducer,
     login: LoginReducer,
     videos : VideoReducer,
-    shows: show.reducers,
-    u: user.reducers,
-});
+}, reds));
 
 // # 02
 /**
@@ -111,14 +116,20 @@ localStorage.setItem('statsUpdate', statsUpdate);
 // Read news
 if(true || ENVIRONMENT.DEV) {
     // store.dispatch(postsReadAction());
-    store.dispatch(userReadAction());
+    // store.dispatch(userReadAction());
     // store.dispatch(videoReadAction());
-    store.dispatch(show.actions.read({}));
-    store.dispatch(user.actions.read({}));
+    // store.dispatch(show.actions.read({}));
+    // store.dispatch(user.actions.read({}));
     /*store.dispatch(show.actions.read_success({
         a: 5455,
         b: 9909
     }));*/
+
+
+    for(let i=0; i < Object.keys(models).length; i++) {
+        const model = models[Object.keys(models)[i]];
+        store.dispatch(model.actions.read({}));
+    }
 }
 
 /**

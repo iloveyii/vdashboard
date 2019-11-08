@@ -48,14 +48,14 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction, itemViewAction}) =>
                 {
                     itemDeleteAction && itemDeleteAction !== null ?
                         <div style={{flex: 1}}>
-                            <button onClick={() => itemDeleteAction(itemArray)} className="button-small">Delete</button>
+                            <button onClick={() => itemDeleteAction(itemArray['_id'])} className="button-small">Delete</button>
                         </div>
                         : null
                 }
                 {
                     itemViewAction && itemViewAction !== null ?
                         <div style={{flex: 1}}>
-                            <button onClick={() => itemViewAction(itemArray)} className="button-small">View</button>
+                            <button onClick={() => itemViewAction(itemArray['_id'])} className="button-small">View</button>
                         </div>
                         : null
                 }

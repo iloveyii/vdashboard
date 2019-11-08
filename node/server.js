@@ -72,7 +72,7 @@ app.get('/api/v1/remove', mongoVideo.remove);
 
 app.get('/api/v1/shows', constants.USE_MONGO ? mongoVideo.get : mySqlVideo.get);
 app.post('/api/v1/shows', mongoVideo.post);
-app.delete('/api/v1/shows/:id', mySqlVideo.delete);
+app.delete('/api/v1/shows/:id', mongoVideo.delete);
 app.put('/api/v1/shows/:id', mongoVideo.update);
 
 app.post('/api/v1/episode', mongoVideo.postEpisode);

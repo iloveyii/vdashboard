@@ -1,18 +1,19 @@
 import {call, put} from 'redux-saga/effects';
 import api from "../api/video";
 import axios from "axios";
+import {apiServer} from "../common/constants";
 
 class Model {
 
     // Constructor - Name, forceUpdate
-    constructor(name, forceUpdate = null, server = 'http://localhost:8090/api/v1/shows') {
+    constructor(name, forceUpdate = null) {
         this.name = name;
         if (forceUpdate && typeof forceUpdate === 'function') {
             this.forceUpdate = forceUpdate;
         } else {
             this.forceUpdate = () => null;
         }
-        this.server = server;
+        this.server = apiServer + '/api/v1/' + name;
         this.debug = true;
     }
 
@@ -185,8 +186,8 @@ class Model {
                         console.dir(error);
                     })
                 },
-                delete: (video) =>
-                    axios.delete(this.server + '/' + video.id).then(res => res.data).catch(error => {
+                delete: (data) =>
+                    axios.delete(this.server + '/' + data.data).then(res => res.data).catch(error => {
                         throw new Error(error);
                         console.dir(error);
                     }),
