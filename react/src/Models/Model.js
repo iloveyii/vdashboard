@@ -6,16 +6,14 @@ import {apiServer} from "../common/constants";
 class Model {
 
     // Constructor - Name, forceUpdate
-    constructor(name, forceUpdate = null) {
+    constructor(name) {
         this.name = name;
-        if (forceUpdate && typeof forceUpdate === 'function') {
-            this.forceUpdate = forceUpdate;
-        } else {
-            this.forceUpdate = () => null;
-        }
+        this.forceUpdate = () => null;
         this.server = apiServer + '/api/v1/' + name;
-        this.debug = true;
+        this.debug = false;
     }
+
+    forceUpdate = () => null;
 
     log(msg) {
         if(this.debug) console.log(msg);
@@ -48,7 +46,7 @@ class Model {
     get actions() {
         console.log('Inside show actions');
         return {
-            create: (data) => ({type: this.types.create, payload: {data} }),
+            create: (data) => { window.data = data; console.log('Create ', data, {data}); return {type: this.types.create, payload: {data} }; },
             create_success: (data) => ({type: this.types.create_success, payload: {data} }),
             create_fail: (data) => ({type: this.types.create_fail, payload: {data} }),
 
@@ -96,6 +94,7 @@ class Model {
         const $this = this;// new Model('show');
 
         const create = function* (action) {
+            console.log('Action in saga', action.payload);
             try {
                 const data = yield call($this.api.create, {
                     formData: action.payload.data.formData,
@@ -181,7 +180,8 @@ class Model {
                             data.action && data.action(percentCompleted);
                         }
                     };
-                    return axios.post(this.server, data.video, config).then(res => res.data).catch(error => {
+                    console.log('API', data);
+                    return axios.post(this.server, data.formData, config).then(res => res.data).catch(error => {
                         throw new Error(error);
                         console.dir(error);
                     })

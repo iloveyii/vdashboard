@@ -11,35 +11,55 @@ class Shows extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            shows: models.shows
+            show: models.shows // Show is an Object of class Show, while shows is array of objects from json/db
         }
     }
 
     componentDidMount() {
         const {readAction} = this.props;
-        const {shows} = this.state;
-        shows.list = this.props.shows.list;
-        shows.form = this.props.shows.form;
+        const {show} = this.state;
+        show.list = this.props.shows.list;
+        show.form = this.props.shows.form;
 
-        if (shows.list.length < 1) {
+        if (show.list.length < 1) {
             readAction();
         } else {
-            this.setState({shows});
+            this.setState({show});
         }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        const {shows} = this.state;
-        shows.list = nextProps.shows.list;
-        shows.form = nextProps.shows.form;
+        const {show} = this.state;
+        show.list = nextProps.shows.list;
+        show.form = nextProps.shows.form;
 
-        if (!shows || shows.list.length < 1) {
-            this.setState({shows});
+        console.log('componentWillReceiveProps', show.form);
+
+        if (!show || show.list.length < 1) {
+            this.setState({show});
         }
     }
 
+    handleChange = (e) => {
+        const {show} = this.state;
+        show.form[e.target.id] = e.target.value;
+        this.forceUpdate();
+        console.log(e.target.value);
+    };
+
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        const {show} = this.state;
+        const {createAction, updateAction} = this.props;
+        show.submitForm(show.mode=='create' ? createAction : updateAction);
+        show.form.title = ''; show.form.description = ''; show.mode = 'create';
+        this.setState({show});
+        console.log('    handleFormSubmit', this.state.show)
+    };
+
+
     render() {
-        const {shows} = this.state;
+        const {show} = this.state;
 
         return (
             <section id="dashboard" className="dashboard">
@@ -60,7 +80,7 @@ class Shows extends React.Component {
                                 <div className="row">
                                     <div className="col-1-of-1">
                                         <input type="text" id="title" placeholder="Type title"
-                                               value={shows.form.title}
+                                               value={show.form.title}
                                                onChange={e => this.handleChange(e)}/>
                                     </div>
                                 </div>
@@ -68,8 +88,8 @@ class Shows extends React.Component {
                                 <div className="row">
                                     <div className="col-1-of-1">
                                         <textarea cols={40} rows={5} id="description" placeholder="Type description"
-                                                  value={shows.form.description}
-                                                  onChange={e => this.handleChange(e)}> </textarea>
+                                                  value={show.form.description}
+                                                  onChange={e => this.handleChange(e)}></textarea>
                                     </div>
                                 </div>
 
@@ -90,8 +110,8 @@ class Shows extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'description']} items={shows.list}
-                           // itemViewAction={(arr) => this.props.history.push('/videos/' + (arr['id'] ? arr['id'] : arr['_id']) )}
+                    <Table fields={['id', 'title', 'description']} items={show.list}
+                        // itemViewAction={(arr) => this.props.history.push('/videos/' + (arr['id'] ? arr['id'] : arr['_id']) )}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
                 </Center>
             </section>
@@ -113,9 +133,11 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = {
-    readAction : models.shows.actions.read,
-    deleteAction : models.shows.actions.delete,
-    editAction : models.shows.actions.read,
+    readAction: models.shows.actions.read,
+    deleteAction: models.shows.actions.delete,
+    editAction: models.shows.actions.read,
+    createAction: models.shows.actions.create,
+    updateAction: models.shows.actions.update,
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Shows));

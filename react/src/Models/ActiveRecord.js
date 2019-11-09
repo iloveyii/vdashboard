@@ -24,11 +24,16 @@ class ActiveRecord extends Model{
         return this;
     }
 
-    forceUpdateOnSubscribers(method) {
+    forceUpdateOnSubscribers = (method) => {
         this._subscribers.includes(method) && this.forceUpdate();
     }
 
+    forceUpdate() {
+
+    }
+
     set form(form) {
+        this._form = {};
         for (let key in form) {
             this._form[key] = form[key];
         }
@@ -41,9 +46,9 @@ class ActiveRecord extends Model{
 
     setUploadProgress(value) {
         this._uploadProgress = value;
-        this.forceUpdateOnSubscribers('setUploadProgress');
+        // this.forceUpdateOnSubscribers('setUploadProgress');
         if (this._uploadProgress > 99) {
-            this.form = new ActiveRecord().form;
+            this.form = {};
             this.mode = 'create';
         }
     }
@@ -52,8 +57,10 @@ class ActiveRecord extends Model{
         const formData = new FormData();
         Object.keys(this.form).map(key => {
             formData.append(key, this.form[key]);
+            console.log('submitForm : ', key, this.form[key]);
         });
-        this.mode === 'create' ? action(formData, this.setUploadProgress) : action(formData, this.setUploadProgress);
+
+        this.mode === 'create' ? action({formData, action:this.setUploadProgress}) : action({formData, action:this.setUploadProgress});
         return this;
     }
 }

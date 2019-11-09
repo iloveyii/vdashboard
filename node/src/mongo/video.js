@@ -145,34 +145,26 @@ const shows = {
     },
     post: async (req, res) => {
         console.log('POST2 /api/v1/shows');
-
         if (!req.files || Object.keys(req.files).length == 0) {
             // return res.status(400).json({result: 'No images were attached'});
         }
-
-        const userInput = req.body;
-        const {title, description} = userInput;
-        const result = await file.save(req);
+        const {title, description} = req.body;
+        // const result = await file.save(req);
         const show = {
             title,
             description,
             episodes: []
         };
 
-        if (result.status === 'ok') {
-            db.getDb().collection(collections.shows).insertOne(show, (err, result) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('Added show to mongodb:', req.body);
-                    result.message += ' , Show saved to mongodb.';
-                }
-            });
-        } else {
-            result.status = 'error';
-        }
-
-        res.json({result});
+        db.getDb().collection(collections.shows).insertOne(show, (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Added show to mongodb:', req.body);
+                result.message += ' , Show saved to mongodb.';
+                res.json({result});
+            }
+        });
     },
 
     delete: (req, res) => {
