@@ -33,6 +33,10 @@ class Model {
             read_success: this.name + '.read.success',
             read_fail: this.name + '.read.fail',
 
+            edit: this.name + '.edit',
+            edit_success: this.name + '.edit.success',
+            edit_fail: this.name + '.edit.fail',
+
             update: this.name + '.update',
             update_success: this.name + '.update.success',
             update_fail: this.name + '.update.fail',
@@ -55,8 +59,12 @@ class Model {
             read_fail: (data) => ({type: this.types.read_fail, payload: {data} }),
 
             update: (data) => ({type: this.types.update, payload: {data} }),
-            update_success: (data) => ({type: this.types.update, payload: {data} }),
-            update_fail: (data) => ({type: this.types.update_success, payload: {data} }),
+            update_success: (data) => ({type: this.types.update_success, payload: {data} }),
+            update_fail: (data) => ({type: this.types.update_fail, payload: {data} }),
+
+            edit: (data) => ({type: this.types.edit, payload: {data} }),
+            edit_success: (data) => ({type: this.types.edit_success, payload: {data} }),
+            edit_fail: (data) => ({type: this.types.edit_fail, payload: {data} }),
 
             delete: (data) => ({type: this.types.delete, payload: {data} }),
             delete_success: (data) => ({type: this.types.delete_success, payload: {data} }),
@@ -76,8 +84,18 @@ class Model {
             switch (action.type) {
                 case this.types.read_success:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload) );
-                    const {data} = action.payload;
-                    const newState = {...state, ...{list:data}};
+                    var {data} = action.payload;
+                    var newState = {...state, ...{list:data}};
+                    return newState;
+                case this.types.edit:
+                    this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload) );
+                    var {data} = action.payload; data.mode = 'edit';
+                    var newState = {...state, ...{form:data}};
+                    return newState;
+                case this.types.update_success:
+                    this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload) );
+                    var {data} = action.payload; data.mode = this.types.update_success;
+                    var newState = {...state, ...{form:data}};
                     return newState;
                 default:
                     this.log('Inside show default reducer of class ' + this.name + JSON.stringify(action));

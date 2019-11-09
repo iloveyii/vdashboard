@@ -32,6 +32,7 @@ class Shows extends React.Component {
         const {show} = this.state;
         show.list = nextProps.shows.list;
         show.form = nextProps.shows.form;
+        show.mode = nextProps.shows.form.mode;
 
         console.log('componentWillReceiveProps', show.form);
 
@@ -135,7 +136,7 @@ const mapStateToProps = state => ({
 const mapActionsToProps = {
     readAction: models.shows.actions.read,
     deleteAction: models.shows.actions.delete,
-    editAction: models.shows.actions.read,
+    editAction: models.shows.actions.edit,
     createAction: models.shows.actions.create,
     updateAction: models.shows.actions.update,
 };
