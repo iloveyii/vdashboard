@@ -26,8 +26,11 @@ const shows = {
             if (err) {
                 console.log(err);
             } else {
+                console.log(shows);
                 res.status(200);
                 shows.map(show => {
+                    console.log(show);
+
                     show.episodes.map(episode => {
                         episode.video = 'http://' + constants.serverIP + ':' + constants.port + episode.video;
                         episode.image = 'http://' + constants.serverIP + ':' + constants.port + episode.image;
@@ -162,7 +165,7 @@ const shows = {
             } else {
                 console.log('Added show to mongodb:', req.body);
                 result.message = ' , Show saved to mongodb.';
-                show.status='ok', show.mode='added';
+                show.status = 'ok', show.mode = 'added';
                 res.json({show});
             }
         });
@@ -187,31 +190,31 @@ const shows = {
         console.log('POST /api/v1/episode', req.body);
         const userInput = req.body;
         const result = await file.save(req);
-        const {show_id, title, description,genre} = userInput;
+        const {show_id, title, description, genre} = userInput;
         const showId = show_id ? db.getPrimaryKey(show_id) : db.getPrimaryKey();
 
-        const show = {
-            episodes: [{
-                title: title,
-                description:description,
-                genre: genre,
-                image: result.image_path,
-                video: result.video_path
-            }]
+        const episode = {
+            title: title,
+            description: description,
+            genre: genre,
+            image: result.image_path,
+            video: result.video_path
         };
 
-        console.log('show', show);
+        console.log('episode', episode);
+        episode.imageUrl = 'http://' + constants.serverIP + ':' + constants.port + result.image_path;
+        episode.videoUrl = 'http://' + constants.serverIP + ':' + constants.port + result.video_path;
 
         db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},
-            { $addToSet: { episodes: show.episodes }},
+            {$addToSet: {episodes: episode}},
             {returnOriginal: false, upsert: true},
             (err, result) => {
                 if (err) {
                     console.log('Some error occurred. ', err);
                 } else {
                     console.log('Show added or updated');
-                    res.json(result);
+                    res.json(episode);
                 }
             }
         )

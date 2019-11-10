@@ -103,8 +103,7 @@ class Model {
 
                 case this.types.create_success:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload) );
-                    var {data} = action.payload; data.mode = this.types.create_success;
-                    var form = {}; form.result = data;
+                    var form = action.payload.data;
                     var newState = {...state, ...{form}};
                     return newState;
 
@@ -129,14 +128,19 @@ class Model {
                     formData: action.payload.data.formData,
                     action: (d) => action.payload.data.action ? action.payload.data.action(d) : null
                 });
-                if (data && Array.isArray(Object.keys(data))) {
+                console.log('CREATE ', data);
+                if (true || data && Array.isArray(Object.keys(data))) {
+                    console.log('CREATE if', data);
                     yield put($this.actions.create_success(data));
                     yield put($this.actions.read());
                 } else {
+                    console.log('CREATE fail', data);
                     yield put($this.actions.create_fail(data));
                 }
             } catch (err) {
                 console.log(err);
+                console.log('CREATE err', err);
+
                 yield put($this.actions.create_fail(err));
             }
         };

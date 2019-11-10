@@ -13,8 +13,8 @@ class Episode extends ActiveRecord {
         console.log('Shows', this.types);
     }
 
-    onSelect = () => {
-
+    onSelect = (item) => {
+        this.form.genre = item.value;
     };
 
     getFiles = () => {
@@ -36,21 +36,6 @@ class Episode extends ActiveRecord {
     setImagePath(files) {
         this._form.image_path = files[0];
     }
-
-    get types() {
-        const superTypes = super.types;
-        const name = 'episodes';
-
-        return Object.assign({}, superTypes,
-            {
-                episodes: {
-                    create: name + '.create',
-                    create_success: name + '.create.success',
-                    create_fail: name + '.create.fail',
-                }
-            });
-    }
-
 
 }
 

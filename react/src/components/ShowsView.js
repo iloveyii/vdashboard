@@ -23,8 +23,8 @@ class ShowsView extends React.Component {
     componentDidMount() {
         const {readAction, match} = this.props;
         const {episode} = this.state;
-        episode.list = this.props.shows.list;
-        episode.form = this.props.shows.form;
+        episode.list = this.props.episodes.list;
+        episode.form = this.props.episodes.form;
         episode._form.show_id = match.params.id;
 
 
@@ -34,8 +34,8 @@ class ShowsView extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         const {episode} = this.state;
-        episode.list = nextProps.shows.list;
-        episode.form = nextProps.shows.form;
+        episode.list = nextProps.episodes.list;
+        episode.form = nextProps.episodes.form;
 
         if (!episode || episode.list.length > 0) {
             this.setState({episode});
@@ -145,7 +145,7 @@ class ShowsView extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    shows: state.shows,
+    episodes: state.episodes,
 });
 
 /**
