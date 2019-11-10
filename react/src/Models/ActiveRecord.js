@@ -78,6 +78,8 @@ class ActiveRecord extends Model{
         if(this.form['_id'] && this.form['_id'].length > 0) return true;
         return false;
     }
+
+
 }
 
 export default ActiveRecord;
