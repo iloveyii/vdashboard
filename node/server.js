@@ -75,7 +75,7 @@ app.post('/api/v1/shows', mongoVideo.post);
 app.delete('/api/v1/shows/:id', mongoVideo.delete);
 app.put('/api/v1/shows/:id', mongoVideo.update);
 
-app.post('/api/v1/episode', mongoVideo.postEpisode);
+app.post('/api/v1/episodes', mongoVideo.postEpisode);
 
 
 app.listen(constants.port, () => console.log('Server started on port ' + constants.port));

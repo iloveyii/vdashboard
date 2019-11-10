@@ -9,56 +9,59 @@ import File from './File';
 import Select from './Select';
 import Alert from './Alert';
 import VideoPlayer from './VideoPlayer';
+import Episode from "../Models/Episode";
 
 
 class ShowsView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: models.shows // Show is an Object of class Show, while shows is array of objects from json/db
+            episode: new Episode('episodes')// Show is an Object of class Show, while shows is array of objects from json/db
         }
     }
 
     componentDidMount() {
-        const {readAction} = this.props;
-        const {show} = this.state;
-        show.list = this.props.shows.list;
-        show.form = this.props.shows.form;
+        const {readAction, match} = this.props;
+        const {episode} = this.state;
+        episode.list = this.props.shows.list;
+        episode.form = this.props.shows.form;
+        episode._form.show_id = match.params.id;
 
-        if (show.list.length < 1) {
-            readAction();
-        } else {
-            this.setState({show});
-        }
+
+            this.setState({episode});
+
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        const {show} = this.state;
-        show.list = nextProps.shows.list;
-        show.form = nextProps.shows.form;
+        const {episode} = this.state;
+        episode.list = nextProps.shows.list;
+        episode.form = nextProps.shows.form;
 
-        if (!show || show.list.length > 0) {
-            this.setState({show});
+        if (!episode || episode.list.length > 0) {
+            this.setState({episode});
         }
     }
 
     handleChange = (e) => {
-        const {show} = this.state;
-        show.form[e.target.id] = e.target.value;
+        const {episode} = this.state;
+        episode.form[e.target.id] = e.target.value;
         this.forceUpdate();
     };
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const {show} = this.state;
+        const {episode} = this.state;
+        episode.form.show_id = this.props.match.params.id;
+
+        console.log('Episode', episode);
         const {createAction, updateAction} = this.props; // actions for episodes
-        show.submitForm(createAction, updateAction);
-        this.setState({show});
+        episode.submitForm(createAction, updateAction);
+        this.setState({episode});
     };
 
 
     render() {
-        const {show} = this.state;
+        const {episode} = this.state;
 
         return (
             <section id="dashboard" className="dashboard">
@@ -79,7 +82,7 @@ class ShowsView extends React.Component {
                                 <div className="row">
                                     <div className="col-1-of-1">
                                         <input type="text" id="title" placeholder="Type title"
-                                               value={show.form.title}
+                                               value={episode.form.title}
                                                onChange={e => this.handleChange(e)}/>
                                     </div>
                                 </div>
@@ -87,26 +90,26 @@ class ShowsView extends React.Component {
                                 <div className="row">
                                     <div className="col-1-of-1">
                                         <textarea cols={40} rows={5} id="description" placeholder="Type description"
-                                                  value={show.form.description}
+                                                  value={episode.form.description}
                                                   onChange={e => this.handleChange(e)}></textarea>
                                     </div>
                                 </div>
 
                                 <div className="row">
                                     <div className="col-1-of-1">
-                                        <Select model={show}/>
+                                        <Select model={episode}/>
                                     </div>
                                 </div>
 
                                 <div className="row">
                                     <div className="col-1-of-1">
-                                        <File model={show} type="image"/>
+                                        <File model={episode} type="image"/>
                                     </div>
                                 </div>
 
                                 <div className="row">
                                     <div className="col-1-of-1">
-                                        <File model={show} type="video"/>
+                                        <File model={episode} type="video"/>
                                     </div>
                                 </div>
 
@@ -127,7 +130,7 @@ class ShowsView extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'description']} items={show.list}
+                    <Table fields={['id', 'title', 'description']} items={episode.list}
                            itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']) )}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
                 </Center>
@@ -150,11 +153,11 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = {
-    readAction: models.shows.actions.read,
-    deleteAction: models.shows.actions.delete,
-    editAction: models.shows.actions.edit,
-    createAction: models.shows.actions.create,
-    updateAction: models.shows.actions.update,
+    readAction: models.episodes.actions.read,
+    deleteAction: models.episodes.actions.delete,
+    editAction: models.episodes.actions.edit,
+    createAction: models.episodes.actions.create,
+    updateAction: models.episodes.actions.update,
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(ShowsView));

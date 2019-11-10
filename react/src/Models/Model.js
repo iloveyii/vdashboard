@@ -87,23 +87,27 @@ class Model {
                     var {data} = action.payload;
                     var newState = {...state, ...{list:data}};
                     return newState;
+
                 case this.types.edit:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload) );
                     var {data} = action.payload; data.mode = this.types.edit;
                     var newState = {...state, ...{form:data}};
                     return newState;
+
                 case this.types.update_success:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload) );
                     var {data} = action.payload; data.mode = this.types.update_success;
                     var form = {}; form.result = data;
                     var newState = {...state, ...{form}};
                     return newState;
+
                 case this.types.create_success:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload) );
                     var {data} = action.payload; data.mode = this.types.create_success;
                     var form = {}; form.result = data;
                     var newState = {...state, ...{form}};
                     return newState;
+
                 default:
                     this.log('Inside show default reducer of class ' + this.name + JSON.stringify(action));
                     return state;

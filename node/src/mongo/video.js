@@ -187,28 +187,24 @@ const shows = {
         console.log('POST /api/v1/episode', req.body);
         const userInput = req.body;
         const result = await file.save(req);
-        const {id, episode} = userInput;
-        const showId = id ? db.getPrimaryKey(id) : db.getPrimaryKey();
+        const {show_id, title, description,genre} = userInput;
+        const showId = show_id ? db.getPrimaryKey(show_id) : db.getPrimaryKey();
 
         const show = {
-            episodes: episode ? [{
-                title: episode.title,
-                description: episode.description,
-                genre: episode.genre,
+            episodes: [{
+                title: title,
+                description:description,
+                genre: genre,
                 image: result.image_path,
                 video: result.video_path
-            }] : []
+            }]
         };
 
         console.log('show', show);
 
-        db.getDb().collection(collections.shows).updateOne(
+        db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},
-            {
-                $set: {
-                    episodes: show.episodes,
-                }
-            },
+            { $addToSet: { episodes: show.episodes }},
             {returnOriginal: false, upsert: true},
             (err, result) => {
                 if (err) {
