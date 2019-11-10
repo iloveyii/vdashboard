@@ -32,11 +32,8 @@ class Shows extends React.Component {
         const {show} = this.state;
         show.list = nextProps.shows.list;
         show.form = nextProps.shows.form;
-        show.mode = nextProps.shows.form.mode;
 
-        console.log('componentWillReceiveProps', show.form);
-
-        if (!show || show.list.length < 1) {
+        if (!show || show.list.length > 0) {
             this.setState({show});
         }
     }
@@ -45,17 +42,14 @@ class Shows extends React.Component {
         const {show} = this.state;
         show.form[e.target.id] = e.target.value;
         this.forceUpdate();
-        console.log(e.target.value);
     };
 
     handleFormSubmit = (e) => {
         e.preventDefault();
         const {show} = this.state;
         const {createAction, updateAction} = this.props;
-        show.submitForm(show.mode=='create' ? createAction : updateAction);
-        show.form.title = ''; show.form.description = ''; show.mode = 'create';
+        show.submitForm(createAction, updateAction);
         this.setState({show});
-        console.log('    handleFormSubmit', this.state.show)
     };
 
 
@@ -112,7 +106,7 @@ class Shows extends React.Component {
                     </div>
 
                     <Table fields={['id', 'title', 'description']} items={show.list}
-                        // itemViewAction={(arr) => this.props.history.push('/videos/' + (arr['id'] ? arr['id'] : arr['_id']) )}
+                           itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']) )}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
                 </Center>
             </section>

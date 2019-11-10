@@ -5,7 +5,8 @@ class Show extends ActiveRecord {
         super(name);
         this.form = {
             title : '',
-            description: ''
+            description: '',
+            mode: this.types.create
         };
     }
 }

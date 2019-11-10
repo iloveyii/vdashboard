@@ -161,8 +161,9 @@ const shows = {
                 console.log(err);
             } else {
                 console.log('Added show to mongodb:', req.body);
-                result.message += ' , Show saved to mongodb.';
-                res.json({result});
+                result.message = ' , Show saved to mongodb.';
+                show.status='ok', show.mode='added';
+                res.json({show});
             }
         });
     },

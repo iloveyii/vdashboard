@@ -53,15 +53,30 @@ class ActiveRecord extends Model{
         }
     }
 
-    submitForm(action) {
+    /**
+     * Avoid problem of bound to unbound controls on form
+     */
+    resetForm() {
+        Object.keys(this.form).forEach( key => {
+            this._form[key] = '';
+        })
+    }
+
+    submitForm(createAction, updateAction) {
         const formData = new FormData();
         Object.keys(this.form).map(key => {
             formData.append(key, this.form[key]);
-            console.log('submitForm : ', key, this.form[key]);
         });
 
-        this.mode === 'create' ? action({formData, action:this.setUploadProgress}) : action({formData, action:this.setUploadProgress});
+        this.hasId ? updateAction({formData, action:this.setUploadProgress}) : createAction({formData, action:this.setUploadProgress});
+        this.resetForm();
         return this;
+    }
+
+    get hasId() {
+        if(this.form['id'] && this.form['id'].length > 0) return true;
+        if(this.form['_id'] && this.form['_id'].length > 0) return true;
+        return false;
     }
 }
 

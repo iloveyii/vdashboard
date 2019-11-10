@@ -55,7 +55,7 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction, itemViewAction}) =>
                 {
                     itemViewAction && itemViewAction !== null ?
                         <div style={{flex: 1}}>
-                            <button onClick={() => itemViewAction(itemArray['_id'])} className="button-small">View</button>
+                            <button onClick={() => itemViewAction(itemArray)} className="button-small">View</button>
                         </div>
                         : null
                 }

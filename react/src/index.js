@@ -52,9 +52,9 @@ for(let i=0; i < Object.keys(models).length; i++) {
 }
 
 const allReducers = combineReducers( Object.assign({}, {
-    users: UserReducer,
-    login: LoginReducer,
-    videos : VideoReducer,
+    //users: UserReducer,
+    //login: LoginReducer,
+    //videos : VideoReducer,
 }, reds));
 
 // # 02
