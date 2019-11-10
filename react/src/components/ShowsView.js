@@ -21,15 +21,12 @@ class ShowsView extends React.Component {
     }
 
     componentDidMount() {
-        const {readAction, match} = this.props;
+        const {match, shows} = this.props;
         const {episode} = this.state;
         episode.list = this.props.episodes.list;
         episode.form = this.props.episodes.form;
         episode._form.show_id = match.params.id;
-
-
-            this.setState({episode});
-
+        this.setState({episode, shows});
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -37,9 +34,7 @@ class ShowsView extends React.Component {
         episode.list = nextProps.episodes.list;
         episode.form = nextProps.episodes.form;
 
-        if (!episode || episode.list.length > 0) {
-            this.setState({episode});
-        }
+        this.setState({episode, shows: nextProps.shows});
     }
 
     handleChange = (e) => {
@@ -62,6 +57,11 @@ class ShowsView extends React.Component {
 
     render() {
         const {episode} = this.state;
+        const {shows} = this.props;
+        if (!shows || Object.keys(shows).length < 1) return <div>Loading</div>;
+
+        const show = shows.list.find(s => s._id === this.props.match.params.id);
+        if(!show) return <div>Loading...</div>;
 
         return (
             <section id="dashboard" className="dashboard">
@@ -130,8 +130,8 @@ class ShowsView extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'description']} items={episode.list}
-                           itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']) )}
+                    <Table fields={['id', 'title', 'description']} items={show.episodes? show.episodes : []}
+                           itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']))}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
                 </Center>
             </section>
@@ -146,6 +146,7 @@ class ShowsView extends React.Component {
  */
 const mapStateToProps = state => ({
     episodes: state.episodes,
+    shows: state.shows,
 });
 
 /**
