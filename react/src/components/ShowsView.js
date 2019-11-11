@@ -54,6 +54,10 @@ class ShowsView extends React.Component {
         this.setState({episode});
     };
 
+    deleteAction = (episodeId) => {
+        const showId = this.props.match.params.id;
+        this.props.deleteAction(showId+'+'+episodeId);
+    };
 
     render() {
         const {episode} = this.state;
@@ -129,10 +133,10 @@ class ShowsView extends React.Component {
                             </form>
                         </div>
                     </div>
-
-                    <Table fields={['id', 'title', 'description']} items={show.episodes? show.episodes : []}
+5y
+                    <Table fields={['title', 'description']} items={show.episodes? show.episodes : []}
                            itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']))}
-                           itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
+                           itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
                 </Center>
             </section>
         )

@@ -18,9 +18,9 @@ class UserInfo extends React.Component {
     }
 
     componentDidMount() {
-        const { login } = this.props;
-        console.log('componentDidMount', login);
-        this.setState({username: login.username});
+        const { logins } = this.props;
+        console.log('componentDidMount', logins);
+        this.setState({username: logins.form.username});
     }
 
     render() {
@@ -49,7 +49,7 @@ class UserInfo extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    login: state.login,
+    logins: state.logins,
 });
 
 /**

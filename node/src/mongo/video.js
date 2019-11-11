@@ -186,6 +186,29 @@ const shows = {
             }
         );
     },
+    deleteEpisode: (req, res) => {
+        console.log('DELETE /api/v1/episodes/:id ' + req.params.id);
+        let [showId, episodeId] = req.params.id.split('+');
+        console.log('DELETE /api/v1/episodes/:id showId, episodeId ', showId, episodeId);
+
+        showId = db.getPrimaryKey(showId);
+        db.getDb().collection(collections.shows).findOneAndUpdate(
+            {_id: showId},
+            {$pull: { episodes: {_id: db.getPrimaryKey(episodeId)} }},
+            {returnOriginal: false, upsert: true},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('Show added or updated');
+                    res.json(result);
+                }
+            }
+        )
+    },
+    getEpisode: (req, res) => {
+        res.json({result: 'Cannot get episodes directly, you need to call show api end point'});
+    },
     postEpisode: async (req, res) => {
         console.log('POST /api/v1/episode', req.body);
         const userInput = req.body;
@@ -194,6 +217,7 @@ const shows = {
         const showId = show_id ? db.getPrimaryKey(show_id) : db.getPrimaryKey();
 
         const episode = {
+            _id: db.getPrimaryKey(),
             title: title,
             description: description,
             genre: genre,

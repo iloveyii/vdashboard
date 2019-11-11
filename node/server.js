@@ -59,7 +59,7 @@ function isAdmin(req) {
 }
 
 
-app.get('/api/v1/login', login.get);
+app.get('/api/v1/logins', login.get);
 
 app.get('/api/v1/users', user.get);
 app.post('/api/v1/users', user.post);
@@ -76,6 +76,8 @@ app.delete('/api/v1/shows/:id', mongoVideo.delete);
 app.put('/api/v1/shows/:id', mongoVideo.update);
 
 app.post('/api/v1/episodes', mongoVideo.postEpisode);
+app.get('/api/v1/episodes', mongoVideo.getEpisode);
+app.delete('/api/v1/episodes/:id', mongoVideo.deleteEpisode);
 
 
 app.listen(constants.port, () => console.log('Server started on port ' + constants.port));

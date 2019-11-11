@@ -1,12 +1,13 @@
 // name, server, form, forceUpdate
 import Show from "../Models/Show";
 import Episode from "../Models/Episode";
+import Login from "../Models/Login";
 
 
 const models = {
     shows: new Show('shows'),
     users: new Show('users'),
-    login: new Show('login'),
+    logins: new Login('logins'),
     episodes: new Episode('episodes')
 };
 

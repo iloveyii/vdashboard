@@ -16,7 +16,7 @@ class Model {
     forceUpdate = () => null;
 
     log(msg) {
-        if(this.debug) console.log(msg);
+        if(false && this.debug) console.log(msg);
     }
 
         // Subscribers

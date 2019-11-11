@@ -37,7 +37,7 @@ class Show extends ActiveRecord {
         this._form.image_path = files[0];
     }
 
-    get types() {
+    /*get types() {
         const superTypes = super.types;
         const name = 'episodes';
 
@@ -49,7 +49,7 @@ class Show extends ActiveRecord {
                     create_fail: name + '.create.fail',
                 }
             });
-    }
+    }*/
 
 
 }

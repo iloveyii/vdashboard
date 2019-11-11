@@ -22,7 +22,7 @@ const user = new Show('u' , apiServer + '/api/v1/users', [],  null);
 
 
 export default function* rootSaga() {
-    yield takeLatest(USER_ADD, userAddSaga);
+    /*yield takeLatest(USER_ADD, userAddSaga);
     yield takeLatest(USER_DELETE, userDeleteSaga);
     yield takeLatest(USER_UPDATE, userUpdateSaga);
     yield takeLatest(USER_READ, userReadSaga);
@@ -32,7 +32,7 @@ export default function* rootSaga() {
     yield takeLatest(VIDEO_ADD, videoAddSaga);
     yield takeLatest(VIDEO_READ, videoReadSaga);
     yield takeLatest(VIDEO_DELETE, videoDeleteSaga);
-    yield takeLatest(VIDEO_UPDATE, videoUpdateSaga);
+    yield takeLatest(VIDEO_UPDATE, videoUpdateSaga);*/
 
     // yield takeLatest(show.types.read, show.sagas.read);
     //yield takeLatest(user.types.read, user.sagas.read);

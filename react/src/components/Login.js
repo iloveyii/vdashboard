@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 import axios from 'axios';
 import {loginAction} from "../actions/LoginAction";
+import models from '../store/models';
 
 
 class Login extends React.Component {
@@ -14,7 +15,7 @@ class Login extends React.Component {
         this.state = {
             username: 'root',
             password: 'root',
-            login: false
+            login: models.logins
         }
     }
 
@@ -27,12 +28,12 @@ class Login extends React.Component {
 
     handleLogin(e) {
         e.preventDefault();
-        const {loginAction} = this.props;
+        const {readAction} = this.props;
         const user = {
             username: this.state.username,
             password: this.state.password
         };
-        loginAction(user);
+        readAction(user);
 
 
         return;
@@ -60,15 +61,16 @@ class Login extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        const {login} = nextProps;
-        if (login.authenticated) {
+        const {logins} = nextProps;
+        console.log('componentWillReceiveProps', logins)
+        if (logins.list.authenticated) {
             this.props.history.push('/dashboard');
         }
     }
 
     render() {
 
-        this.state.login && this.props.history.push('/dashboard');
+        // this.state.login && this.props.history.push('/dashboard');
 
         return (
             <section id="dashboard" className="dashboard">
@@ -128,7 +130,7 @@ class Login extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    login: state.login,
+    logins: state.logins,
 });
 
 /**
@@ -136,7 +138,7 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = {
-    loginAction
+    readAction : models.logins.actions.read
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Login));
