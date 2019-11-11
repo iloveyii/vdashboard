@@ -8,7 +8,7 @@ const login = {
         // const password = userInput.password ? md5(userInput.password) : 'root';
         console.log('header', req.headers);
 
-        if( ! req.headers.authorization ) {
+        if (!req.headers.authorization) {
             const auth = {
                 authenticated: false,
             };
@@ -46,6 +46,33 @@ const login = {
 
         console.log(sql);
         console.log('Headers: ', req.headers);
+    },
+    isAdmin: (req) => {
+        const base64Credentials = req.headers.authorization.split(' ')[1];
+        const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
+        let [username, password] = credentials.split(':');
+        console.log('credentials', credentials);
+        password = md5(password);
+
+        sql = `
+          SELECT * 
+          FROM login 
+          WHERE username='${username}' 
+          AND password='${password}'
+          AND admin=1
+          ;
+        `;
+
+        async function doQuery() {
+            await
+                con.query(sql, (err, result) => {
+                    if (err) throw  err;
+                    console.log(result);
+                    return result.length > 0;
+                });
+        }
+
+        return doQuery();
     }
 };
 

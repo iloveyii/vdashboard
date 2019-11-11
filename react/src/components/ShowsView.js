@@ -7,16 +7,17 @@ import Center from './Center';
 import Table from './Table';
 import File from './File';
 import Select from './Select';
-import Alert from './Alert';
 import VideoPlayer from './VideoPlayer';
 import Episode from "../Models/Episode";
+import Video from "../Models/Video";
 
 
 class ShowsView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            episode: new Episode('episodes')// Show is an Object of class Show, while shows is array of objects from json/db
+            episode: new Episode('episodes'), // Show is an Object of class Show, while shows is array of objects from json/db
+            showPlayer: false
         }
     }
 
@@ -33,7 +34,6 @@ class ShowsView extends React.Component {
         const {episode} = this.state;
         episode.list = nextProps.episodes.list;
         episode.form = nextProps.episodes.form;
-
         this.setState({episode, shows: nextProps.shows});
     }
 
@@ -57,6 +57,11 @@ class ShowsView extends React.Component {
     deleteAction = (episodeId) => {
         const showId = this.props.match.params.id;
         this.props.deleteAction(showId+'+'+episodeId);
+    };
+
+    viewAction = (video) => {
+        // e.preventDefault();
+        this.setState({showPlayer: true, video: new Video(video)});
     };
 
     render() {
@@ -120,22 +125,25 @@ class ShowsView extends React.Component {
                                 <div className="row">
                                     <div className="col-1-of-3">
                                         <div className="dashboard--container">
-
                                             <button style={{width: '80px'}} type="submit"
                                                     onClick={e => this.handleFormSubmit(e)}><i
                                                 className="fas fa-save"></i> Save
                                             </button>
-
                                         </div>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
+
+                        <div className="col-1-of-2">
+                            {
+                                this.state.showPlayer ? <VideoPlayer video={this.state.video} /> : null
+                            }
+                        </div>
                     </div>
-5y
                     <Table fields={['title', 'description']} items={show.episodes? show.episodes : []}
-                           itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']))}
+                           itemViewAction={ episodeArray => this.viewAction(episodeArray)}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
                 </Center>
             </section>

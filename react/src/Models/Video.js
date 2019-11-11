@@ -153,14 +153,16 @@ class Video {
         if (this._form.result && this._form.result.video_url) {
             return this._form.result.video_url;
         }
-        return this._videoUrl ? this._videoUrl : apiServer + '/' + this._form.video_path;
+        if(this._form.videoUrl) return this._form.videoUrl;
+        if(this._form.video) return this._form.video;
     }
 
     get imageUrl() {
         if (this._form.result && this._form.result.image_url) {
             return this._form.result.image_url;
         }
-        return this._imageUrl ? this._imageUrl : apiServer + '/' + this._form.image_path;
+        if(this._form.imageUrl) return this._form.imageUrl;
+        if(this._form.image) return this._form.image;
     }
 
     set videoPath(files) {

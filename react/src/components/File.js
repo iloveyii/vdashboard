@@ -56,6 +56,7 @@ class File extends React.Component {
         if (model) {
             var {uploadProgress, videoUrl, imageUrl} = model;
             if(!videoUrl) videoUrl = model.form.videoUrl;
+            if(!imageUrl) imageUrl = model.form.imageUrl;
         }
         this.setState({uploadProgress, videoUrl, imageUrl});
     }

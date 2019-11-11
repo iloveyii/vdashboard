@@ -15,7 +15,7 @@ class Login extends React.Component {
         this.state = {
             username: 'root',
             password: 'root',
-            login: models.logins
+            login: models.logins,
         }
     }
 
@@ -62,7 +62,7 @@ class Login extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         const {logins} = nextProps;
-        console.log('componentWillReceiveProps', logins)
+        console.log('componentWillReceiveProps', logins);
         if (logins.list.authenticated) {
             this.props.history.push('/dashboard');
         }

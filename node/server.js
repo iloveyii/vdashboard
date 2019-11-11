@@ -30,33 +30,6 @@ app.use(
     }
 );
 
-function isAdmin(req) {
-    const base64Credentials = req.headers.authorization.split(' ')[1];
-    const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
-    let [username, password] = credentials.split(':');
-    console.log('credentials', credentials);
-    password = md5(password);
-
-    sql = `
-          SELECT * 
-          FROM login 
-          WHERE username='${username}' 
-          AND password='${password}'
-          AND admin=1
-          ;
-        `;
-
-    async function doQuery() {
-        await
-            con.query(sql, (err, result) => {
-                if (err) throw  err;
-                console.log(result);
-                return result.length > 0;
-            });
-    }
-
-    return doQuery();
-}
 
 
 app.get('/api/v1/logins', login.get);
@@ -76,6 +49,7 @@ app.delete('/api/v1/shows/:id', mongoVideo.delete);
 app.put('/api/v1/shows/:id', mongoVideo.update);
 
 app.post('/api/v1/episodes', mongoVideo.postEpisode);
+app.put('/api/v1/episodes/:id', (req, res) => res.json({msg: 'cannot update for now'}));
 app.get('/api/v1/episodes', mongoVideo.getEpisode);
 app.delete('/api/v1/episodes/:id', mongoVideo.deleteEpisode);
 
