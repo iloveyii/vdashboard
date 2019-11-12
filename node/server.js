@@ -30,8 +30,6 @@ app.use(
     }
 );
 
-
-
 app.get('/api/v1/logins', login.get);
 
 app.get('/api/v1/users', user.get);
@@ -49,7 +47,7 @@ app.delete('/api/v1/shows/:id', mongoVideo.delete);
 app.put('/api/v1/shows/:id', mongoVideo.update);
 
 app.post('/api/v1/episodes', mongoVideo.postEpisode);
-app.put('/api/v1/episodes/:id', (req, res) => res.json({msg: 'cannot update for now'}));
+app.put('/api/v1/episodes/:id', mongoVideo.updateEpisode);
 app.get('/api/v1/episodes', mongoVideo.getEpisode);
 app.delete('/api/v1/episodes/:id', mongoVideo.deleteEpisode);
 

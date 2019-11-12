@@ -43,15 +43,25 @@ class ShowsView extends React.Component {
         this.forceUpdate();
     };
 
+    // CREATE
     handleFormSubmit = (e) => {
         e.preventDefault();
         const {episode} = this.state;
         episode.form.show_id = this.props.match.params.id;
-
-        console.log('Episode', episode);
-        const {createAction, updateAction} = this.props; // actions for episodes
-        episode.submitForm(createAction, updateAction);
+        const {createAction} = this.props; // actions for episodes
+        episode.submitForm(createAction, this.updateAction);
         this.setState({episode});
+    };
+
+    // UPDATE
+    updateAction = (data) => {
+        const {formData, action} = data;
+        console.log('updateAction', data);
+        const showId = this.props.match.params.id;
+        const episodeId = formData.getAll('_id');
+        formData.delete('_id');
+        formData.append('_id', showId+'+'+episodeId);
+        this.props.updateAction({formData, action});
     };
 
     deleteAction = (episodeId) => {

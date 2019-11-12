@@ -209,6 +209,55 @@ const shows = {
     getEpisode: (req, res) => {
         res.json({result: 'Cannot get episodes directly, you need to call show api end point'});
     },
+    updateEpisode: async (req, res) => {
+        console.log('PUT /api/v1/episode', req.body);
+        const userInput = req.body;
+        const result = await file.save(req);
+        const [showId, episodeId] = req.params.id.split('+');
+        const {title, description, genre} = userInput;
+
+        const episode = {
+            _id: db.getPrimaryKey(episodeId),
+            title: title,
+            description: description,
+            genre: genre,
+            image: result.image_path,
+            video: result.video_path
+        };
+
+        console.log('episode', episode);
+        episode.imageUrl = 'http://' + constants.serverIP + ':' + constants.port + result.image_path;
+        episode.videoUrl = 'http://' + constants.serverIP + ':' + constants.port + result.video_path;
+
+        db.getDb().collection(collections.shows).findOneAndUpdate(
+            {_id: showId},
+            {$pull: { episodes: {_id: db.getPrimaryKey(episodeId)} }},
+            {returnOriginal: false, upsert: false},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('Show added or updated');
+                    // res.json(episode);
+                }
+            }
+        );
+
+
+        db.getDb().collection(collections.shows).findOneAndUpdate(
+            {_id: showId},
+            {$addToSet: {episodes: episode}},
+            {returnOriginal: false, upsert: false},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('Show added or updated');
+                    res.json(episode);
+                }
+            }
+        )
+    },
     postEpisode: async (req, res) => {
         console.log('POST /api/v1/episode', req.body);
         const userInput = req.body;
