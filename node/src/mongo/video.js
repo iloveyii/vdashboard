@@ -200,7 +200,7 @@ const shows = {
                 if (err) {
                     console.log('Some error occurred. ', err);
                 } else {
-                    console.log('Show added or updated');
+                    console.log('Show added or updated', result);
                     res.json(result);
                 }
             }
@@ -209,13 +209,28 @@ const shows = {
     getEpisode: (req, res) => {
         res.json({result: 'Cannot get episodes directly, you need to call show api end point'});
     },
+    _addToSet: (showId, episode, res) => {
+        db.getDb().collection(collections.shows).findOneAndUpdate(
+            {_id: showId},
+            {$addToSet: {episodes: episode}},
+            {returnOriginal: false, upsert: false},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('Show added or updated');
+                    res.json(episode);
+                }
+            }
+        );
+    },
     updateEpisode: async (req, res) => {
-        console.log('PUT /api/v1/episode', req.body);
+        console.log('PUT /api/v1/episode/:id', req.body);
         const userInput = req.body;
         const result = await file.save(req);
-        const [showId, episodeId] = req.params.id.split('+');
+        let [showId, episodeId] = req.params.id.split('+'); // no need here
         const {title, description, genre} = userInput;
-
+        // console.log(result, 'showid, epi', showId, episodeId, userInput); return 1;
         const episode = {
             _id: db.getPrimaryKey(episodeId),
             title: title,
@@ -229,6 +244,7 @@ const shows = {
         episode.imageUrl = 'http://' + constants.serverIP + ':' + constants.port + result.image_path;
         episode.videoUrl = 'http://' + constants.serverIP + ':' + constants.port + result.video_path;
 
+        showId = db.getPrimaryKey(showId);
         db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},
             {$pull: { episodes: {_id: db.getPrimaryKey(episodeId)} }},
@@ -237,26 +253,14 @@ const shows = {
                 if (err) {
                     console.log('Some error occurred. ', err);
                 } else {
-                    console.log('Show added or updated');
-                    // res.json(episode);
+                    console.log('Show added or updated', result);
+                    return shows._addToSet(showId, episode, res);
                 }
             }
         );
 
 
-        db.getDb().collection(collections.shows).findOneAndUpdate(
-            {_id: showId},
-            {$addToSet: {episodes: episode}},
-            {returnOriginal: false, upsert: false},
-            (err, result) => {
-                if (err) {
-                    console.log('Some error occurred. ', err);
-                } else {
-                    console.log('Show added or updated');
-                    res.json(episode);
-                }
-            }
-        )
+
     },
     postEpisode: async (req, res) => {
         console.log('POST /api/v1/episode', req.body);
@@ -275,6 +279,7 @@ const shows = {
         };
 
         console.log('episode', episode);
+        // Debug on this server
         episode.imageUrl = 'http://' + constants.serverIP + ':' + constants.port + result.image_path;
         episode.videoUrl = 'http://' + constants.serverIP + ':' + constants.port + result.video_path;
 

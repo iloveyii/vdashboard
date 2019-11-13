@@ -20,7 +20,7 @@ const _file = {
             const image_path = constants.IMAGES_DIR + fileNameNumber + '_' + cleanFileName;
             imageFile && await this.moveFile(imageFile, imageFilePath);
             result.image_path = image_path;
-            result.image_url = constants.IMAGES_URL + fileNameNumber + '_' + cleanFileName;
+            result.image_url = fileNameNumber + '_' + cleanFileName;
         } else {
             result.image_path_status = ' No image file attached';
         }
@@ -30,7 +30,7 @@ const _file = {
             const videoFilePath = constants.VIDEOS_DIR_PATH + '/' + fileNameNumber + '_' + cleanFileName;
             const video_path = constants.VIDEOS_DIR + fileNameNumber + '_' + cleanFileName;
             videoFile && await this.moveFile(videoFile, videoFilePath);
-            result.video_url = constants.VIDEOS_URL + fileNameNumber + '_' + cleanFileName;
+            result.video_url = fileNameNumber + '_' + cleanFileName;
             result.video_path = video_path;
         } else {
             result.video_path_status = 'No video file attached';
