@@ -101,7 +101,7 @@ class ShowsView extends React.Component {
 
     render() {
         const {episode} = this.state;
-        const {shows} = this.props;
+        const {shows} = this.props; // @TODO save in state filtered one
         if (!shows || Object.keys(shows).length < 1) return <div>Loading</div>;
 
         const show = shows.list.find(s => s._id === this.props.match.params.id);
