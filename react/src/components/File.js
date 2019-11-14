@@ -15,7 +15,7 @@ class File extends React.Component {
         this.refDisplayImage = React.createRef();
         this.handleOnClick = this.handleOnClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.readURL = this.readURL.bind(this);
+        this.readUploadingImage = this.readUploadingImage.bind(this);
     }
 
     handleOnClick() {
@@ -32,18 +32,15 @@ class File extends React.Component {
 
         if (this.refImage.current.accept.includes('image')) {
             console.log('File type is image');
-            this.readURL();
+            this.readUploadingImage();
         }
-        // this.refImage.current.value = '';
     }
 
-    readURL() {
+    readUploadingImage() {
         const input = this.refImage.current; // used for all ie image and video
-        console.log('readURL', input.files, input.files && true && input.files[0]);
 
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-            console.log('readURL if');
             reader.onload = (e) => {
                 this.refDisplayImage.current.src = e.target.result;
             };
