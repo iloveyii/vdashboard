@@ -153,14 +153,20 @@ class Video {
         if (this._form.result && this._form.result.video_url) {
             return this._form.result.video_url;
         }
+        if(this._form.video.includes('http')) return this._form.video;
         if(this._form.videoUrl) return this._form.videoUrl;
         if(this._form.video) return this._form.video;
     }
 
+    /**
+     * Do we have model
+     * @returns {*}
+     */
     get imageUrl() {
         if (this._form.result && this._form.result.image_url) {
             return this._form.result.image_url;
         }
+        if(this._form.image.includes('http')) return this._form.image;
         if(this._form.imageUrl) return this._form.imageUrl;
         if(this._form.image) return this._form.image;
     }

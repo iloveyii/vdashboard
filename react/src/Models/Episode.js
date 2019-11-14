@@ -1,4 +1,5 @@
 import ActiveRecord from './ActiveRecord';
+import models from '../store/models';
 
 class Episode extends ActiveRecord {
     _genreList = [
@@ -80,6 +81,16 @@ class Episode extends ActiveRecord {
     // INTERFACE Select
     onSelect(item) {
         this.form.genre = item;
+    }
+
+    /**
+     * We need to load shows and not episodes
+     * @returns {*}
+     */
+    get api2() {
+        const newApi = super.api;
+        newApi.read = models.shows.api.read;
+        return newApi;
     }
 
 

@@ -218,7 +218,7 @@ const shows = {
                 if (err) {
                     console.log('Some error occurred. ', err);
                 } else {
-                    console.log('Show added or updated');
+                    console.log('Show added or updated', result);
                     res.json(episode);
                 }
             }
@@ -231,13 +231,31 @@ const shows = {
         let [showId, episodeId] = req.params.id.split('+'); // no need here
         const {title, description, genre} = userInput;
         // console.log(result, 'showid, epi', showId, episodeId, userInput); return 1;
+        // Check if result.image_path is null then use previous value from userInput
+        let image_path = result.image_path;
+        let video_path = result.video_path;
+
+        if(result.image_path === null) {
+            if(userInput.image.search('/images/') !== -1) {
+                image_path = userInput.image.substring(userInput.image.search('/images/'));
+            } else {
+                image_path = userInput.image;
+            }
+        }
+        if(result.video_path === null) {
+            if(userInput.video.search('/videos/') !== -1) {
+                video_path = userInput.video.substring(userInput.video.search('/videos/'));
+            } else {
+                video_path = userInput.video;
+            }
+        }
         const episode = {
             _id: db.getPrimaryKey(episodeId),
             title: title,
             description: description,
             genre: genre,
-            image: result.image_path,
-            video: result.video_path
+            image: image_path,
+            video: video_path
         };
 
         console.log('episode', episode);
@@ -258,9 +276,6 @@ const shows = {
                 }
             }
         );
-
-
-
     },
     postEpisode: async (req, res) => {
         console.log('POST /api/v1/episode', req.body);

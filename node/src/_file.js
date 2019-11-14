@@ -8,6 +8,7 @@ const _file = {
     save: async function (req) {
         const imageFile = req.files ? req.files.image_path : null;
         const videoFile = req.files ? req.files.video_path : null;
+        console.log('SAVE FILE : ', typeof imageFile);
         const fileNameNumber = uuidv1();
         const result = {
             image_path: null,

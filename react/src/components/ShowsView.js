@@ -31,6 +31,7 @@ class ShowsView extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
+        console.log('componentWillReceiveProps', nextProps);
         const {episode} = this.state;
         episode.list = nextProps.episodes.list;
         episode.form = nextProps.episodes.form;
@@ -48,9 +49,12 @@ class ShowsView extends React.Component {
         e.preventDefault();
         const {episode} = this.state;
         episode.form.show_id = this.props.match.params.id;
-        const {createAction} = this.props; // actions for episodes
+        const {createAction, readShowsAction} = this.props; // actions for episodes
         episode.submitForm(createAction, this.updateAction);
         this.setState({episode});
+        setTimeout(() => {
+            readShowsAction();
+        }, 2000, this);
     };
 
     // UPDATE
@@ -60,13 +64,13 @@ class ShowsView extends React.Component {
         const showId = this.props.match.params.id;
         const episodeId = formData.getAll('_id');
         formData.delete('_id');
-        formData.append('_id', showId+'+'+episodeId);
+        formData.append('_id', showId + '+' + episodeId);
         this.props.updateAction({formData, action});
     };
 
     deleteAction = (episodeId) => {
         const showId = this.props.match.params.id;
-        this.props.deleteAction(showId+'+'+episodeId);
+        this.props.deleteAction(showId + '+' + episodeId);
     };
 
     viewAction = (video) => {
@@ -80,7 +84,7 @@ class ShowsView extends React.Component {
         if (!shows || Object.keys(shows).length < 1) return <div>Loading</div>;
 
         const show = shows.list.find(s => s._id === this.props.match.params.id);
-        if(!show) return <div>Loading...</div>;
+        if (!show) return <div>Loading...</div>;
 
         return (
             <section id="dashboard" className="dashboard">
@@ -148,12 +152,12 @@ class ShowsView extends React.Component {
 
                         <div className="col-1-of-2">
                             {
-                                this.state.showPlayer ? <VideoPlayer video={this.state.video} /> : null
+                                this.state.showPlayer ? <VideoPlayer video={this.state.video}/> : null
                             }
                         </div>
                     </div>
-                    <Table fields={['title', 'description']} items={show.episodes? show.episodes : []}
-                           itemViewAction={ episodeArray => this.viewAction(episodeArray)}
+                    <Table fields={['title', 'description']} items={show.episodes ? show.episodes : []}
+                           itemViewAction={episodeArray => this.viewAction(episodeArray)}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
                 </Center>
             </section>
@@ -176,6 +180,7 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = {
+    readShowsAction: models.shows.actions.read,
     readAction: models.episodes.actions.read,
     deleteAction: models.episodes.actions.delete,
     editAction: models.episodes.actions.edit,
