@@ -293,14 +293,9 @@ const shows = {
             title: title,
             description: description,
             genre: genre,
-            image: result.image_path,
-            video: result.video_path
+            image: 'http://' + constants.serverIP + ':' + constants.port + result.image_path,
+            video: 'http://' + constants.serverIP + ':' + constants.port + result.video_path
         };
-
-        console.log('episode', episode);
-        // Debug on this server
-        episode.imageUrl = 'http://' + constants.serverIP + ':' + constants.port + result.image_path;
-        episode.videoUrl = 'http://' + constants.serverIP + ':' + constants.port + result.video_path;
 
         db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},

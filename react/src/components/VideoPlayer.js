@@ -1,11 +1,14 @@
 import React from 'react';
-import {apiServer} from "../common/constants";
 
 class VideoPlayer extends React.Component {
+
+    /**
+     * video = {title, description, genre, image, video, views}
+     * @param props
+     */
     constructor(props) {
         super(props);
         this.state = {};
-
         this.onClose = this.onClose.bind(this);
     }
 
@@ -32,35 +35,35 @@ class VideoPlayer extends React.Component {
             <article className="video-view" style={{marginTop: '13px'}}>
                 <header>
                     <i className="fas fa-film"></i>
-                    <h2>{video.form.title}</h2>
+                    <h2>{video.title}</h2>
                 </header>
                 <main>
                     <div className="left">
-                        <video width="100%" controls autoPlay key={video.videoUrl}>
+                        <video width="100%" controls autoPlay key={video.video}>
                             <source
-                                src={video.videoUrl}
+                                src={video.video}
                                 type="video/mp4"></source>
                         </video>
                     </div>
 
                     <div className="footer">
                         <div className="footer-image">
-                            <img src={video.imageUrl}
+                            <img src={video.image}
                                  alt="image"/>
                         </div>
 
                         <div className="footer-detail">
                             <div className="footer-row">
                                 <label htmlFor="">Genre</label>
-                                <p>{video.form.genre}</p>
+                                <p>{video.genre}</p>
                             </div>
                             <div className="footer-row">
                                 <label htmlFor="">Description</label>
-                                <p>{video.form.description}</p>
+                                <p>{video.description}</p>
                             </div>
                             <div className="footer-row">
                                 <i className="far fa-eye"></i>
-                                <p>355</p>
+                                <p>{video.views}</p>
                             </div>
                         </div>
                     </div>

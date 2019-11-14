@@ -40,7 +40,7 @@ class ShowsView extends React.Component {
          * This is needed because we need to execute readShowsAction
          * If it is simple independent model read is automatically called after each action
          */
-        if(episodes.action && episodes.action.type==='delete' && episodes.action.ok == 1) {
+        if (episodes.action && episodes.action.type === 'delete' && episodes.action.ok == 1) {
             readShowsAction();
             deleteAction('reset');
         }
@@ -82,8 +82,8 @@ class ShowsView extends React.Component {
     };
 
     viewAction = (video) => {
-        // e.preventDefault();
-        this.setState({showPlayer: true, video: new Video(video)});
+        video.views = Math.floor(Math.random() * 1000);
+        this.setState({showPlayer: true, video});
     };
 
     render() {
