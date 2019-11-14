@@ -63,7 +63,7 @@ class ActiveRecord extends Model{
     resetForm() {
         Object.keys(this.form).forEach( key => {
             this._form[key] = '';
-        })
+        });
     }
 
     submitForm(createAction, updateAction) {

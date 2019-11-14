@@ -63,7 +63,7 @@ class Login extends React.Component {
     componentWillReceiveProps(nextProps, nextContext) {
         const {logins} = nextProps;
         console.log('componentWillReceiveProps', logins);
-        if (logins.list.authenticated) {
+        if (logins && logins.form.authenticated) {
             this.props.history.push('/dashboard');
         }
     }

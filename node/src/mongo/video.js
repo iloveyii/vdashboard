@@ -18,6 +18,24 @@ db.connect(err => {
     }
 });
 
+const collection = {
+    get: async function (name) {
+        await db.getDb().collection(name).find({}).toArray((err, shows) => {
+            if (err) {
+                console.log(err);
+            } else {
+                shows.map(show => {
+                    show.episodes.map(episode => {
+                        episode.video = 'http://' + constants.serverIP + ':' + constants.port + episode.video;
+                        episode.image = 'http://' + constants.serverIP + ':' + constants.port + episode.image;
+                    });
+                });
+                return shows;
+            }
+        });
+    },
+
+};
 
 const shows = {
     get: (req, res) => {
@@ -27,17 +45,19 @@ const shows = {
                 console.log(err);
             } else {
                 console.log(shows);
-                res.status(200);
+                // res.status(200);
                 shows.map(show => {
                     console.log(show);
-
                     show.episodes.map(episode => {
                         episode.video = 'http://' + constants.serverIP + ':' + constants.port + episode.video;
                         episode.image = 'http://' + constants.serverIP + ':' + constants.port + episode.image;
                     });
                 });
-
-                res.json(shows);
+                const data = {
+                    actions: {type: 'read', ok: 1},
+                    list: shows
+                };
+                res.json(data);
             }
         });
     },
@@ -146,7 +166,7 @@ const shows = {
                 });
         });
     },
-    post: async (req, res) => {
+    post: (req, res) => {
         console.log('POST2 /api/v1/shows');
         if (!req.files || Object.keys(req.files).length == 0) {
             // return res.status(400).json({result: 'No images were attached'});
@@ -163,10 +183,11 @@ const shows = {
             if (err) {
                 console.log(err);
             } else {
-                console.log('Added show to mongodb:', req.body);
-                result.message = ' , Show saved to mongodb.';
-                show.status = 'ok', show.mode = 'added';
-                res.json({show});
+                const data = {
+                    actions: {type: 'create', ok: result.result.ok},
+                    form: {_id: result.insertedId, ...show},
+                };
+                res.json(data);
             }
         });
     },
@@ -181,7 +202,10 @@ const shows = {
                     console.log('Error in deleting id ' + req.params.id);
                 } else {
                     console.log(action);
-                    res.json(action)
+                    const actions = {
+                        type: 'delete', ok: 1
+                    };
+                    res.json(actions)
                 }
             }
         );
@@ -194,18 +218,21 @@ const shows = {
         showId = db.getPrimaryKey(showId);
         db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},
-            {$pull: { episodes: {_id: db.getPrimaryKey(episodeId)} }},
+            {$pull: {episodes: {_id: db.getPrimaryKey(episodeId)}}},
             {returnOriginal: false, upsert: true},
             (err, result) => {
                 if (err) {
                     console.log('Some error occurred. ', err);
                 } else {
                     console.log('Show added or updated', result);
-                    const action = {
-                        type : 'delete',
+                    const actions = {
+                        type: 'delete',
                         ok: result.ok
-                    }
-                    res.json(action);
+                    };
+                    const form = {
+                        showId, episodeId
+                    };
+                    res.json({actions, form});
                 }
             }
         )
@@ -223,7 +250,14 @@ const shows = {
                     console.log('Some error occurred. ', err);
                 } else {
                     console.log('Show added or updated', result);
-                    res.json(episode);
+                    const actions = {
+                        type: 'update',
+                        ok: result.ok
+                    };
+                    const form = {
+                        showId, episode
+                    };
+                    res.json({actions, form});
                 }
             }
         );
@@ -239,15 +273,15 @@ const shows = {
         let image_path = result.image_path;
         let video_path = result.video_path;
 
-        if(result.image_path === null) {
-            if(userInput.image.search('/images/') !== -1) {
+        if (result.image_path === null) {
+            if (userInput.image.search('/images/') !== -1) {
                 image_path = userInput.image.substring(userInput.image.search('/images/'));
             } else {
                 image_path = userInput.image;
             }
         }
-        if(result.video_path === null) {
-            if(userInput.video.search('/videos/') !== -1) {
+        if (result.video_path === null) {
+            if (userInput.video.search('/videos/') !== -1) {
                 video_path = userInput.video.substring(userInput.video.search('/videos/'));
             } else {
                 video_path = userInput.video;
@@ -269,7 +303,7 @@ const shows = {
         showId = db.getPrimaryKey(showId);
         db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},
-            {$pull: { episodes: {_id: db.getPrimaryKey(episodeId)} }},
+            {$pull: {episodes: {_id: db.getPrimaryKey(episodeId)}}},
             {returnOriginal: false, upsert: false},
             (err, result) => {
                 if (err) {
@@ -293,8 +327,8 @@ const shows = {
             title: title,
             description: description,
             genre: genre,
-            image: 'http://' + constants.serverIP + ':' + constants.port + result.image_path,
-            video: 'http://' + constants.serverIP + ':' + constants.port + result.video_path
+            image: result.image_path,
+            video: result.video_path
         };
 
         db.getDb().collection(collections.shows).findOneAndUpdate(
@@ -306,7 +340,12 @@ const shows = {
                     console.log('Some error occurred. ', err);
                 } else {
                     console.log('Show added or updated');
-                    res.json(episode);
+                    const actions = {
+                        type: 'create',
+                        ok: result.ok
+                    };
+                    const form = episode;
+                    res.json({actions, form});
                 }
             }
         )
@@ -334,7 +373,10 @@ const shows = {
                     console.log('Some error occurred. ', err);
                 } else {
                     console.log('No files attached');
-                    res.json({status: 'ok', action: 'update'});
+                    const actions = {
+                        type: 'update', ok: result.ok
+                    };
+                    res.json({actions});
                 }
             }
         )

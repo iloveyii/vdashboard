@@ -32,18 +32,31 @@ class ShowsView extends React.Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         const {episode} = this.state;
-        const {episodes, readShowsAction, shows, deleteAction} = nextProps;
+        const {shows, episodes, readShowsAction, deleteAction, createAction, updateAction} = nextProps;
         episode.form = episodes.form;
-        this.setState({episode, shows});
 
         /**
          * This is needed because we need to execute readShowsAction
          * If it is simple independent model read is automatically called after each action
          */
-        if (episodes.action && episodes.action.type === 'delete' && episodes.action.ok == 1) {
-            readShowsAction();
-            deleteAction('reset');
+        if (episodes.actions && episodes.actions.ok == 1) {
+            switch (episodes.actions.type) {
+                case 'delete':
+                    //readShowsAction();
+                    //deleteAction('reset');
+                    break;
+                case 'create':
+                    // Refresh shows since episodes is inside show
+                    if( (Date.now() - episodes.actions.timestamp) < 10 ){
+                        readShowsAction();
+                    }
+                    //
+                    //createAction('reset');
+                    break;
+            }
         }
+
+        this.setState({episode, shows});
     }
 
     handleChange = (e) => {
@@ -61,7 +74,7 @@ class ShowsView extends React.Component {
         episode.submitForm(createAction, this.updateAction);
         this.setState({episode});
         setTimeout(() => {
-            readShowsAction();
+            // readShowsAction();
         }, 500, this);
     };
 
@@ -92,7 +105,7 @@ class ShowsView extends React.Component {
         if (!shows || Object.keys(shows).length < 1) return <div>Loading</div>;
 
         const show = shows.list.find(s => s._id === this.props.match.params.id);
-        if (!show) return <div>Loading...</div>;
+        if (!show || !show.episodes) return <div>Loading...</div>;
 
         return (
             <section id="dashboard" className="dashboard">

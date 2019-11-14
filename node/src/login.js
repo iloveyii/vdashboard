@@ -40,8 +40,12 @@ const login = {
             if (result.length > 0) {
                 auth.authenticated = true;
             }
+            const data = {
+                actions: { type: 'login', ok : 1},
+                form: auth
+            };
 
-            res.json(auth);
+            res.json(data);
         });
 
         console.log(sql);

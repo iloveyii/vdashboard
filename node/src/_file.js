@@ -40,7 +40,6 @@ const _file = {
         console.log('before return from save(): ', result);
 
         return result;
-
     },
 
     moveFile: function (file, fullFilePath) {

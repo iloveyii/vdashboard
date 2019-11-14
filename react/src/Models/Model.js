@@ -1,5 +1,4 @@
 import {call, put} from 'redux-saga/effects';
-import api from "../api/video";
 import axios from "axios";
 import {apiServer} from "../common/constants";
 
@@ -81,17 +80,18 @@ class Model {
     get reducers() {
         const initState = {
             list: [],
-            form: {}
+            form: {},
+            actions: {
+                type: null, ok: false
+            }
         };
 
         const reducer = (state = initState, action = {}) => {
 
             switch (action.type) {
                 case this.types.read_success:
-                    this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload));
-                    var {data} = action.payload;
-                    var newState = {...state, ...{list: data}};
-                    return newState;
+                    var {list, form, actions} = action.payload.data;
+                    return {...state, ...{list, form, actions}};
 
                 case this.types.edit:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload));
@@ -100,24 +100,29 @@ class Model {
                     var newState = {...state, ...{form: data}};
                     return newState;
 
-                case this.types.update_success:
-                    this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload));
-                    var {data} = action.payload;
-                    data.mode = this.types.update_success;
-                    var form = {};
-                    form.result = data;
-                    var newState = {...state, ...{form}};
-                    return newState;
+                case this.types.create_success :
+                    var {form, actions} = action.payload.data;
+                    // If status ok and form has got id then add item to list and clear form
+                    state.list && state.list.push(form) || (state.list = []);
+                    if (actions.ok === 1 && form._id) form = {};
+                    actions.timestamp = Date.now();
 
-                case this.types.create_success:
-                    this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload));
-                    var form = action.payload.data;
-                    var newState = {...state, ...{form}};
-                    return newState;
+                    return {
+                        ...state, ...{
+                            actions,
+                            form
+                        }
+                    };
 
-                case this.types.delete_success:
-                    var newState = {...state, ...{action: action.payload.data === 'reset' ? {} : action.payload.data}};
-                    return newState;
+                case this.types.update_success || this.types.delete_success:
+                    var {form} = action.payload.data;
+                    if (action.ok === 1) form = {};
+                    return {
+                        ...state, ...{
+                            action: action.payload.data.action,
+                            form
+                        }
+                    };
 
                 default:
                     this.log('Inside show default reducer of class ' + this.name + JSON.stringify(action));
@@ -144,7 +149,7 @@ class Model {
                 if (true || data && Array.isArray(Object.keys(data))) {
                     console.log('CREATE if', data);
                     yield put($this.actions.create_success(data));
-                    yield put($this.actions.read());
+                    // yield put($this.actions.read());
                 } else {
                     console.log('CREATE fail', data);
                     yield put($this.actions.create_fail(data));
