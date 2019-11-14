@@ -201,7 +201,11 @@ const shows = {
                     console.log('Some error occurred. ', err);
                 } else {
                     console.log('Show added or updated', result);
-                    res.json(result);
+                    const action = {
+                        type : 'delete',
+                        ok: result.ok
+                    }
+                    res.json(action);
                 }
             }
         )

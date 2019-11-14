@@ -16,7 +16,7 @@ class ShowsView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            episode: new Episode('episodes'), // Show is an Object of class Show, while shows is array of objects from json/db
+            episode: models.episodes, // Show is an Object of class Show, while shows is array of objects from json/db
             showPlayer: false
         }
     }
@@ -31,11 +31,19 @@ class ShowsView extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log('componentWillReceiveProps', nextProps);
         const {episode} = this.state;
-        episode.list = nextProps.episodes.list;
-        episode.form = nextProps.episodes.form;
-        this.setState({episode, shows: nextProps.shows});
+        const {episodes, readShowsAction, shows, deleteAction} = nextProps;
+        episode.form = episodes.form;
+        this.setState({episode, shows});
+
+        /**
+         * This is needed because we need to execute readShowsAction
+         * If it is simple independent model read is automatically called after each action
+         */
+        if(episodes.action && episodes.action.type==='delete' && episodes.action.ok == 1) {
+            readShowsAction();
+            deleteAction('reset');
+        }
     }
 
     handleChange = (e) => {
@@ -49,12 +57,12 @@ class ShowsView extends React.Component {
         e.preventDefault();
         const {episode} = this.state;
         episode.form.show_id = this.props.match.params.id;
-        const {createAction, readShowsAction} = this.props; // actions for episodes
+        const {createAction, updateAction, readShowsAction} = this.props; // actions for episodes
         episode.submitForm(createAction, this.updateAction);
         this.setState({episode});
         setTimeout(() => {
             readShowsAction();
-        }, 2000, this);
+        }, 500, this);
     };
 
     // UPDATE
@@ -92,7 +100,10 @@ class ShowsView extends React.Component {
                 <Center>
                     <div className="row">
                         <div className="col-1-of-1">
-                            <h1>Shows</h1>
+                            <h1>Show View</h1>
+                            <h3>{show.title}</h3>
+                            <h3>{show.description}</h3>
+                            <h3>Episodes: {show.episodes.length}</h3>
                         </div>
                     </div>
                     <div className="row">

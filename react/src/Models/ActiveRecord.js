@@ -53,6 +53,10 @@ class ActiveRecord extends Model{
         }
     }
 
+    get uploadProgress() {
+        return this._uploadProgress;
+    }
+
     /**
      * Avoid problem of bound to unbound controls on form
      */

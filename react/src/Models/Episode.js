@@ -26,11 +26,13 @@ class Episode extends ActiveRecord {
         this.form = {
             title: '',
             description: '',
-            mode: this.types.create
+            mode: this.types.create,
+            image: null,
+            video: null,
+            genre: 'rock'
         };
         this.setImagePath = this.setImagePath.bind(this);
         this.setVideoPath = this.setVideoPath.bind(this);
-        console.log('Shows', this.types);
     }
 
     getFiles = () => {
@@ -55,7 +57,7 @@ class Episode extends ActiveRecord {
 
     onSelect = (item) => {
         this.genre = item;
-    }
+    };
 
     get selected() {
         return this.genreList.find(item => item.value == this.form.genre);
@@ -82,18 +84,6 @@ class Episode extends ActiveRecord {
     onSelect(item) {
         this.form.genre = item;
     }
-
-    /**
-     * We need to load shows and not episodes
-     * @returns {*}
-     */
-    get api2() {
-        const newApi = super.api;
-        newApi.read = models.shows.api.read;
-        return newApi;
-    }
-
-
 }
 
 export default Episode;

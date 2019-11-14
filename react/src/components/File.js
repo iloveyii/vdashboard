@@ -4,34 +4,28 @@ import uuidv4 from 'uuid/v4';
 
 class File extends React.Component {
 
+    /**
+     * Handles only model
+     * @param props
+     */
     constructor(props) {
         super(props);
         this.state = {
-            imageUrl: null,
-            videoUrl: null,
-            uploadProgress: 0
+            model: {}
         };
         this.refImage = React.createRef();
         this.refDisplayImage = React.createRef();
-        this.handleOnClick = this.handleOnClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.readUploadingImage = this.readUploadingImage.bind(this);
     }
 
-    handleOnClick() {
-        console.log('handleOnClick');
-    }
-
     handleChange() {
         const files = this.refImage.current.files;
-        console.log('handleChange', files, files && true);
-        let {getFiles, model, type} = this.props;
-        if (model && type == 'image') getFiles = model.setImagePath;
-        if (model && type == 'video') getFiles = model.setVideoPath;
-        getFiles(files);
+        let {model, type} = this.props;
+        if (model && type == 'image') model.setImagePath(files);
+        if (model && type == 'video') model.setVideoPath(files);
 
         if (this.refImage.current.accept.includes('image')) {
-            console.log('File type is image');
             this.readUploadingImage();
         }
     }
@@ -49,15 +43,14 @@ class File extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        var {uploadProgress, videoUrl, imageUrl, model} = nextProps;
-        if (model) {
-            var {uploadProgress, videoUrl, imageUrl} = model;
-            // if(!videoUrl) videoUrl = model.form.videoUrl;
-            // if(!imageUrl) imageUrl = model.form.imageUrl;
-            imageUrl = model.form.image;
-            videoUrl = model.form.video;
-        }
-        this.setState({uploadProgress, videoUrl, imageUrl});
+        const {model} = nextProps;
+        model && this.setState({model});
+    }
+
+    componentDidMount() {
+        const {model} = this.props;
+        console.log('File', model);
+        model && this.setState({model});
     }
 
     render() {
@@ -66,6 +59,8 @@ class File extends React.Component {
         const {type} = this.props;
         if (type && type == 'image') accept = "image/x-png,image/gif,image/jpeg";
         if (type && type == 'video') accept = "video/mp4,video/x-m4v,video/*";
+        const {model} = this.state;
+        if (!model.form) return <div>Loading ...</div>
 
         return (
             <div className="file-upload">
@@ -76,23 +71,23 @@ class File extends React.Component {
                 </header>
                 <main>
                     <input accept={accept} ref={this.refImage} multiple type="file" id={id}
-                           onClick={this.handleOnClick} onChange={this.handleChange}/>
+                           onChange={this.handleChange}/>
                     <label htmlFor={id} className="upload">
                         <i className="fas fa-cloud-upload-alt"></i>
                         <p>Drag your files here</p>
                     </label>
                     <div className="display">
                         {type && type == 'video'
-                            ? <video width="100%" controls autoPlay={true} key={this.state.videoUrl}>
-                                <source src={this.state.videoUrl} type="video/mp4"></source>
+                            ? <video width="100%" controls autoPlay={true} key={model.form.video}>
+                                <source src={model.form.video} type="video/mp4"></source>
                             </video>
-                            : <img ref={this.refDisplayImage} style={{width: '100%'}} src={this.state.imageUrl}
+                            : <img ref={this.refDisplayImage} style={{width: '100%'}} src={model.form.image}
                                    alt="Image"/>
                         }
                     </div>
                 </main>
                 <footer>
-                    <span className="progress" style={{width: this.state.uploadProgress + '%'}}></span>
+                    <span className="progress" style={{width: Number(model.uploadProgress) + '%'}}></span>
                 </footer>
 
             </div>
