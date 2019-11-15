@@ -628,14 +628,17 @@ p.large {
   box-sizing: border-box; }
 
 .video-view {
+  right: 5%;
+  top: 20px;
+  width: 40%;
+  position: fixed;
+
   padding: 5px;
   border-radius: 3px;
-  width: 100%;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  position: relative;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
   line-height: 1;

@@ -266,8 +266,9 @@ const shows = {
         console.log('PUT /api/v1/episode/:id', req.body);
         const userInput = req.body;
         const result = await file.save(req);
-        let [showId, episodeId] = req.params.id.split('+'); // no need here
-        const {title, description, genre} = userInput;
+        let episodeId = req.params.id; // no need here
+        const {show_id, title, description, genre} = userInput;
+        let showId = show_id;
         // console.log(result, 'showid, epi', showId, episodeId, userInput); return 1;
         // Check if result.image_path is null then use previous value from userInput
         let image_path = result.image_path;

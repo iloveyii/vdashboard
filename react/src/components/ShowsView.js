@@ -8,8 +8,6 @@ import Table from './Table';
 import File from './File';
 import Select from './Select';
 import VideoPlayer from './VideoPlayer';
-import Episode from "../Models/Episode";
-import Video from "../Models/Video";
 import Show from "../Models/Show";
 
 
@@ -25,38 +23,14 @@ class ShowsView extends React.Component {
     componentDidMount() {
         const {match, shows} = this.props;
         const {episode} = this.state;
-        episode.list = this.props.episodes.list;
-        episode.form = this.props.episodes.form;
         episode._form.show_id = match.params.id;
         this.setState({episode, show: this.filterByShow(shows)});
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         const {episode} = this.state;
-        const {shows, episodes, readShowsAction, deleteAction, createAction, updateAction} = nextProps;
+        const {shows, episodes} = nextProps;
         episode.form = episodes.form;
-
-        /**
-         * This is needed because we need to execute readShowsAction
-         * If it is simple independent model read is automatically called after each action
-         */
-        if (episodes.actions && episodes.actions.ok == 1) {
-            switch (episodes.actions.type) {
-                case 'delete':
-                    //readShowsAction();
-                    //deleteAction('reset');
-                    break;
-                case 'create':
-                    // Refresh shows since episodes is inside show
-                    if ((Date.now() - episodes.actions.timestamp) < 10) {
-                        readShowsAction();
-                    }
-                    //
-                    //createAction('reset');
-                    break;
-            }
-        }
-
         this.setState({episode, show: this.filterByShow(shows)});
     }
 
@@ -71,12 +45,9 @@ class ShowsView extends React.Component {
         e.preventDefault();
         const {episode} = this.state;
         episode.form.show_id = this.props.match.params.id;
-        const {createAction, updateAction, readShowsAction} = this.props; // actions for episodes
-        episode.submitForm(createAction, this.updateAction);
+        const {createAction, updateAction} = this.props; // actions for episodes
+        episode.submitForm(createAction, updateAction);
         this.setState({episode});
-        setTimeout(() => {
-            // readShowsAction();
-        }, 500, this);
     };
 
     handleFormClear = e => {
@@ -84,17 +55,6 @@ class ShowsView extends React.Component {
         const {episode} = this.state;
         episode.resetForm();
         this.setState({episode});
-    };
-
-    // UPDATE
-    updateAction = (data) => {
-        const {formData, action} = data;
-        console.log('updateAction', data);
-        const showId = this.props.match.params.id;
-        const episodeId = formData.getAll('_id');
-        formData.delete('_id');
-        formData.append('_id', showId + '+' + episodeId);
-        this.props.updateAction({formData, action});
     };
 
     deleteAction = (episodeId) => {
@@ -108,16 +68,15 @@ class ShowsView extends React.Component {
     };
 
     filterByShow(shows) {
-        //const {shows} = this.props; // @TODO save in state filtered one
         if (!shows || Object.keys(shows).length < 1) return (new Show()).form;
         const show = shows.list.find(s => s._id === this.props.match.params.id);
-        console.log('filterByShow', show)
         return show;
     }
 
     render() {
         const {episode, show} = this.state;
-        if (!show) return <div>Loading...</div>
+        if (!show) return <div>Loading...</div>;
+        const btnLabel = episode.hasId ? 'Update' : 'Save';
 
         return (
             <section id="dashboard" className="dashboard">
@@ -177,7 +136,7 @@ class ShowsView extends React.Component {
                                         <div className="dashboard--container">
                                             <button style={{width: '80px'}} type="submit"
                                                     onClick={e => this.handleFormSubmit(e)}><i
-                                                className="fas fa-save"></i> Save
+                                                className="fas fa-save"></i> {btnLabel}
                                             </button>
                                         </div>
                                     </div>
@@ -200,7 +159,7 @@ class ShowsView extends React.Component {
                             }
                         </div>
                     </div>
-                    <Table fields={['title', 'description']} items={show.episodes ? show.episodes : []}
+                    <Table fields={['title', 'description', 'genre']} items={show.episodes ? show.episodes : []}
                            itemViewAction={episodeArray => this.viewAction(episodeArray)}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
                 </Center>

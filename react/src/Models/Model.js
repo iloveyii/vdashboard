@@ -48,13 +48,8 @@ class Model {
 
     // ACTIONS
     get actions() {
-        console.log('Inside show actions');
         return {
-            create: (data) => {
-                window.data = data;
-                console.log('Create ', data, {data});
-                return {type: this.types.create, payload: {data}};
-            },
+            create: (data) => ({type: this.types.create, payload: {data}}),
             create_success: (data) => ({type: this.types.create_success, payload: {data}}),
             create_fail: (data) => ({type: this.types.create_fail, payload: {data}}),
 

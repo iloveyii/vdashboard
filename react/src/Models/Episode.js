@@ -55,7 +55,7 @@ class Episode extends ActiveRecord {
         this._form.image_path = files[0];
     }
 
-    onSelect = (item) => {
+    onSelect2 = (item) => {
         this.genre = item;
     };
 
@@ -81,8 +81,15 @@ class Episode extends ActiveRecord {
     }
 
     // INTERFACE Select
-    onSelect(item) {
-        this.form.genre = item;
+    onSelect = (item) => {
+        this.form.genre = item.value;
+    };
+
+    get actions() {
+        const actionsSuper = super.actions;
+        actionsSuper.read = models.shows.actions.read;
+        actionsSuper.create_success = models.shows.actions.read;
+        return actionsSuper;
     }
 }
 
