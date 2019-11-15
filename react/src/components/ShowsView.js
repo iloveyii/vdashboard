@@ -10,6 +10,7 @@ import Select from './Select';
 import VideoPlayer from './VideoPlayer';
 import Episode from "../Models/Episode";
 import Video from "../Models/Video";
+import Show from "../Models/Show";
 
 
 class ShowsView extends React.Component {
@@ -27,7 +28,7 @@ class ShowsView extends React.Component {
         episode.list = this.props.episodes.list;
         episode.form = this.props.episodes.form;
         episode._form.show_id = match.params.id;
-        this.setState({episode, shows});
+        this.setState({episode, show: this.filterByShow(shows)});
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -47,7 +48,7 @@ class ShowsView extends React.Component {
                     break;
                 case 'create':
                     // Refresh shows since episodes is inside show
-                    if( (Date.now() - episodes.actions.timestamp) < 10 ){
+                    if ((Date.now() - episodes.actions.timestamp) < 10) {
                         readShowsAction();
                     }
                     //
@@ -56,7 +57,7 @@ class ShowsView extends React.Component {
             }
         }
 
-        this.setState({episode, shows});
+        this.setState({episode, show: this.filterByShow(shows)});
     }
 
     handleChange = (e) => {
@@ -76,6 +77,13 @@ class ShowsView extends React.Component {
         setTimeout(() => {
             // readShowsAction();
         }, 500, this);
+    };
+
+    handleFormClear = e => {
+        e.preventDefault();
+        const {episode} = this.state;
+        episode.resetForm();
+        this.setState({episode});
     };
 
     // UPDATE
@@ -99,13 +107,17 @@ class ShowsView extends React.Component {
         this.setState({showPlayer: true, video});
     };
 
-    render() {
-        const {episode} = this.state;
-        const {shows} = this.props; // @TODO save in state filtered one
-        if (!shows || Object.keys(shows).length < 1) return <div>Loading</div>;
-
+    filterByShow(shows) {
+        //const {shows} = this.props; // @TODO save in state filtered one
+        if (!shows || Object.keys(shows).length < 1) return (new Show()).form;
         const show = shows.list.find(s => s._id === this.props.match.params.id);
-        if (!show || !show.episodes) return <div>Loading...</div>;
+        console.log('filterByShow', show)
+        return show;
+    }
+
+    render() {
+        const {episode, show} = this.state;
+        if (!show) return <div>Loading...</div>
 
         return (
             <section id="dashboard" className="dashboard">
@@ -166,6 +178,14 @@ class ShowsView extends React.Component {
                                             <button style={{width: '80px'}} type="submit"
                                                     onClick={e => this.handleFormSubmit(e)}><i
                                                 className="fas fa-save"></i> Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="col-1-of-3">
+                                        <div className="dashboard--container">
+                                            <button style={{width: '80px'}} type="submit"
+                                                    onClick={e => this.handleFormClear(e)}><i
+                                                className="fas fa-save"></i> Clear
                                             </button>
                                         </div>
                                     </div>

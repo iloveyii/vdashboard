@@ -6,7 +6,7 @@ class Show extends ActiveRecord {
         this.form = {
             title: '',
             description: '',
-            mode: this.types.create
+            episodes: [],
         };
         this.setImagePath = this.setImagePath.bind(this);
         this.setVideoPath = this.setVideoPath.bind(this);

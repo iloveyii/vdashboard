@@ -296,10 +296,6 @@ const shows = {
             video: video_path
         };
 
-        console.log('episode', episode);
-        episode.imageUrl = 'http://' + constants.serverIP + ':' + constants.port + result.image_path;
-        episode.videoUrl = 'http://' + constants.serverIP + ':' + constants.port + result.video_path;
-
         showId = db.getPrimaryKey(showId);
         db.getDb().collection(collections.shows).findOneAndUpdate(
             {_id: showId},
