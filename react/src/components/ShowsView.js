@@ -15,6 +15,7 @@ class ShowsView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            show: {},
             episode: models.episodes, // Show is an Object of class Show, while shows is array of objects from json/db
             showPlayer: false
         }
@@ -75,7 +76,7 @@ class ShowsView extends React.Component {
 
     render() {
         const {episode, show} = this.state;
-        if (!show) return <div>Loading...</div>;
+        if (!show || !show.title) return <div>Loading...</div>;
         const btnLabel = episode.hasId ? 'Update' : 'Save';
 
         return (
@@ -101,6 +102,14 @@ class ShowsView extends React.Component {
                                     <div className="col-1-of-1">
                                         <input type="text" id="title" placeholder="Type title"
                                                value={episode.form.title}
+                                               onChange={e => this.handleChange(e)}/>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-1-of-1">
+                                        <input type="text" id="number" placeholder="Episode number"
+                                               value={episode.form.number}
                                                onChange={e => this.handleChange(e)}/>
                                     </div>
                                 </div>
@@ -155,11 +164,11 @@ class ShowsView extends React.Component {
 
                         <div className="col-1-of-2">
                             {
-                                this.state.showPlayer ? <VideoPlayer video={this.state.video}/> : null
+                                this.state.showPlayer ? <VideoPlayer close={()=>this.setState({showPlayer:false})} video={this.state.video}/> : null
                             }
                         </div>
                     </div>
-                    <Table fields={['title', 'description', 'genre']} items={show.episodes ? show.episodes : []}
+                    <Table fields={['title', 'number', 'description', 'genre']} items={show.episodes ? show.episodes : []}
                            itemViewAction={episodeArray => this.viewAction(episodeArray)}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
                 </Center>

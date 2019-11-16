@@ -267,7 +267,7 @@ const shows = {
         const userInput = req.body;
         const result = await file.save(req);
         let episodeId = req.params.id; // no need here
-        const {show_id, title, description, genre} = userInput;
+        const {show_id, title, number, description, genre} = userInput;
         let showId = show_id;
         // console.log(result, 'showid, epi', showId, episodeId, userInput); return 1;
         // Check if result.image_path is null then use previous value from userInput
@@ -291,6 +291,7 @@ const shows = {
         const episode = {
             _id: db.getPrimaryKey(episodeId),
             title: title,
+            number: number,
             description: description,
             genre: genre,
             image: image_path,
@@ -316,12 +317,13 @@ const shows = {
         console.log('POST /api/v1/episode', req.body);
         const userInput = req.body;
         const result = await file.save(req);
-        const {show_id, title, description, genre} = userInput;
+        const {show_id, title, number, description, genre} = userInput;
         const showId = show_id ? db.getPrimaryKey(show_id) : db.getPrimaryKey();
 
         const episode = {
             _id: db.getPrimaryKey(),
             title: title,
+            number: number,
             description: description,
             genre: genre,
             image: result.image_path,

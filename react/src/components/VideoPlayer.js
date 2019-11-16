@@ -36,6 +36,7 @@ class VideoPlayer extends React.Component {
                 <header>
                     <i className="fas fa-film"></i>
                     <h2>{video.title}</h2>
+                    <i className="fas fa-flag" onClick={this.props.close}></i>
                 </header>
                 <main>
                     <div className="left">

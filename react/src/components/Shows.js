@@ -55,6 +55,7 @@ class Shows extends React.Component {
 
     render() {
         const {show} = this.state;
+        if(!show || !show.form) return <div>Loading...</div>
 
         return (
             <section id="dashboard" className="dashboard">
@@ -68,10 +69,6 @@ class Shows extends React.Component {
                     <div className="row">
                         <div className="col-1-of-2">
                             <form>
-                                <div className="row">
-                                    <div className="col-1-of-1">
-                                    </div>
-                                </div>
                                 <div className="row">
                                     <div className="col-1-of-1">
                                         <input type="text" id="title" placeholder="Type title"

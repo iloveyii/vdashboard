@@ -7,8 +7,8 @@ class Select extends React.Component {
         this.state = {
             isVisible: false,
             selected: {
-                value: '',
-                label: ''
+                value: 'na',
+                label: 'Select genre'
             }
         };
 

@@ -25,8 +25,8 @@ class Episode extends ActiveRecord {
         super(name);
         this.form = {
             title: '',
+            number: '',
             description: '',
-            mode: this.types.create,
             image: null,
             video: null,
             genre: 'rock'
@@ -34,10 +34,6 @@ class Episode extends ActiveRecord {
         this.setImagePath = this.setImagePath.bind(this);
         this.setVideoPath = this.setVideoPath.bind(this);
     }
-
-    getFiles = () => {
-
-    };
 
     set videoPath(files) {
         this._form.video_path = files[0];
