@@ -1,14 +1,16 @@
 import Model from './Model';
 
-class ActiveRecord extends Model{
+class ActiveRecord extends Model {
     mode = 'create';
     _uploadProgress = 0;
+    _forceUpdate = () => null;
     _form = {};
     _subscribers = [];
 
     constructor(name) {
         super(name);
         this.debug = true;
+        this.setUploadProgress = this.setUploadProgress.bind(this)
     }
 
     get __class() {
@@ -28,8 +30,8 @@ class ActiveRecord extends Model{
         this._subscribers.includes(method) && this.forceUpdate();
     }
 
-    forceUpdate() {
-
+    set forceUpdate(f) {
+        this._forceUpdate = f;
     }
 
     set form(form) {
@@ -46,24 +48,24 @@ class ActiveRecord extends Model{
 
     setUploadProgress(value) {
         this._uploadProgress = value;
-        // this.forceUpdateOnSubscribers('setUploadProgress');
-        if (this._uploadProgress > 99) {
-            this.form = {};
-            this.mode = 'create';
-        }
+        if(value > 95) this.resetForm();
+        this._forceUpdate();
     }
 
     get uploadProgress() {
         return this._uploadProgress;
     }
 
+
     /**
      * Avoid problem of bound to unbound controls on form
      */
     resetForm() {
-        Object.keys(this.form).forEach( key => {
+        Object.keys(this.form).forEach(key => {
             this._form[key] = '';
         });
+        this._uploadProgress = 0;
+        this._forceUpdate();
     }
 
     submitForm(createAction, updateAction) {
@@ -72,14 +74,15 @@ class ActiveRecord extends Model{
             formData.append(key, this.form[key]);
         });
 
-        this.hasId ? updateAction({formData, action:this.setUploadProgress}) : createAction({formData, action:this.setUploadProgress});
-        this.resetForm();
-        return this;
+        this.hasId ? updateAction({formData, action: this.setUploadProgress}) : createAction({
+            formData,
+            action: this.setUploadProgress
+        });
     }
 
     get hasId() {
-        if(this.form['id'] && this.form['id'].length > 0) return true;
-        if(this.form['_id'] && this.form['_id'].length > 0) return true;
+        if (this.form['id'] && this.form['id'].length > 0) return true;
+        if (this.form['_id'] && this.form['_id'].length > 0) return true;
         return false;
     }
 

@@ -8,6 +8,7 @@ import Table from './Table';
 import File from './File';
 import Select from './Select';
 import VideoPlayer from './VideoPlayer';
+import Card from './Card';
 import Show from "../Models/Show";
 
 
@@ -46,6 +47,7 @@ class ShowsView extends React.Component {
         e.preventDefault();
         const {episode} = this.state;
         episode.form.show_id = this.props.match.params.id;
+        episode.forceUpdate = () => this.forceUpdate(); // Show upload progress
         const {createAction, updateAction} = this.props; // actions for episodes
         episode.submitForm(createAction, updateAction);
         this.setState({episode});
@@ -168,6 +170,8 @@ class ShowsView extends React.Component {
                             }
                         </div>
                     </div>
+
+                    <Card items={show.episodes ? show.episodes : []} />
                     <Table fields={['title', 'number', 'description', 'genre']} items={show.episodes ? show.episodes : []}
                            itemViewAction={episodeArray => this.viewAction(episodeArray)}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
