@@ -210,6 +210,12 @@ const shows = {
             }
         );
     },
+    popularize : (req, res) => {
+        console.log('PUT /api/v1/popularize/:id ' + req.params.id);
+        let [showId, episodeId] = req.params.id.split('+');
+        console.log('PUT /api/v1/popularize/:id showId, episodeId ', showId, episodeId);
+        // @TODO
+    },
     deleteEpisode: (req, res) => {
         console.log('DELETE /api/v1/episodes/:id ' + req.params.id);
         let [showId, episodeId] = req.params.id.split('+');
