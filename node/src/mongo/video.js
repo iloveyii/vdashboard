@@ -215,6 +215,25 @@ const shows = {
         let [showId, episodeId] = req.params.id.split('+');
         console.log('PUT /api/v1/popularize/:id showId, episodeId ', showId, episodeId);
         // @TODO
+        showId = db.getPrimaryKey(showId);
+        db.getDb().collection(collections.shows).findOneAndUpdate(
+            {_id: showId},
+            {
+                $inc: { "views" : 1 }
+            },
+            {returnOriginal: false},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('No files attached', result);
+                    const actions = {
+                        type: 'popularize', ok: result.ok
+                    };
+                    res.json({actions});
+                }
+            }
+        )
     },
     deleteEpisode: (req, res) => {
         console.log('DELETE /api/v1/episodes/:id ' + req.params.id);
