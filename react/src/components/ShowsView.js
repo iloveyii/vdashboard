@@ -176,11 +176,11 @@ class ShowsView extends React.Component {
                     <div className="row">
                         <div className="col-1-of-3">
                             <div className="dashboard--container">
-                                <button style={{width: '80px'}} type="submit"
+                                <button style={{width: '200px'}} type="submit"
                                         onClick={e => this.handleFormSubmit(e)}><i
                                     className="fas fa-save"> </i> {btnLabel}
                                 </button>
-                                <button style={{width: '80px'}} type="submit"
+                                <button style={{width: '200px'}} type="submit"
                                         onClick={e => this.handleFormClear(e)}><i
                                     className="fas fa-brush"> </i> Clear
                                 </button>
