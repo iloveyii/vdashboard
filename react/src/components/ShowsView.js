@@ -79,7 +79,17 @@ class ShowsView extends React.Component {
     handleSort = (e, col) => {
         e.preventDefault();
         const {show} = this.state;
-        show.episodes.sort((a, b) => a[col] > b[col] ? 1 : -1);
+        show.episodes.sort((a, b) => {
+            let valA = a[col] ? a[col] : '0';
+            let valB = b[col] ? b[col] : '0';
+            if (col === 'number') {
+                valA = Number(a[col]);
+                valB = Number(b[col]);
+            }
+            if (valA > valB) return 1;
+            if (valA < valB) return -1;
+            return 0;
+        });
         this.setState({show});
     };
 
@@ -184,12 +194,17 @@ class ShowsView extends React.Component {
                             className="fas fa-sort-alpha-down"> </i> Genre
                         </button>
                         <button style={{width: '80px'}} type="submit"
-                                onClick={e => this.handleSort(e,'title')}><i
+                                onClick={e => this.handleSort(e, 'title')}><i
                             className="fas fa-sort-alpha-down"> </i> Title
+                        </button>
+                        <button style={{width: '80px'}} type="submit"
+                                onClick={e => this.handleSort(e, 'number')}><i
+                            className="fas fa-sort-alpha-down"> </i> Episode
                         </button>
                     </div>
                     <div className="row">
-                        <Card itemViewAction={episodeArray => this.viewAction(episodeArray)} items={show.episodes ? show.episodes : []}/>
+                        <Card itemViewAction={episodeArray => this.viewAction(episodeArray)}
+                              items={show.episodes ? show.episodes : []}/>
                     </div>
 
                     <div className="row">
