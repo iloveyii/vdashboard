@@ -32,11 +32,11 @@ class VideoPlayer extends React.Component {
         if (!video) return <div>Loading</div>
 
         return (
-            <article className="video-view" style={{marginTop: '13px'}}>
+            <article className="video-view" style={{marginTop: '13px', zIndex:100}}>
                 <header>
                     <i className="fas fa-film"></i>
                     <h2>{video.title}</h2>
-                    <i className="fas fa-flag" onClick={this.props.close}></i>
+                    <i className="fas fa-times" onClick={this.props.close}></i>
                 </header>
                 <main>
                     <div className="left">

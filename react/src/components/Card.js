@@ -54,24 +54,25 @@ class Card extends React.Component {
 
     render() {
         const id = uuidv4();
-        const {items} = this.props;
+        const {items, itemViewAction} = this.props;
         if (!items) return <div>Loading ...</div>
 
         return (
             items.map(item =>
                 <div className="file-upload" style={{width:'23%', display:'inline-block', margin: '5px'}}>
                     <header>
-                        <p style={{margin: 0}}><i className="fas fa-file"></i> &nbsp;
+                        <p style={{margin: 0}}><i className="fas fa-film"></i> &nbsp;
                             {item.title}
                         </p>
                     </header>
                     <main>
                         <div className="display">
-                            <img ref={this.refDisplayImage} style={{width: '100%'}} src={item.image}
-                                 alt="Image"/>
+                            <img ref={this.refDisplayImage} style={{width: '100%', cursor: 'pointer'}} src={item.image}
+                                 alt="Image" onClick={()=>itemViewAction(item)} />
                         </div>
                     </main>
                     <footer>
+                        {item.genre}
                     </footer>
 
                 </div>

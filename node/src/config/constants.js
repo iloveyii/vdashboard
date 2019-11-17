@@ -10,7 +10,7 @@ const VIDEOS_DIR_PATH = path.resolve('public/' + VIDEOS_DIR);
 const IMAGES_DIR = '/images/';
 const IMAGES_DIR_PATH = path.resolve('public/' + IMAGES_DIR);
 // URls
-const serverIP = 'localhost';//getIp('wlp1s0');
+const serverIP = '10.42.0.1';//getIp('wlp1s0');
 const IMAGES_URL = 'http://' + serverIP + ':' + port + IMAGES_DIR;
 const VIDEOS_URL = 'http://' + serverIP + ':' + port + VIDEOS_DIR;
 

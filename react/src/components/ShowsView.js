@@ -76,6 +76,13 @@ class ShowsView extends React.Component {
         return show;
     }
 
+    handleSort = (e, col) => {
+        e.preventDefault();
+        const {show} = this.state;
+        show.episodes.sort((a, b) => a[col] > b[col] ? 1 : -1);
+        this.setState({show});
+    };
+
     render() {
         const {episode, show} = this.state;
         if (!show || !show.title) return <div>Loading...</div>;
@@ -87,10 +94,12 @@ class ShowsView extends React.Component {
                 <Center>
                     <div className="row">
                         <div className="col-1-of-1">
-                            <h1>Show View</h1>
-                            <h3>{show.title}</h3>
-                            <h3>{show.description}</h3>
-                            <h3>Episodes: {show.episodes.length}</h3>
+                            <div style={{backgroundColor: 'black', padding: '10px', borderRadius: '4px'}}>
+                                <h1>Show View</h1>
+                                <h3>{show.title}</h3>
+                                <h3>{show.description}</h3>
+                                <h3>Episodes: {show.episodes.length}</h3>
+                            </div>
                         </div>
                     </div>
                     <div className="row">
@@ -118,9 +127,9 @@ class ShowsView extends React.Component {
 
                                 <div className="row">
                                     <div className="col-1-of-1">
-                                        <textarea cols={40} rows={5} id="description" placeholder="Type description"
+                                        <textarea cols={40} rows={10} id="description" placeholder="Type description"
                                                   value={episode.form.description}
-                                                  onChange={e => this.handleChange(e)}></textarea>
+                                                  onChange={e => this.handleChange(e)}> </textarea>
                                     </div>
                                 </div>
 
@@ -130,51 +139,65 @@ class ShowsView extends React.Component {
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col-1-of-1">
-                                        <File model={episode} type="image"/>
-                                    </div>
-                                </div>
-
-                                <div className="row">
-                                    <div className="col-1-of-1">
-                                        <File model={episode} type="video"/>
-                                    </div>
-                                </div>
-
-                                <div className="row">
-                                    <div className="col-1-of-3">
-                                        <div className="dashboard--container">
-                                            <button style={{width: '80px'}} type="submit"
-                                                    onClick={e => this.handleFormSubmit(e)}><i
-                                                className="fas fa-save"></i> {btnLabel}
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div className="col-1-of-3">
-                                        <div className="dashboard--container">
-                                            <button style={{width: '80px'}} type="submit"
-                                                    onClick={e => this.handleFormClear(e)}><i
-                                                className="fas fa-save"></i> Clear
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </form>
                         </div>
 
                         <div className="col-1-of-2">
+                            <div className="row">
+                                <div className="col-1-of-1">
+                                    <File model={episode} type="image"/>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-1-of-1">
+                                    <File model={episode} type="video"/>
+                                </div>
+                            </div>
+
                             {
-                                this.state.showPlayer ? <VideoPlayer close={()=>this.setState({showPlayer:false})} video={this.state.video}/> : null
+                                this.state.showPlayer ? <VideoPlayer close={() => this.setState({showPlayer: false})}
+                                                                     video={this.state.video}/> : null
                             }
                         </div>
                     </div>
 
-                    <Card items={show.episodes ? show.episodes : []} />
-                    <Table fields={['title', 'number', 'description', 'genre']} items={show.episodes ? show.episodes : []}
-                           itemViewAction={episodeArray => this.viewAction(episodeArray)}
-                           itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
+                    <div className="row">
+                        <div className="col-1-of-3">
+                            <div className="dashboard--container">
+                                <button style={{width: '80px'}} type="submit"
+                                        onClick={e => this.handleFormSubmit(e)}><i
+                                    className="fas fa-save"> </i> {btnLabel}
+                                </button>
+                                <button style={{width: '80px'}} type="submit"
+                                        onClick={e => this.handleFormClear(e)}><i
+                                    className="fas fa-brush"> </i> Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <button style={{width: '80px'}} type="submit"
+                                onClick={e => this.handleSort(e, 'genre')}><i
+                            className="fas fa-sort-alpha-down"> </i> Genre
+                        </button>
+                        <button style={{width: '80px'}} type="submit"
+                                onClick={e => this.handleSort(e,'title')}><i
+                            className="fas fa-sort-alpha-down"> </i> Title
+                        </button>
+                    </div>
+                    <div className="row">
+                        <Card itemViewAction={episodeArray => this.viewAction(episodeArray)} items={show.episodes ? show.episodes : []}/>
+                    </div>
+
+                    <div className="row">
+                        <Table fields={['title', 'number', 'description', 'genre']}
+                               items={show.episodes ? show.episodes : []}
+                               itemViewAction={episodeArray => this.viewAction(episodeArray)}
+                               itemEditAction={this.props.editAction} itemDeleteAction={this.deleteAction}/>
+                    </div>
                 </Center>
             </section>
         )
