@@ -14,7 +14,14 @@ const IMAGES_DIR_PATH = path.resolve('public/' + IMAGES_DIR);
 const serverIP = '194.47.45.208';//getIp('wlp1s0');
 const IMAGES_URL = 'http://' + serverIP + ':' + port + IMAGES_DIR;
 const VIDEOS_URL = 'http://' + serverIP + ':' + port + VIDEOS_DIR;
-const collections = {shows: 'shows'};
+
+const mongo = {
+    collections: {shows: 'shows'},
+    dbname: 'mychoice',
+    url: 'mongodb://localhost:27017',
+    mongoOptions: {useNewUrlParser: true}
+};
+
 
 module.exports = {
     port,
@@ -26,5 +33,5 @@ module.exports = {
     IMAGES_URL,
     VIDEOS_URL,
     USE_MONGO,
-    collections
+    mongo
 };

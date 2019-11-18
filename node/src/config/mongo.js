@@ -29,7 +29,7 @@ const getPrimaryKey = (_id) => {
 };
 
 const getDb = () => {
-    console.log('Inside getDB')
+    // console.log('Inside getDB')
     return state.db;
 };
 
