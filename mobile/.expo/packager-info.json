@@ -1,10 +1,10 @@
 {
-  "devToolsPort": 19003,
+  "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19004,
-  "packagerPid": 8626,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPort": 19001,
+  "packagerPid": 6649,
+  "expoServerNgrokUrl": "https://dn-ch2.softhem.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.dn-ch2.softhem.mobile.exp.direct",
+  "ngrokPid": 6673,
   "webpackServerPort": null
 }

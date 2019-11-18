@@ -1,7 +1,6 @@
 import React from 'react';
 import {Dimensions, View, StyleSheet, TouchableOpacity, Text} from "react-native";
 import {theme} from "../constants";
-import {apiServer} from "../constants/settings";
 import CachedImage from './CachedImage';
 import {MaterialIcons} from '@expo/vector-icons';
 

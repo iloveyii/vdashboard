@@ -85,7 +85,6 @@ export default class CachedImage extends React.Component {
 
     render() {
         // @TODO change the following to _ this.state.source to get image from cache
-        console.log('this.state.source.uri', this.state.source.uri);
         return this.state.source.uri
             ? <Image resizeMode='cover' style={this.props.style} source={this.props.source}/>
             : <Image resizeMode='cover' style={{width: 50, height: 50}} source={theme.icons.default}/> ;
