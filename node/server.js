@@ -54,9 +54,9 @@ app.delete('/api/v1/episodes/:id', mongoVideo.deleteEpisode);
 app.put('/api/v1/popularize/:id', mongoVideo.popularize);
 
 
-
-
-
 app.listen(constants.port, () => console.log('Server started on port ' + constants.port));
+
+// INSTALL on SERVR
+// pm2 start server.js
 
 
