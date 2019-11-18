@@ -15,8 +15,8 @@
           "number": "6",
           "description": "Veniam officia esse",
           "genre": "jazz",
-          "image": "/images/21852040-0850-11ea-a86e-5b5bda1d01a7_16.png",
-          "video": "/videos/1b233400-0871-11ea-a08c-7d96e3e5b17c_songs19.mp4"
+          "image": "/images/01.png",
+          "video": "/videos/songs01.mp4"
         },
         {
           "_id": "5dd02dc88479d80dcca78a05",
@@ -24,8 +24,8 @@
           "number": "865",
           "description": "Repellendus A sint ",
           "genre": "pop",
-          "image": "/images/52438480-0894-11ea-bd2e-af6fdc5222f5_07.png",
-          "video": "/videos/52438480-0894-11ea-bd2e-af6fdc5222f5_songs07.mp4"
+          "image": "/images/02.png",
+          "video": "/videos/songs02.mp4"
         },
         {
           "_id": "5dd02df58479d80dcca78a06",
@@ -33,8 +33,8 @@
           "number": "387",
           "description": "Deserunt quod iste a",
           "genre": "disco",
-          "image": "/images/5ec767d0-0894-11ea-bd2e-af6fdc5222f5_15.png",
-          "video": "/videos/40108d30-0894-11ea-bd2e-af6fdc5222f5_songs15.mp4"
+          "image": "/images/03.png",
+          "video": "/videos/songs03.mp4"
         },
         {
           "_id": "5dd02e4e8479d80dcca78a07",
@@ -42,8 +42,8 @@
           "number": "996",
           "description": "Voluptate exercitati",
           "genre": "rock",
-          "image": "/images/75176170-0894-11ea-bd2e-af6fdc5222f5_02.png",
-          "video": "/videos/75176170-0894-11ea-bd2e-af6fdc5222f5_songs02.mp4"
+          "image": "/images/04.png",
+          "video": "/videos/songs04.mp4"
         },
         {
           "_id": "5dd02e618479d80dcca78a08",
@@ -51,8 +51,8 @@
           "number": "587",
           "description": "Officiis at facere e",
           "genre": "pop",
-          "image": "/images/80692d60-0894-11ea-bd2e-af6fdc5222f5_04.png",
-          "video": "/videos/80692d60-0894-11ea-bd2e-af6fdc5222f5_songs04.mp4"
+          "image": "/images/05.png",
+          "video": "/videos/songs05.mp4"
         }
       ],
       "views": 6
@@ -68,8 +68,8 @@
           "number": "322",
           "description": "Temporibus eveniet ",
           "genre": "disco",
-          "image": "/images/6b6d2040-086e-11ea-a08c-7d96e3e5b17c_13.png",
-          "video": "/videos/6b6d2040-086e-11ea-a08c-7d96e3e5b17c_songs13.mp4"
+          "image": "/images/06.png",
+          "video": "/videos/songs06.mp4"
         },
         {
           "_id": "5dcff26e0060f62b52c5175f",
@@ -77,8 +77,8 @@
           "number": "312",
           "description": "Ut praesentium occae",
           "genre": "rock",
-          "image": "/images/c51812b0-0870-11ea-a08c-7d96e3e5b17c_45.png",
-          "video": "/videos/c51812b0-0870-11ea-a08c-7d96e3e5b17c_songs45.mp4"
+          "image": "/images/07.png",
+          "video": "/videos/songs07.mp4"
         },
         {
           "_id": "5dd02aa38479d80dcca789fb",
@@ -86,8 +86,8 @@
           "number": "502",
           "description": "Quasi laboris placea",
           "genre": "jazz",
-          "image": "/images/45ed52d0-0892-11ea-bd2e-af6fdc5222f5_18.png",
-          "video": "/videos/45ed52d0-0892-11ea-bd2e-af6fdc5222f5_songs18.mp4"
+          "image": "/images/08.png",
+          "video": "/videos/songs08.mp4"
         },
         {
           "_id": "5dd02ad18479d80dcca789fc",
@@ -95,8 +95,8 @@
           "number": "703",
           "description": "Est ut ea rerum non ",
           "genre": "rock",
-          "image": "/images/60f1acc0-0892-11ea-bd2e-af6fdc5222f5_16.png",
-          "video": "/videos/60f1acc0-0892-11ea-bd2e-af6fdc5222f5_songs16.mp4"
+          "image": "/images/09.png",
+          "video": "/videos/songs09.mp4"
         },
         {
           "_id": "5dd02af58479d80dcca789fd",
@@ -104,8 +104,8 @@
           "number": "878",
           "description": "Qui aut ea voluptati",
           "genre": "rock",
-          "image": "/images/76888f90-0892-11ea-bd2e-af6fdc5222f5_23.png",
-          "video": "/videos/76888f90-0892-11ea-bd2e-af6fdc5222f5_songs23.mp4"
+          "image": "/images/10.png",
+          "video": "/videos/songs10.mp4"
         },
         {
           "_id": "5dd02bda8479d80dcca789ff",
@@ -113,8 +113,8 @@
           "number": "11",
           "description": "Fugiat et est eligen",
           "genre": "jazz",
-          "image": "/images/fed63500-0892-11ea-bd2e-af6fdc5222f5_29.png",
-          "video": "/videos/fed63500-0892-11ea-bd2e-af6fdc5222f5_songs29.mp4"
+          "image": "/images/11.png",
+          "video": "/videos/songs11.mp4"
         },
         {
           "_id": "5dd02c078479d80dcca78a00",
@@ -122,8 +122,8 @@
           "number": "20",
           "description": "Debitis ut voluptas ",
           "genre": "rock",
-          "image": "/images/19f7daf0-0893-11ea-bd2e-af6fdc5222f5_28.png",
-          "video": "/videos/19f7daf0-0893-11ea-bd2e-af6fdc5222f5_songs28.mp4"
+          "image": "/images/12.png",
+          "video": "/videos/songs12.mp4"
         },
         {
           "_id": "5dd02c1f8479d80dcca78a01",
@@ -131,8 +131,8 @@
           "number": "392",
           "description": "Nostrud aut rerum es",
           "genre": "disco",
-          "image": "/images/282d65e0-0893-11ea-bd2e-af6fdc5222f5_31.png",
-          "video": "/videos/282d65e0-0893-11ea-bd2e-af6fdc5222f5_songs31.mp4"
+          "image": "/images/13.png",
+          "video": "/videos/songs13.mp4"
         },
         {
           "_id": "5dd02c358479d80dcca78a02",
@@ -140,8 +140,8 @@
           "number": "295",
           "description": "Proident anim sint",
           "genre": "jazz",
-          "image": "/images/35308b50-0893-11ea-bd2e-af6fdc5222f5_34.png",
-          "video": "/videos/35308b50-0893-11ea-bd2e-af6fdc5222f5_songs34.mp4"
+          "image": "/images/14.png",
+          "video": "/videos/songs14.mp4"
         },
         {
           "_id": "5dd02b0c8479d80dcca789fe",
@@ -149,8 +149,8 @@
           "number": "101",
           "description": "Sed alias nostrud vo",
           "genre": "disco",
-          "image": "/images/8423af40-0892-11ea-bd2e-af6fdc5222f5_24.png",
-          "video": "/videos/8423af40-0892-11ea-bd2e-af6fdc5222f5_songs24.mp4"
+          "image": "/images/15.png",
+          "video": "/videos/songs15.mp4"
         },
         {
           "_id": "5dd1378aeb8a931a98f37d28",
@@ -158,8 +158,8 @@
           "number": "۴۴۵",
           "description": " عرgvxdddcxxdcےرےےے   ء ء ۵ ء  ء ءء ععے ے ے  ءی ی ",
           "genre": "rock",
-          "image": "/images/c93af340-0932-11ea-a831-d50673fd9ab6_40.png",
-          "video": "/videos/c93af340-0932-11ea-a831-d50673fd9ab6_songs40.mp4"
+          "image": "/images/16.png",
+          "video": "/videos/songs16.mp4"
         }
       ],
       "views": 13
@@ -175,8 +175,8 @@
           "number": "739",
           "description": "Et deleniti voluptat",
           "genre": "jazz",
-          "image": "/images/fb187aa0-089b-11ea-bd2e-af6fdc5222f5_25.png",
-          "video": "/videos/92625660-089c-11ea-bd2e-af6fdc5222f5_khabarzar03.mp4"
+          "image": "/images/17.png",
+          "video": "/videos/songs17.mp4"
         },
         {
           "_id": "5dd03c048479d80dcca78a0d",
@@ -184,8 +184,8 @@
           "number": "52",
           "description": "Doloremque eius quae",
           "genre": null,
-          "image": "/images/a123cda0-089c-11ea-bd2e-af6fdc5222f5_20.png",
-          "video": "/videos/a123cda0-089c-11ea-bd2e-af6fdc5222f5_khabarzar08.mp4"
+          "image": "/images/25.png",
+          "video": "/videos/songs25.mp4"
         }
       ],
       "views": 28
@@ -201,8 +201,8 @@
           "number": "902",
           "description": "Perferendis quis quo",
           "genre": "rock",
-          "image": "/images/ddd2c6c0-089c-11ea-bd2e-af6fdc5222f5_14.png",
-          "video": "/videos/ddd2c6c0-089c-11ea-bd2e-af6fdc5222f5_songs25.mp4"
+          "image": "/images/18.png",
+          "video": "/videos/songs18.mp4"
         },
         {
           "_id": "5dd03dbe8479d80dcca78a10",
@@ -210,8 +210,8 @@
           "number": "1",
           "description": "Best movies of 2018",
           "genre": "jazz",
-          "image": "/images/a8e885c0-089d-11ea-bd2e-af6fdc5222f5_22.png",
-          "video": "/videos/a8e885c0-089d-11ea-bd2e-af6fdc5222f5_best.mp4"
+          "image": "/images/19.png",
+          "video": "/videos/songs19.mp4"
         },
         {
           "_id": "5dd03de68479d80dcca78a11",
@@ -219,8 +219,8 @@
           "number": "89",
           "description": "Vero non tempor nihi",
           "genre": "null",
-          "image": "/images/ca84a600-089d-11ea-bd2e-af6fdc5222f5_31.png",
-          "video": "/videos/c0bab290-089d-11ea-bd2e-af6fdc5222f5_beast.mp4"
+          "image": "/images/20.png",
+          "video": "/videos/songs20.mp4"
         },
         {
           "_id": "5dd03e178479d80dcca78a12",
@@ -228,8 +228,8 @@
           "number": "868",
           "description": "Atque nihil mollit e",
           "genre": null,
-          "image": "/images/ddd62cb0-089d-11ea-bd2e-af6fdc5222f5_24.png",
-          "video": "/videos/ddd62cb0-089d-11ea-bd2e-af6fdc5222f5_lionheart.mp4"
+          "image": "/images/21.png",
+          "video": "/videos/songs21.mp4"
         },
         {
           "_id": "5dd03e378479d80dcca78a13",
@@ -237,8 +237,8 @@
           "number": "266",
           "description": "Perspiciatis deleni",
           "genre": null,
-          "image": "/images/f1145270-089d-11ea-bd2e-af6fdc5222f5_14.png",
-          "video": "/videos/f1145270-089d-11ea-bd2e-af6fdc5222f5_geostrom.mp4"
+          "image": "/images/22.png",
+          "video": "/videos/songs22.mp4"
         },
         {
           "_id": "5dd03e508479d80dcca78a14",
@@ -246,8 +246,8 @@
           "number": "747",
           "description": "Voluptatem eaque eo",
           "genre": null,
-          "image": "/images/00156ac0-089e-11ea-bd2e-af6fdc5222f5_17.png",
-          "video": "/videos/00156ac0-089e-11ea-bd2e-af6fdc5222f5_jetlee.mp4"
+          "image": "/images/23.png",
+          "video": "/videos/songs23.mp4"
         },
         {
           "_id": "5dd041c68479d80dcca78a15",
@@ -255,8 +255,8 @@
           "number": "954",
           "description": "Accusamus consequatu",
           "genre": null,
-          "image": "null",
-          "video": "/videos/100eb3d0-08a0-11ea-bd2e-af6fdc5222f5_romantic_comedy.mp4"
+          "image": "/images/24.png",
+          "video": "/videos/songs24.mp4"
         }
       ],
       "views": 1

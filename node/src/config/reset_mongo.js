@@ -1,14 +1,18 @@
-const constants = require('./constants');
 const fs = require('fs');
 const ffmpeg = require('fluent-ffmpeg');
 const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 const rimraf = require("rimraf");
 const mongoClient = require('mongodb').MongoClient;
+const constants = require('./constants');
+const path = require('path');
+
 
 const mongo = constants.mongo;
+let db = null;
 
 function connectMongo() {
     return new Promise(function (resolve, reject) {
+        console.log(mongo);
 
         mongoClient.connect(mongo.url, mongo.mongoOptions, (err, client) => {
             if (err) {
@@ -24,13 +28,23 @@ function connectMongo() {
 
 function deleteCollection() {
     return new Promise(function (resolve, reject) {
-        db.collection(mongo.collections.shows).drop(function (err, delOK) {
+
+        // return resolve(true);
+        db.dropCollection(mongo.collections.shows, function (err, delOK) {
             if (err) {
+                console.log(err); process.exit();
                 reject(err);
                 throw err;
             }
-            if (delOK) console.log("Collection deleted : " + mongo.collections.shows);
-            resolve(delOK);
+            if (delOK) {
+                console.log("Collection deleted : " + mongo.collections.shows);
+                db.createCollection(mongo.collections.shows, function (err, res) {
+                    if (err) throw err;
+                    console.log("Collection created : " + mongo.collections.shows);
+                    resolve(delOK);
+                });
+            }
+
         });
     })
 }
@@ -38,7 +52,7 @@ function deleteCollection() {
 function readDataFile() {
 
     return new Promise(function (resolve, reject) {
-        fs.readFile('db.json', {encoding: 'UTF-8'}, (err, data) => {
+        fs.readFile(mongo.dbfile, {encoding: 'UTF-8'}, (err, data) => {
             if (err) {
                 reject(err);
                 throw  err;
@@ -68,9 +82,36 @@ function insertIntoMongo(list) {
     });
 }
 
+function removeDirs() {
+    return new Promise(function (resolve, reject) {
+
+        rimraf(constants.IMAGES_DIR_PATH + '/*', function () {
+            console.log("Removed " + constants.IMAGES_DIR_PATH + '*');
+        });
+
+        if (!fs.existsSync(constants.IMAGES_DIR_PATH)) {
+            fs.mkdirSync(constants.IMAGES_DIR_PATH);
+        }
+
+        rimraf(constants.VIDEOS_DIR_PATH + '/*', function () {
+            console.log("Removed " + constants.VIDEOS_DIR_PATH + '*');
+        });
+
+        if (!fs.existsSync(constants.VIDEOS_DIR_PATH)) {
+            fs.mkdirSync(constants.VIDEOS_DIR_PATH);
+        }
+        resolve();
+    });
+}
+
+
 connectMongo()
     .then(() => deleteCollection()
         .then(() => readDataFile()
             .then(list => insertIntoMongo(list)
-                .then((data) => console.log(data.actions.ok.insertedCount) ))));
+                .then(() => removeDirs()
+                    ))));
 
+
+
+// console.log(mongo.dbfile);

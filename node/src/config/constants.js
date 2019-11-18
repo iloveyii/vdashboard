@@ -19,7 +19,8 @@ const mongo = {
     collections: {shows: 'shows'},
     dbname: 'mychoice',
     url: 'mongodb://localhost:27017',
-    mongoOptions: {useNewUrlParser: true}
+    mongoOptions: {useNewUrlParser: true},
+    dbfile: path.resolve('src/config/mongodb.json')
 };
 
 
