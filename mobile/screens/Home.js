@@ -113,7 +113,7 @@ class Home extends React.Component {
                             <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
                                 {
                                     latest.map(show =>
-                                        <View key={show._id + 'view'} style={styles.card}>
+                                        <View key={show._id + 'view' + Math.random()} style={styles.card}>
                                             <TouchImage captionText={show.title} i={show._id}
                                                         imageUrl={show.episodes[0].image}
                                                         onPress={() => this.handleWatchEpisodes(show, 'latest')}/>
@@ -139,7 +139,7 @@ class Home extends React.Component {
                             <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
                                 {
                                     popular.map(show =>
-                                        <View key={show._id + 'view'} style={styles.card}>
+                                        <View key={show._id + 'view' + Math.random()} style={styles.card}>
                                             <TouchImage captionText={show.title} i={show._id}
                                                         imageUrl={show.episodes[0].image}
                                                         popular={show.views ? show.views : 1}
