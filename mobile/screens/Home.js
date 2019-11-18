@@ -11,9 +11,7 @@ import Header from '../components/Header';
 import TouchImage from '../components/TouchImage';
 import YellowButton from '../components/YellowButton';
 import More from '../components/More';
-import Activity from '../components/Activity';
 
-import {postsReadAction} from '../actions/PostsAction';
 import {songsReadAction} from '../actions/SongsAction';
 import {showFindAction} from '../actions/ShowAction';
 import {muteAction, addPlayListAction, addPlayingNowAction} from "../actions/PlayerAction";
@@ -188,7 +186,6 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = ({
-    postsReadAction,
     songsReadAction,
     showFindAction,
     muteAction, addPlayListAction, addPlayingNowAction

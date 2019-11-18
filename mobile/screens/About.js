@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Text from "../components/Text";
 import { connect } from "react-redux";
 import {apiServer} from "../constants/settings";
-import Activity from "./Program";
+import Activity from "../components/Activity";
 import CachedImage from "../components/CachedImage";
 
 const {width} = Dimensions.get('window');

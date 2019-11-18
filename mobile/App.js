@@ -46,3 +46,13 @@ export default class App extends React.Component {
         );
     }
 }
+
+
+// PUBLISH
+// expo publish
+
+// BUILDS
+// expo build:android -t app-bundle
+
+// expo build:ios -t app-bundle
+// expo build:ios

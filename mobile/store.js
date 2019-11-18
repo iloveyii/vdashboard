@@ -11,17 +11,14 @@ import createSagaMiddleware from 'redux-saga';
  * @returns {Array} - every return value is assigned to the corresponding key in allReducers
  */
 import rootSaga from './sagas/rootSaga';
-import PostsReducer from "./reducers/PostsReducer";
 import SongsReducer from "./reducers/SongsReducer";
 import {songsReadAction} from "./actions/SongsAction";
 import {showFindAction} from "./actions/ShowAction";
-import ShowReducer from "./reducers/ShowReducer";
 import LoginReducer from "./reducers/Login";
 import PlayerReducer from "./reducers/PlayerReducer";
 
 const allReducers = combineReducers({
     shows: SongsReducer,
-    //shows: ShowReducer, // Search
     login: LoginReducer,
     player: PlayerReducer,
 });

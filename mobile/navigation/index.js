@@ -1,18 +1,14 @@
 import React from 'react';
 import {
     createAppContainer,
-    createStackNavigator,
     createDrawerNavigator,
     SafeAreaView,
     DrawerItems
 } from 'react-navigation';
-import {Image, ScrollView, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {ScrollView, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Home from '../screens/Home';
 import Show from '../screens/Show';
-import News from '../screens/News';
-import About from '../screens/About';
-import Program from '../screens/Program';
 import Contact from '../screens/Contact';
 import {theme} from '../constants';
 import Profile from '../components/Profile';
