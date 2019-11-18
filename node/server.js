@@ -6,13 +6,14 @@ const cors = require('cors');
 const md5 = require('md5');
 const constants = require('./src/config/constants');
 const fileUpload = require('express-fileupload');
-const Joi = require('joi');
-
-const mySqlVideo = require('./src/mysql/video');
 const mongoVideo = require('./src/mongo/video');
+
+/*
+const mySqlVideo = require('./src/mysql/video');
+const Joi = require('joi');
 const user = require('./src/user');
 const login = require('./src/login');
-
+*/
 
 app.use(
     express.static(__dirname + '/public'),
@@ -30,18 +31,19 @@ app.use(
     }
 );
 
+/*
 app.get('/api/v1/logins', login.get);
 
 app.get('/api/v1/users', user.get);
 app.post('/api/v1/users', user.post);
 app.delete('/api/v1/users/:id', user.delete);
-app.put('/api/v1/users/:id', user.put);
+app.put('/api/v1/users/:id', user.put); */
 
 
 app.get('/api/v1/generate', mongoVideo.generate);
 app.get('/api/v1/remove', mongoVideo.remove);
 
-app.get('/api/v1/shows', constants.USE_MONGO ? mongoVideo.get : mySqlVideo.get);
+app.get('/api/v1/shows',  mongoVideo.get);
 app.post('/api/v1/shows', mongoVideo.post);
 app.delete('/api/v1/shows/:id', mongoVideo.delete);
 app.put('/api/v1/shows/:id', mongoVideo.update);
