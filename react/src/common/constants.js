@@ -1,4 +1,4 @@
-const apiServer = 'http://mobile-server.softhem.se:8090';
+const apiServer = 'http://localhost:8090';
 
 export  {
     apiServer,

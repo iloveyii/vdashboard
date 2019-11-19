@@ -59,7 +59,7 @@ class Card extends React.Component {
 
         return (
             items.map(item =>
-                <div className="file-upload" style={{width:'23%', display:'inline-block', margin: '5px'}}>
+                <div key={item._id} className="file-upload" style={{width:'23%', display:'inline-block', margin: '5px'}}>
                     <header>
                         <p style={{margin: 0}}><i className="fas fa-film"></i> &nbsp;
                             {item.title}

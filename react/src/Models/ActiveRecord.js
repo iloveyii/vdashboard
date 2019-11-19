@@ -10,7 +10,7 @@ class ActiveRecord extends Model {
     constructor(name) {
         super(name);
         this.debug = true;
-        this.setUploadProgress = this.setUploadProgress.bind(this)
+        this.setUploadProgress = this.setUploadProgress.bind(this);
     }
 
     get __class() {

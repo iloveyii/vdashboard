@@ -13,25 +13,41 @@ class File extends React.Component {
         this.state = {
             model: {}
         };
-        this.refImage = React.createRef();
+        this.refFile = React.createRef();
         this.refDisplayImage = React.createRef();
+        this.refDisplayCanvas = React.createRef();
+        this.refDisplayVideo = React.createRef();
+        this.refDisplaySource = React.createRef();
         this.handleChange = this.handleChange.bind(this);
         this.readUploadingImage = this.readUploadingImage.bind(this);
+        this.readUpLoadingVideo = this.readUpLoadingVideo.bind(this);
     }
 
     handleChange() {
-        const files = this.refImage.current.files;
+        const files = this.refFile.current.files;
         let {model, type} = this.props;
         if (model && type == 'image') model.setImagePath(files);
         if (model && type == 'video') model.setVideoPath(files);
 
-        if (this.refImage.current.accept.includes('image')) {
+        if (this.refFile.current.accept.includes('image')) {
             this.readUploadingImage();
+        } else {
+            this.readUpLoadingVideo();
+            this.props.setRefVideo(this.refDisplayVideo);
+        }
+    }
+
+    readUpLoadingVideo() {
+        const input = this.refFile.current; // used for all ie image and video
+
+        if (input.files && input.files[0]) {
+            this.refDisplaySource.current.src = URL.createObjectURL(input.files[0]);
+            this.refDisplayVideo.current.load();
         }
     }
 
     readUploadingImage() {
-        const input = this.refImage.current; // used for all ie image and video
+        const input = this.refFile.current; // used for all ie image and video
 
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -41,6 +57,12 @@ class File extends React.Component {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    takePicture = () => {
+        const context = this.refDisplayCanvas.current.getContext("2d");
+        context.drawImage(this.props.refVideo.current, 0, 0, this.props.refVideo.current.videoWidth/2, this.props.refVideo.current.videoHeight/2);
+        this.refDisplayImage.current.src = this.refDisplayCanvas.current.toDataURL();
+    };
 
     componentWillReceiveProps(nextProps, nextContext) {
         const {model} = nextProps;
@@ -70,19 +92,27 @@ class File extends React.Component {
                     </p>
                 </header>
                 <main>
-                    <input accept={accept} ref={this.refImage} multiple type="file" id={id}
+                    <input accept={accept} ref={this.refFile} multiple type="file" id={id}
                            onChange={this.handleChange}/>
                     <label htmlFor={id} className="upload">
                         <i className="fas fa-cloud-upload-alt"></i>
                         <p>Drag your files here</p>
                     </label>
                     <div className="display">
+
                         {type && type == 'video'
-                            ? <video width="100%" controls autoPlay={true} key={model.form.video}>
-                                <source src={model.form.video} type="video/mp4"></source>
+                            ?
+                            <video ref={this.refDisplayVideo} width="100%" controls autoPlay={true}
+                                   key={model.form.video}>
+                                <source ref={this.refDisplaySource} src={model.form.video} type="video/mp4"></source>
                             </video>
-                            : <img ref={this.refDisplayImage} style={{width: '100%'}} src={model.form.image}
-                                   alt="Image"/>
+                            :
+                            <div>
+                                <img ref={this.refDisplayImage} style={{width: '100%'}} src={model.form.image}
+                                     alt="Image"/>
+                                <canvas style={{display:'none'}} ref={this.refDisplayCanvas}></canvas>
+                                <button onClick={this.takePicture}>Pic</button>
+                            </div>
                         }
                     </div>
                 </main>

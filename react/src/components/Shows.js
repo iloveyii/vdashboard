@@ -72,7 +72,7 @@ class Shows extends React.Component {
                                 <div className="row">
                                     <div className="col-1-of-1">
                                         <input type="text" id="title" placeholder="Type title"
-                                               value={show.form.title}
+                                               value={show.form.title?show.form.title:''}
                                                onChange={e => this.handleChange(e)}/>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ class Shows extends React.Component {
                                     <div className="col-1-of-1">
                                         <textarea cols={40} rows={5} id="description" placeholder="Type description"
                                                   value={show.form.description}
-                                                  onChange={e => this.handleChange(e)}></textarea>
+                                                  onChange={e => this.handleChange(e)} />
                                     </div>
                                 </div>
 

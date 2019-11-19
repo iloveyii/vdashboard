@@ -18,7 +18,8 @@ class ShowsView extends React.Component {
         this.state = {
             show: {},
             episode: models.episodes, // Show is an Object of class Show, while shows is array of objects from json/db
-            showPlayer: false
+            showPlayer: false,
+            refVideo: null
         }
     }
 
@@ -93,6 +94,10 @@ class ShowsView extends React.Component {
         this.setState({show});
     };
 
+    setRefVideo=(refVideo)=> {
+        this.setState({refVideo})
+    };
+
     render() {
         const {episode, show} = this.state;
         if (!show || !show.title) return <div>Loading...</div>;
@@ -139,7 +144,7 @@ class ShowsView extends React.Component {
                                     <div className="col-1-of-1">
                                         <textarea cols={40} rows={10} id="description" placeholder="Type description"
                                                   value={episode.form.description}
-                                                  onChange={e => this.handleChange(e)}> </textarea>
+                                                  onChange={e => this.handleChange(e)} />
                                     </div>
                                 </div>
 
@@ -156,13 +161,13 @@ class ShowsView extends React.Component {
                         <div className="col-1-of-2">
                             <div className="row">
                                 <div className="col-1-of-1">
-                                    <File model={episode} type="image"/>
+                                    <File refVideo={this.state.refVideo} model={episode} type="image"/>
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-1-of-1">
-                                    <File model={episode} type="video"/>
+                                    <File setRefVideo={this.setRefVideo} model={episode} type="video"/>
                                 </div>
                             </div>
 
