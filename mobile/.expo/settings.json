@@ -1,7 +1,7 @@
 {
-  "hostType": "localhost",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "mn-rud"
+  "urlRandomness": "wp-245"
 }
