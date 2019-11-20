@@ -132,7 +132,7 @@ export const playPauseSuccessAction = (result) => {
     }
 };
 export const playPositionAction = (time, duration) => {
-    console.log('Inside playPositionAction', time, duration);
+    // console.log('Inside playPositionAction', time, duration);
     return {
         type: PLAY_POSITION,
         payload: {time, duration}
