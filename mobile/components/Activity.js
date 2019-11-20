@@ -1,14 +1,14 @@
 import React from 'react';
-import {StyleSheet, ActivityIndicator} from "react-native";
+import {StyleSheet, ActivityIndicator, View} from "react-native";
 import Logo from "./Logo";
 import {theme} from "../constants";
 
 class Activity extends React.Component {
     render() {
         return (
-            <ActivityIndicator style={styles.activityI} size="small" color="black" animating={true}>
+            <View style={styles.activityI} size="small" color="black" animating={true}>
                 <Logo imageUri={theme.icons.default} />
-            </ActivityIndicator>
+            </View>
         )
     }
 }
