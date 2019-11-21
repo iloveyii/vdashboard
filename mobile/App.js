@@ -56,3 +56,6 @@ export default class App extends React.Component {
 
 // expo build:ios -t app-bundle
 // expo build:ios
+
+// you need to this app id
+// https://developer.apple.com/account/resources/identifiers/list

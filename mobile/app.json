@@ -25,10 +25,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "se.softhem.mychoice2"
+      "bundleIdentifier": "se.softhem.my-choice"
     },
     "android": {
-      "package": "se.softhem.mychoice2"
+      "package": "se.softhem.mychoice"
     }
   }
 }

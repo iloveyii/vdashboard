@@ -16,7 +16,7 @@ const IMAGES_URL = 'http://' + serverIP + ':' + port + IMAGES_DIR;
 const VIDEOS_URL = 'http://' + serverIP + ':' + port + VIDEOS_DIR;
 
 const mongo = {
-    collections: {shows: 'shows'},
+    collections: {shows: 'shows', users: 'users'},
     dbname: 'mychoice',
     url: 'mongodb://localhost:27017',
     mongoOptions: {useNewUrlParser: true},

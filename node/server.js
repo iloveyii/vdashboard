@@ -7,6 +7,7 @@ const md5 = require('md5');
 const constants = require('./src/config/constants');
 const fileUpload = require('express-fileupload');
 const mongoVideo = require('./src/mongo/video');
+const mongoUser = require('./src/mongo/user');
 
 /*
 const mySqlVideo = require('./src/mysql/video');
@@ -33,12 +34,12 @@ app.use(
 
 /*
 app.get('/api/v1/logins', login.get);
-
-app.get('/api/v1/users', user.get);
-app.post('/api/v1/users', user.post);
 app.delete('/api/v1/users/:id', user.delete);
 app.put('/api/v1/users/:id', user.put); */
 
+app.get('/api/v1/users', mongoUser.get);
+app.get('/api/v1/logins', mongoUser.get);
+app.post('/api/v1/users', mongoUser.post);
 
 app.get('/api/v1/generate', mongoVideo.generate);
 app.get('/api/v1/remove', mongoVideo.remove);
