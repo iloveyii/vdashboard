@@ -87,20 +87,19 @@ function removeDirs() {
 
         rimraf(constants.IMAGES_DIR_PATH + '/*', function () {
             console.log("Removed " + constants.IMAGES_DIR_PATH + '*');
+            if (!fs.existsSync(constants.IMAGES_DIR_PATH)) {
+                fs.mkdirSync(constants.IMAGES_DIR_PATH);
+            }
         });
-
-        if (!fs.existsSync(constants.IMAGES_DIR_PATH)) {
-            fs.mkdirSync(constants.IMAGES_DIR_PATH);
-        }
 
         rimraf(constants.VIDEOS_DIR_PATH + '/*', function () {
             console.log("Removed " + constants.VIDEOS_DIR_PATH + '*');
-        });
 
-        if (!fs.existsSync(constants.VIDEOS_DIR_PATH)) {
-            fs.mkdirSync(constants.VIDEOS_DIR_PATH);
-        }
-        resolve();
+            if (!fs.existsSync(constants.VIDEOS_DIR_PATH)) {
+                fs.mkdirSync(constants.VIDEOS_DIR_PATH);
+            }
+            resolve();
+        });
     });
 }
 
@@ -110,6 +109,7 @@ connectMongo()
         .then(() => readDataFile()
             .then(list => insertIntoMongo(list)
                 .then(() => removeDirs()
+                        .then(()=> console.log('All done !!!'))
                     ))));
 
 
