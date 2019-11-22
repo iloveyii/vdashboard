@@ -11,7 +11,6 @@ import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Reports from './components/Reports';
 import Videos from "./components/Videos";
-import VideosView from "./components/VideosView";
 import Shows from "./components/Shows";
 import ShowsView from "./components/ShowsView";
 

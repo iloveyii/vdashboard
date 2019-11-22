@@ -109,8 +109,8 @@ connectMongo()
         .then(() => readDataFile()
             .then(list => insertIntoMongo(list)
                 .then(() => removeDirs()
-                        .then(()=> console.log('All done !!!'))
-                    ))));
+                        .then(()=> console.log('All done !!!')
+                    )))));
 
 
 
