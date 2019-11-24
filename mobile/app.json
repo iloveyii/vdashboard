@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "2.0.0",
+    "version": "2.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -28,6 +28,7 @@
       "bundleIdentifier": "se.softhem.my-choice"
     },
     "android": {
+      "permissions": [],
       "package": "se.softhem.mychoice",
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
