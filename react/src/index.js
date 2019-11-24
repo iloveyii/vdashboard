@@ -18,7 +18,6 @@ import App from './App';
 /**
  * Resources
  */
-import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 // # 01
@@ -31,19 +30,7 @@ import registerServiceWorker from './registerServiceWorker';
  * @returns {Array} - every return value is assigned to the corresponding key in allReducers
  */
 import rootSaga from './sagas/rootSaga';
-import UserReducer from "./reducers/UserReducer";
-import LoginReducer from "./reducers/LoginReducer";
-import VideoReducer from "./reducers/VideoReducer";
-
-import {userReadAction} from "./actions/UserAction";
-import {videoReadAction} from "./actions/VideoAction";
-import Model from './Models/Model';
-import {apiServer} from "./common/constants";
 import models from './store/models';
-import {takeLatest} from "redux-saga/effects";
-
-const show = new Model('shows');
-const user = new Model('users');
 
 let reds = {};
 for(let i=0; i < Object.keys(models).length; i++) {
@@ -52,9 +39,6 @@ for(let i=0; i < Object.keys(models).length; i++) {
 }
 
 const allReducers = combineReducers( Object.assign({}, {
-    //users: UserReducer,
-    //login: LoginReducer,
-    //videos : VideoReducer,
 }, reds));
 
 // # 02

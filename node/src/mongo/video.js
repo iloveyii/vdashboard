@@ -18,25 +18,6 @@ db.connect(err => {
     }
 });
 
-const collection = {
-    get: async function (name) {
-        await db.getDb().collection(name).find({}).toArray((err, shows) => {
-            if (err) {
-                console.log(err);
-            } else {
-                shows.map(show => {
-                    show.episodes.map(episode => {
-                        episode.video = 'http://' + constants.serverIP + ':' + constants.port + episode.video;
-                        episode.image = 'http://' + constants.serverIP + ':' + constants.port + episode.image;
-                    });
-                });
-                return shows;
-            }
-        });
-    },
-
-};
-
 const shows = {
     get: (req, res) => {
         console.log('GET /api/v1/shows ', req.params, req.body);
@@ -44,11 +25,10 @@ const shows = {
             if (err) {
                 console.log(err);
             } else {
-                console.log(shows);
-                // res.status(200);
+                console.log('Shows: ', Array.isArray(shows), shows.length);
+                res.status(200);
                 shows.map(show => {
-                    console.log(show);
-                    show.episodes.map(episode => {
+                   show.episodes && show.episodes.map(episode => {
                         episode.video = 'http://' + constants.serverIP + ':' + constants.port + episode.video;
                         episode.image = 'http://' + constants.serverIP + ':' + constants.port + episode.image;
                     });
