@@ -1,0 +1,266 @@
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:186
+-keep class abi33_0_0.com.facebook.react.devsupport.DevSettingsActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:267
+-keep class abi33_0_0.expo.modules.payments.stripe.RedirectUriReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:183
+-keep class abi34_0_0.com.facebook.react.devsupport.DevSettingsActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:251
+-keep class abi34_0_0.expo.modules.payments.stripe.RedirectUriReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:180
+-keep class abi35_0_0.com.facebook.react.devsupport.DevSettingsActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:235
+-keep class abiabi35_0_0.expo.modules.payments.stripe.RedirectUriReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:116
+-keep class android.support.v4.app.CoreComponentFactory { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:450
+-keep class android.support.v4.content.FileProvider { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:637
+-keep class com.facebook.CampaignTrackingReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:630
+-keep class com.facebook.CurrentAccessTokenExpirationBroadcastReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:490
+-keep class com.facebook.CustomTabActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:489
+-keep class com.facebook.CustomTabMainActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:296
+-keep class com.facebook.FacebookActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:491
+-keep class com.facebook.ads.AudienceNetworkActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:301
+-keep class com.facebook.ads.InterstitialAdActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:504
+-keep class com.facebook.ads.internal.ipc.AdsMessengerService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:501
+-keep class com.facebook.ads.internal.ipc.AdsProcessPriorityService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:495
+-keep class com.facebook.ads.internal.ipc.RemoteANActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:625
+-keep class com.facebook.internal.FacebookInitProvider { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:176
+-keep class com.facebook.react.devsupport.DevSettingsActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:508
+-keep class com.google.android.gms.analytics.AnalyticsJobService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:329
+-keep class com.google.android.gms.analytics.AnalyticsReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:338
+-keep class com.google.android.gms.analytics.AnalyticsService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:526
+-keep class com.google.android.gms.auth.api.signin.RevocationBoundService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:517
+-keep class com.google.android.gms.auth.api.signin.internal.SignInHubActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:577
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:344
+-keep class com.google.android.gms.gcm.GcmReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:593
+-keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:607
+-keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:588
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:603
+-keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:557
+-keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:568
+-keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:550
+-keep class com.google.firebase.messaging.FirebaseMessagingService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:582
+-keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:395
+-keep class com.theartofdev.edmodo.cropper.CropImageActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:469
+-keep class expo.modules.appauth.AppAuthBrowserActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:475
+-keep class expo.modules.filesystem.FileSystemFileProvider { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:485
+-keep class expo.modules.location.services.LocationTaskService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:219
+-keep class expo.modules.payments.stripe.RedirectUriReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:190
+-keep class host.exp.exponent.ExponentDevActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:307
+-keep class host.exp.exponent.ExponentIntentService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:125
+-keep class host.exp.exponent.LauncherActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:137
+-keep class host.exp.exponent.MainActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:116
+-keep class host.exp.exponent.MainApplication { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:284
+-keep class host.exp.exponent.chrometabs.ChromeTabsManagerActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:286
+-keep class host.exp.exponent.experience.ErrorActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:131
+-keep class host.exp.exponent.experience.ExperienceActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:158
+-keep class host.exp.exponent.experience.HomeActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:291
+-keep class host.exp.exponent.experience.InfoActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:165
+-keep class host.exp.exponent.experience.TvActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:376
+-keep class host.exp.exponent.fcm.ExpoFcmMessagingService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:389
+-keep class host.exp.exponent.fcm.FcmRegistrationIntentService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:356
+-keep class host.exp.exponent.gcm.ExponentGcmListenerService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:363
+-keep class host.exp.exponent.gcm.ExponentInstanceIDListenerService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:370
+-keep class host.exp.exponent.gcm.GcmRegistrationIntentService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:436
+-keep class host.exp.exponent.notifications.ScheduledNotificationReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:439
+-keep class host.exp.exponent.notifications.receivers.SchedulingTriggerReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:215
+-keep class host.exp.exponent.oauth.OAuthResultActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:198
+-keep class host.exp.exponent.oauth.OAuthWebViewActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:312
+-keep class host.exp.exponent.referrer.InstallReferrerReceiver { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:537
+-keep class io.nlopez.smartlocation.activity.providers.ActivityGooglePlayServicesProvider$ActivityRecognitionService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:543
+-keep class io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider$AndroidGeocodingService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:540
+-keep class io.nlopez.smartlocation.geofencing.providers.GeofencingGooglePlayServicesProvider$GeofencingService { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:531
+-keep class net.openid.appauth.AuthorizationManagementActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:203
+-keep class net.openid.appauth.RedirectUriReceiverActivity { <init>(); }
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:459
+-keep class versioned.host.exp.exponent.modules.api.components.webview.RNCWebViewFileProvider { <init>(); }
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/design_bottom_navigation_item.xml:27
+-keep class android.support.design.internal.BaselineLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/design_navigation_item.xml:17
+-keep class android.support.design.internal.NavigationMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/design_navigation_menu.xml:17
+-keep class android.support.design.internal.NavigationMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/design_text_input_password_icon.xml:18
+-keep class android.support.design.widget.CheckableImageButton { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/design_bottom_sheet_dialog.xml:26
+-keep class android.support.design.widget.CoordinatorLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/mtrl_layout_snackbar.xml:18
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/design_layout_snackbar.xml:18
+-keep class android.support.design.widget.Snackbar$SnackbarLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/mtrl_layout_snackbar_include.xml:18
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/ffa08f7a852c3a77517e5c58ebdf063c/res/layout/design_layout_snackbar_include.xml:18
+-keep class android.support.design.widget.SnackbarContentLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/src/main/res/layout/error_activity_new.xml:2
+-keep class android.support.v4.view.ViewPager { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_alert_dialog_material.xml:41
+-keep class android.support.v4.widget.NestedScrollView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_select_dialog_material.xml:23
+-keep class android.support.v7.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_action_menu_item_layout.xml:17
+-keep class android.support.v7.view.menu.ActionMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_expanded_menu_layout.xml:17
+-keep class android.support.v7.view.menu.ExpandedMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_popup_menu_item_layout.xml:17
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_list_menu_item_layout.xml:17
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_cascading_menu_item_layout.xml:20
+-keep class android.support.v7.view.menu.ListMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_toolbar.xml:27
+-keep class android.support.v7.widget.ActionBarContainer { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_toolbar.xml:43
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_action_mode_bar.xml:19
+-keep class android.support.v7.widget.ActionBarContextView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_toolbar.xml:17
+-keep class android.support.v7.widget.ActionBarOverlayLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_action_menu_layout.xml:17
+-keep class android.support.v7.widget.ActionMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_activity_chooser_view.xml:19
+-keep class android.support.v7.widget.ActivityChooserView$InnerLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_alert_dialog_material.xml:18
+-keep class android.support.v7.widget.AlertDialogLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/facebook-common-5.0.1.aar/68a0cf3b5fd15974afe1d289303cabbc/res/layout/com_facebook_smart_device_dialog_fragment.xml:47
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/facebook-common-5.0.1.aar/68a0cf3b5fd15974afe1d289303cabbc/res/layout/com_facebook_device_auth_dialog_fragment.xml:45
+-keep class android.support.v7.widget.AppCompatImageView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_alert_dialog_button_bar_material.xml:26
+-keep class android.support.v7.widget.ButtonBarLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/facebook-common-5.0.1.aar/68a0cf3b5fd15974afe1d289303cabbc/res/layout/com_facebook_smart_device_dialog_fragment.xml:22
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/facebook-common-5.0.1.aar/68a0cf3b5fd15974afe1d289303cabbc/res/layout/com_facebook_device_auth_dialog_fragment.xml:22
+-keep class android.support.v7.widget.CardView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_content_include.xml:19
+-keep class android.support.v7.widget.ContentFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_alert_dialog_title_material.xml:45
+-keep class android.support.v7.widget.DialogTitle { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_simple_overlay_action_mode.xml:23
+-keep class android.support.v7.widget.FitWindowsFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_simple.xml:17
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_dialog_title_material.xml:22
+-keep class android.support.v7.widget.FitWindowsLinearLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_search_view.xml:75
+-keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout-v26/abc_screen_toolbar.xml:37
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/expoview-35.0.0.aar/88e81c52c4b4065d642bd108b6d8f709/res/layout/oauth_webview_activity.xml:5
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/expoview-35.0.0.aar/88e81c52c4b4065d642bd108b6d8f709/res/layout/info_activity.xml:14
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_toolbar.xml:36
+-keep class android.support.v7.widget.Toolbar { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_simple_overlay_action_mode.xml:32
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_screen_simple.xml:25
+-keep class android.support.v7.widget.ViewStubCompat { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_alert_dialog_title_material.xml:56
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_alert_dialog_material.xml:52
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/35888b520a63b7e75f9245cfee718fd9/res/layout/abc_alert_dialog_button_bar_material.xml:43
+-keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/customtabs-28.0.0.aar/da070f298e9c6860c2408be1513eb1c9/res/layout/browser_actions_context_menu_page.xml:5
+-keep class androidx.browser.browseractions.BrowserActionsFallbackMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.9.2.aar/8cfb85133f83666b2e79fcf40fc03eed/res/layout/exo_simple_player_view.xml:18
+-keep class com.google.android.exoplayer2.ui.AspectRatioFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.9.2.aar/8cfb85133f83666b2e79fcf40fc03eed/res/layout/exo_playback_control_view.xml:76
+-keep class com.google.android.exoplayer2.ui.DefaultTimeBar { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.9.2.aar/8cfb85133f83666b2e79fcf40fc03eed/res/layout/exo_simple_player_view.xml:35
+-keep class com.google.android.exoplayer2.ui.SubtitleView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.9.2.aar/8cfb85133f83666b2e79fcf40fc03eed/res/layout/exo_track_selection_dialog.xml:20
+-keep class com.google.android.exoplayer2.ui.TrackSelectionView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/android-maps-utils-0.5.aar/7da81d0a07cc203f540a42a9c8c5425b/res/layout/amu_text_bubble.xml:7
+-keep class com.google.maps.android.ui.RotationLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/android-image-cropper-2.7.0.aar/2855a5715619bb5b9359069d07e43dea/res/layout/crop_image_activity.xml:2
+-keep class com.theartofdev.edmodo.cropper.CropImageView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/.gradle/caches/transforms-1/files-1.1/android-image-cropper-2.7.0.aar/2855a5715619bb5b9359069d07e43dea/res/layout/crop_image_view.xml:13
+-keep class com.theartofdev.edmodo.cropper.CropOverlayView { <init>(android.content.Context, android.util.AttributeSet); }
+
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/src/main/res/layout/error_fragment.xml:57
+# Referenced at /home/alex/projects/frontend/dashboard/mobile/android/app/src/main/res/layout/error_console_fragment.xml:25
+-keep class host.exp.exponent.views.ExponentImageButton { <init>(android.content.Context, android.util.AttributeSet); }
+

@@ -59,3 +59,6 @@ export default class App extends React.Component {
 
 // you need to this app id
 // https://developer.apple.com/account/resources/identifiers/list
+
+// export ANDROID_HOME=$HOME/Android/Sdk
+// export PATH=$PATH:$ANDROID_HOME/tools
