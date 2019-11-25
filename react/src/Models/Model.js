@@ -86,7 +86,10 @@ class Model {
             switch (action.type) {
                 case this.types.read_success:
                     var {list, form, actions} = action.payload.data;
-                    return {...state, ...{list, form, actions}};
+                    if(list) {
+                        return {...state, ...{list, form, actions}};
+                    }
+                    return {...state, ...{form, actions}};
 
                 case this.types.edit:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload));

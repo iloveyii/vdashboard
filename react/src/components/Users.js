@@ -1,12 +1,11 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {userAddAction, userUpdateAction} from "../actions/UserAction";
 import Center from "./Center";
 import Select from './Select';
 import Table from './Table';
 import Sidebar from "./Sidebar";
-import {userDeleteAction, userEditAction} from '../actions/UserAction';
+import models from "../store/models";
 
 
 class Users extends React.Component {
@@ -24,19 +23,13 @@ class Users extends React.Component {
         ];
 
         this.state = {
-            id: null,
-            email: '',
-            username: '',
-            password: '',
-            admin: 0,
             showAdminList: false,
+            login : models.logins
         };
-
 
         this.showAdminList = this.showAdminList.bind(this);
         this.handleCenterClick = this.handleCenterClick.bind(this);
         this.makeAdmin = this.makeAdmin.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     showAdminList(e) {
@@ -52,51 +45,47 @@ class Users extends React.Component {
         this.setState({admin: user.value});
     }
 
-    handleChange(e) {
-        this.setState({[e.target.id]: e.target.value});
+    componentDidMount() {
+        const {readAction} = this.props;
+        const {login} = this.state;
+        login.list = this.props.logins.list;
+        login.form = this.props.logins.form;
+
+        if (login.list.length < 1) {
+            readAction();
+        } else {
+            this.setState({login});
+        }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log('componentWillReceiveProps', nextProps);
-        const {edit, add} = nextProps.users;
+        const {login} = this.state;
+        login.list = nextProps.logins.list;
+        login.form = nextProps.logins.form;
 
-        if (nextProps.users && edit) {
-            const {id, email, username, admin} = edit;
-            this.setState({id: id ? id : null, email, username, password: '', admin});
-        }
-
-        if ( (add && add.status === 1) || (edit && edit.result && edit.result.affectedRows == 1) ) {
-            this.setState({id: null, email: '', username: '', password: '', admin: 0});
+        if (login && login.list && login.list.length > 0) {
+            this.setState({login});
         }
     }
 
-    handleFormSubmit(e) {
+    handleChange = (e) => {
+        const {login} = this.state;
+        login.form[e.target.id] = e.target.value;
+        this.forceUpdate();
+    };
+
+    handleFormSubmit = (e) => {
         e.preventDefault();
-        const {id, email, username, password, admin} = this.state;
-        const {userAddAction, userUpdateAction} = this.props;
+        const {login} = this.state;
+        const {createAction, updateAction} = this.props;
+        login.submitForm(createAction, updateAction);
+        this.setState({login});
+    };
 
-        const user = {
-            id: id,
-            email: email,
-            username: username,
-            password: password,
-            admin: admin
-        };
-
-        console.log('Form data: ', id, username, password, admin);
-
-        if (id === null) {
-            userAddAction(user);
-        } else {
-            userUpdateAction(user);
-            this.setState({id: null, email: '', username: '', password: '', admin: 0});
-        }
-    }
 
     render() {
-        const {users, userDeleteAction, userEditAction} = this.props;
-        if (!users) return <div>Loading</div>
-        console.log('Users Render', users);
+        const {login} = this.state;
+        if(!login || !login.form) return <div>Loading...</div>
 
         return (
             <section id="dashboard" className="dashboard">
@@ -106,29 +95,28 @@ class Users extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="email" placeholder="Type email" value={this.state.email}
+                                <input type="text" id="email" placeholder="Type email" value={login.form.email}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="username" placeholder="Type username" value={this.state.username}
+                                <input type="text" id="username" placeholder="Type username" value={login.form.username}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-3">
-                                <input type="password" id="password" placeholder="Type password" value={this.state.password}
+                                <input type="password" id="password" placeholder="Type password" value={login.form.password}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <Select selected={this.adminList.find(i => i.value == this.state.admin)}
-                                        data={this.adminList} onSelect={this.makeAdmin}/>
+                                <Select model={login}/>
                             </div>
                         </div>
 
@@ -147,8 +135,8 @@ class Users extends React.Component {
 
                     </form>
 
-                    <Table fields={['id', 'username', 'admin']} items={users.list}
-                           itemDeleteAction={userDeleteAction} itemEditAction={userEditAction}/>
+                    <Table fields={['id', 'username', 'admin']} items={login.list}
+                           itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
                 </Center>
             </section>
         )
@@ -161,7 +149,7 @@ class Users extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    users: state.users
+    logins: state.logins
 });
 
 /**
@@ -169,10 +157,11 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = {
-    userAddAction,
-    userUpdateAction,
-    userDeleteAction,
-    userEditAction
+    readAction: models.logins.actions.read,
+    deleteAction: models.logins.actions.delete,
+    editAction: models.logins.actions.edit,
+    createAction: models.logins.actions.create,
+    updateAction: models.logins.actions.update,
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Users));

@@ -20,7 +20,9 @@ class UserInfo extends React.Component {
     componentDidMount() {
         const { logins } = this.props;
         console.log('componentDidMount', logins);
-        this.setState({username: logins.form.username});
+        if(logins && logins.form && logins.form.username) {
+            this.setState({username: logins.form.username});
+        }
     }
 
     render() {
