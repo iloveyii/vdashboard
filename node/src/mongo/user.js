@@ -21,6 +21,7 @@ const user = {
             const auth = {
                 authenticated: false,
             };
+            console.log('Login :' , auth);
             res.json(auth);
             return false;
         }
@@ -47,14 +48,15 @@ const user = {
                     form: auth
                 };
 
-                console.log('Headers: ', req.headers);
+                //console.log('Headers: ', req.headers);
+                console.log('Login: ', data);
                 res.json(data);
             }
         });
     },
     post: (req, res) => {
         console.log('POST /api/v1/users', req.body);
-        const {email, username, password} = req.body.item;
+        const {email, username, password} = req.body;
         const user = {
             email,
             username,

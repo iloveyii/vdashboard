@@ -36,9 +36,8 @@ app.get('/api/v1/logins', login.get);
 app.delete('/api/v1/users/:id', user.delete);
 app.put('/api/v1/users/:id', user.put); */
 
-app.get('/api/v1/users', mongoUser.get);
 app.get('/api/v1/logins', mongoUser.get);
-app.post('/api/v1/users', mongoUser.post);
+app.post('/api/v1/logins', mongoUser.post);
 
 app.get('/api/v1/generate', mongoVideo.generate);
 app.get('/api/v1/remove', mongoVideo.remove);

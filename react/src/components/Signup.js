@@ -4,6 +4,8 @@ import {withRouter} from "react-router-dom";
 import {Link} from 'react-router-dom';
 import {apiServer} from '../common/constants';
 import axios from 'axios';
+import models from '../store/models';
+
 
 
 class Signup extends React.Component {
@@ -12,49 +14,43 @@ class Signup extends React.Component {
         super(props);
 
         this.state = {
-            username: '',
-            password: '',
-            email: '',
-            login: false
+            authenticated: false,
+            login: models.logins,
+            user:{}
         }
     }
 
-    handleChange(e) {
-        e.preventDefault();
-        const field = e.target.id;
-        const value = e.target.value;
-        this.setState({[field]: value});
-    }
+    componentWillReceiveProps(nextProps, nextContext) {
+        const {logins} = nextProps;
+        const {readAction} = this.props;
+        const {user} = this.state;
 
-    async handleSignUp(e) {
-        e.preventDefault();
-        const url = apiServer + '/api/v1/users';
-        const {username, email, password} = this.state;
-        const item = {username, email, password};
+        if(logins.actions && logins.actions.type=='create' && logins.actions.ok === 1) {
+            readAction({username: user.username, password: user.password});
+        }
 
-        try {
-            await axios.post(url, {item})
-                .then(res => {
-                    if (res.data && res.data.authenticated) {
-                        this.setState({login: true});
-                    }
-                    console.log('res', res.data);
-                    if(res.data.status === 1) {
-                        this.props.history.push('/dashboard');
-                    }
-                    return res.data;
-                }).catch(error => {
-                throw new Error(error);
-                console.dir(error);
-            });
-        } catch (e) {
-            alert('Some error occurred, please refresh page. ' + e.message);
+        if (logins && logins.form.authenticated) {
+            this.props.history.push('/dashboard');
         }
     }
+
+    handleChange = (e) => {
+        const {login} = this.state;
+        login.form[e.target.id] = e.target.value;
+        this.forceUpdate();
+    };
+
+    handleSignUp = (e) => {
+        e.preventDefault();
+        const {login} = this.state;
+        const user = Object.assign({}, login.form);
+        const {createAction} = this.props;
+        login.submitForm(createAction, ()=>null);
+        this.setState({login, user});
+    };
 
     render() {
-
-        this.state.login && this.props.history.push('/dashboard');
+        const {login} = this.state;
 
         return (
             <section id="dashboard" className="dashboard">
@@ -75,7 +71,7 @@ class Signup extends React.Component {
                             <h1>Sign Up</h1>
                             <div className="row">
                                 <div className="col-1-of-1">
-                                    <input type="text" id="email" placeholder="Type email" value={this.state.email}
+                                    <input type="text" id="email" placeholder="Type email" value={login.email}
                                            onChange={e => this.handleChange(e)}/>
                                 </div>
                             </div>
@@ -83,7 +79,7 @@ class Signup extends React.Component {
                             <div className="row">
                                 <div className="col-1-of-1">
                                     <input type="text" id="username" placeholder="Type username"
-                                           value={this.state.username}
+                                           value={login.username}
                                            onChange={e => this.handleChange(e)}/>
                                 </div>
                             </div>
@@ -91,7 +87,7 @@ class Signup extends React.Component {
                             <div className="row">
                                 <div className="col-1-of-1">
                                     <input type="password" id="password" placeholder="Type password"
-                                           value={this.state.password}
+                                           value={login.password}
                                            onChange={e => this.handleChange(e)}/>
                                 </div>
                             </div>
@@ -121,13 +117,16 @@ class Signup extends React.Component {
  * @param state
  */
 const mapStateToProps = state => ({
-    spot: state.spot,
+    logins: state.logins,
 });
 
 /**
  * Import action from dir action above - but must be passed to connect method in order to trigger reducer in store
  * @type {{UserUpdate: UserUpdateAction}}
  */
-const mapActionsToProps = {};
+const mapActionsToProps = {
+    readAction: models.logins.actions.read,
+    createAction: models.logins.actions.create
+};
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Signup));
