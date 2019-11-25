@@ -8,3 +8,4 @@ node/public/videos/
 mobile/ios_development.cer
 mobile2
 keys
+.env

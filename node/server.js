@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const md5 = require('md5');
 const constants = require('./src/config/constants');
 const fileUpload = require('express-fileupload');
 const mongoVideo = require('./src/mongo/video');
