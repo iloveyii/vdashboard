@@ -81,8 +81,7 @@ const user = {
         const {email, username, password} = req.body;
 
         if (!email || !username || !password) {
-            res.json({email: 'Email, username, password is required'});
-            process.exit(0);
+            return res.json({email: 'Email, username, password is required'});
         }
         const user = {
             email,

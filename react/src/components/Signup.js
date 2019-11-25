@@ -29,7 +29,7 @@ class Signup extends React.Component {
             readAction({username: user.username, password: user.password});
         }
 
-        if (logins && logins.form.authenticated) {
+        if (logins && logins.form && logins.form.authenticated) {
             this.props.history.push('/dashboard');
         }
     }

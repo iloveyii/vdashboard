@@ -1,5 +1,26 @@
 import React from 'react';
 
+function Row(data) {
+    this.__class = 'Row';
+
+    const dim = {
+        id: 1,
+        title: 3,
+        description: 5,
+        genre: 2,
+        controls: 5,
+        image: 3
+    };
+
+    for (let col in data) {
+        this[col] = {
+            value: data[col],
+            flexSize: dim[col] ? dim[col] : 1
+        };
+    }
+    return this;
+}
+
 const Div = ({itemRow}) => {
     let el = '';
 
@@ -20,7 +41,7 @@ const Li = ({fields, item, itemDeleteAction, itemEditAction, itemViewAction}) =>
     let itemArray = item; // Array
     let itemRow = item; // Row
 
-    if (item.__class && item.__class === 'Video') {
+    if (item && item.__class && item.__class === 'Video') {
         itemArray = item.form;
     }
 
@@ -115,23 +136,3 @@ Table.defaultProps = {
 };
 export default Table;
 
-function Row(data) {
-    this.__class = 'Row';
-
-    const dim = {
-        id: 1,
-        title: 3,
-        description: 5,
-        genre: 2,
-        controls: 5,
-        image: 3
-    };
-
-    for (let col in data) {
-        this[col] = {
-            value: data[col],
-            flexSize: dim[col] ? dim[col] : 1
-        };
-    }
-    return this;
-}
