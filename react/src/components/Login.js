@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
-import axios from 'axios';
 import models from '../store/models';
 
 
@@ -33,30 +32,6 @@ class Login extends React.Component {
             password: this.state.password
         };
         readAction(user);
-
-
-        return;
-        const url = 'http://localhost:8090/api/v1/login';
-        axios.get(url, {
-            auth: {
-                username: this.state.username,
-                password: this.state.password
-            },
-            headers: {
-                username: this.state.username,
-                password: this.state.password
-            }
-
-        }).then(res => {
-            if (res.data && res.data.authenticated) {
-                this.setState({login: true});
-            }
-            console.log('res', res.data);
-            return res.data;
-        }).catch(error => {
-            throw new Error(error);
-            console.dir(error);
-        });
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -68,9 +43,6 @@ class Login extends React.Component {
     }
 
     render() {
-
-        // this.state.login && this.props.history.push('/dashboard');
-
         return (
             <section id="dashboard" className="dashboard">
                 <div className="dashboard--center" style={{textAlign: 'center', float: 'none'}}>
@@ -137,7 +109,7 @@ const mapStateToProps = state => ({
  * @type {{UserUpdate: UserUpdateAction}}
  */
 const mapActionsToProps = {
-    readAction : models.logins.actions.read
+    readAction: models.logins.actions.read
 };
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Login));
