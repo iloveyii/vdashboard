@@ -150,7 +150,7 @@ class ShowsView extends React.Component {
 
                                 <div className="row">
                                     <div className="col-1-of-1">
-                                        <Select model={episode}/>
+                                        <Select attr={'genre'} model={episode}/>
                                     </div>
                                 </div>
 

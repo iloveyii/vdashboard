@@ -31,54 +31,23 @@ class Episode extends ActiveRecord {
             video: null,
             genre: 'rock'
         };
-        this.setImagePath = this.setImagePath.bind(this);
-        this.setVideoPath = this.setVideoPath.bind(this);
+        this._selectList.genre = this._genreList;
     }
 
     set videoPath(files) {
         this._form.video_path = files[0];
     }
 
-    setVideoPath(files) {
+    setVideoPath = (files) => {
         this._form.video_path = files[0];
-    }
+    };
 
     set imagePath(files) {
         this._form.image_path = files[0];
     }
 
-    setImagePath(files) {
+    setImagePath = (files) => {
         this._form.image_path = files[0];
-    }
-
-    onSelect2 = (item) => {
-        this.genre = item;
-    };
-
-    get selected2() {
-        return this.genreList.find(item => item.value == this.form.genre);
-    }
-
-    get genreList() {
-        return this._genreList;
-    }
-
-    // INTERFACE Select
-    get data() {
-        return this._genreList;
-    }
-
-    set genre(item) {
-        this.form.genre = item.value;
-    }
-
-    setGenre(item) {
-        this.form.genre = item.value;
-    }
-
-    // INTERFACE Select
-    onSelect = (item) => {
-        this.form.genre = item.value;
     };
 
     get actions() {
