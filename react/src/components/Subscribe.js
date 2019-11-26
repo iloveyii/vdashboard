@@ -56,7 +56,7 @@ class Subscribe extends React.Component {
                     <br/>
                     <br/>
                     <br/>
-                    <div className="row">
+                    <div className="row" style={{backgroundColor: 'green'}}>
                             {
                                 show.list.map(s => <Deck key={s._id} show={s} />)
                             }

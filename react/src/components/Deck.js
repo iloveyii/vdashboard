@@ -31,24 +31,22 @@ class Deck extends React.Component {
         return (
             <div className="col-1-of-4">
                 <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <h1 style={{zIndex: 1000, textAlign:'center'}}>{show.title}</h1>
+                    <h1 style={{zIndex: 1000, textAlign:'center', fontSize: '20px', height: '40px'}}>{show.title}</h1>
                     {
                         show.episodes.slice(0, 3).map((episode, i) => <img
                             style={{
                                 zIndex: 100 - i,
-                                width: '100%',
+                                width: '180px',
                                 height: '200px',
                                 position: 'relative',
-                                marginTop: -(100 - (i * 1)) + '%',
-                                marginLeft: (i * 5) + '%'
+                                marginTop: i === 0 ? '0' : -(200 -i*7) + 'px',
+                                marginLeft: (i * 10) + 'px'
                             }}
 
                             src={episode.image} alt={episode.title}/>)
                     }
-                    <br/>
-                    <br/>
-                    <br/>
                 </div>
+                <hr/>
             </div>
         )
     }
