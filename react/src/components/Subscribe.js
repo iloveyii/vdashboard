@@ -38,7 +38,6 @@ class Subscribe extends React.Component {
         }
     }
 
-
     render() {
         const {show}= this.state;
         if(!show || !show.list) return <div>Loading...</div>
@@ -52,10 +51,7 @@ class Subscribe extends React.Component {
                             <h1>Subscribe</h1>
                         </div>
                     </div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
+
                     <div className="row" style={{}}>
                             {
                                 show.list.map(s => <Deck key={s._id} show={s} />)

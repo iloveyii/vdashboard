@@ -5,6 +5,8 @@ import models from '../store/models';
 import Sidebar from './Sidebar';
 import Center from './Center';
 import Table from './Table';
+import Deck from "./Deck";
+
 
 
 class Shows extends React.Component {
@@ -65,8 +67,9 @@ class Shows extends React.Component {
 
 
     render() {
-        const {show, login} = this.state;
+        const {show} = this.state;
         if(!show || !show.form) return <div>Loading...</div>
+        const items = this.getFilteredRows();
 
         return (
             <section id="dashboard" className="dashboard">
@@ -108,7 +111,15 @@ class Shows extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'description']} items={this.getFilteredRows()}
+                    <div className="row">
+                        <div className="col-1-of-1">
+                            {
+                                items.map(s => <Deck unsubscribe={true} key={s._id} show={s} />)
+                            }
+                        </div>
+                    </div>
+
+                    <Table fields={['id', 'title', 'description']} items={items}
                            itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']) )}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
                 </Center>

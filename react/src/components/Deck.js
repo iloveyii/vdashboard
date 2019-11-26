@@ -41,6 +41,7 @@ class Deck extends React.Component {
         const {login} = this.state;
         const {updateAction, show} = this.props;
         login.form.subscription = show._id;
+        login.form.unsubscribe = this.props.unsubscribe ? this.props.unsubscribe : false;
         login.submitForm(updateAction, updateAction);
         this.setState({login});
     };

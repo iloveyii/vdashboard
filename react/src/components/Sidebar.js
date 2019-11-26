@@ -54,29 +54,19 @@ class Sidebar extends React.Component {
                     <label htmlFor="">Subscribe</label>
                 </Link>
 
-                <Link to={`/users`} className={pathname == '/users' ? 'button active' : 'button'}>
-                    <i className="fas fa-users"></i>
-                    <label htmlFor="">Users</label>
-                </Link>
-
-                <Link to={`/profile`} className={pathname == '/profile' ? 'button active' : 'button'}>
-                    <i className="fas fa-user"></i>
-                    <label htmlFor="">Profile</label>
-                </Link>
-
                 <Link to={`/shows`} className={pathname == '/shows' ? 'button active' : 'button'}>
                     <i className="fas fa-photo-video"></i>
                     <label htmlFor="">Shows</label>
                 </Link>
 
+                <Link to={`/users`} className={pathname == '/users' ? 'button active' : 'button'}>
+                    <i className="fas fa-users"></i>
+                    <label htmlFor="">Users</label>
+                </Link>
+
                 <Link to={`/settings`} className={pathname == '/settings' ? 'button active' : 'button'}>
                     <i className="fas fa-cog"></i>
                     <label>Settings</label>
-                </Link>
-
-                <Link to={`/reports`} className={pathname == '/reports' ? 'button active' : 'button'}>
-                    <i className="fas fa-chart-bar"></i>
-                    <label>Reports</label>
                 </Link>
 
                 <span className="button" onClick={() => this.handleLogout()}>

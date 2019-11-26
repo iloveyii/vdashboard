@@ -126,12 +126,22 @@ const users = {
         console.log('PUT /api/v1/logins/:id', req.body);
         const userId = db.getPrimaryKey(req.params.id);
         const userInput = req.body;
-        const {email, username, password, admin, subscription} = userInput;
+        const {email, username, password, admin, subscription, unsubscribe} = userInput;
 
+        console.log('unsubscribe: ', unsubscribe, unsubscribe=='true');
         if(subscription) {
-            users._addToSet(userId, subscription, res);
+            if(unsubscribe==='true') {
+                console.log('unsubscribe is not equal to true: ');
+                users._removeFromSet(userId, subscription, res);
+            } else {
+                console.log('unsubscribe is  equal to true: ');
+
+                users._addToSet(userId, subscription, res);
+            }
             return true;
         }
+
+        console.log('out of unsubscribe is not equal to true: ', unsubscribe==true);
 
         let user = {
             email,
@@ -177,6 +187,26 @@ const users = {
             }
         );
     },
+    _removeFromSet: (userId, subscription_id, res) => {
+        db.getDb().collection(constants.mongo.collections.users).findOneAndUpdate(
+            {_id: userId},
+            {$pull: {subscriptions: subscription_id}},
+            {returnOriginal: false, upsert: false},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('Subscription removed', subscription_id, result);
+                    const actions = {
+                        type: 'update',
+                        ok: result.ok
+                    };
+                    res.json({actions});
+                }
+            }
+        );
+    },
+
 };
 
 module.exports = users;
