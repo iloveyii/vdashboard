@@ -95,7 +95,7 @@ class Users extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <input type="text" id="email" placeholder="Type email" value={login.form.email}
+                                <input type="text" id="email" placeholder="Type email" value={login.form.email ? login.form.email : ''}
                                        onChange={e => this.handleChange(e)}/>
                             </div>
                         </div>
@@ -116,7 +116,7 @@ class Users extends React.Component {
 
                         <div className="row">
                             <div className="col-1-of-2">
-                                <Select model={login}/>
+                                <Select placeHolder={'Select admin'} attr={'admin'} model={login}/>
                             </div>
                         </div>
 

@@ -125,12 +125,13 @@ const user = {
         console.log('PUT /api/v1/logins/:id', req.body);
         const userId = db.getPrimaryKey(req.params.id);
         const userInput = req.body;
-        const {email, username, password} = userInput;
+        const {email, username, password, admin} = userInput;
 
         const user = {
             email,
             username,
-            password: md5(password)
+            password: md5(password),
+            admin
         };
 
         db.getDb().collection(constants.mongo.collections.users).findOneAndUpdate(

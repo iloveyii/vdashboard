@@ -6,6 +6,10 @@ class ActiveRecord extends Model {
     _forceUpdate = () => null;
     _form = {};
     _subscribers = [];
+    _selectList = {
+        genre: [],
+        admin: []
+    };
 
     constructor(name) {
         super(name);
@@ -86,7 +90,31 @@ class ActiveRecord extends Model {
         return false;
     }
 
+    // INTERFACE Select
+    getSelectList = (attr) => {
+        return this._selectList[attr] ? this._selectList[attr] : [];
+    };
 
+    // sets attr in form
+    onSelect = (item, attr) => {
+        console.log('Select ', item, attr);
+        this.form[attr] = item.value;
+    };
+
+    //@return {}
+    selected = (attr) => {
+        console.log('Select selected', attr);
+        if(!attr) {
+            return {value: 'na', label: 'NA'};
+        }
+        const found = this._selectList[attr].find(item => item.value == this.form[attr]);
+
+        if(!found) {
+            return this._selectList[attr][0];
+        }
+
+        return found;
+    }
 }
 
 export default ActiveRecord;

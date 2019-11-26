@@ -55,7 +55,7 @@ class Episode extends ActiveRecord {
         this.genre = item;
     };
 
-    get selected() {
+    get selected2() {
         return this.genreList.find(item => item.value == this.form.genre);
     }
 

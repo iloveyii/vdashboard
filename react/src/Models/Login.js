@@ -9,7 +9,7 @@ class Login extends ActiveRecord {
         },
         {
             value: '0',
-            label: 'Noe'
+            label: 'No'
         },
     ];
 
@@ -20,33 +20,12 @@ class Login extends ActiveRecord {
             password: 'root',
             authenticated: false
         };
+        this._selectList.admin = this._adminList;
     }
     // INTERFACE Select
-    onSelect = (item) => {
+    onSelect2 = (item) => {
         this.form.admin = item.value;
     };
-
-    get selected() {
-        return this.genreList.find(item => item.value == this.form.genre);
-    }
-
-    get genreList() {
-        return this._adminList;
-    }
-
-    // INTERFACE Select
-    get data() {
-        return this._adminList;
-    }
-
-    set genre(item) {
-        this.form.admin = item.value;
-    }
-
-    setGenre(item) {
-        this.form.admin = item.value;
-    }
-
 
     newApiRead = (user) => {
         console.log('Inside api newApiRead', user);

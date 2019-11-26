@@ -11,63 +11,51 @@ class Select extends React.Component {
                 label: 'Select genre'
             }
         };
-
-        this.handleOnClick = this.handleOnClick.bind(this);
-        this.showHide = this.showHide.bind(this);
     }
 
-    showHide(e) {
+    showHide = (e) => {
         e.stopPropagation();
         this.setState({isVisible: !this.state.isVisible});
-    }
+    };
 
-    handleOnClick(selected) {
+    handleOnClick = (item) => {
+        console.log('handleOnClick ', item);
         const isVisible = false;
-        this.setState({selected, isVisible});
-        let {onSelect, model} = this.props;
-        if(model) {
-            onSelect = model.onSelect;
-        }
-        onSelect(selected);
-    }
+        this.state.model.onSelect(item, this.props.attr);
+        this.setState({isVisible});
+    };
 
     componentDidMount() {
-        let {selected, model} = this.props;
-        console.log('componentDidMount', selected);
-        if(model) {
-            selected = model.selected;
-        }
-        if (selected) {
-            this.setState({selected});
+        let {model, attr} = this.props;
+        console.log('componentDidMount', model, attr);
+        if (model) {
+            this.setState({model, attr});
         }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        let {selected, model} = nextProps;
-        if(model) {
-            selected = model.selected;
-        }
-
-        if (selected) {
-            this.setState({selected});
+        let {model} = nextProps;
+        if (model) {
+            this.setState({model});
         }
     }
 
     render() {
-        const {data} = this.props;
+        let {model, attr} = this.state;
+        if(!model) return <div>Loading ... </div>
 
         return (
             <div className="dd-wrapper">
                 <div className="dd-header dd-header-open" id="select-city"
                      onClick={(e) => this.showHide(e)}>
                     <div className="dd-header-title"
-                         id="dd-header-title"> {this.state.selected.label} </div>
+                         id="dd-header-title"> {model.selected(attr).label} </div>
                     <div className="dd-icon"><i className="fas fa-angle-down"></i></div>
                 </div>
                 <ul className="dd-list" id="dd-list"
                     style={{display: this.state.isVisible ? 'block' : 'none'}}>
                     {
-                        data.map((item, i) => <li
+                        model.getSelectList(attr).map((item, i) => <li
                             key={i}
                             onClick={() => this.handleOnClick(item)} id={item.value}
                             className="dd-list-item">{item.label}</li>)
