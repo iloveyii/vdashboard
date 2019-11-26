@@ -86,10 +86,17 @@ class Model {
             switch (action.type) {
                 case this.types.read_success:
                     var {list, form, actions} = action.payload.data;
+                    var newState = {...state};
                     if(list) {
-                        return {...state, ...{list, form, actions}};
+                        newState.list = list;
                     }
-                    return {...state, ...{form, actions}};
+                    if(form) {
+                        newState.form = form;
+                    }
+                    if(actions) {
+                        newState.actions = actions;
+                    }
+                    return newState;
 
                 case this.types.edit:
                     this.log('Inside reducer of class ' + this.name + ' : ' + JSON.stringify(action.payload));
@@ -113,14 +120,18 @@ class Model {
                     };
 
                 case this.types.update_success || this.types.delete_success:
-                    var {form} = action.payload.data;
-                    if (action.ok === 1) form = {};
-                    return {
-                        ...state, ...{
-                            action: action.payload.data.action,
-                            form
-                        }
-                    };
+                    var {list, form, actions} = action.payload.data;
+                    var newState = {...state};
+                    if(list) {
+                        newState.list = list;
+                    }
+                    if(form) {
+                        newState.form = form;
+                    }
+                    if(actions) {
+                        newState.actions = actions;
+                    }
+                    return newState;
 
                 default:
                     this.log('Inside show default reducer of class ' + this.name + JSON.stringify(action));

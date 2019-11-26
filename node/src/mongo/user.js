@@ -12,7 +12,7 @@ db.connect(err => {
     }
 });
 
-const user = {
+const users = {
     get: (req, res) => {
 
         console.log('GET /api/v1/users ', req.params, req.body);
@@ -43,7 +43,8 @@ const user = {
                 } else {
                     const auth = {
                         authenticated: false,
-                        username: username
+                        username: username,
+                        _id: users[0]._id
                     };
                     if (users.length > 0) {
                         auth.authenticated = true;
@@ -125,9 +126,14 @@ const user = {
         console.log('PUT /api/v1/logins/:id', req.body);
         const userId = db.getPrimaryKey(req.params.id);
         const userInput = req.body;
-        const {email, username, password, admin} = userInput;
+        const {email, username, password, admin, subscription} = userInput;
 
-        const user = {
+        if(subscription) {
+            users._addToSet(userId, subscription, res);
+            return true;
+        }
+
+        let user = {
             email,
             username,
             password: md5(password),
@@ -151,7 +157,26 @@ const user = {
                 }
             }
         )
-    }
+    },
+    _addToSet: (userId, subscription, res) => {
+        db.getDb().collection(constants.mongo.collections.users).findOneAndUpdate(
+            {_id: userId},
+            {$addToSet: {subscriptions: subscription}},
+            {returnOriginal: false, upsert: false},
+            (err, result) => {
+                if (err) {
+                    console.log('Some error occurred. ', err);
+                } else {
+                    console.log('Show added or updated', result);
+                    const actions = {
+                        type: 'update',
+                        ok: result.ok
+                    };
+                    res.json({actions});
+                }
+            }
+        );
+    },
 };
 
-module.exports = user;
+module.exports = users;

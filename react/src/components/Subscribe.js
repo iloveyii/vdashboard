@@ -11,7 +11,7 @@ class Subscribe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: models.shows // Show is an Object of class Show, while shows is array of objects from json/db
+            show: models.shows, // Show is an Object of class Show, while shows is array of objects from json/db
         }
     }
 
@@ -56,7 +56,7 @@ class Subscribe extends React.Component {
                     <br/>
                     <br/>
                     <br/>
-                    <div className="row" style={{backgroundColor: 'green'}}>
+                    <div className="row" style={{}}>
                             {
                                 show.list.map(s => <Deck key={s._id} show={s} />)
                             }

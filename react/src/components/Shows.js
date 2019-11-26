@@ -11,30 +11,31 @@ class Shows extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: models.shows // Show is an Object of class Show, while shows is array of objects from json/db
+            show: models.shows, // Show is an Object of class Show, while shows is array of objects from json/db
+            login: models.logins
         }
     }
 
     componentDidMount() {
         const {readAction} = this.props;
-        const {show} = this.state;
-        show.list = this.props.shows.list;
-        show.form = this.props.shows.form;
+        const {show, login} = this.state;
+        show.list = this.props.shows.list; login.list = this.props.logins.list;
+        show.form = this.props.shows.form; login.form = this.props.logins.form;
 
         if (show.list.length < 1) {
             readAction();
         } else {
-            this.setState({show});
+            this.setState({show, login});
         }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        const {show} = this.state;
-        show.list = nextProps.shows.list;
-        show.form = nextProps.shows.form;
+        const {show, login} = this.state;
+        show.list = nextProps.shows.list; login.list = nextProps.logins.list;
+        show.form = nextProps.shows.form; login.form = nextProps.logins.form;
 
         if (!show || show.list.length > 0) {
-            this.setState({show});
+            this.setState({show, login});
         }
     }
 
@@ -52,9 +53,19 @@ class Shows extends React.Component {
         this.setState({show});
     };
 
+    getFilteredRows =() => {
+        const {show, login} = this.state;
+        if(!show || !login || !login.list) return [];
+        const userId = login.form._id;
+        const loggedInUser = login.list.find( user => user._id === userId);
+        if( !loggedInUser || ! loggedInUser.subscriptions) return [];
+        console.log('getFilteredRows', show, loggedInUser, loggedInUser.subscriptions);
+        return show.filterByIds(loggedInUser.subscriptions);
+    };
+
 
     render() {
-        const {show} = this.state;
+        const {show, login} = this.state;
         if(!show || !show.form) return <div>Loading...</div>
 
         return (
@@ -97,7 +108,7 @@ class Shows extends React.Component {
                         </div>
                     </div>
 
-                    <Table fields={['id', 'title', 'description']} items={show.list}
+                    <Table fields={['id', 'title', 'description']} items={this.getFilteredRows()}
                            itemViewAction={(arr) => this.props.history.push('/shows/' + (arr['id'] ? arr['id'] : arr['_id']) )}
                            itemEditAction={this.props.editAction} itemDeleteAction={this.props.deleteAction}/>
                 </Center>
@@ -113,6 +124,7 @@ class Shows extends React.Component {
  */
 const mapStateToProps = state => ({
     shows: state.shows,
+    logins: state.logins
 });
 
 /**

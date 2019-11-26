@@ -37,6 +37,14 @@ class Show extends ActiveRecord {
         this._form.image_path = files[0];
     }
 
+    filterByIds(ids) {
+        console.log('getFilteredRows', ids);
+        if(!ids || ! this.list) return [];
+        var filtered = this.list.filter( show => ids.includes(show._id));
+        console.log('getFilteredRows', filtered);
+        return filtered;
+    }
+
     /*get types() {
         const superTypes = super.types;
         const name = 'episodes';
