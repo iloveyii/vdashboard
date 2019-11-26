@@ -9,7 +9,16 @@ class Center extends React.Component {
         return (
             <div className="dashboard--center" onClick={this.handleCenterClick}>
                 <div style={{textAlign: 'right'}}><UserInfo /></div>
-                <h1 className="h1">{title}</h1>
+                {
+                    title
+                    ? <div className="row">
+                            <div className="col-1-of-1">
+                                <h1>{title}</h1>
+                            </div>
+                        </div>
+                    : null
+
+                }
                 {this.props.children}
             </div>
         )

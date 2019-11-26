@@ -60,12 +60,7 @@ class Shows extends React.Component {
         return (
             <section id="dashboard" className="dashboard">
                 <Sidebar/>
-                <Center>
-                    <div className="row">
-                        <div className="col-1-of-1">
-                            <h1>Shows</h1>
-                        </div>
-                    </div>
+                <Center title="Shows">
                     <div className="row">
                         <div className="col-1-of-2">
                             <form>

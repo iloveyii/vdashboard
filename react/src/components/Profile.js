@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
 import Sidebar from './Sidebar';
+import Center from "./Center";
 
 
 class Profile extends React.Component {
@@ -15,9 +16,13 @@ class Profile extends React.Component {
         return (
             <section id="dashboard" className="dashboard">
                 <Sidebar/>
-                <div className="dashboard--center" onClick={this.handleCenterClick}>
-                    <h1>Profile</h1>
-                </div>
+                <Center>
+                    <div className="row">
+                        <div className="col-1-of-1">
+                            <h1>Profile</h1>
+                        </div>
+                    </div>
+                </Center>
             </section>
         )
     }
