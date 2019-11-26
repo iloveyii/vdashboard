@@ -13,6 +13,7 @@ import Reports from './components/Reports';
 import Videos from "./components/Videos";
 import Shows from "./components/Shows";
 import ShowsView from "./components/ShowsView";
+import Subscribe from "./components/Subscribe";
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
                     <Route exact path={`/login`} component={Login}/>
                     <Route exact path={`/signup`} component={Signup}/>
                     <Route exact path={`/dashboard`} component={Dashboard}/>
+                    <Route exact path={`/subscribe`} component={Subscribe}/>
                     <Route exact path={`/profile`} component={Profile}/>
                     <Route exact path={`/settings`} component={Settings}/>
                     <Route exact path={`/reports`} component={Reports}/>

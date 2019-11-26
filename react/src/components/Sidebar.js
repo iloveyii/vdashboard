@@ -49,6 +49,11 @@ class Sidebar extends React.Component {
                     <label htmlFor="">Dashboard</label>
                 </Link>
 
+                <Link to={`/subscribe`} className={pathname == '/subscribe' ? 'button active' : 'button'}>
+                    <i className="fas fa-check-double"></i>
+                    <label htmlFor="">Subscribe</label>
+                </Link>
+
                 <Link to={`/users`} className={pathname == '/users' ? 'button active' : 'button'}>
                     <i className="fas fa-users"></i>
                     <label htmlFor="">Users</label>
