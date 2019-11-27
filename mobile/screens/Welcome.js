@@ -112,8 +112,8 @@ class Welcome extends React.Component {
                     this.setState({login});
                     console.log('setListener would have got event in 1.5 secs', login);
                     this.setState({login});
+                    this.props.facebookLoginSuccessAction(login);
                 }, 1500, this);
-                this.props.facebookLoginSuccessAction(login);
             }
         });
     }
@@ -146,8 +146,8 @@ class Welcome extends React.Component {
             };
             setTimeout(() => {
                 this.setState({login});
+                this.props.facebookLoginSuccessAction(login);
             }, 1500, this);
-            this.props.facebookLoginSuccessAction(login);
         }
     }
 
@@ -181,7 +181,7 @@ class Welcome extends React.Component {
         return (
             this.state.login.facebook === settings.login.LOGIN_SUCCESS
             || this.state.login.google === settings.login.LOGIN_SUCCESS
-                || true
+                //|| true
                 ? <Stored login={this.state.login}/>
                 : <View style={styles.container}>
                     <WelcomeHeader/>

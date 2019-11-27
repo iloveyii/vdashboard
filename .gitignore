@@ -6,4 +6,5 @@ node/public/images/
 node/public/videos/
 .Rhistory
 mobile/ios_development.cer
-
+keys
+.env
