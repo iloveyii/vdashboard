@@ -3,6 +3,10 @@ import {StyleSheet, View, Image, Dimensions, Text} from 'react-native';
 import {theme} from '../constants';
 import {connect} from "react-redux";
 import {login} from '../constants/settings';
+import axios from 'axios';
+import * as settings from "../constants/settings";
+
+const server = settings.apiServer + '/api/v1/login-with-id/';
 
 const {width} = Dimensions.get('window');
 
@@ -14,7 +18,7 @@ class Profile extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         console.log('Profile componentWillReceiveProps props ', nextProps);
         const {login} = nextProps;
-        if(login.facebook && login.facebook === 2) {
+        if (login.facebook && login.facebook === 2) {
             console.log('Profile componentWillReceiveProps login to system with fb ', login.facebook);
             this.loginToSystem(login.user.uid);
         } else {
@@ -24,7 +28,10 @@ class Profile extends Component {
     }
 
     loginToSystem = (id) => {
-
+        axios.get(server+id).then(res => {
+            console.log('Inside Profile login with id.', server, res.data);
+            return res.data;
+        }).catch(error => console.log(error));
     };
 
     render() {

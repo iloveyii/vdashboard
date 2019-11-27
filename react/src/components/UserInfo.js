@@ -39,7 +39,7 @@ class UserInfo extends React.Component {
                         cursor: 'pointer',
                         color: 'white'
                     }}>
-                        <i className="fas fa-user"></i>  {this.state.username}
+                        <i className="fas fa-user"></i>  {this.state.username.slice(0,8)}
                     </span>
             </div>
         )

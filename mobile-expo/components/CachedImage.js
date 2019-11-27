@@ -23,6 +23,7 @@ async function getiOSNotificationPermission() {
 export default class CachedImage extends React.Component {
     constructor(props) {
         super(props);
+        this._isMounted = false;
         this.state = {
             fileUri: false,
             source: {uri : false},
@@ -68,7 +69,9 @@ export default class CachedImage extends React.Component {
     }
 
     setSource(fileUri) {
-        this.setState({source: {uri: fileUri}});
+        if(this._isMounted) {
+            this.setState({source: {uri: fileUri}});
+        }
     }
 
     componentWillMount() {
@@ -76,11 +79,16 @@ export default class CachedImage extends React.Component {
     }
 
     componentDidMount() {
+        this._isMounted = true;
         this.downloadFileIfNotExist(this.props.source.uri);
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         this.downloadFileIfNotExist(nextProps.source.uri);
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {

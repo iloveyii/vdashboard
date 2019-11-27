@@ -5,6 +5,7 @@ const rimraf = require("rimraf");
 const mongoClient = require('mongodb').MongoClient;
 const constants = require('./constants');
 const path = require('path');
+const objectId = require('mongodb').ObjectID;
 
 
 const mongo = constants.mongo;
@@ -32,7 +33,8 @@ function deleteCollection() {
         // return resolve(true);
         db.dropCollection(mongo.collections.shows, function (err, delOK) {
             if (err) {
-                console.log(err); process.exit();
+                console.log(err);
+                process.exit();
                 reject(err);
                 throw err;
             }
@@ -67,18 +69,16 @@ function readDataFile() {
 
 function insertIntoMongo(list) {
     return new Promise(function (resolve, reject) {
-        db.collection(mongo.collections.shows).insertMany(list, (err, result) => {
-            if (err) {
-                reject(err);
-                console.log(err);
-            } else {
-                const data = {
-                    actions: {type: 'create', ok: result},
-                };
-                console.log('Inserted into mongo a list of length : ' + list.length);
-                resolve(data);
-            }
+        list.map(show => {
+            show._id = objectId(show._id); // make it object id from string id
+            show.episodes && show.episodes.map(episode => {
+                episode._id = objectId(episode._id);
+            });
+            db.collection(mongo.collections.shows).insertOne(show, (err, result) => {
+                err && reject(err);
+            });
         });
+        resolve({});
     });
 }
 
@@ -109,9 +109,10 @@ connectMongo()
         .then(() => readDataFile()
             .then(list => insertIntoMongo(list)
                 .then(() => removeDirs()
-                        .then(()=> console.log('All done !!!')
+                    .then(() => console.log('All done !!!')
                     )))));
 
 
-
 // console.log(mongo.dbfile);
+// RUN AS
+// db-migrate --config

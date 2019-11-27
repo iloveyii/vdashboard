@@ -32,21 +32,18 @@ const users = {
             const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
             let [username, password] = credentials.split(':');
             console.log('credentials', credentials);
-            password = md5(password);
-
-            db.getDb().collection(constants.mongo.collections.users).find({
-                username: username,
-                password: password
-            }).toArray((err, users) => {
+            let filter = password && password.length > 0  ? {username, password: md5(password)} : {email: username};
+            db.getDb().collection(constants.mongo.collections.users).find(filter).toArray((err, users) => {
                 if (err) {
                     console.log(err);
                 } else {
                     const auth = {
                         authenticated: false,
                         username: username,
-                        _id: users[0]._id
+                        _id: users && Array.isArray(users) && users.length > 0 ? users[0]._id : '',
+                        filter: JSON.stringify(filter)
                     };
-                    if (users.length > 0) {
+                    if (users.length > 0 || filter.email) {
                         auth.authenticated = true;
                     }
                     const data = {
@@ -99,10 +96,14 @@ const users = {
                     if (err) {
                         console.log('Some error occurred. ', err);
                     } else {
+                        let _id = users && users.value && users.value._id ? users.value._id : '';
+                        _id = users && users.lastErrorObject && users.lastErrorObject.upserted ? users.lastErrorObject.upserted : _id;
+
                         const auth = {
                             authenticated: true,
                             username: 'na',
-                            _id: users.value._id
+                            //_id: users.value._id,
+                            _id: _id
                         };
 
                         const data = {

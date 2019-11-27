@@ -51,9 +51,9 @@ class Deck extends React.Component {
 
         return (
             <ul onClick={(e) => this.subscribe(e)} style={{display: 'inline-block', listStyle: 'none', cursor: 'pointer'}}>
-                <h1 style={{zIndex: 1000, textAlign: 'center', fontSize: '20px', height: '40px'}}>{show.title}</h1>
+                <li><h1 style={{zIndex: 1000, textAlign: 'center', fontSize: '20px', height: '40px'}}>{show.title}</h1></li>
                 {
-                    show.episodes.slice(0, 3).map((episode, i) => <li key={episode._id}><img
+                  show.episodes && show.episodes.slice(0, 3).map((episode, i) => <li key={episode._id}><img
                         style={{
                             zIndex: 100 - i,
                             width: '180px',

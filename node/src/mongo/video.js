@@ -175,7 +175,7 @@ const shows = {
     delete: (req, res) => {
         console.log('DELETE /api/v1/shows/:id ' + req.params.id);
         const showId = db.getPrimaryKey(req.params.id);
-        db.getDb().collection(collections.shows).findOneAndDelete(
+        db.getDb().collection(collections.shows).deleteOne(
             {_id: showId},
             (err, action) => {
                 if (err) {
@@ -229,7 +229,7 @@ const shows = {
                 if (err) {
                     console.log('Some error occurred. ', err);
                 } else {
-                    console.log('Show added or updated', result);
+                    console.log('Episode removed from show', result);
                     const actions = {
                         type: 'delete',
                         ok: result.ok
