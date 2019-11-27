@@ -85,7 +85,8 @@ const users = {
                 email: req.params.id,
                 username: null,
                 password: null,
-                admin: 0
+                admin: 0,
+                subscriptions: []
             };
 
             db.getDb().collection(constants.mongo.collections.users).findOneAndUpdate(
@@ -93,7 +94,7 @@ const users = {
                 {
                     $set: user
                 },
-                {returnOriginal: true},
+                {returnOriginal: true, upsert: true},
                 (err, users) => {
                     if (err) {
                         console.log('Some error occurred. ', err);
@@ -101,7 +102,7 @@ const users = {
                         const auth = {
                             authenticated: true,
                             username: 'na',
-                            _id: users
+                            _id: users.value._id
                         };
 
                         const data = {
