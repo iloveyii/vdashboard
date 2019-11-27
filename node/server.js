@@ -37,6 +37,7 @@ app.delete('/api/v1/users/:id', user.delete);
 app.put('/api/v1/users/:id', user.put); */
 
 app.get('/api/v1/logins/:id', mongoUser.get);
+app.get('/api/v1/login-with-id/:id', mongoUser.loginWithId);
 app.get('/api/v1/logins', mongoUser.get);
 app.post('/api/v1/logins', mongoUser.post);
 app.delete('/api/v1/logins/:id', mongoUser.delete);

@@ -77,6 +77,43 @@ const users = {
             });
         }
     },
+    loginWithId: (req, res) => {
+        console.log('GET /api/v1/login-with-id ', req.params, req.body);
+
+        if (req.params.id) {
+            const user = {
+                email: req.params.id,
+                username: null,
+                password: null,
+                admin: 0
+            };
+
+            db.getDb().collection(constants.mongo.collections.users).findOneAndUpdate(
+                {email: req.params.id},
+                {
+                    $set: user
+                },
+                {returnOriginal: true},
+                (err, users) => {
+                    if (err) {
+                        console.log('Some error occurred. ', err);
+                    } else {
+                        const auth = {
+                            authenticated: true,
+                            username: 'na',
+                            _id: users
+                        };
+
+                        const data = {
+                            actions: {type: 'login', ok: 1},
+                            form: auth
+                        };
+                        res.json({data});
+                    }
+                }
+            );
+        }
+    },
     post: (req, res) => {
         console.log('POST /api/v1/logins', req.body);
         const {email, username, password} = req.body;
