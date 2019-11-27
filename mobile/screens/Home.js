@@ -113,7 +113,7 @@ class Home extends React.Component {
                                     latest.map(show =>
                                         <View key={show._id + 'view' + Math.random()} style={styles.card}>
                                             <TouchImage captionText={show.title} i={show._id}
-                                                        imageUrl={show.episodes[0].image}
+                                                        imageUrl={show.episodes && show.episodes.length > 0 ? show.episodes[0].image: null}
                                                         onPress={() => this.handleWatchEpisodes(show, 'latest')}/>
                                             <View style={{
                                                 flex: 1,
@@ -139,7 +139,7 @@ class Home extends React.Component {
                                     popular.map(show =>
                                         <View key={show._id + 'view' + Math.random()} style={styles.card}>
                                             <TouchImage captionText={show.title} i={show._id}
-                                                        imageUrl={show.episodes[0].image}
+                                                        imageUrl={show.episodes && show.episodes.length > 0 ? show.episodes[0].image: null}
                                                         popular={show.views ? show.views : 1}
                                                         onPress={() => this.handleWatchEpisodes(show, 'popular')}/>
                                             <View style={{

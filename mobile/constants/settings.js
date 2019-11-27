@@ -1,6 +1,7 @@
 const appName = 'MY CHOICE';
 // const serverIp = '10.42.0.1';
 const serverIp = process.env.REACT_APP_serverIp ? process.env.REACT_APP_serverIp : 'mobile-server.softhem.se';
+
 const apiServer = 'http://' + serverIp + ':8090';
 const login = {
     NOT_LOGGED_IN: 0,
