@@ -74,11 +74,20 @@ function insertIntoMongo(list) {
             show.episodes && show.episodes.map(episode => {
                 episode._id = objectId(episode._id);
             });
-            db.collection(mongo.collections.shows).insertOne(show, (err, result) => {
-                err && reject(err);
-            });
         });
-        resolve({});
+
+        db.collection(mongo.collections.shows).insertMany(list, (err, result) => {
+            if (err) {
+                reject(err);
+                console.log(err);
+            } else {
+                const data = {
+                    actions: {type: 'create', ok: result},
+                };
+                console.log('Inserted into mongo a list of length : ' + list.length);
+                resolve(data);
+            }
+        });
     });
 }
 
