@@ -94,14 +94,14 @@ function insertIntoMongo(list) {
 function removeDirs() {
     return new Promise(function (resolve, reject) {
 
-        rimraf(constants.IMAGES_DIR_PATH + '/*', function () {
+        rimraf(constants.IMAGES_DIR_PATH + '/a*', function () {
             console.log("Removed " + constants.IMAGES_DIR_PATH + '*');
             if (!fs.existsSync(constants.IMAGES_DIR_PATH)) {
                 fs.mkdirSync(constants.IMAGES_DIR_PATH);
             }
         });
 
-        rimraf(constants.VIDEOS_DIR_PATH + '/*', function () {
+        rimraf(constants.VIDEOS_DIR_PATH + '/b*', function () {
             console.log("Removed " + constants.VIDEOS_DIR_PATH + '*');
 
             if (!fs.existsSync(constants.VIDEOS_DIR_PATH)) {

@@ -1,5 +1,7 @@
 import React from 'react';
 import UserInfo from "./UserInfo";
+import QRCode from 'qrcode.react';
+
 
 class Center extends React.Component {
 
@@ -8,6 +10,7 @@ class Center extends React.Component {
 
         return (
             <div className="dashboard--center" onClick={this.handleCenterClick}>
+                <div style={{padding: '20px', backgroundColor: 'white'}}><QRCode value="exp://10.42.0.1:19000" /></div>
                 <div style={{textAlign: 'right'}}><UserInfo /></div>
                 {
                     title

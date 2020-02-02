@@ -1,6 +1,6 @@
 const appName = 'MY CHOICE';
 // const serverIp = '10.42.0.1';
-const serverIp = '192.168.1.245';
+const serverIp = '10.3.141.218';
 const apiServer = 'http://' + serverIp + ':8090';
 const login = {
     NOT_LOGGED_IN: 0,
