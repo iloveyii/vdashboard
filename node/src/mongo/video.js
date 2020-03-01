@@ -60,6 +60,7 @@ const shows = {
             }
         });
     },
+    // Generate thumbs for the show
     generate: (req, res) => {
         const files = shows._scanDir(constants.VIDEOS_DIR_PATH);
         shows._generateThumbs(files, false);
