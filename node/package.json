@@ -27,7 +27,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "migrate:mysql": "cd ./database && db-migrate up --config ./config/dev.json",
-    "migrate:mongo": "node ./src/config/reset_mongo.js"
+    "migrate:mongo": "node ./src/config/reset_mongo.js",
+    "backup:mongo": "mongodump  -h 127.0.0.1:27017 -d mychoice",
+    "restore:mongo": "mongorestore",
+    "help:mongo": "echo 'backup creates dump dir, run restore relative to dump dir to restore'"
   },
   "keywords": [
     "node",
