@@ -3,11 +3,11 @@ vDashboard
 This a video management web app and mobile app for your favourite videos.
 The admin uploads favourite videos to the server and then users can subscribe to the particular category to watch them in the mobile app[iOS, Android].
 
-![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss1.PNG)
-![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss2.PNG)
-![React dashboard login](https://github.com/iloveyii/vdashboard/blob/master/release/login-react-app.PNG)
-![React dashboard signup](https://github.com/iloveyii/vdashboard/blob/master/release/signup-react-app.PNG)
-![React dashboard](https://github.com/iloveyii/vdashboard/blob/master/release/dashboard-react-app.PNG)
+![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss1.png)
+![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss2.png)
+![React dashboard login](https://github.com/iloveyii/vdashboard/blob/master/release/login-react-app.png)
+![React dashboard signup](https://github.com/iloveyii/vdashboard/blob/master/release/signup-react-app.png)
+![React dashboard](https://github.com/iloveyii/vdashboard/blob/master/release/dashboard-react-app.png)
 
 ## Technology Stack
   * JS, React, ES6
