@@ -11,3 +11,5 @@ keys
 .env
 react/build
 react/public/images
+.keys/
+*.keystore

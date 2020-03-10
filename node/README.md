@@ -11,7 +11,7 @@ This is node , express server for the application. It provides RESTFul Services.
   * Run migrations by: `db-migrate up --config ./config/dev.json`.
   
 #### Run app
-  * Change credentials in _file server.js.
+  * Change credentials in file server.js.
   * Run app like (inside node) : `npm start`.
 
     
