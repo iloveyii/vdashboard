@@ -1,4 +1,4 @@
-Dashboard 
+vDashboard 
 ==========
 This a video management web app and mobile app for your favourite videos.
 The admin uploads favourite videos to the server and then users can subscribe to the particular category to watch them in the mobile app[iOS, Android].
@@ -16,22 +16,32 @@ The different sub applications gives the versatility and choice of technology to
   1. Two mobile apps - mobile / mobile-expo : It is the mobile app in React Native, one is dispatched version from expo.
   2. Two backend servers - node / server : node is written in node js while server is in PHP (Yii2 microservices)
   3. Two databases support - MangoDB / MySQL 
-  4. 
+  4. Two frontend apps - react / sass : react is web app while sass is css based design app.
 
-This is node , express server for the application. It provides RESTFul Services.
+## Installations
+   Each of the six sub applications has their own installations but we would quickly present only two in this version of 
+   the document.
+### Node
+   * Install MySql and Mongo db on your computer and adjust the settings in node/database/config and in node/src/config/constants.js.
+   * Install npm packages by running the following command inside node/ `npm install`
+   * Run migrations by: `db-migrate up --config ./config/dev.json`. Or run the following.
+```bash
+   npm run migrate:mysql
+   npm run migrate:mongo
+```
+   * Start node server as `npm start`
 
-### Installations
-
-#### Migrations
+### React app
+   * Change credentials inside react/.env
+   * Install packages `npm install`
+   * npm start
+   
+## Tips
   * Create migrations by: `db-migrate create create_table_tablename --config ./config/dev.json`.
-  * Run migrations by: `db-migrate up --config ./config/dev.json`.
   
-#### Run app
-  * Change credentials in _file server.js.
-  * Run app like (inside node) : `npm start`.
 
     
-### Requirements
+## Requirements
 
    * You many need to install the following.
      1. node >= 10.16.0
