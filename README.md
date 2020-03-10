@@ -3,6 +3,9 @@ vDashboard
 This a video management web app and mobile app for your favourite videos.
 The admin uploads favourite videos to the server and then users can subscribe to the particular category to watch them in the mobile app[iOS, Android].
 
+![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss1.PNG)
+![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss2.PNG)
+
 ## Technology Stack
   * JS, React, ES6
   * Node, Express
