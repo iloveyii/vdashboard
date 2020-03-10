@@ -5,6 +5,9 @@ The admin uploads favourite videos to the server and then users can subscribe to
 
 ![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss1.PNG)
 ![Mobile app](https://github.com/iloveyii/vdashboard/blob/master/release/ss2.PNG)
+![React dashboard login](https://github.com/iloveyii/vdashboard/blob/master/release/login-react-app.PNG)
+![React dashboard signup](https://github.com/iloveyii/vdashboard/blob/master/release/signup-react-app.PNG)
+![React dashboard](https://github.com/iloveyii/vdashboard/blob/master/release/dashboard-react-app.PNG)
 
 ## Technology Stack
   * JS, React, ES6
